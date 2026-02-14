@@ -303,7 +303,7 @@
     </section>
 
     <!-- CARD 02: ADN PROFESIONAL (Fundamentul Academic) -->
-    <section class="bg-white">
+    <section class="bg-pearl">
         <div class="container grid-2">
             <div class="image-container">
                 <figure><img src="card02.png" alt="Expertiză academică"></figure>
@@ -330,7 +330,7 @@
     </section>
 
     <!-- CARD 03: NUTRISIB PERSONAL (B2C) -->
-    <section class="bg-pearl">
+    <section class="bg-navy">
         <div class="container">
             <div style="text-align: center; max-width: 800px; margin: 0 auto 60px;">
                 <span class="badge">NutriSib Personal • B2C</span>
@@ -363,7 +363,7 @@
     </section>
 
     <!-- CARD 04: CORPORATE WELLBEING (B2B) -->
-    <section class="bg-navy">
+    <section class="bg-pearl">
         <div class="container grid-2">
             <div class="image-container">
                 <figure><img src="card04.png" alt="Corporate Wellbeing"></figure>
@@ -392,7 +392,7 @@
     </section>
 
     <!-- CARD 05: MANAGEMENTUL MACRO-PROIECTELOR (UE) -->
-    <section class="bg-white">
+    <section class="bg-navy">
         <div class="container grid-2">
             <div class="body-content">
                 <span class="badge">Management de proiect • International and National Funds</span>
@@ -450,7 +450,7 @@
     </section>
 
     <!-- CARD 07: EDUCAȚIE, FORMARE & ANDRAGOGIE -->
-    <section class="bg-white">
+    <section class="bg-navy">
         <div class="container grid-2">
             <div class="body-content">
                 <span class="badge">Formare & Mentorat</span>
@@ -482,7 +482,7 @@
     </section>
 
     <!-- CARD 08: SINCRETISM CULTURAL-ȘTIINȚIFIC -->
-    <section class="bg-navy">
+    <section class="bg-pearl">
         <div class="container grid-2">
             <div class="image-container">
                 <figure><img src="card08.png" alt="Artă culinară"></figure>
@@ -504,7 +504,7 @@
     </section>
 
     <!-- CARD 09: CERCETARE ACADEMICĂ -->
-    <section class="bg-white">
+    <section class="bg-navy">
         <div class="container grid-2">
             <div class="body-content">
                 <span class="badge">Patrimoniu Epistemic</span>
@@ -521,42 +521,44 @@
         </div>
     </section>
 
-    <!-- CARD 10: CONTACT -->
+<!-- CARD 10: CONTACT -->
     <section id="contact" class="bg-pearl">
         <div class="container grid-2">
-            <div class="image-container" style="max-width: 400px;">
-                <figure><img src="card10.png" alt="Contact Radu Pascu"></figure>
-                <div style="margin-top: 30px; text-align: center;">
-                    <p><strong>Sibiu, România</strong></p>
-                    <p>rv.pascu@gmail.com</p>
-                    <p>0723-274.206</p>
-                </div>
-            </div>
-            <div class="body-content" style="background: var(--white); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <div class="body-content">
                 <span class="badge">Să construim împreună</span>
                 <h2>Inițiază o colaborare strategică.</h2>
                 <p>Succesul necesită strategie, nu doar acțiune. Definind împreună arhitectura viitorului tău proiect, asigurăm performanța sustenabilă.</p>
-                
-                <form onsubmit="event.preventDefault(); alert('Solicitarea a fost trimisă către dr.ing. Radu V. Pascu.');" style="margin-top: 24px;">
+                <div style="margin-top: 30px; display: grid; gap: 15px;">
+                    <p><i data-lucide="mail" style="vertical-align: bottom; margin-right: 12px; color: var(--navy);"></i> rv.pascu@gmail.com</p>
+                    <p><i data-lucide="phone" style="vertical-align: bottom; margin-right: 12px; color: var(--navy);"></i> 0723-274.206</p>
+                    <p><i data-lucide="map-pin" style="vertical-align: bottom; margin-right: 12px; color: var(--navy);"></i> Sibiu, România</p>
+                </div>
+            </div>
+            <div class="contact-form-box">
+                <h3 style="margin-bottom: 24px; font-family: var(--font-title);">Solicită consultanță</h3>
+                <!-- Formular procesat prin Formspree pentru primire email -->
+                <form action="https://formspree.io/f/mqakokm5f9" method="POST">
                     <div style="margin-bottom: 16px;">
-                        <input type="text" placeholder="Nume complet" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px;">
+                        <input type="text" name="nume" placeholder="Nume complet / Organizație" class="input-field" required>
                     </div>
                     <div style="margin-bottom: 16px;">
-                        <input type="email" placeholder="Email profesional" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px;">
+                        <input type="email" name="email" placeholder="Email profesional" class="input-field" required>
                     </div>
                     <div style="margin-bottom: 16px;">
-                        <select style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: white;">
+                        <select name="interes" class="input-field" style="background: white;" required>
                             <option>Domeniu de interes</option>
                             <option>Consultanță în management</option>
-                            <option>Nutriție integrativă</option>
-                            <option>Corporate Wellbeing</option>
                             <option>Management proiecte</option>
+                            <option>Training și formare</option>
+                            <option>Nutriție integrativă</option>
+                            <option>Suplimente Premium</option>
+                            <option>Corporate Wellbeing</option>
                         </select>
                     </div>
                     <div style="margin-bottom: 24px;">
-                        <textarea placeholder="Mesajul tău..." rows="4" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit;"></textarea>
+                        <textarea name="mesaj" placeholder="Descrieți scurt nevoia dumneavoastră de optimizare..." rows="4" class="input-field" required></textarea>
                     </div>
-                    <button class="btn btn-gold" style="width: 100%; justify-content: center;">Trimite solicitarea de consultanță</button>
+                    <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">Trimite solicitarea</button>
                 </form>
             </div>
         </div>
