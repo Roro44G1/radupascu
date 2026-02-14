@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radu V. Pascu | Arhitectura performanței</title>
+    
+    <!-- Fonturi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Iconițe -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --navy: #0A2463;
+            --gold: #C5A021;
+            --gold-light: #E1B72E;
+            --white: #FFFFFF;
+            --pearl: #F1F5F9;
+            --charcoal: #1A1A1A;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Montserrat', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--navy);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Layout-uri flexibile */
+        .split-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5% 8%;
+            z-index: 2;
+        }
+
+        .image-side {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Proporții specifice */
+        .side-40 { flex: 0 0 40%; }
+        .side-60 { flex: 0 0 60%; }
+
+        /* Stiluri de fundal */
+        .bg-navy { background-color: var(--navy); color: var(--white); }
+        .bg-white { background-color: var(--white); color: var(--navy); }
+        .bg-pearl { background-color: var(--pearl); color: var(--navy); }
+        .bg-charcoal { background-color: var(--charcoal); color: var(--white); }
+
+        /* Tipografie */
+        .kicker {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-family: var(--font-title);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .lead-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .essence-paragraph {
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            color: inherit;
+            opacity: 0.85;
+        }
+
+        /* Elemente vizuale */
+        .impact-grid {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .impact-item span:first-child {
+            display: block;
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .impact-item span:last-child {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        ul.tech-bullets {
+            list-style: none;
+        }
+
+        ul.tech-bullets li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        ul.tech-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23C5A021' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Overlay-uri pentru imagini */
+        .overlay-navy {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, var(--navy) 10%, transparent 100%);
+        }
+
+        .overlay-white {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to left, var(--white) 5%, transparent 100%);
+        }
+
+        /* Secțiunea 5 - Proiecte UE (Design special) */
+        .projects-band {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .expertise-cards {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            width: 80%;
+        }
+
+        .small-card {
+            flex: 1;
+            padding: 2.5rem;
+            background: var(--pearl);
+            border-bottom: 4px solid var(--gold);
+            transition: var(--transition);
+        }
+
+        .small-card:hover { transform: translateY(-10px); }
+
+        /* Formular */
+        .contact-box {
+            background: var(--white);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-bottom: 2px solid #eee;
+            font-family: var(--font-main);
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus { border-color: var(--gold); }
+
+        @media (max-width: 1024px) {
+            section { height: auto; flex-direction: column; scroll-snap-align: none; }
+            .split-layout { flex-direction: column; }
+            .content-side, .image-side { width: 100%; height: auto; padding: 4rem 2rem; }
+            .image-side { order: -1; height: 350px; }
+            .expertise-cards { flex-direction: column; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CARD 01: THE HERO -->
+    <!-- Prompt AI: Portret profesional de înaltă clasă, fundal bleumarin profund, linii geometrice aurii discrete, iluminare cinematică, rezoluție 8k. -->
+    <section class="bg-navy">
+        <div class="split-layout">
+            <div class="content-side">
+                <span class="kicker">Consultanță strategică • Calitate instituțională • Abordare științifică • Suport IT • Bio-nutriție • Suplimente premium</span>
+                <h1>Arhitectura performanței: de la rigoare instituțională la optimizare umană.</h1>
+                <p class="lead-text">Performanța durabilă nu este o coincidență. Este rezultatul unei arhitecturi decizionale impecabile. dr.ing. Radu V. Pascu integrează rigoarea managementului academic cu știința aplicată a bio-nutriției.</p>
+                <div class="impact-grid">
+                    <div class="impact-item"><span>25+</span><span>Ani expertiză</span></div>
+                    <div class="impact-item"><span>18+</span><span>Proiecte majore</span></div>
+                    <div class="impact-item"><span>100%</span><span>Focus pe calitate</span></div>
+					<div class="impact-item"><span>100%</span><span>Rigoare științifică</span></div>
+                </div>
+                <a href="#card02" class="btn-gold">Descoperă ecosistemul</a>
+            </div>
+            <div class="image-side">
+                <img src="card01.png" alt="Radu V. Pascu">
+                <div class="overlay-navy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 02: ADN-UL PROFESIONAL -->
+    <!-- Prompt AI: Vedere arhitecturală modernă a unui coridor universitar minimalist, linii geometrice curate, tonuri de albastru și alb. -->
+    <section id="card02" class="bg-white">
+        <div class="split-layout">
+            <div class="image-side">
+                <img src="card02.png" alt="Sistem academic">
+            </div>
+            <div class="content-side">
+                <span class="kicker">Expertiză academică</span>
+                <h2>10 ani la cârma calității: rigoare și evaluare instituțională.</h2>
+                <p class="essence-paragraph">Baza activității mele este ingineria proceselor educaționale. Ca fost șef al Biroului de Asigurare a Calității (ULBS), am transformat conceptele teoretice în parametri operaționali măsurabili.</p>
+                <ul class="tech-bullets">
+                    <li><strong>Proiectare QMS:</strong> Arhitectură și implementare pentru sisteme de management al calității.</li>
+                    <li><strong>Audit intern:</strong> Evaluarea alinierii la standardele europene (ARACIS / ESG).</li>
+                    <li><strong>Data-driven:</strong> Decizii strategice bazate exclusiv pe prelucrarea datelor statistice.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 03: NUTRISIB PERSONAL -->
+    <!-- Prompt AI: Interfață digitală de sănătate pe o tabletă modernă lângă un preparat nutritiv minimalist, estetică medicală premium. -->
+    <section class="bg-pearl">
+        <div class="split-layout">
+            <div class="content-side side-40">
+                <span class="kicker">Nutrisib clinic • B2C</span>
+                <h2>Biochimie aplicată: dincolo de dietă, către homeostazie.</h2>
+                <p class="essence-paragraph">Corpul uman este cel mai complex sistem. Optimizarea lui necesită date, nu presupuneri. Propun protocoale de reprogramare metabolică bazate pe biometrie precisă.</p>
+                <ul class="tech-bullets">
+                    <li><strong>Managementul greutății:</strong> Slăbire sustenabilă prin controlul deficitului caloric.</li>
+                    <li><strong>Echilibrare hormonală:</strong> Calibrarea micronutrienților pentru stabilitate endocrină.</li>
+                    <li><strong>Reducerea inflamației:</strong> Protocoale antiinflamatorii bazate pe monitorizare continuă.</li>
+                </ul>
+                <a href="#" class="btn-gold">Programează o anamneză</a>
+            </div>
+            <div class="image-side side-60">
+                <img src="card03.png" alt="Monitorizare biometrică">
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 04: CORPORATE WELLBEING -->
+    <!-- Prompt AI: Sală de consiliu executivă, atmosferă profesională de elită, focus pe detalii tehnice, iluminare premium. -->
+    <section class="bg-navy">
+        <div class="split-layout">
+            <div class="image-side">
+                <img src="card04.png" alt="Performanță corporate">
+                <div class="overlay-navy" style="background: linear-gradient(to right, var(--navy) 5%, transparent 100%);"></div>
+            </div>
+            <div class="content-side">
+                <span class="kicker">Nutrisib corporate • B2B</span>
+                <h2>Biohacking organizațional: nutriția ca instrument de performanță.</h2>
+                <p class="essence-paragraph">Sănătatea organizațională începe la nivel celular. Echipele de elită necesită strategii care cresc randamentul cognitiv și securizează investiția în capitalul uman.</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div><h4 style="color:var(--gold)">Focus cognitiv</h4><p style="font-size:0.8rem; opacity:0.7">Nutriție pentru randament maxim.</p></div>
+                    <div><h4 style="color:var(--gold)">Antiburnout</h4><p style="font-size:0.8rem; opacity:0.7">Combaterea stresului oxidativ.</p></div>
+                    <div><h4 style="color:var(--gold)">ROI sănătate</h4><p style="font-size:0.8rem; opacity:0.7">Scăderea absenteismului medical.</p></div>
+                    <div><h4 style="color:var(--gold)">Training</h4><p style="font-size:0.8rem; opacity:0.7">Workshop-uri interactive.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 05: FONDURI UE -->
+    <!-- Prompt AI: Vizualizare abstractă de fluxuri de date și noduri financiare, stil blueprint tehnic, estetică europeană. -->
+    <section class="bg-white projects-band">
+        <div class="absolute inset-0 opacity-5">
+            <img src="card05.png" alt="Background proiecte" class="image-placeholder">
+        </div>
+        <span class="kicker">Management de proiect</span>
+        <h2>Guvernanța proiectelor complexe: de la idee la impact măsurabil.</h2>
+        <p class="lead-text" style="max-width: 800px;">Experiență validată în arhitectura și coordonarea proiectelor strategice cu bugete de ordinul milioanelor de euro.</p>
+        <div class="expertise-cards">
+            <div class="small-card"><h4>Design structural</h4><p style="font-size:0.85rem">Cereri de finanțare și bugete.</p></div>
+            <div class="small-card" style="background:var(--navy); color:white"><h4>Risk Management</h4><p style="font-size:0.85rem">Identificarea vulnerabilităților.</p></div>
+            <div class="small-card"><h4>Sustenabilitate</h4><p style="font-size:0.85rem">Audit de conformitate post-proiect.</p></div>
+        </div>
+    </section>
+
+    <!-- CARD 06: SCIM -->
+    <!-- Prompt AI: Scheme logice și fluxuri de procese redate elegant pe un dashboard digital de control, estetică dark-tech. -->
+    <section class="bg-charcoal">
+        <div class="split-layout">
+            <div class="image-side side-60">
+                <img src="card06.png" alt="Control managerial">
+            </div>
+            <div class="content-side side-40">
+                <span class="kicker">Audit și guvernanță</span>
+                <h2>Control intern managerial (SCIM): eficiență prin conformitate.</h2>
+                <p class="essence-paragraph">Implementez standardul SCIM ca instrument de minimizare a riscului și optimizare decizională, asigurând o organizație fluidă și predictibilă.</p>
+                <ul class="tech-bullets">
+                    <li>Cartografierea proceselor și fluxurilor.</li>
+                    <li>Registrul riscurilor instituționale.</li>
+                    <li>Redactarea procedurilor de sistem.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 07: ANDRAGOGIE -->
+    <!-- Prompt AI: Trainer profesionist într-o sală de curs modernă, audiență adultă atentă, lumină naturală, atmosferă de mentorat. -->
+    <section class="bg-white">
+        <div class="split-layout">
+            <div class="content-side">
+                <span class="kicker">Train the trainers</span>
+                <h2>Arhitectura învățării: formare experiențială și mentorat.</h2>
+                <p class="essence-paragraph">Excelența se transferă prin metodă. Aplic principiile andragogiei pentru a construi programe de training cu impact cognitiv maxim pentru profesioniști.</p>
+                <ul class="tech-bullets">
+                    <li>Formarea profesorilor-mentori academici.</li>
+                    <li>Transfer de know-how managerial.</li>
+                    <li>Design curricular pentru corporații.</li>
+                </ul>
+            </div>
+            <div class="image-side">
+                <img src="card07.png" alt="Formare profesională">
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 08: SINCRETISM CULTURAL -->
+    <!-- Prompt AI: Close-up artistic de textură de pâine tradițională românească, umbre dramatice, iluminare de tip muzeal, stil fine art. -->
+    <section class="bg-navy">
+        <div class="split-layout">
+            <div class="image-side">
+                <img src="card08.png" alt="Cumințenia gustului">
+            </div>
+            <div class="content-side">
+                <span class="kicker">Inovație transdisciplinară</span>
+                <h2>Artă, patrimoniu și știința nutriției.</h2>
+                <p class="essence-paragraph">Decriptez științific moștenirea culturală prin proiecte interdisciplinare precum „Cumințenia gustului”, demonstrând că tradiția este inteligență metabolică.</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-left: 4px solid var(--gold);">
+                    <h4 style="color:var(--gold); margin-bottom:1rem">Studiu de caz: postul brâncușian</h4>
+                    <p style="font-size:0.9rem">Validarea științifică a arhetipurilor gastronomice și transformarea actului artistic în barometru de educație metabolică.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 09: CERCETARE ACADEMICĂ -->
+    <!-- Prompt AI: Radu Pascu sitting at a refined wooden desk in a scholarly office, a framed Ph.D. diploma subtly visible in the background, soft natural library lighting, sophisticated academic atmosphere, no text. -->
+    <section class="bg-pearl">
+        <div class="split-layout">
+            <div class="content-side">
+                <span class="kicker">Autoritate validată</span>
+                <h2>Cercetare academică și patrimoniu epistemic.</h2>
+                <p class="essence-paragraph">Activitatea mea este fundamentată pe rigoarea unui doctorat în inginerie și pe cercetarea concretizată în volume de referință publicate la editura ULBS.</p>
+                <div style="display:flex; flex-direction:column; gap:1.5rem">
+                    <div style="border-left:3px solid var(--navy); padding-left:1.5rem">
+                        <h4 style="font-size:0.9rem; text-transform:uppercase">Doctor în inginerie (2013)</h4>
+                        <p style="font-size:0.85rem; opacity:0.7">Teza: Managementul integrat al cunoștințelor și al calității în universități.</p>
+                    </div>
+                    <div style="border-left:3px solid var(--navy); padding-left:1.5rem">
+                        <h4 style="font-size:0.9rem; text-transform:uppercase">Sisteme de management</h4>
+                        <p style="font-size:0.85rem; opacity:0.7">Autor al volumului „Cunoștințe, calitate, proiecte” (ISBN 978-606-12-0580-6).</p>
+                    </div>
+                    <div style="border-left:3px solid var(--navy); padding-left:1.5rem">
+                        <h4 style="font-size:0.9rem; text-transform:uppercase">Metodologii</h4>
+                        <p style="font-size:0.85rem; opacity:0.7">Autor al cursului „Managementul proiectelor. Concepte de bază” (406 pagini).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="image-side">
+                <img src="card09.png" alt="Radu Pascu academic">
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD 10: CONTACT -->
+    <!-- Prompt AI: Fundal abstract bleumarin cu linii aurii fine de topografie, stil minimalist de lux, sugerând creștere strategică. -->
+    <section class="bg-navy">
+        <div class="split-layout">
+            <div class="content-side">
+                <span class="kicker">Să construim împreună</span>
+                <h2>Inițiază o colaborare de nivel superior.</h2>
+                <p class="essence-paragraph">Fie că aveți nevoie de un audit SCIM/QMS, un program de wellbeing corporativ sau o recalibrare metabolică personalizată – succesul începe cu o strategie informată.</p>
+                <div style="margin-top:2rem">
+                    <p style="margin-bottom:1rem">📍 Sibiu (fizic) • Online (internațional)</p>
+                    <p style="margin-bottom:1rem">✉️ rv.pascu@gmail.com</p>
+                    <p>📞 0723-274.206</p>
+                </div>
+            </div>
+            <div class="content-side" style="background: rgba(0,0,0,0.2)">
+                <div class="contact-box">
+                    <h3 style="color:var(--navy); margin-bottom:2rem; font-family:var(--font-title)">Solicită consultanță</h3>
+                    <form onsubmit="event.preventDefault(); alert('Solicitarea a fost trimisă către Radu V. Pascu.');">
+                        <div class="form-group"><input type="text" placeholder="Nume și organizație"></div>
+                        <div class="form-group"><input type="email" placeholder="Email profesional"></div>
+                        <div class="form-group">
+                            <select>
+                                <option>Domeniu de interes</option>
+                                <option>Nutriție personală (NutriSib)</option>
+                                <option>Corporate Wellbeing (B2B)</option>
+                                <option>Audit QMS / SCIM </option>
+                                <option>Management de proiect</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><textarea placeholder="Descrieți pe scurt obiectivele dumneavoastră..."></textarea></div>
+                        <button class="btn-gold" style="width:100%">Trimite solicitarea</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Inițializare iconițe Lucide
+        lucide.createIcons();
+        
+        // Efect de fade-in la scroll (opțional pentru eleganță)
+        const sections = document.querySelectorAll('section');
+        const observerOptions = { threshold: 0.2 };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            section.style.opacity = '0.9'; // Valoare de bază
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
