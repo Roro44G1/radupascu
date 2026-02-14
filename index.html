@@ -26,6 +26,8 @@
             --border-color: #e2e8f0;
             --font-main: 'Inter', sans-serif;
             --font-title: 'Montserrat', sans-serif;
+			--color-text-footer: #bdc3c7;
+            --color-text-footer-link: #e5e7eb;
         }
 
         * {
@@ -215,12 +217,49 @@
         }
 
         /* Footer */
-        footer {
-            padding: 60px 0;
-            background: var(--navy);
-            color: rgba(255,255,255,0.6);
+        /* --- Footer (Fetch Support & Icons Fix) --- */
+        #footer-placeholder footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-text-footer);
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem 1rem;
+            border-radius: var(--radius-card) var(--radius-card) 0 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #footer-placeholder a {
+            color: var(--color-text-footer-link) !important;
+            text-decoration: none;
+        }
+        #footer-placeholder .footer-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 1rem;
+        }
+        #footer-placeholder .footer-social-links svg,
+        #footer-placeholder .footer-social-links img {
+            width: 28px !important;
+            height: 28px !important;
+            min-width: 28px;
+            display: block;
+        }
+        .legal-footer-box {
+            background-color: var(--color-footer-bg);
+            border-top: 1px solid #374151;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 0 0 var(--radius-card) var(--radius-card);
+            margin-bottom: 2rem;
+        }
+        .legal-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin: 0 10px;
         }
 
         /* Responsive */
@@ -507,10 +546,10 @@
                     <div style="margin-bottom: 16px;">
                         <select style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: white;">
                             <option>Domeniu de interes</option>
-                            <option>Consultant QMS / SCIM</option>
-                            <option>Nutriție Integrativă (NutriSib)</option>
+                            <option>Consultanță în management</option>
+                            <option>Nutriție integrativă</option>
                             <option>Corporate Wellbeing</option>
-                            <option>Management Proiecte UE</option>
+                            <option>Management proiecte</option>
                         </select>
                     </div>
                     <div style="margin-bottom: 24px;">
