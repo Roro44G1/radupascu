@@ -901,6 +901,146 @@
         display: block;
     }
 	
+	/* ════════════════════════════════════
+	   FORMULAR PROGRAMARE
+	════════════════════════════════════ */
+	.appointment-section {
+		background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-mid) 100%);
+		padding: 5rem 0;
+		position: relative;
+	}
+	.appointment-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+		align-items: start;
+	}
+	.appointment-info h2 {
+		font-family: 'Playfair Display', serif;
+		font-size: 2rem; font-weight: 800;
+		color: var(--white); line-height: 1.15;
+		margin: 0 0 1rem;
+	}
+	.appointment-info h2 em {
+		font-style: normal; color: var(--gold);
+	}
+	.appointment-info p {
+		font-size: 0.95rem; color: rgba(255,255,255,0.6);
+		line-height: 1.75; margin: 0 0 2rem;
+	}
+	.appointment-contact-item {
+		display: flex; align-items: center; gap: 1rem;
+		margin-bottom: 1.25rem;
+	}
+	.appointment-contact-icon {
+		width: 44px; height: 44px; flex-shrink: 0;
+		background: rgba(251,182,76,0.12);
+		border: 1px solid rgba(251,182,76,0.25);
+		border-radius: 12px;
+		display: flex; align-items: center; justify-content: center;
+		font-size: 1.1rem;
+	}
+	.appointment-contact-text {
+		font-size: 0.9rem; color: rgba(255,255,255,0.75);
+		line-height: 1.5;
+	}
+	.appointment-contact-text strong {
+		display: block; color: var(--white); font-size: 0.95rem;
+	}
+
+	.appointment-form-box {
+		background: var(--white);
+		border-radius: var(--radius);
+		padding: 2.5rem;
+		box-shadow: var(--shadow-xl);
+	}
+	.appointment-form-box h3 {
+		font-family: 'Playfair Display', serif;
+		font-size: 1.35rem; font-weight: 700;
+		color: var(--navy); margin: 0 0 0.35rem;
+	}
+	.appointment-form-box .form-subtitle {
+		font-size: 0.82rem; color: var(--text-muted);
+		margin: 0 0 1.5rem;
+	}
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.85rem;
+		margin-bottom: 0.85rem;
+	}
+	.form-field {
+		display: flex; flex-direction: column; gap: 0.3rem;
+	}
+	.form-field.full { grid-column: 1 / -1; }
+	.form-label {
+		font-size: 0.75rem; font-weight: 700;
+		color: var(--navy); text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+	.form-input {
+		width: 100%; padding: 0.7rem 1rem;
+		border: 2px solid var(--border);
+		border-radius: var(--radius-sm);
+		font-family: 'DM Sans', sans-serif;
+		font-size: 0.9rem; color: var(--text-dark);
+		background: var(--pearl);
+		transition: border-color 0.2s, box-shadow 0.2s;
+		-webkit-appearance: none;
+	}
+	.form-input:focus {
+		outline: none;
+		border-color: var(--navy);
+		box-shadow: 0 0 0 3px rgba(63,68,140,0.1);
+	}
+	.form-input::placeholder { color: var(--text-muted); }
+	select.form-input { cursor: pointer; }
+	textarea.form-input { resize: vertical; min-height: 90px; }
+
+	.form-input:disabled, .form-input option:disabled {
+		color: var(--text-muted);
+		background: var(--pearl-warm);
+		cursor: not-allowed;
+	}
+	.form-note {
+		font-size: 0.72rem; color: var(--text-muted);
+		font-style: italic; margin-top: 0.25rem;
+	}
+	.form-submit {
+		width: 100%;
+		padding: 0.85rem 2rem;
+		background: var(--gold);
+		color: var(--navy);
+		border: none; border-radius: 10px;
+		font-family: 'DM Sans', sans-serif;
+		font-weight: 800; font-size: 0.95rem;
+		cursor: pointer;
+		box-shadow: 0 4px 0 var(--gold-dark), 0 6px 18px rgba(197,160,33,0.25);
+		transition: all 0.15s;
+		margin-top: 0.5rem;
+	}
+	.form-submit:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 0 var(--gold-dark), 0 10px 24px rgba(197,160,33,0.3);
+	}
+	.form-submit:active {
+		transform: translateY(2px);
+		box-shadow: 0 1px 0 var(--gold-dark);
+	}
+	.form-privacy {
+		font-size: 0.7rem; color: var(--text-muted);
+		text-align: center; margin-top: 0.75rem;
+		line-height: 1.5;
+	}
+
+	@media (max-width: 900px) {
+		.appointment-grid { grid-template-columns: 1fr; }
+		.appointment-form-box { padding: 1.75rem; }
+	}
+	@media (max-width: 550px) {
+		.form-row { grid-template-columns: 1fr; }
+	}
+	
 	
 	/* ════════════════════════════════════
    TESTIMONIALE — Single card carousel
@@ -1382,7 +1522,7 @@
 <header class="navbar" id="siteHeader">
     <nav class="navbar-inner">
         <a href="#acasa" class="nav-brand">
-            <img src="logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
+            <img src="../ZH/imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
         </a>
 		<div class="nav-links" id="navMenu">
 			<a href="#acasa" class="active">Acasă</a>
@@ -1481,7 +1621,7 @@
         <div class="pain-grid">
             <div class="pain-card sr sr-d1">
                 <div class="pain-card-img">
-                    <img src="myriam-unit.jpg" />
+                    <img src="../ZH/imagini/myriam-unit.jpg" />
                     <div class="pain-card-img-overlay"></div>
                 </div>
                 <div class="pain-card-body">
@@ -1495,7 +1635,7 @@
             </div>
             <div class="pain-card sr sr-d2">
                 <div class="pain-card-img">
-                    <img src="slavic-larg.jpg"  />
+                    <img src="../ZH/imagini/slavic-larg.jpg"  />
                     <div class="pain-card-img-overlay"></div>
                 </div>
                 <div class="pain-card-body">
@@ -1635,7 +1775,7 @@
         <div class="services-grid">
             <div class="service-card sr sr-d1">
                 <div class="service-card-top">
-                    <img src="implant.png" alt="Implanturi dentare premium — reabilitare orală completă" />
+                    <img src="../ZH/imagini/implant.png" alt="Implanturi dentare premium — reabilitare orală completă" />
                     <div class="service-card-top-overlay"></div>
                     <div class="service-card-chip">Premium</div>
                 </div>
@@ -1655,7 +1795,7 @@
             </div>
             <div class="service-card sr sr-d2">
                 <div class="service-card-top">
-                    <img src="fatete.png" alt="Estetică dentară — fațete și zâmbet perfect" />
+                    <img src="../ZH/imagini/fatete.png" alt="Estetică dentară — fațete și zâmbet perfect" />
                     <div class="service-card-top-overlay"></div>
                     <div class="service-card-chip">Estetică</div>
                 </div>
@@ -1723,7 +1863,7 @@
             <!-- 1. Coordonator -->
             <div class="doctor-card sr sr-d1">
                 <div class="doctor-card-img">
-                    <img src="dr_cristinadahm.jpg" alt="Ș.l.dr. Cristina Dahm" />
+                    <img src="../ZH/imagini/dr_cristinadahm.jpg" alt="Ș.l.dr. Cristina Dahm" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Ș.l.dr. Cristina Dahm</h3>
@@ -1733,7 +1873,7 @@
             <!-- 2. Manager -->
             <div class="doctor-card sr sr-d2">
                 <div class="doctor-card-img">
-                    <img src="dr_deliapascu.jpg" alt="Delia Pascu" />
+                    <img src="../ZH/imagini/dr_deliapascu.jpg" alt="Delia Pascu" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Delia Pascu</h3>
@@ -1743,7 +1883,7 @@
             <!-- 3. -->
             <div class="doctor-card sr sr-d3">
                 <div class="doctor-card-img">
-                    <img src="dr_veaceslavcojocaru.jpg" alt="Dr. Veaceslav Cojocaru-Blaga" />
+                    <img src="../ZH/imagini/dr_veaceslavcojocaru.jpg" alt="Dr. Veaceslav Cojocaru-Blaga" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Veaceslav Cojocaru-Blaga</h3>
@@ -1753,7 +1893,7 @@
             <!-- 4. -->
             <div class="doctor-card sr sr-d1">
                 <div class="doctor-card-img">
-                    <img src="dr_tiberiugehl.jpg" alt="Dr. Tiberiu Călin Gehl" />
+                    <img src="../ZH/imagini/dr_tiberiugehl.jpg" alt="Dr. Tiberiu Călin Gehl" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Tiberiu Călin Gehl</h3>
@@ -1763,7 +1903,7 @@
             <!-- 5. -->
             <div class="doctor-card sr sr-d2">
                 <div class="doctor-card-img">
-                    <img src="dr_ioanadorca.jpg" alt="Dr. Ioana Silvia Dorca" />
+                    <img src="../ZH/imagini/dr_ioanadorca.jpg" alt="Dr. Ioana Silvia Dorca" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Ioana Silvia Dorca</h3>
@@ -1773,7 +1913,7 @@
             <!-- 6. -->
             <div class="doctor-card sr sr-d3">
                 <div class="doctor-card-img">
-                    <img src="dr_myriammzoughi.jpg" alt="Dr. Myriam Mzoughi" />
+                    <img src="../ZH/imagini/dr_myriammzoughi.jpg" alt="Dr. Myriam Mzoughi" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Myriam Mzoughi</h3>
@@ -1783,7 +1923,7 @@
             <!-- 7. -->
             <div class="doctor-card sr sr-d1">
                 <div class="doctor-card-img">
-                    <img src="dr_razvanlupea.jpg" alt="Dr. Lupea Răzvan" />
+                    <img src="../ZH/imagini/dr_razvanlupea.jpg" alt="Dr. Lupea Răzvan" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Lupea Răzvan</h3>
@@ -1793,7 +1933,7 @@
             <!-- 8. -->
             <div class="doctor-card sr sr-d2">
                 <div class="doctor-card-img">
-                    <img src="dr_placeholder-woman.jpg" alt="Dr. Andronie Ioana" />
+                    <img src="../ZH/imagini/dr_placeholder-woman.jpg" alt="Dr. Andronie Ioana" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Andronie Ioana</h3>
@@ -1803,7 +1943,7 @@
             <!-- 9. -->
             <div class="doctor-card sr sr-d3">
                 <div class="doctor-card-img">
-                    <img src="dr_andreiandronic.jpg" alt="Dr. Andrei Andronic" />
+                    <img src="../ZH/imagini/dr_andreiandronic.jpg" alt="Dr. Andrei Andronic" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Andrei Andronic</h3>
@@ -1813,7 +1953,7 @@
             <!-- 10. -->
             <div class="doctor-card sr sr-d1">
                 <div class="doctor-card-img">
-                    <img src="dr_amirskaik.jpg" alt="Dr. Amir Skaik" />
+                    <img src="../ZH/imagini/dr_amirskaik.jpg" alt="Dr. Amir Skaik" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Amir Skaik</h3>
@@ -1823,7 +1963,7 @@
             <!-- 11. -->
             <div class="doctor-card sr sr-d2">
                 <div class="doctor-card-img">
-                    <img src="dr_danamariaacu.jpg" alt="Dr. Dana Maria Acu" />
+                    <img src="../ZH/imagini/dr_danamariaacu.jpg" alt="Dr. Dana Maria Acu" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. Dana Maria Acu</h3>
@@ -1833,7 +1973,7 @@
             <!-- 12. -->
             <div class="doctor-card sr sr-d3">
                 <div class="doctor-card-img">
-                    <img src="dr_georgepatriche.jpg" alt="Dr. George Patriche" />
+                    <img src="../ZH/imagini/dr_georgepatriche.jpg" alt="Dr. George Patriche" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Dr. George Patriche</h3>
@@ -1853,7 +1993,7 @@
         <div class="doctors-grid" style="grid-template-columns: repeat(3, 1fr);">
             <div class="doctor-card sr sr-d1">
                 <div class="doctor-card-img">
-                    <img src="dr_filipdahm.jpg" alt="Rezident 1" />
+                    <img src="../ZH/imagini/dr_filipdahm.jpg" alt="Rezident 1" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Filip DAHM</h3>
@@ -1862,7 +2002,7 @@
             </div>
             <div class="doctor-card sr sr-d2">
                 <div class="doctor-card-img">
-                    <img src="dr_placeholder-man.jpg" alt="Rezident 2" />
+                    <img src="../ZH/imagini/dr_placeholder-man.jpg" alt="Rezident 2" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Vă așteptăm!</h3>
@@ -1871,7 +2011,7 @@
             </div>
             <div class="doctor-card sr sr-d3">
                 <div class="doctor-card-img">
-                    <img src="dr_placeholder-woman.jpg" alt="Rezident 3" />
+                    <img src="../ZH/imagini/dr_placeholder-woman.jpg" alt="Rezident 3" />
                 </div>
                 <div class="doctor-card-body">
                     <h3>Vă așteprăm!</h3>
@@ -2114,25 +2254,25 @@
 
     <div class="partners-track sr">
         <div class="partners-scroll">
-			<a href="https://cnas.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_cnas.jpg" alt="CNAS" /></a>
-			<a href="https://www.dentotal.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_dentotal.jpg" alt="Dentotal Protect" /></a>
-			<a href="https://digiray.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_digiray.jpg" alt="Digiray" /></a>
-			<a href="https://inmanaligner.com" target="_blank" rel="noopener"><img class="partner-logo" src="logo_inmanaligner.jpg" alt="Inman Aligner" /></a>
-			<a href="https://miiosmile.com" target="_blank" rel="noopener"><img class="partner-logo" src="logo_miiosmile.png" alt="MiioSmile" /></a>
-			<a href="https://sser.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_sser.png" alt="SSER" /></a>
-			<a href="https://www.dentex.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_dentex.jpg" alt="DENTEX" /></a>
-			<a href="https://www.straumann.com/ro/ro/profesionisti-in-medicina-dentara.html" target="_blank" rel="noopener"><img class="partner-logo" src="logo_straumann.jpg" alt="Straumann" /></a>
-			<a href="https://www.straumann.com/neodent/ro/ro/professionals.html" target="_blank" rel="noopener"><img class="partner-logo" src="logo_neodent.jpg" alt="Neodent" /></a>
+			<a href="https://cnas.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_cnas.jpg" alt="CNAS" /></a>
+			<a href="https://www.dentotal.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_dentotal.jpg" alt="Dentotal Protect" /></a>
+			<a href="https://digiray.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_digiray.jpg" alt="Digiray" /></a>
+			<a href="https://inmanaligner.com" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_inmanaligner.jpg" alt="Inman Aligner" /></a>
+			<a href="https://miiosmile.com" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_miiosmile.png" alt="MiioSmile" /></a>
+			<a href="https://sser.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_sser.png" alt="SSER" /></a>
+			<a href="https://www.dentex.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_dentex.jpg" alt="DENTEX" /></a>
+			<a href="https://www.straumann.com/ro/ro/profesionisti-in-medicina-dentara.html" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_straumann.jpg" alt="Straumann" /></a>
+			<a href="https://www.straumann.com/neodent/ro/ro/professionals.html" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_neodent.jpg" alt="Neodent" /></a>
 			<!-- Duplicat pentru loop -->
-			<a href="https://cnas.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_cnas.jpg" alt="CNAS" /></a>
-			<a href="https://www.dentotal.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_dentotal.jpg" alt="Dentotal Protect" /></a>
-			<a href="https://digiray.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_digiray.jpg" alt="Digiray" /></a>
-			<a href="https://inmanaligner.com" target="_blank" rel="noopener"><img class="partner-logo" src="logo_inmanaligner.jpg" alt="Inman Aligner" /></a>
-			<a href="https://miiosmile.com" target="_blank" rel="noopener"><img class="partner-logo" src="logo_miiosmile.png" alt="MiioSmile" /></a>
-			<a href="https://sser.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_sser.png" alt="SSER" /></a>
-			<a href="https://www.dentex.ro" target="_blank" rel="noopener"><img class="partner-logo" src="logo_dentex.jpg" alt="DENTEX" /></a>
-			<a href="https://www.straumann.com/ro/ro/profesionisti-in-medicina-dentara.html" target="_blank" rel="noopener"><img class="partner-logo" src="logo_straumann.jpg" alt="Straumann" /></a>
-			<a href="https://www.straumann.com/neodent/ro/ro/professionals.html" target="_blank" rel="noopener"><img class="partner-logo" src="logo_neodent.jpg" alt="Neodent" /></a>
+			<a href="https://cnas.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_cnas.jpg" alt="CNAS" /></a>
+			<a href="https://www.dentotal.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_dentotal.jpg" alt="Dentotal Protect" /></a>
+			<a href="https://digiray.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_digiray.jpg" alt="Digiray" /></a>
+			<a href="https://inmanaligner.com" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_inmanaligner.jpg" alt="Inman Aligner" /></a>
+			<a href="https://miiosmile.com" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_miiosmile.png" alt="MiioSmile" /></a>
+			<a href="https://sser.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_sser.png" alt="SSER" /></a>
+			<a href="https://www.dentex.ro" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_dentex.jpg" alt="DENTEX" /></a>
+			<a href="https://www.straumann.com/ro/ro/profesionisti-in-medicina-dentara.html" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_straumann.jpg" alt="Straumann" /></a>
+			<a href="https://www.straumann.com/neodent/ro/ro/professionals.html" target="_blank" rel="noopener"><img class="partner-logo" src="../ZH/imagini/logo_neodent.jpg" alt="Neodent" /></a>
 		</div>
     </div>
 </section>
@@ -2258,63 +2398,141 @@
         </div>
     </div>
 </section>
-	
 
 <!-- ══════════════════════════════════════════════
-     CTA FINAL + CONTACT
-══════════════════════════════════════════════ -->
+     FORMULAR PROGRAMARE
+══════════════════════════════════════════════ 
+<section class="cta-section" id="programare">-->
 <section class="cta-section" id="contact" aria-labelledby="ctaTitle">
     <div class="container">
-        <div class="section-badge light sr">🦷 Următorul pas</div>
+	    <div class="section-badge light sr">🦷 Următorul pas: Programarea online</div>
         <h2 class="cta-title sr" id="ctaTitle">
             Fii pacientul care vine pentru că<br/> are <em>încredere</em>,<br/> nu doar pentru că are o durere.
         </h2>
         <p class="cta-desc sr">
-            Primul pas este cel mai important. Consultația de bilanț stomatologic îți oferă 
+            Consultația de bilanț stomatologic îți oferă 
             toată claritatea de care ai nevoie — fără obligații, fără presiune.
+			Completează formularul și te vom contacta în maximum 24 de ore 
+            pentru confirmarea programării. Sau sună-ne direct dacă preferi.
         </p>
-        <div class="cta-btns sr">
-            <a href="tel:+40749214341" class="btn-gold">📞 Sună: 0749.214.341</a>
-            <a href="mailto:info@dentalsibiu.ro" class="btn-outline-w">✉️ info@dentalsibiu.ro</a>
-        </div>
-
-        <div class="contact-grid sr">
-            <div class="contact-card">
-                <div class="contact-icon">📍</div>
-                <h4>Locație Sibiu</h4>
-					<a href="https://www.google.com/maps/search/?api=1&query=Zahnarzt+Hermannstadt+Str.+Dimitrie+Cantemir+20+Sibiu" target="_blank" rel="noopener">
+        <div class="appointment-grid">
+            <!-- Coloana stânga — info -->
+            <div class="appointment-info sr">
+                <div class="appointment-contact-item">
+                    <div class="appointment-contact-icon">📞</div>
+                    <div class="appointment-contact-text">
+                        <strong><a href="tel:+40749214341" style="color:var(--white);">0749.214.341</a></strong>
+                        Luni – Vineri, în programul clinicii
+                    </div>
+                </div>
+                <div class="appointment-contact-item">
+                    <div class="appointment-contact-icon">✉️</div>
+                    <div class="appointment-contact-text">
+                        <strong><a href="mailto:info@dentalsibiu.ro" style="color:var(--white);">info@dentalsibiu.ro</a></strong>
+                        Răspundem în maxim 24h
+                    </div>
+                </div>
+                <div class="appointment-contact-item">
+                    <div class="appointment-contact-icon">🕐</div>
+                    <div class="appointment-contact-text">
+                        <strong>Program</strong>
+                        Luni – Miercuri: 14:00 – 20:00<br/>
+                        Joi – Vineri: 08:00 – 14:00
+                    </div>
+                </div>
+			<div class="contact-card">     
+				<a href="https://www.google.com/maps/search/?api=1&query=Zahnarzt+Hermannstadt+Str.+Dimitrie+Cantemir+20+Sibiu" target="_blank" rel="noopener">
 						Str. Dimitrie Cantemir Nr. 20, Sibiu
-					</a>
+				</a>
                 <div class="contact-card-map">
                     <iframe src="https://maps.google.com/maps?q=Str.+Dimitrie+Cantemir+20,+Sibiu,+Romania&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-            </div>
+			</div>
             <div class="contact-card">
-                <div class="contact-icon">📍</div>
-                <h4>Locație Orlat</h4>
                 <a href="https://www.google.com/maps/search/?api=1&query=Zahnarzt+Hermannstadt+Str.+Avram+Iancu+637+Orlat+Sibiu" target="_blank" rel="noopener">
                     Str. Avram Iancu Nr. 637, Orlat
                 </a>
                 <div class="contact-card-map">
                     <iframe src="https://maps.google.com/maps?q=Str.+Avram+Iancu+637,+Orlat,+Sibiu,+Romania&t=&z=16&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
+			</div>
+        </div>
+
+            <!-- Coloana dreapta — formular -->
+            <div class="appointment-form-box sr">
+                <h3>Programează consultația</h3>
+                <p class="form-subtitle">Toate câmpurile marcate * sunt obligatorii.</p>
+
+                <form action="https://formspree.io/f/mreyveeo" method="POST" id="appointmentForm">
+                    <input type="hidden" name="_subject" value="Programare nouă — Zahnarzt Hermannstadt" />
+                    <input type="hidden" name="_replyto" id="replyToField" />
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label class="form-label">Nume *</label>
+                            <input type="text" name="nume" class="form-input" placeholder="Popescu" required />
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Prenume *</label>
+                            <input type="text" name="prenume" class="form-input" placeholder="Andrei" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label class="form-label">Telefon *</label>
+                            <input type="tel" name="telefon" class="form-input" placeholder="07XX XXX XXX" required />
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">E-mail *</label>
+                            <input type="email" name="email" class="form-input" placeholder="email@exemplu.ro" required id="emailField" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field full">
+                            <label class="form-label">Doresc *</label>
+                            <select name="tip_consultatie" class="form-input" required>
+                                <option value="" disabled selected>— Selectează —</option>
+                                <option value="Consultație de bilanț">O consultație de bilanț</option>
+                                <option value="Control periodic">Un control periodic</option>
+                                <option value="A doua opinie">O a doua opinie</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label class="form-label">Data dorită *</label>
+                            <input type="date" name="data" class="form-input" id="dateField" required />
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Ora dorită *</label>
+                            <select name="ora" class="form-input" id="timeField" required disabled>
+                                <option value="" disabled selected>Selectează data întâi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="form-note">Lu–Mi: 14–20 · Jo–Vi: 8–14 · Sâ–Du: Închis</p>
+
+                    <div class="form-row" style="margin-top:0.5rem;">
+                        <div class="form-field full">
+                            <label class="form-label">Detalii suplimentare</label>
+                            <textarea name="detalii" class="form-input" placeholder="Spuneți-ne, pe scurt, motivul vizitei sau orice informație considerați utilă..." rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-submit">Trimite cererea de programare →</button>
+                    <p class="form-privacy">
+                        Datele tale sunt protejate conform GDPR. Le folosim exclusiv pentru programare.
+                    </p>
+                </form>
             </div>
-            <div class="contact-card">
-			    <div class="contact-card-details">
-                    Luni – Miercuri: 14:00 – 20:00<br/>
-                    Joi – Vineri: 08:00 – 14:00
-                </div>
-                <div class="contact-icon">📞</div>
-                <h4>Contact direct</h4>
-                <a href="tel:+40749214341" style="font-size:1.25rem;"> 0749.214.341</a>
-                <a href="mailto:info@dentalsibiu.ro" style="font-size:0.85rem; color:var(--gold); margin-top:0.5rem;">info@dentalsibiu.ro</a>
-                <div class="contact-card-details" style="margin-top:1rem;">
-                    🌐 <a href="https://dentalsibiu.ro" target="_blank" rel="noopener" style="font-size:0.78rem; color:rgba(255,255,255,0.55);">dentalsibiu.ro</a>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
+	
 
 <!-- ══════════════════════════════════════════════
      FOOTER
@@ -2325,7 +2543,7 @@
 
         <div class="footer-inner">
 		<a href="#acasa" class="nav-brand">
-            <img src="logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
+            <img src="../ZH/imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
         </a>
             <div class="footer-links">
                 <a href="#">Politica de confidențialitate</a>
@@ -2423,7 +2641,68 @@ fetch('https://nutrisib.club/script_protect.js')
         show(idx);
     });
 })();
+/* ── Formular programare — ore dinamice ── */
+(() => {
+    const dateField = document.getElementById('dateField');
+    const timeField = document.getElementById('timeField');
+    const emailField = document.getElementById('emailField');
+    const replyTo = document.getElementById('replyToField');
 
+    if (!dateField || !timeField) return;
+
+    // Set min date = azi
+    const today = new Date();
+    dateField.min = today.toISOString().split('T')[0];
+
+    dateField.addEventListener('change', () => {
+        const selected = new Date(dateField.value + 'T00:00:00');
+        const day = selected.getDay(); // 0=Du, 1=Lu ... 6=Sâ
+
+        timeField.innerHTML = '';
+        timeField.disabled = false;
+
+        let startH, endH;
+
+        if (day >= 1 && day <= 3) {
+            // Luni–Miercuri: 14–20
+            startH = 14; endH = 20;
+        } else if (day === 4 || day === 5) {
+            // Joi–Vineri: 8–14
+            startH = 8; endH = 14;
+        } else {
+            // Sâmbătă / Duminică
+            timeField.innerHTML = '<option value="" disabled selected>Închis în weekend</option>';
+            timeField.disabled = true;
+            dateField.value = '';
+            alert('Clinica este închisă Sâmbăta și Duminica. Vă rugăm selectați o zi lucrătoare.');
+            return;
+        }
+
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.disabled = true;
+        placeholder.selected = true;
+        placeholder.textContent = '— Selectează ora —';
+        timeField.appendChild(placeholder);
+
+        for (let h = startH; h < endH; h++) {
+            ['00', '30'].forEach(m => {
+                const opt = document.createElement('option');
+                const timeStr = String(h).padStart(2, '0') + ':' + m;
+                opt.value = timeStr;
+                opt.textContent = timeStr;
+                timeField.appendChild(opt);
+            });
+        }
+    });
+
+    // Sync reply-to
+    if (emailField && replyTo) {
+        emailField.addEventListener('input', () => {
+            replyTo.value = emailField.value;
+        });
+    }
+})();
 </script>
 
 </body>

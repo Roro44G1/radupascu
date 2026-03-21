@@ -3,138 +3,67 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Care este primul dinte permanent care iese în gura copilului? | Zahnarzt Hermannstadt</title>
-    <meta name="description" content="Un ghid esențial pentru părinți despre momentul erupției primului dinte permanent și cum să-l protejați corect." />
+    <title>Primul dinte permanent: tot ce trebuie să știi ca părinte | Zahnarzt Hermannstadt</title>
+    <meta name="description" content="Molarul de 6 ani este primul dinte permanent care apare în gura copilului — fără să înlocuiască nimic. Ghid complet: cum îl recunoști, de ce contează, cum îl protejezi." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
     <style>
     :root {
         --navy: #3F448C; --navy-deep: #2A2E5E; --navy-mid: #4E54A3;
+        --navy-pale: #E8E9F4;
         --gold: #FBB64C; --gold-dark: #C48B1A; --gold-pale: #FEF0D4;
-        --pearl: #FAFAF7; --pearl-warm: #F4F2ED; --white: #FFFFFF;
+        --pearl: #FAFAF7; --white: #FFFFFF;
         --text-dark: #1A1A2E; --text-med: #4A4A5A; --text-light: #6B7280;
-        --border: #E5E1D8; --border-light: #EDEBE5;
-        --shadow-md: 0 8px 24px rgba(63,68,140,0.08);
-        --radius: 14px;
+        --border: #E5E1D8; --radius: 14px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-        font-family: 'DM Sans', -apple-system, sans-serif;
-        color: var(--text-dark); background: var(--pearl);
-        line-height: 1.7; -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--text-dark); background: var(--pearl); line-height: 1.7; -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
 
-    /* Navbar */
-    .navbar {
-        position: sticky; top: 0; z-index: 1000;
-        background: rgba(248,246,241,0.92);
-        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
-    }
-    .navbar-inner {
-        max-width: 1280px; margin: 0 auto; padding: 0.65rem 2rem;
-        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    }
+    .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(248,246,241,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .navbar-inner { max-width: 1280px; margin: 0 auto; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .nav-brand img { height: 72px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 2px; }
-    .nav-links a {
-        font-size: 0.84rem; font-weight: 500; color: var(--text-med);
-        padding: 0.42rem 0.85rem; border-radius: 6px; transition: all 0.2s;
-    }
+    .nav-links a { font-size: 0.84rem; font-weight: 500; color: var(--text-med); padding: 0.42rem 0.85rem; border-radius: 6px; transition: all 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--navy); background: rgba(11,29,58,0.05); font-weight: 600; }
-    .mobile-btn {
-        display: none; background: none; border: 1px solid var(--border);
-        border-radius: 6px; padding: 0.4rem 0.65rem;
-        cursor: pointer; color: var(--navy); font-size: 1.3rem;
-    }
+    .mobile-btn { display: none; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.65rem; cursor: pointer; color: var(--navy); font-size: 1.3rem; }
 
-    /* Article hero */
-    .art-hero {
-        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 40%, var(--navy-mid) 100%);
-        padding: 3.5rem 2rem 0; text-align: center; position: relative; overflow: hidden;
-    }
-    .art-hero-badge {
-        display: inline-flex; align-items: center; gap: 0.4rem;
-        background: rgba(251,182,76,0.15); border: 1px solid rgba(251,182,76,0.3);
-        border-radius: 50px; padding: 0.25rem 0.9rem;
-        font-size: 0.7rem; font-weight: 700; color: var(--gold);
-        text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
-    }
-    .art-hero h1 {
-        font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800;
-        color: var(--white); line-height: 1.15; max-width: 700px; margin: 0 auto 1.5rem;
-    }
-    .art-hero-img {
-        max-width: 900px; margin: 0 auto; border-radius: 14px 14px 0 0; overflow: hidden;
-    }
+    .art-hero { background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 40%, var(--navy-mid) 100%); padding: 3.5rem 2rem 0; text-align: center; position: relative; overflow: hidden; }
+    .art-hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(251,182,76,0.15); border: 1px solid rgba(251,182,76,0.3); border-radius: 50px; padding: 0.25rem 0.9rem; font-size: 0.7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .art-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800; color: var(--white); line-height: 1.15; max-width: 700px; margin: 0 auto 1.5rem; }
+    .art-hero-img { max-width: 900px; margin: 0 auto; border-radius: 14px 14px 0 0; overflow: hidden; }
     .art-hero-img img { width: 100%; height: 350px; object-fit: cover; display: block; }
 
-    /* Article body */
-    .art-body {
-        max-width: 750px; margin: 0 auto; padding: 3rem 2rem 4rem;
-    }
-    .art-body p {
-        font-size: 1rem; color: var(--text-med); line-height: 1.85; margin: 0 0 1.25rem;
-    }
-    .art-body h2 {
-        font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700;
-        color: var(--navy); margin: 2.5rem 0 1rem; line-height: 1.25;
-    }
+    .art-body { max-width: 750px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+    .art-body p { font-size: 1rem; color: var(--text-med); line-height: 1.85; margin: 0 0 1.25rem; }
+    .art-body h2 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: var(--navy); margin: 2.5rem 0 1rem; line-height: 1.25; }
     .art-body strong { color: var(--navy); }
 
-    /* Back link */
-    .art-back {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        font-size: 0.88rem; font-weight: 600; color: var(--navy);
-        margin-bottom: 2rem; padding: 0.5rem 1rem;
-        border: 1px solid var(--border); border-radius: 50px;
-        transition: all 0.2s;
-    }
+    .art-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 2rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 50px; transition: all 0.2s; }
     .art-back:hover { background: var(--navy); color: var(--white); }
 
-    /* CTA */
-    .art-cta {
-        background: var(--gold-pale); border-left: 4px solid var(--gold);
-        border-radius: 0 var(--radius) var(--radius) 0;
-        padding: 1.5rem 1.75rem; margin: 2.5rem 0;
-    }
-    .art-cta p {
-        font-family: 'Cormorant Garamond', serif; font-style: italic;
-        font-size: 1.05rem; color: var(--navy); margin: 0 0 0.75rem; line-height: 1.55;
-    }
-    .art-cta a {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: var(--navy); color: var(--white); border-radius: 8px;
-        padding: 0.6rem 1.5rem; font-weight: 700; font-size: 0.88rem;
-        transition: background 0.2s;
-    }
+    .art-highlight { background: var(--navy-pale); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 2rem 0; }
+    .art-highlight p { margin-bottom: 0.5rem; }
+    .art-highlight p:last-child { margin-bottom: 0; }
+
+    .art-cta { background: var(--gold-pale); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.5rem 1.75rem; margin: 2.5rem 0; }
+    .art-cta p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--navy); margin: 0 0 0.75rem; line-height: 1.55; }
+    .art-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy); color: var(--white); border-radius: 8px; padding: 0.6rem 1.5rem; font-weight: 700; font-size: 0.88rem; transition: background 0.2s; }
     .art-cta a:hover { background: var(--navy-mid); }
 
-    /* Footer */
-    .footer {
-        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 100%);
-        padding: 2rem 0;
-    }
-    .footer-inner {
-        max-width: 1280px; margin: 0 auto; padding: 0 2rem;
-        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
+    .footer { background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 100%); padding: 2rem 0; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-inner img { height: 50px; width: auto; }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
     .footer-copy a { color: rgba(255,255,255,0.6); }
     .footer-copy a:hover { color: var(--gold); }
 
     @media (max-width: 768px) {
-        .nav-links {
-            display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-            background: rgba(248,246,241,0.98); padding: 1rem 1.5rem;
-            border-top: 1px solid var(--border); z-index: 999;
-        }
+        .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(248,246,241,0.98); padding: 1rem 1.5rem; border-top: 1px solid var(--border); z-index: 999; }
         .nav-links.open { display: flex; }
         .mobile-btn { display: block; }
         .navbar-inner { position: relative; }
@@ -149,7 +78,7 @@
 <header class="navbar">
     <nav class="navbar-inner">
         <a href="../index.html" class="nav-brand">
-            <img src="../logo_clinica.png" alt="Zahnarzt Hermannstadt" />
+            <img src="../imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt" />
         </a>
 		<div class="nav-links" id="navMenu">
 			<a href="../index.html#acasa" class="active">Acasă</a>
@@ -167,37 +96,64 @@
 
 <section class="art-hero">
     <span class="art-hero-badge">Pedodonție</span>
-    <h1>Care este primul dinte permanent care iese în gura copilului?</h1>
-    <div class="art-hero-img">
-        <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=800&h=400&fit=crop" alt="Care este primul dinte permanent care iese în gura copilului?" />
-    </div>
+    <h1>Primul dinte permanent: tot ce trebuie să știi ca părinte</h1>
 </section>
 
 <article class="art-body">
-    <a href="../articole.html" class="art-back">← Toate articolele</a>
+    <a href="../Articole/index.html" class="art-back">← Toate articolele</a>
 
-    
-        <p>Unul dintre cele mai frecvente întrebări pe care le primim de la părinți este legat de apariția primului dinte permanent. Și, surprinzător, răspunsul nu este cel pe care majoritatea îl așteaptă.</p>
+    <p>Dacă ați fi întrebați „care este primul dinte permanent care apare în gura copilului?", probabil ați răspunde: „cel din față, care îl înlocuiește pe cel de lapte care a căzut". Și ați greși. Răspunsul corect surprinde pe majoritatea părinților — și tocmai de aceea am scris acest ghid.</p>
 
-        <h2>Molarul de 6 ani — eroul necunoscut</h2>
-        <p>Primul dinte permanent care apare în gura copilului este molarul de 6 ani. Acesta erupe în spatele ultimului dinte de lapte, fără să înlocuiască vreun dinte existent. Tocmai de aceea, mulți părinți nu îi acordă atenția cuvenită — crezând că este încă un dinte de lapte.</p>
+    <h2>Eroul invizibil: molarul de 6 ani</h2>
 
-        <h2>Când apare?</h2>
-        <p>De obicei, molarul de 6 ani erupe între 5,5 și 7 ani. Procesul poate dura câteva luni, timp în care gingia din zona respectivă poate fi ușor inflamată.</p>
+    <p>Primul dinte permanent care erupe în gura copilului este <strong>molarul de 6 ani</strong> — primul molar permanent. Apare de obicei între 5,5 și 7 ani, în spatele ultimului dinte de lapte, fără să înlocuiască absolut nimic. Nu cade niciun dinte înainte. Nu este precedat de niciun semn evident. Pur și simplu apare, discret, în fundul gurii.</p>
 
-        <h2>Ce trebuie să facă părinții</h2>
-        <p>Verificați periodic gura copilului pentru a observa apariția acestui dinte. Când este vizibil, programați o vizită la pedodont pentru sigilarea preventivă a șanțurilor — o procedură simplă, rapidă și complet nedureroasă care protejează dintele de carii pentru mulți ani.</p>
-        
+    <p>Tocmai această „intrare liniștită" este problema. Mulți părinți nu observă apariția lui sau — și mai periculos — îl confundă cu un dinte de lapte. Atitudinea „oricum se schimbă" este o greșeală care poate costa scump: <strong>molarul de 6 ani este permanent. Odată pierdut sau distrus de carii, nu mai crește altul în locul lui.</strong></p>
+
+    <h2>De ce este considerat „cheia ocluziei"?</h2>
+
+    <p>Stomatologii îl numesc „cheia ocluziei" pentru un motiv simplu: molarul de 6 ani determină poziția și alinierea tuturor celorlalți dinți permanenți care vor erupe ulterior. El servește ca punct de referință pentru arcadele dentare superioare și inferioare. Gândiți-vă la el ca la piatra de temelie a unei clădiri — dacă fundația cedează, tot ce construiești deasupra se dezalinează.</p>
+
+    <p>Pierderea prematură a molarului de 6 ani poate duce la înghesuirea dinților vecini care migrează spre spațiul gol, probleme de ocluzie (mușcătură incorectă), dificultăți de masticație și chiar necesitatea unui tratament ortodontic complex în adolescență — tratament care ar fi putut fi evitat prin prevenție simplă la vârsta de 6 ani.</p>
+
+    <h2>De ce este atât de vulnerabil?</h2>
+
+    <p>La momentul erupției, smalțul molarului de 6 ani nu este complet mineralizat — este mai moale, mai poros și mai susceptibil la acizii produși de bacterii. În plus, suprafața sa de masticație are șanțuri și fosete adânci care rețin resturi alimentare și placa bacteriană. Aceste zone sunt aproape imposibil de curățat eficient doar cu periajul, indiferent cât de riguroasă este igiena copilului.</p>
+
+    <div class="art-highlight">
+        <p><strong>Studiile clinice arată că molarul de 6 ani este dintele permanent cu cea mai mare incidență a cariilor în primii 2 ani de la erupție.</strong></p>
+        <p>Fereastra de vulnerabilitate este scurtă dar critică — iar intervențiile preventive în această perioadă au cel mai mare impact pe termen lung. Un leu investit în prevenție la 6 ani economisește zeci de lei în tratamente la 16.</p>
+    </div>
+
+    <h2>Cum îl protejezi: cele 3 acțiuni esențiale</h2>
+
+    <p><strong>1. Sigilarea preventivă a șanțurilor.</strong> Este cea mai eficientă măsură de prevenție disponibilă astăzi. Procedura durează 10-15 minute per dinte, este complet nedureroasă (fără anestezie, fără frezare, fără disconfort) și creează o barieră fizică de rășină care acoperă șanțurile vulnerabile. Eficacitatea dovedită clinic: reducerea cariilor cu 60-90% în primii 2-4 ani. La Zahnarzt Hermannstadt, Dr. Myriam Mzoughi realizează sigilări preventive cu materiale de ultimă generație, într-un mediu gândit special pentru confortul celor mici.</p>
+
+    <p><strong>2. Fluorizare profesională.</strong> Aplicarea de lacuri sau geluri cu fluor în cabinet accelerează mineralizarea smalțului tânăr, întărindu-l. Procedura este rapidă, nedureroasă și se realizează de obicei la fiecare control semestrial. Combinată cu sigilarea, formează un scut dublu de protecție.</p>
+
+    <p><strong>3. Monitorizare activă.</strong> Controale la pedodont la fiecare 6 luni permit depistarea precoce a oricărei modificări — când o carie incipientă poate fi tratată minim invaziv, fără durere și fără pierdere semnificativă de substanță dentară. Prevenția nu este o cheltuială — este cea mai inteligentă investiție în sănătatea copilului.</p>
+
+    <h2>Cum recunoști molarul de 6 ani?</h2>
+
+    <p>Verificați periodic gura copilului, în special zona din spatele ultimului dinte de lapte — atât pe maxilar (sus), cât și pe mandibulă (jos, unde erupe de obicei primul). Dacă vedeți o margine albă-cenușie ieșind din gingie, sau copilul se plânge de „o gingiecare-l doare în spate" — acesta este semnalul. Procesul de erupție poate dura câteva săptămâni, timp în care gingia din zonă poate fi ușor inflamată și sensibilă.</p>
+
+    <p><strong>Momentul ideal pentru prima vizită:</strong> imediat ce observați molarul erupând, sau proactiv la vârsta de 5,5-6 ani, ca vizită de screening. Nu așteptați simptome — când un copil acuză durere la un molar de 6 ani, de cele mai multe ori caria este deja profundă și tratamentul mult mai complex decât ar fi fost prevenția.</p>
+
+    <h2>Ce se întâmplă dacă ați ratat fereastra de prevenție?</h2>
+
+    <p>Nu e prea târziu. Chiar dacă molarul de 6 ani are deja o carie, există soluții conservatoare eficiente: obturații din compozit estetic care restaurează forma și funcția dintelui, sau — în cazuri mai avansate — tratament endodontic pediatric care poate salva dintele. Scopul este întotdeauna <strong>păstrarea dintelui în arcadă</strong>, nu extracția. Fiecare dinte salvat este un pas câștigat pentru dezvoltarea corectă a întregii danturi permanente.</p>
+
+    <p>Dacă din nefericire dintele este pierdut, medicul ortodont poate planifica menținerea spațiului cu un dispozitiv special (space maintainer) pentru a preveni migrarea dinților vecini și dezalinierile viitoare.</p>
 
     <div class="art-cta">
-        <p>Ai întrebări sau vrei să programezi o consultație? Echipa noastră te așteaptă.</p>
+        <p>Copilul tău are între 5 și 7 ani? E momentul perfect pentru un control preventiv și sigilarea molarilor de 6 ani. Programează o vizită la Dr. Myriam Mzoughi — pedodontul clinicii noastre.</p>
         <a href="../index.html#contact">Programează consultația →</a>
     </div>
 </article>
 
 <footer class="footer">
     <div class="footer-inner">
-        <a href="../index.html"><img src="../logo_clinica.png" alt="Zahnarzt Hermannstadt" /></a>
+        <a href="../index.html"><img src="../imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt" /></a>
         <div class="footer-copy">© 2026 dr.ing. Radu Pascu - <a href="https://www.radupascu.online" target="_blank">radupascu.online</a></div>
     </div>
 </footer>

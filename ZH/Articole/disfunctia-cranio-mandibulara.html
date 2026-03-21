@@ -3,138 +3,73 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ce este disfuncția cranio-mandibulară (DCM)? | Zahnarzt Hermannstadt</title>
-    <meta name="description" content="Afecțiunile articulației temporo-mandibulare au o importanță deosebită pentru sănătatea aparatului dento-maxilar." />
+    <title>Disfuncția cranio-mandibulară (DCM): diagnostic, cauze și tratament modern | Zahnarzt Hermannstadt</title>
+    <meta name="description" content="Ghid complet despre disfuncția cranio-mandibulară: simptome, clasificare, diagnostic diferențial și opțiuni terapeutice bazate pe evidențe. Echipa Zahnarzt Hermannstadt Sibiu." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
     <style>
     :root {
         --navy: #3F448C; --navy-deep: #2A2E5E; --navy-mid: #4E54A3;
+        --navy-pale: #E8E9F4;
         --gold: #FBB64C; --gold-dark: #C48B1A; --gold-pale: #FEF0D4;
-        --pearl: #FAFAF7; --pearl-warm: #F4F2ED; --white: #FFFFFF;
+        --pearl: #FAFAF7; --white: #FFFFFF;
         --text-dark: #1A1A2E; --text-med: #4A4A5A; --text-light: #6B7280;
-        --border: #E5E1D8; --border-light: #EDEBE5;
-        --shadow-md: 0 8px 24px rgba(63,68,140,0.08);
-        --radius: 14px;
+        --border: #E5E1D8; --radius: 14px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-        font-family: 'DM Sans', -apple-system, sans-serif;
-        color: var(--text-dark); background: var(--pearl);
-        line-height: 1.7; -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; color: var(--text-dark); background: var(--pearl); line-height: 1.7; -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
 
-    /* Navbar */
-    .navbar {
-        position: sticky; top: 0; z-index: 1000;
-        background: rgba(248,246,241,0.92);
-        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
-    }
-    .navbar-inner {
-        max-width: 1280px; margin: 0 auto; padding: 0.65rem 2rem;
-        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    }
+    .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(248,246,241,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .navbar-inner { max-width: 1280px; margin: 0 auto; padding: 0.65rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
     .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
     .nav-brand img { height: 72px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 2px; }
-    .nav-links a {
-        font-size: 0.84rem; font-weight: 500; color: var(--text-med);
-        padding: 0.42rem 0.85rem; border-radius: 6px; transition: all 0.2s;
-    }
+    .nav-links a { font-size: 0.84rem; font-weight: 500; color: var(--text-med); padding: 0.42rem 0.85rem; border-radius: 6px; transition: all 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--navy); background: rgba(11,29,58,0.05); font-weight: 600; }
-    .mobile-btn {
-        display: none; background: none; border: 1px solid var(--border);
-        border-radius: 6px; padding: 0.4rem 0.65rem;
-        cursor: pointer; color: var(--navy); font-size: 1.3rem;
-    }
+    .mobile-btn { display: none; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.65rem; cursor: pointer; color: var(--navy); font-size: 1.3rem; }
 
-    /* Article hero */
-    .art-hero {
-        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 40%, var(--navy-mid) 100%);
-        padding: 3.5rem 2rem 0; text-align: center; position: relative; overflow: hidden;
-    }
-    .art-hero-badge {
-        display: inline-flex; align-items: center; gap: 0.4rem;
-        background: rgba(251,182,76,0.15); border: 1px solid rgba(251,182,76,0.3);
-        border-radius: 50px; padding: 0.25rem 0.9rem;
-        font-size: 0.7rem; font-weight: 700; color: var(--gold);
-        text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;
-    }
-    .art-hero h1 {
-        font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800;
-        color: var(--white); line-height: 1.15; max-width: 700px; margin: 0 auto 1.5rem;
-    }
-    .art-hero-img {
-        max-width: 900px; margin: 0 auto; border-radius: 14px 14px 0 0; overflow: hidden;
-    }
+    .art-hero { background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 40%, var(--navy-mid) 100%); padding: 3.5rem 2rem 0; text-align: center; position: relative; overflow: hidden; }
+    .art-hero-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(251,182,76,0.15); border: 1px solid rgba(251,182,76,0.3); border-radius: 50px; padding: 0.25rem 0.9rem; font-size: 0.7rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .art-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800; color: var(--white); line-height: 1.15; max-width: 750px; margin: 0 auto 1.5rem; }
+    .art-hero-img { max-width: 900px; margin: 0 auto; border-radius: 14px 14px 0 0; overflow: hidden; }
     .art-hero-img img { width: 100%; height: 350px; object-fit: cover; display: block; }
 
-    /* Article body */
-    .art-body {
-        max-width: 750px; margin: 0 auto; padding: 3rem 2rem 4rem;
-    }
-    .art-body p {
-        font-size: 1rem; color: var(--text-med); line-height: 1.85; margin: 0 0 1.25rem;
-    }
-    .art-body h2 {
-        font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700;
-        color: var(--navy); margin: 2.5rem 0 1rem; line-height: 1.25;
-    }
+    .art-body { max-width: 750px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+    .art-body p { font-size: 1rem; color: var(--text-med); line-height: 1.85; margin: 0 0 1.25rem; }
+    .art-body h2 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: var(--navy); margin: 2.5rem 0 1rem; line-height: 1.25; }
+    .art-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy-mid); margin: 1.75rem 0 0.75rem; }
     .art-body strong { color: var(--navy); }
+    .art-body ul { margin: 0 0 1.25rem 1.5rem; color: var(--text-med); }
+    .art-body ul li { margin-bottom: 0.4rem; line-height: 1.7; }
 
-    /* Back link */
-    .art-back {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        font-size: 0.88rem; font-weight: 600; color: var(--navy);
-        margin-bottom: 2rem; padding: 0.5rem 1rem;
-        border: 1px solid var(--border); border-radius: 50px;
-        transition: all 0.2s;
-    }
+    .art-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 2rem; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 50px; transition: all 0.2s; }
     .art-back:hover { background: var(--navy); color: var(--white); }
 
-    /* CTA */
-    .art-cta {
-        background: var(--gold-pale); border-left: 4px solid var(--gold);
-        border-radius: 0 var(--radius) var(--radius) 0;
-        padding: 1.5rem 1.75rem; margin: 2.5rem 0;
-    }
-    .art-cta p {
-        font-family: 'Cormorant Garamond', serif; font-style: italic;
-        font-size: 1.05rem; color: var(--navy); margin: 0 0 0.75rem; line-height: 1.55;
-    }
-    .art-cta a {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: var(--navy); color: var(--white); border-radius: 8px;
-        padding: 0.6rem 1.5rem; font-weight: 700; font-size: 0.88rem;
-        transition: background 0.2s;
-    }
+    .art-highlight { background: var(--navy-pale); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 2rem 0; }
+    .art-highlight p { margin-bottom: 0.5rem; }
+    .art-highlight p:last-child { margin-bottom: 0; }
+
+    .art-warning { background: var(--gold-pale); border-left: 4px solid var(--gold-dark); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+    .art-warning p { margin-bottom: 0; font-size: 0.95rem; }
+
+    .art-cta { background: var(--gold-pale); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.5rem 1.75rem; margin: 2.5rem 0; }
+    .art-cta p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--navy); margin: 0 0 0.75rem; line-height: 1.55; }
+    .art-cta a { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--navy); color: var(--white); border-radius: 8px; padding: 0.6rem 1.5rem; font-weight: 700; font-size: 0.88rem; transition: background 0.2s; }
     .art-cta a:hover { background: var(--navy-mid); }
 
-    /* Footer */
-    .footer {
-        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 100%);
-        padding: 2rem 0;
-    }
-    .footer-inner {
-        max-width: 1280px; margin: 0 auto; padding: 0 2rem;
-        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
+    .footer { background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 100%); padding: 2rem 0; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-inner img { height: 50px; width: auto; }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
     .footer-copy a { color: rgba(255,255,255,0.6); }
     .footer-copy a:hover { color: var(--gold); }
 
     @media (max-width: 768px) {
-        .nav-links {
-            display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-            background: rgba(248,246,241,0.98); padding: 1rem 1.5rem;
-            border-top: 1px solid var(--border); z-index: 999;
-        }
+        .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(248,246,241,0.98); padding: 1rem 1.5rem; border-top: 1px solid var(--border); z-index: 999; }
         .nav-links.open { display: flex; }
         .mobile-btn { display: block; }
         .navbar-inner { position: relative; }
@@ -148,57 +83,123 @@
 
 <header class="navbar">
     <nav class="navbar-inner">
-        <a href="../index.html" class="nav-brand">
-            <img src="../logo_clinica.png" alt="Zahnarzt Hermannstadt" />
-        </a>
-		<div class="nav-links" id="navMenu">
-			<a href="../index.html#acasa" class="active">Acasă</a>
-			<a href="../index.html#calatorie">Procesul</a>
-			<a href="../index.html#servicii">Servicii</a>
-			<a href="../index.html#despre">Echipa</a>
-			<a href="../index.html#bilant">Consultația</a>
-			<a href="../index.html#filosofie">Filosofie</a>
-			<a href="../Articole/index.html">Articole</a>
-			<a href="../index.html#contact" class="nav-cta">Contact</a>
-		</div>
+        <a href="../index.html" class="nav-brand"><img src="../imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt" /></a>
+        <div class="nav-links" id="navMenu">
+            <a href="../index.html#acasa">Acasă</a>
+            <a href="../index.html#calatorie">Procesul</a>
+            <a href="../index.html#servicii">Servicii</a>
+            <a href="../index.html#despre">Echipa</a>
+            <a href="../index.html#bilant">Consultația</a>
+            <a href="../index.html#filosofie">Filosofie</a>
+            <a href="../Articole/index.html" class="active">Articole</a>
+            <a href="../index.html#contact" class="nav-cta">Contact</a>
+        </div>
         <button class="mobile-btn" id="mobileBtn" aria-label="Meniu">☰</button>
     </nav>
 </header>
 
 <section class="art-hero">
-    <span class="art-hero-badge">Profilaxie</span>
-    <h1>Ce este disfuncția cranio-mandibulară (DCM)?</h1>
-    <div class="art-hero-img">
-        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=400&fit=crop" alt="Ce este disfuncția cranio-mandibulară (DCM)?" />
-    </div>
+    <span class="art-hero-badge">Profilaxie · Diagnostic</span>
+    <h1>Disfuncția cranio-mandibulară (DCM): ce este, cum o recunoști și cum se tratează</h1>
 </section>
 
 <article class="art-body">
-    <a href="../articole.html" class="art-back">← Toate articolele</a>
+    <a href="../Articole/index.html" class="art-back">← Toate articolele</a>
 
-    
-        <p>Afecțiunile articulației temporo-mandibulare (ATM) reprezintă un aspect de o importanță deosebită pentru sănătatea și buna funcționare a aparatului dento-maxilar. Deși mulți pacienți nu le recunosc, simptomele DCM pot afecta semnificativ calitatea vieții.</p>
+    <p>Disfuncția cranio-mandibulară (DCM) — sau, în terminologia internațională actuală, <strong>tulburările temporo-mandibulare (TMD)</strong> — reprezintă un grup de afecțiuni musculo-scheletale și neuromusculare care implică articulația temporo-mandibulară (ATM), musculatura masticatorie și structurile asociate. Conform ghidurilor publicate de Royal College of Surgeons (2024) și actualizate în 2025, TMD-urile trebuie abordate ca afecțiuni potențial persistente — nu ca simple probleme dentare — cu management holistic și individualizat.</p>
 
-        <h2>Simptome frecvente</h2>
-        <p>Durerea la nivelul articulației mandibulare, crepitații (pocnituri) la deschiderea gurii, dureri de cap recurente, tensiune în mușchii feței, dificultăți la masticație și bruxism (scrâșnitul dinților) sunt toate simptome asociate disfuncției cranio-mandibulare.</p>
+    <p>Deși prevalența variază în funcție de criteriile de diagnostic folosite, estimările actuale sugerează că simptome asociate TMD apar la aproximativ 25-30% din populația adultă, cu o incidență mai mare la femei în perioada reproductivă. Totuși, doar o fracțiune din acești pacienți necesită tratament activ — ceea ce face diagnosticul diferențial cu atât mai important.</p>
 
-        <h2>Cauze</h2>
-        <p>Stresul, bruxismul nocturn, ocluzia dentară incorectă, traumatismele și pozițiile vicioase ale mandibulei sunt factori declanșatori frecvenți. Adesea, mai mulți factori contribuie simultan.</p>
+    <h2>Clasificarea modernă a TMD-urilor</h2>
 
-        <h2>Abordarea terapeutică</h2>
-        <p>Tratamentul DCM este multidisciplinar și poate include gutiere de relaxare musculară, fizioterapie, ajustarea ocluziei, tehnici de management al stresului și, în cazuri severe, intervenții chirurgicale minimally invazive.</p>
-        <p>La Zahnarzt Hermannstadt, evaluarea ATM face parte din consultația de bilanț stomatologic — astfel identificăm și prevenim problemele înainte ca ele să devină cronice.</p>
-        
+    <p>Criteriile diagnostice internaționale (DC/TMD) clasifică tulburările temporo-mandibulare în două mari categorii, fiecare cu subtipuri distincte care necesită abordări terapeutice diferite:</p>
+
+    <h3>Tulburări miogene (de origine musculară)</h3>
+    <p>Sursa durerii și a disfuncției provine din musculatura masticatorie — în principal mușchii temporal, maseter, pterigoidian medial și lateral. Aceste tulburări se subclasifică în mialgie locală (durere la palpare, limitată la zona palpată), durere miofascială (durere care se extinde dincolo de zona palpată, dar rămâne în limitele mușchiului) și durere miofascială cu iradiere (durerea se referă spre structuri la distanță — ureche, tâmplă, orbită).</p>
+
+    <h3>Tulburări artrogene (de origine articulară)</h3>
+    <p>Sursa problemei este articulația temporo-mandibulară propriu-zisă. Acestea includ deplasarea discului articular cu reducere (discul revine în poziție la deschiderea gurii — produce clasicul „clic"), deplasarea discului fără reducere (discul rămâne blocat — limitare bruscă a deschiderii gurii), boala degenerativă articulară (artroză ATM), subluxația și, mai rar, anchiloza sau tumorile articulare.</p>
+
+    <div class="art-highlight">
+        <p><strong>Important:</strong> Cele două categorii coexistă frecvent. Un pacient cu deplasare de disc dezvoltă adesea secundar tensiune musculară compensatorie, iar un bruxist cronic cu patologie musculară primară poate genera în timp modificări degenerative articulare. Abordarea terapeutică trebuie să adreseze ambele componente simultan.</p>
+    </div>
+
+    <h2>Simptomatologie — dincolo de „pocniturile" mandibulare</h2>
+
+    <p>Tabloul clinic al TMD-urilor este remarcabil de divers și mimează frecvent alte patologii, ceea ce explică diagnosticarea adesea tardivă. Simptomele cardinale includ:</p>
+
+    <ul>
+        <li><strong>Durere în zona preauriculară</strong> (în fața urechii), la nivelul mandibulei sau la tâmple — frecvent interpretată greșit ca otită, sinuzită sau nevralgie</li>
+        <li><strong>Zgomote articulare</strong> — click-uri, crepitații (scârțâituri fine) sau pocnituri la deschiderea sau închiderea gurii</li>
+        <li><strong>Limitarea deschiderii bucale</strong> — deschidere maximă sub 35 mm interincisal (normal: 40-55 mm) sau devierea mandibulei la deschidere</li>
+        <li><strong>Cefalee de tip tensional</strong> — în special în zona temporală, adesea confundată cu migrenă sau cefalee primară</li>
+        <li><strong>Otalgie reflexă</strong> — durere sau senzație de plenitudine auriculară fără patologie ORL obiectivă</li>
+        <li><strong>Bruxism</strong> — scrâșnit sau încleștare dentară, diurnă sau nocturnă, frecvent inconștientă</li>
+        <li><strong>Dificultăți de masticație</strong> — oboseala musculaturii masticatorii la alimentele consistente, senzație de „maxilar blocat"</li>
+        <li><strong>Dureri cervicale asociate</strong> — tensiunea musculaturii masticatorii se transmite frecvent spre musculatura cervicală posterioară</li>
+    </ul>
+
+    <div class="art-warning">
+        <p><strong>Atenție:</strong> Durerea la nivelul feței și al mandibulei nu este întotdeauna de origine temporo-mandibulară. Patologia odontogenă (abces, pulpită, parodontită), nevralgia de trigemen, otita medie, sinuzita maxilară și chiar patologia cardiacă ischemică (durere referită mandibulară) trebuie excluse printr-un diagnostic diferențial riguros înainte de a eticheta simptomele ca TMD.</p>
+    </div>
+
+    <h2>Factorii etiologici — modelul biopsihosocial</h2>
+
+    <p>Abordarea actuală a TMD-urilor a abandonat modelul mecanic simplistic (ocluzie greșită → disfuncție) în favoarea unui model biopsihosocial care recunoaște interacțiunea complexă dintre factori biologici, psihologici și sociali. Consensul științific actual identifică trei categorii de factori:</p>
+
+    <p><strong>Factori predispozanți</strong> — creează vulnerabilitatea: hiperlaxitate ligamentară, anomalii anatomice ale condilului sau fosei glenoide, sex feminin, predispoziție genetică la sensibilizare centrală, catabolism al catecol-O-metiltransferazei (COMT) — un factor genetic care influențează percepția durerii.</p>
+
+    <p><strong>Factori precipitanți</strong> — declanșează episodul: macro-traumatisme (impact direct, whiplash, intubație orotraheală prelungită), micro-traumatisme repetitive (bruxism, mestecarea gumei, obiceiuri parafuncționale), intervenții stomatologice cu deschidere bucală prelungită.</p>
+
+    <p><strong>Factori perpetuanți</strong> — mențin și agravează disfuncția: stresul psihologic cronic, anxietatea, depresia, tulburările de somn (apnea obstructivă de somn — frecvent asociată cu bruxismul nocturn), hipervigilența somatică, catastrofizarea durerii.</p>
+
+    <h2>Diagnosticul — de la anamneză la imagistică</h2>
+
+    <p>Conform ghidurilor actuale, diagnosticul TMD se bazează în mod primar pe anamneză detaliată și examen clinic standardizat. Ghidul NHS/Faculty of Dental Surgery (2024, actualizat 2025) recomandă utilizarea chestionarului de screening 3Q/TMD ca prim pas — trei întrebări simple care permit trierea eficientă a pacienților simptomatici.</p>
+
+    <p><strong>Examenul clinic</strong> include palparea bilaterală a mușchilor temporal și maseter, palparea laterală și endaurală a ATM, evaluarea deschiderii bucale maxime (dureroasă și asistată), evaluarea excursiilor laterale și a protuziei, auscultarea zgomotelor articulare și testul Mahan bilateral pentru identificarea surselor intra-articulare de durere.</p>
+
+    <p><strong>Imagistica</strong> nu este necesară de rutină. CBCT-ul (tomografia computerizată cu fascicul conic) este indicat pentru evaluarea modificărilor osoase degenerative, iar RMN-ul articular — cu secvențe în T1 și T2, în gură închisă și deschisă — rămâne standardul de aur pentru vizualizarea discului articular și a modificărilor inflamatorii (efuziune articulară). Radiografia panoramică standard oferă informații limitate despre ATM, dar este utilă pentru excluderea patologiei odontogene.</p>
+
+    <h2>Principii terapeutice actuale</h2>
+
+    <p>Consensul actual (AAPD 2025, RCS 2024/2025, AAOMS 2024) este clar: <strong>managementul TMD trebuie să fie conservator, non-invaziv, reversibil și bazat pe evidențe</strong>. Tratamentele ireversibile (ajustarea ocluzală prin șlefuire, reabilitări protetice extensive „pentru ocluzie", chirurgie articulară) trebuie rezervate cazurilor refractare și indicate doar după eșecul documentat al terapiilor conservative.</p>
+
+    <h3>Educația pacientului și auto-managementul</h3>
+    <p>Primul pas terapeutic — și adesea cel mai eficient — este educarea pacientului: explicarea naturii afecțiunii (non-amenințătoare, frecvent autolimitantă), identificarea și eliminarea obiceiurilor parafuncționale (încleștare diurnă, mestecarea gumei, sprijinirea mandibulei în palmă), dieta moale temporară, aplicarea de căldură umedă sau comprese reci pe musculatura afectată, tehnici de relaxare musculară și igienă posturală cervicală.</p>
+
+    <h3>Gutiera ocluzală (dispozitivul de stabilizare)</h3>
+    <p>Gutiera ocluzală de tip stabilizare (plat, acoperind toată arcada) rămâne un instrument terapeutic central în managementul TMD-urilor miogene. Mecanismele de acțiune includ reducerea activității musculare parafuncționale nocturne, redistribuirea forțelor ocluzale, decomprimarea spațiului articular și efectul de conștientizare. Gutiera trebuie confecționată pe modele precise (ideal scanare digitală), ajustată ocluzal cu rigurozitate și monitorizată periodic.</p>
+
+    <h3>Kinetoterapia oro-facială</h3>
+    <p>Studiile clinice recente (Romeo et al., 2024) demonstrează beneficiul adăugării kinetoterapiei la gutiera ocluzală: exerciții de stretching mandibular controlat, tehnici de relaxare neuromusculară, mobilizări articulare pasive și terapie manuală a musculaturii masticatorii și cervicale. Asocierea celor două modalități terapeutice produce rezultate superioare față de oricare dintre ele izolat.</p>
+
+    <h3>Farmacoterapia</h3>
+    <p>Medicația este adjuvantă, nu primară. AINS-urile (ibuprofen, naproxen) pe termen scurt pentru episoadele acute, miorelaxantele (ciclobenzaprină) în doze mici seara pentru bruxismul nocturn sever, și — în cazurile cu componentă cronică și sensibilizare centrală — antidepresivele triciclice în doze subterapeutice (amitriptilină 10-25 mg seara) pot fi considerate sub supraveghere medicală.</p>
+
+    <h3>Proceduri minim invazive</h3>
+    <p>Pentru tulburările artrogene refractare la terapia conservatoare, artrocenteza ATM (lavajul articular sub anestezie locală) reprezintă o opțiune documentată. Meta-analiza Xu et al. (2023) demonstrează eficacitatea în reducerea durerii și îmbunătățirea deschiderii bucale, în special la pacienții cu deplasare de disc fără reducere. Infiltrarea intra-articulară cu acid hialuronic sau plasmă bogată în trombocite (PRP) poate oferi beneficii suplimentare, deși evidențele sunt încă în curs de consolidare.</p>
+
+    <h3>Chirurgia articulară</h3>
+    <p>Artroscopia și artrotomia ATM sunt rezervate strict cazurilor severe, documentat refractare la minimum 3-6 luni de terapie conservatoare corect condusă. Indicațiile includ anchiloza, patologia tumorală, deplasarea de disc simptomatică severă fără răspuns la artrocenteză și boala degenerativă avansată cu limitare funcțională majoră.</p>
+
+    <h2>Ce putem face la Zahnarzt Hermannstadt?</h2>
+
+    <p>Evaluarea articulației temporo-mandibulare face parte integrantă din consultația noastră de bilanț stomatologic. Nu tratăm ATM-ul izolat — evaluăm întregul sistem stomatognat: ocluzia, musculatura, articulația, dar și factorii psihosociali și obiceiurile parafuncționale ale pacientului.</p>
+
+    <p>Abordarea noastră urmează principiul „conservative first": educație și auto-management, gutiere ocluzale de stabilizare confecționate digital, monitorizare periodică și, acolo unde este necesar, colaborare cu specialiști în chirurgie oro-maxilo-facială, kinetoterapie oro-facială și medicina somnului.</p>
+
+    <p>Ceea ce facem diferit este că <strong>nu așteptăm ca disfuncția să devină cronică</strong>. Screening-ul ATM de rutină în cadrul consultației de bilanț permite identificarea precoce a semnelor subclinice — înainte ca durerea și limitarea funcțională să se instaleze și să se auto-perpetueze.</p>
 
     <div class="art-cta">
-        <p>Ai întrebări sau vrei să programezi o consultație? Echipa noastră te așteaptă.</p>
+        <p>Ai dureri la nivelul mandibulei, pocnituri articulare sau cefalee recurentă? Nu ignora aceste semne. Programează o consultație de bilanț — evaluarea ATM este inclusă.</p>
         <a href="../index.html#contact">Programează consultația →</a>
     </div>
 </article>
 
 <footer class="footer">
     <div class="footer-inner">
-        <a href="../index.html"><img src="../logo_clinica.png" alt="Zahnarzt Hermannstadt" /></a>
+        <a href="../index.html"><img src="../imagini/logo_clinica.png" alt="Zahnarzt Hermannstadt" /></a>
         <div class="footer-copy">© 2026 dr.ing. Radu Pascu - <a href="https://www.radupascu.online" target="_blank">radupascu.online</a></div>
     </div>
 </footer>
