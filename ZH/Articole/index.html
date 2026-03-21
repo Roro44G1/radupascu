@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articole | Zahnarzt Hermannstadt Dental Clinic — Educație stomatologică</title>
+    <meta name="description" content="Articole educative despre sănătatea orală: implanturi, estetică dentară, pedodonție, profilaxie. Informații de la echipa Zahnarzt Hermannstadt Sibiu." />
+    <meta name="author" content="Zahnarzt Hermannstadt Dental Clinic" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
+    <style>
+    /* ═══════════════════════════════════════
+       ZAHNARZT HERMANNSTADT — ARTICOLE PAGE
+       Design tokens inherited from main site
+    ═══════════════════════════════════════ */
+    :root {
+        --navy: #3F448C;
+        --navy-deep: #2A2E5E;
+        --navy-mid: #4E54A3;
+        --navy-light: #5C63B8;
+        --navy-pale: #E8E9F4;
+        --gold: #FBB64C;
+        --gold-light: #FCC871;
+        --gold-pale: #FEF0D4;
+        --gold-dark: #C48B1A;
+        --pearl: #FAFAF7;
+        --pearl-warm: #F4F2ED;
+        --white: #FFFFFF;
+        --text-dark: #1A1A2E;
+        --text-med: #4A4A5A;
+        --text-light: #6B7280;
+        --text-muted: #9CA3AF;
+        --border: #E5E1D8;
+        --border-light: #EDEBE5;
+        --shadow-sm: 0 2px 8px rgba(63,68,140,0.06);
+        --shadow-md: 0 8px 24px rgba(63,68,140,0.08);
+        --shadow-lg: 0 16px 48px rgba(63,68,140,0.12);
+        --radius: 14px;
+        --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: 'DM Sans', -apple-system, sans-serif;
+        color: var(--text-dark);
+        background: var(--pearl);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 100%;
+    }
+
+    /* ════════════════════════════════════
+       NAVBAR (identic cu site-ul principal)
+    ════════════════════════════════════ */
+    .navbar {
+        position: sticky; top: 0; z-index: 1000;
+        background: rgba(248,246,241,0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        transition: box-shadow 0.3s, background 0.3s;
+    }
+    .navbar.scrolled {
+        box-shadow: 0 4px 24px rgba(11,29,58,0.1);
+        background: rgba(248,246,241,0.97);
+    }
+	.page-wrapper { width: 100%; max-width: 100%; overflow-x: clip; }
+    .navbar-inner {
+        max-width: 1280px; margin: 0 auto;
+        padding: 0.65rem 2rem;
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .nav-brand {
+        display: flex; align-items: center; gap: 12px;
+        text-decoration: none; flex-shrink: 0;
+    }
+    .nav-brand img { height: 72px; width: auto; }
+    .nav-links {
+        display: flex; align-items: center; gap: 2px;
+    }
+    .nav-links a {
+        font-size: 0.84rem; font-weight: 500;
+        color: var(--text-med);
+        padding: 0.42rem 0.85rem; border-radius: 6px;
+        transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active {
+        color: var(--navy); background: rgba(11,29,58,0.05); font-weight: 600;
+    }
+    .mobile-btn {
+        display: none; background: none; border: 1px solid var(--border);
+        border-radius: 6px; padding: 0.4rem 0.65rem;
+        cursor: pointer; color: var(--navy); font-size: 1.3rem;
+    }
+
+    /* ════════════════════════════════════
+       HERO BANNER — Articole
+    ════════════════════════════════════ */
+    .blog-hero {
+        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 40%, var(--navy-mid) 100%);
+        padding: 4rem 2rem 5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .blog-hero::after {
+        content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+        height: 60px; background: var(--pearl);
+        clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .blog-hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem; font-weight: 800;
+        color: var(--white); line-height: 1.1;
+        margin-bottom: 0.75rem;
+    }
+    .blog-hero h1 em {
+        font-style: normal; color: var(--gold);
+    }
+    .blog-hero p {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic; font-size: 1.15rem;
+        color: rgba(255,255,255,0.65);
+        max-width: 600px; margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════
+       FILTER TABS
+    ════════════════════════════════════ */
+    .filter-bar {
+        display: flex; flex-wrap: wrap;
+        justify-content: center; gap: 0.5rem;
+        margin-bottom: 3rem;
+    }
+    .filter-btn {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.4rem 1.15rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.8rem; font-weight: 600;
+        color: var(--text-med);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .filter-btn:hover {
+        border-color: var(--navy);
+        color: var(--navy);
+    }
+    .filter-btn.active {
+        background: var(--navy);
+        color: var(--white);
+        border-color: var(--navy);
+    }
+
+    /* ════════════════════════════════════
+       ARTICLES GRID
+    ════════════════════════════════════ */
+    .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.75rem;
+    }
+    .article-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-light);
+        overflow: hidden;
+        display: flex; flex-direction: column;
+        transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .article-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--gold);
+    }
+    .article-card-img {
+        width: 100%; height: 200px;
+        overflow: hidden; position: relative;
+    }
+    .article-card-img img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .article-card:hover .article-card-img img { transform: scale(1.06); }
+    .article-card-img-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(42,46,94,0.4) 0%, transparent 50%);
+        pointer-events: none;
+    }
+    .article-card-badge {
+        position: absolute; top: 12px; left: 12px;
+        background: var(--gold);
+        color: var(--navy-deep);
+        font-size: 0.65rem; font-weight: 800;
+        padding: 0.2rem 0.65rem; border-radius: 50px;
+        text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .article-card-body {
+        padding: 1.5rem;
+        flex: 1;
+        display: flex; flex-direction: column;
+    }
+    .article-card-body h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem; font-weight: 700;
+        color: var(--navy); margin: 0 0 0.5rem;
+        line-height: 1.35;
+    }
+    .article-card-body p {
+        font-size: 0.88rem; color: var(--text-light);
+        line-height: 1.65; margin: 0;
+        flex: 1;
+    }
+    .article-card-footer {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border-light);
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .article-card-footer span {
+        font-size: 0.78rem; font-weight: 700;
+        color: var(--gold-dark);
+        text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .article-card-footer .arrow {
+        font-size: 1rem; color: var(--navy);
+        transition: transform 0.2s;
+    }
+    .article-card:hover .article-card-footer .arrow {
+        transform: translateX(4px);
+    }
+
+    /* Hidden by filter */
+    .article-card.hidden { display: none; }
+
+    /* ════════════════════════════════════
+       FOOTER (simplified)
+    ════════════════════════════════════ */
+    .footer {
+        background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 100%);
+        padding: 2rem 0;
+        margin-top: 5rem;
+    }
+    .footer-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-inner img { height: 50px; width: auto; }
+    .footer-copy {
+        font-size: 0.75rem; color: rgba(255,255,255,0.4);
+    }
+    .footer-copy a { color: rgba(255,255,255,0.6); }
+    .footer-copy a:hover { color: var(--gold); }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 900px) {
+        .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none; flex-direction: column;
+            position: absolute; top: 100%; left: 0; right: 0;
+            background: rgba(248,246,241,0.98);
+            backdrop-filter: blur(12px);
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+        .nav-links.open { display: flex; }
+        .mobile-btn { display: block; }
+        .navbar-inner { position: relative; }
+        .blog-hero { padding: 3rem 1.25rem 4rem; }
+        .blog-hero h1 { font-size: 2rem; }
+        .container { padding: 0 1.25rem; }
+    }
+    @media (max-width: 550px) {
+        .articles-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Scroll reveal ── */
+    .sr { opacity: 0; transform: translateY(22px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .sr.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<header class="navbar" id="siteHeader">
+    <nav class="navbar-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
+        </a>
+		<div class="nav-links" id="navMenu">
+			<a href="../index.html#acasa" class="active">Acasă</a>
+			<a href="../index.html#calatorie">Procesul</a>
+			<a href="../index.html#servicii">Servicii</a>
+			<a href="../index.html#despre">Echipa</a>
+			<a href="../index.html#bilant">Consultația</a>
+			<a href="../index.html#filosofie">Filosofie</a>
+			<a href="../Articole/index.html">Articole</a>
+			<a href="../index.html#contact" class="nav-cta">Contact</a>
+		</div>
+        <button class="mobile-btn" id="mobileBtn" aria-label="Meniu" aria-expanded="false">☰</button>
+    </nav>
+</header>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section class="blog-hero">
+    <h1>Educație <em>stomatologică</em></h1>
+    <p>Articole scrise de echipa noastră — pentru a te ajuta să înțelegi, să previi și să iei decizii informate.</p>
+</section>
+
+
+<!-- ══════════ CONTENT ══════════ -->
+<section style="padding: 3rem 0;">
+    <div class="container">
+
+        <!-- Filter tabs -->
+        <div class="filter-bar sr">
+            <button class="filter-btn active" data-cat="all">Toate</button>
+            <button class="filter-btn" data-cat="estetica">Estetică</button>
+            <button class="filter-btn" data-cat="implantologie">Implantologie</button>
+            <button class="filter-btn" data-cat="pedodontie">Pedodonție</button>
+            <button class="filter-btn" data-cat="profilaxie">Profilaxie</button>
+            <button class="filter-btn" data-cat="protetica">Protetică</button>
+        </div>
+
+        <!-- Articles grid -->
+        <div class="articles-grid">
+
+            <!-- 1 -->
+            <a href="zambet-stralucitor.html" class="article-card sr" data-cat="estetica">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=500&h=300&fit=crop" alt="Zâmbet strălucitor" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Estetică</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Cum putem obține un zâmbet strălucitor?</h3>
+                    <p>Dinții frumoși oglindesc starea noastră de sănătate și ne fac atractivi. Descoperă opțiunile moderne pentru un zâmbet care radiază încredere.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 2 -->
+            <a href="traumatisme-dentare.html" class="article-card sr" data-cat="profilaxie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=500&h=300&fit=crop" alt="Traumatisme dentare" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Profilaxie</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Tratamentul conservativ al traumatismelor dentare</h3>
+                    <p>Experiența neplăcută a unui traumatism dentar poate fi tratată eficient cu tehnici moderne, minimale și predictibile.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 3 -->
+            <a href="primul-dinte-permanent-quiz.html" class="article-card sr" data-cat="pedodontie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1612531386530-97a1e4e94e2e?w=500&h=300&fit=crop" alt="Primul dinte permanent" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Pedodonție</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Quiz: Care este primul dinte permanent care apare în gura copilului?</h3>
+                    <p>Testează-ți cunoștințele despre dezvoltarea dentară a copilului tău. Răspunsul te-ar putea surprinde!</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 4 -->
+            <a href="disfunctia-cranio-mandibulara.html" class="article-card sr" data-cat="profilaxie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=500&h=300&fit=crop" alt="Disfuncția cranio-mandibulară" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Profilaxie</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Ce este disfuncția cranio-mandibulară (DCM)?</h3>
+                    <p>Afecțiunile articulației temporo-mandibulare au o importanță deosebită pentru sănătatea și buna funcționare a aparatului dento-maxilar.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 5 -->
+            <a href="profilaxia-acasa.html" class="article-card sr" data-cat="profilaxie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1559589688-6ba6beafe000?w=500&h=300&fit=crop" alt="Profilaxia acasă" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Profilaxie</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Profilaxia acasă</h3>
+                    <p>Cum ai dormit azi noapte? Aflați cum obiceiurile zilnice influențează sănătatea orală și ce puteți face acasă pentru prevenție eficientă.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 6 -->
+            <a href="cheia-succesului-implant-dentar.html" class="article-card sr" data-cat="implantologie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=500&h=300&fit=crop" alt="Implant dentar" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Implantologie</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Cheia succesului în inserarea unui implant dentar</h3>
+                    <p>Având în vedere că tot mai mulți adulți se confruntă cu probleme dentare complexe, este important să construim pe o bază solidă.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 7 -->
+            <a href="coroana-unidentara.html" class="article-card sr" data-cat="protetica">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=500&h=300&fit=crop" alt="Coroana unidentară" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Protetică</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Coroana unidentară</h3>
+                    <p>Când dintele este atât de tare deteriorat încât nu mai poate fi restaurat prin obturație, coroana devine soluția ideală de refacere funcțională și estetică.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 8 -->
+            <a href="primul-dinte-permanent.html" class="article-card sr" data-cat="pedodontie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=500&h=300&fit=crop" alt="Importanța molarului de 6 ani" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Pedodonție</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Importanța molarului de 6 ani</h3>
+                    <p>La bebeluși și copiii mici, oasele maxilare nu sunt destul de dezvoltate pentru toți dinții permanenți. Primul molar permanent are un rol crucial.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 9 -->
+            <a href="abordarea-copilului-la-dentist.html" class="article-card sr" data-cat="pedodontie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=500&h=300&fit=crop&crop=faces" alt="Abordarea copilului la dentist" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Pedodonție</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Abordarea copilului în cabinetul de medicină dentară</h3>
+                    <p>Experiența neplăcută suferită de un copil în cabinetul stomatologic poate avea influențe negative asupra psihicului acestuia pe termen lung.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <!-- 10 -->
+            <a href="importanta-molarului-de-sase-ani.html" class="article-card sr" data-cat="pedodontie">
+                <div class="article-card-img">
+                    <img src="https://images.unsplash.com/photo-1612531386530-97a1e4e94e2e?w=500&h=300&fit=crop&crop=center" alt="Primul dinte permanent" loading="lazy" />
+                    <div class="article-card-img-overlay"></div>
+                    <span class="article-card-badge">Pedodonție</span>
+                </div>
+                <div class="article-card-body">
+                    <h3>Care este primul dinte permanent care iese în gura copilului?</h3>
+                    <p>Un ghid esențial pentru părinți despre momentul erupției primului dinte permanent și cum să-l protejați corect de la început.</p>
+                </div>
+                <div class="article-card-footer">
+                    <span>Citește →</span>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <a href="index.html">
+                <img src="logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
+            </a>
+            <div class="footer-copy">
+                © 2026 dr.ing. Radu Pascu - <a href="https://www.radupascu.online" target="_blank">radupascu.online</a> - Toate drepturile rezervate.
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ══════════ JAVASCRIPT ══════════ -->
+<script>
+/* ── Mobile menu ── */
+const mobileBtn = document.getElementById('mobileBtn');
+const navMenu = document.getElementById('navMenu');
+mobileBtn.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('open');
+    mobileBtn.setAttribute('aria-expanded', open);
+    mobileBtn.textContent = open ? '✕' : '☰';
+});
+
+/* ── Navbar scroll shadow ── */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+});
+
+/* ── Filter ── */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.article-card');
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        cards.forEach(card => {
+            card.classList.toggle('hidden', cat !== 'all' && card.dataset.cat !== cat);
+        });
+    });
+});
+
+/* ── Scroll reveal ── */
+const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+    });
+}, { threshold: 0.06 });
+document.querySelectorAll('.sr').forEach(el => ro.observe(el));
+
+/* ── Protecție conținut ── */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
+        (e.ctrlKey && e.key.toUpperCase() === 'U') ||
+        (e.ctrlKey && e.key.toUpperCase() === 'S')) {
+        e.preventDefault();
+    }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('selectstart', e => { if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault(); });
+</script>
+
+</body>
+</html>

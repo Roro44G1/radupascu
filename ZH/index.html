@@ -98,7 +98,7 @@
     img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
 
-    .page-wrapper { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .page-wrapper { width: 100%; max-width: 100%; overflow-x: clip; }
 
     .container {
         max-width: 1280px;
@@ -123,17 +123,19 @@
     /* ════════════════════════════════════
        NAVBAR
     ════════════════════════════════════ */
-    .navbar {
-        position: sticky; top: 0; z-index: 1000;
-        background: rgba(248,246,241,0.92);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
-        transition: box-shadow 0.3s, background 0.3s;
-    }
+	.navbar {
+		position: sticky; top: 0; z-index: 1000;
+		background: rgba(248,246,241,0.92);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-bottom: 1px solid var(--border);
+		transition: box-shadow 0.3s, background 0.3s, padding 0.3s;
+	}
     .navbar.scrolled {
-        box-shadow: 0 4px 24px rgba(11,29,58,0.1);
-        background: rgba(248,246,241,0.97);
+		box-shadow: 0 4px 24px rgba(11,29,58,0.1);
+		background: rgba(248,246,241,0.82);
+		padding-top: 0;
+		padding-bottom: 0;
     }
 
     .navbar-inner {
@@ -200,7 +202,7 @@
         cursor: pointer; color: var(--navy); font-size: 1.3rem;
     }
 	
-	.nav-brand img { height:72px;width:auto; }
+	.nav-brand img { height: 72px; width: auto; transition: height 0.3s; }
 
     /* ════════════════════════════════════
        HERO
@@ -1382,13 +1384,16 @@
         <a href="#acasa" class="nav-brand">
             <img src="logo_clinica.png" alt="Zahnarzt Hermannstadt Dental Clinic" />
         </a>
-        <div class="nav-links" id="navMenu">
-            <a href="#acasa" class="active">Acasă</a>
-            <a href="#servicii">Servicii</a>
-            <a href="#calatorie">Procesul</a>
-            <a href="#despre">Despre Noi</a>
-            <a href="#filosofie">Filosofie</a>
-        </div>
+		<div class="nav-links" id="navMenu">
+			<a href="#acasa" class="active">Acasă</a>
+			<a href="#calatorie">Procesul</a>
+			<a href="#servicii">Servicii</a>
+			<a href="#despre">Echipa</a>
+			<a href="#bilant">Consultația</a>
+			<a href="#filosofie">Filosofie</a>
+			<a href="../ZH/Articole/index.html">Articole</a>
+			<a href="#contact" class="nav-cta">Contact</a>
+		</div>
         <button class="mobile-btn" id="mobileBtn" aria-label="Meniu" aria-expanded="false">☰</button>
     </nav>
 </header>
@@ -1695,7 +1700,7 @@
 <!-- ══════════════════════════════════════════════
      ECHIPA MEDICALĂ — Grid 3x4
 ══════════════════════════════════════════════ -->
-<section class="section section-alt" aria-labelledby="teamTitle">
+<section class="section section-alt" id="despre" aria-labelledby="teamTitle">
     <div class="container">
         <div class="section-header sr">
             <div class="section-badge">👨‍⚕️ Echipa multidisciplinară</div>
