@@ -1126,52 +1126,153 @@
 	}
 
     /* ════════════════════════════════════
-       DOCTORS GRID (3x3)
-    ════════════════════════════════════ */
-    .doctors-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-    .doctor-card {
-        background: var(--white);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow-sm);
-        border: 1px solid var(--border-light);
-        overflow: hidden;
-        text-align: center;
-        transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .doctor-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-        border-color: var(--gold);
-    }
-    .doctor-card-img {
-        width: 100%; height: 370px;
-        overflow: hidden; position: relative;
-        background: linear-gradient(135deg, var(--navy-pale) 0%, var(--pearl-warm) 100%);
-    }
-    .doctor-card-img img {
-        width: 100%; height: 100%;
-        object-fit: cover; object-position: center top;
-        transition: transform 0.5s;
-    }
-    .doctor-card:hover .doctor-card-img img { transform: scale(1.05); }
-    .doctor-card-body {
-        padding: 1.25rem;
-    }
-    .doctor-card-body h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1rem; font-weight: 700;
-        color: var(--navy); margin: 0 0 0.25rem;
-    }
-    .doctor-card-body .doctor-spec {
-        font-size: 0.78rem; font-weight: 600;
-        color: var(--gold-dark);
-        text-transform: uppercase; letter-spacing: 0.05em;
-    }
+		DOCTORS CAROUSEL
+	════════════════════════════════════ */
+	.team-section {
+		background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-mid) 100%);
+		padding: 5rem 0 4rem;
+		overflow: hidden;
+	}
+	.team-section .section-title { color: var(--white); }
+	.team-section .section-desc { color: rgba(255,255,255,0.6); }
+	.team-section .section-badge {
+		background: rgba(255,255,255,0.08);
+		border-color: rgba(255,255,255,0.12);
+		color: rgba(255,255,255,0.6);
+	}
 
+	.doctors-carousel-wrap {
+		position: relative;
+		padding: 0 60px;
+	}
+	.doctors-carousel {
+		display: flex;
+		transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+		will-change: transform;
+	}
+	a.doctor-card {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		cursor: default; /* inactive for now */
+	}
+	a.doctor-card[href]:not([href="#"]) {
+		cursor: pointer;
+	}
+	.doctor-card {
+		flex: 0 0 calc(33.333% - 1.5rem);
+		margin: 0 0.75rem;
+		background: rgba(255,255,255,0.06);
+		border: 1px solid rgba(255,255,255,0.1);
+		border-radius: 20px;
+		overflow: hidden;
+		text-align: center;
+		transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+		opacity: 0.45;
+		transform: scale(0.85);
+		filter: brightness(0.7);
+	}
+	.doctor-card.active {
+		opacity: 1;
+		transform: scale(1.05);
+		background: var(--white);
+		border-color: transparent;
+		box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+		filter: brightness(1);
+		z-index: 2;
+	}
+	.doctor-card-img {
+		width: 100%; height: 440px;
+		overflow: hidden; position: relative;
+		background: linear-gradient(135deg, var(--navy-pale) 0%, var(--pearl-warm) 100%);
+	}
+	.doctor-card-img img {
+		width: 100%; height: 100%;
+		object-fit: cover; object-position: center top;
+		transition: transform 0.5s;
+	}
+	.doctor-card:hover .doctor-card-img img { transform: scale(1.05); }
+	.doctor-card-body {
+		padding: 1.4rem 1.25rem;
+	}
+	.doctor-card-body h3 {
+		font-family: 'Playfair Display', serif;
+		font-size: 1.1rem; font-weight: 700;
+		color: rgba(255,255,255,0.85);
+		margin: 0 0 0.3rem;
+		transition: color 0.4s;
+	}
+	.doctor-card.active .doctor-card-body h3 {
+		color: var(--navy);
+		font-size: 1.2rem;
+	}
+	.doctor-card-body .doctor-spec {
+		font-size: 0.78rem; font-weight: 600;
+		color: rgba(255,255,255,0.35);
+		text-transform: uppercase; letter-spacing: 0.05em;
+		transition: color 0.4s;
+	}
+	.doctor-card.active .doctor-card-body .doctor-spec {
+		color: var(--gold-dark);
+	}
+
+	/* Navigation arrows */
+	.carousel-arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 48px; height: 48px;
+		border-radius: 50%;
+		background: rgba(255,255,255,0.08);
+		border: 1px solid rgba(255,255,255,0.15);
+		color: rgba(255,255,255,0.6);
+		font-size: 1.2rem;
+		cursor: pointer;
+		display: flex; align-items: center; justify-content: center;
+		transition: all 0.2s;
+		z-index: 5;
+	}
+	.carousel-arrow:hover {
+		background: var(--gold);
+		color: var(--navy);
+		border-color: var(--gold);
+	}
+	.carousel-arrow.prev { left: 0; }
+	.carousel-arrow.next { right: 0; }
+
+	/* Dots */
+	.carousel-dots {
+		display: flex;
+		justify-content: center;
+		gap: 8px;
+		margin-top: 2rem;
+	}
+	.carousel-dot {
+		width: 10px; height: 10px;
+		border-radius: 50%;
+		background: rgba(255,255,255,0.2);
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s;
+		padding: 0;
+	}
+	.carousel-dot.active {
+		width: 28px;
+		border-radius: 5px;
+		background: var(--gold);
+	}
+
+	@media (max-width: 900px) {
+		.doctor-card { flex: 0 0 calc(50% - 1.5rem); }
+		.doctors-carousel-wrap { padding: 0 45px; }
+		.doctor-card-img { height: 380px; }
+	}
+	@media (max-width: 550px) {
+		.doctor-card { flex: 0 0 calc(100% - 1.5rem); }
+		.doctors-carousel-wrap { padding: 0 40px; }
+		.carousel-arrow { width: 36px; height: 36px; font-size: 1rem; }
+		.doctor-card-img { height: 360px; }
+}
     @media (max-width: 900px) {
         .doctors-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -1571,7 +1672,7 @@
 		.pain-card-img { height: 150px; }
 		.service-card-top { height: 180px; }
 		.phil-card-img { height: 130px; }
-		.doctor-card-img { height: 280px; }
+		.doctor-card-img { height: 380px; }
 	}
 
 	/* -- 550px: form + internship -- */
@@ -1649,8 +1750,6 @@
 		.btn-gold:hover { transform: none; }
 		.btn-navy:hover { transform: none; }
 	}
-	
-	
     </style>
 </head>
 <body>
@@ -1979,187 +2078,83 @@
 </section>
 
 <!-- ══════════════════════════════════════════════
-     ECHIPA MEDICALĂ — Grid 3x4
+     ECHIPA MEDICALĂ — Carousel
 ══════════════════════════════════════════════ -->
-<section class="section section-alt" id="despre" aria-labelledby="teamTitle">
+<section class="section team-section" id="despre" aria-labelledby="teamTitle">
     <div class="container">
         <div class="section-header sr">
             <div class="section-badge">👨‍⚕️ Echipa multidisciplinară</div>
-            <h2 class="section-title" id="teamTitle">12 specialiști, o singură clinică</h2> 
-                <p class="section-desc" style="margin-top:0.75rem;">
-                    Zahnarzt Hermannstadt nu este doar o clinică stomatologică — este un ecosistem 
-                    gândit să te facă să te simți în siguranță din primul moment. 
-                    Dr. Cristina Dahm și echipa construiesc relații, nu doar tratamente. 
-                    Fiecare medic comunică direct cu pacienții săi — 
-                    prin conținut educativ, cazuri clinice explicate și transparență totală.
-                </p>
-
+            <h2 class="section-title" id="teamTitle">Specialiști dedicați fiecărei ramuri stomatologice</h2>
+            <div class="title-accent"></div>
             <p class="section-desc" style="margin-top:0.75rem;">
                 La Zahnarzt Hermannstadt găsești toate competențele de care ai nevoie — de la chirurgie la pedodonție — sub același acoperiș.
-                Fără trimiteri, fără așteptare, fără pierderi de informație între medici.
             </p>
         </div>
 
-        <div class="doctors-grid">
-            <!-- 1. Coordonator -->
-            <div class="doctor-card sr sr-d1">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_cristinadahm.jpg" alt="Ș.l.dr. Cristina Dahm" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Ș.l.dr. Cristina Dahm</h3>
-                    <span class="doctor-spec">CEO & Fondator · Implantologie</span>
-                </div>
-            </div>
-            <!-- 2. Manager -->
-            <div class="doctor-card sr sr-d2">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_deliapascu.jpg" alt="Delia Pascu" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Delia Pascu</h3>
-                    <span class="doctor-spec">Manager Clinică</span>
-                </div>
-            </div>
-            <!-- 3. -->
-            <div class="doctor-card sr sr-d3">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_veaceslavcojocaru.jpg" alt="Dr. Veaceslav Cojocaru-Blaga" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Veaceslav Cojocaru-Blaga</h3>
-                    <span class="doctor-spec">Terapie restauratorie</span>
-                </div>
-            </div>
-            <!-- 4. -->
-            <div class="doctor-card sr sr-d1">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_tiberiugehl.jpg" alt="Dr. Tiberiu Călin Gehl" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Tiberiu Călin Gehl</h3>
-                    <span class="doctor-spec">Stomatologie generală</span>
-                </div>
-            </div>
-            <!-- 5. -->
-            <div class="doctor-card sr sr-d2">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_ioanadorca.jpg" alt="Dr. Ioana Silvia Dorca" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Ioana Silvia Dorca</h3>
-                    <span class="doctor-spec">Chirurgie dento-alveolară</span>
-                </div>
-            </div>
-            <!-- 6. -->
-            <div class="doctor-card sr sr-d3">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_myriammzoughi.jpg" alt="Dr. Myriam Mzoughi" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Myriam Mzoughi</h3>
-                    <span class="doctor-spec">Pedodonție</span>
+        <div class="doctors-carousel-wrap">
+            <button class="carousel-arrow prev" id="teamPrev" aria-label="Anterior">‹</button>
+
+            <div style="overflow:hidden; border-radius:16px;">
+                <div class="doctors-carousel" id="teamCarousel">
+                    <a href="#" class="doctor-card" data-doctor="cristina-dahm" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_cristinadahm.webp" alt="Ș.l.dr. Cristina Dahm" /></div>
+                        <div class="doctor-card-body"><h3>Ș.l.dr. Cristina Dahm</h3><span class="doctor-spec">CEO & Fondator · Implantologie</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="delia-pascu" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_deliapascu.jpg" alt="Delia Pascu" /></div>
+                        <div class="doctor-card-body"><h3>Delia Pascu</h3><span class="doctor-spec">Manager Clinică</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="veaceslav-cojocaru" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_veaceslavcojocaru.webp" alt="Dr. Veaceslav Cojocaru-Blaga" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Veaceslav Cojocaru-Blaga</h3><span class="doctor-spec">Terapie restauratorie</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="tiberiu-gehl" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_tiberiugehl.webp" alt="Dr. Tiberiu Călin Gehl" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Tiberiu Călin Gehl</h3><span class="doctor-spec">Stomatologie generală</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="ioana-dorca" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_ioanadorca.webp" alt="Dr. Ioana Silvia Dorca" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Ioana Silvia Dorca</h3><span class="doctor-spec">Chirurgie dento-alveolară</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="myriam-mzoughi" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_myriammzoughi.webp" alt="Dr. Myriam Mzoughi" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Myriam Mzoughi</h3><span class="doctor-spec">Pedodonție</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="razvan-lupea" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_razvanlupea.webp" alt="Dr. Lupea Răzvan" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Lupea Răzvan</h3><span class="doctor-spec">Stomatologie generală</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="andronie-ioana" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_ioanandronie.webp" alt="Dr. Andronie Ioana" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Andronie Ioana</h3><span class="doctor-spec">Stomatologie generală · Endodonție</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="andrei-andronic" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_andreiandronic.jpg" alt="Dr. Andrei Andronic" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Andrei Andronic</h3><span class="doctor-spec">Ortodonție · As. univ.</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="amir-skaik" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_amirskaik.jpg" alt="Dr. Amir Skaik" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Amir Skaik</h3><span class="doctor-spec">Ortodonție</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="dana-maria-acu" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_danamariaacu.jpg" alt="Dr. Dana Maria Acu" /></div>
+                        <div class="doctor-card-body"><h3>Dr. Dana Maria Acu</h3><span class="doctor-spec">Stomatologie generală</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="george-patriche" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_georgepatriche.jpg" alt="Dr. George Patriche" /></div>
+                        <div class="doctor-card-body"><h3>Dr. George Patriche</h3><span class="doctor-spec">Chirurgie oro-maxilo-facială</span></div>
+                    </a>
+                    <a href="#" class="doctor-card" data-doctor="filip-dahm" onclick="return false;">
+                        <div class="doctor-card-img"><img src="../ZH/imagini/dr_filipdahm.jpg" alt="Filip Dahm" /></div>
+                        <div class="doctor-card-body"><h3>Filip DAHM</h3><span class="doctor-spec">ZH - Internship</span></div>
+                    </a>
                 </div>
             </div>
-            <!-- 7. -->
-            <div class="doctor-card sr sr-d1">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_razvanlupea.jpg" alt="Dr. Lupea Răzvan" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Lupea Răzvan</h3>
-                    <span class="doctor-spec">Stomatologie generală</span>
-                </div>
-            </div>
-            <!-- 8. -->
-            <div class="doctor-card sr sr-d2">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_placeholder-woman.jpg" alt="Dr. Andronie Ioana" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Andronie Ioana</h3>
-                    <span class="doctor-spec">Stomatologie generală · Endodonție</span>
-                </div>
-            </div>
-            <!-- 9. -->
-            <div class="doctor-card sr sr-d3">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_andreiandronic.jpg" alt="Dr. Andrei Andronic" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Andrei Andronic</h3>
-                    <span class="doctor-spec">Ortodonție · As. univ.</span>
-                </div>
-            </div>
-            <!-- 10. -->
-            <div class="doctor-card sr sr-d1">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_amirskaik.jpg" alt="Dr. Amir Skaik" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Amir Skaik</h3>
-                    <span class="doctor-spec">Ortodonție</span>
-                </div>
-            </div>
-            <!-- 11. -->
-            <div class="doctor-card sr sr-d2">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_danamariaacu.jpg" alt="Dr. Dana Maria Acu" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. Dana Maria Acu</h3>
-                    <span class="doctor-spec">Stomatologie generală</span>
-                </div>
-            </div>
-            <!-- 12. -->
-            <div class="doctor-card sr sr-d3">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_georgepatriche.jpg" alt="Dr. George Patriche" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Dr. George Patriche</h3>
-                    <span class="doctor-spec">Chirurgie oro-maxilo-facială</span>
-                </div>
-            </div>
-        </div>
-		<!-- ── Internship ── -->
-        <div class="section-header sr" style="margin-top:3.5rem; margin-bottom:2rem;">
-            <div class="section-badge gold">🎓 Program de Internship</div>
-            <h2 class="section-title" style="font-size:1.6rem;">Formăm viitoarea generație</h2>
-            <p class="section-desc" style="margin-top:0.5rem;">
-                Clinica noastră este centru de practică pentru rezidenți (și nu numai!). Învață de la cei mai buni, tratează sub supervizare directă.
-            </p>
+
+            <button class="carousel-arrow next" id="teamNext" aria-label="Următor">›</button>
         </div>
 
-        <div class="doctors-grid" style="grid-template-columns: repeat(3, 1fr);">
-            <div class="doctor-card sr sr-d1">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_filipdahm.jpg" alt="Rezident 1" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Filip DAHM</h3>
-                    <span class="doctor-spec">ZH - Internship</span>
-                </div>
-            </div>
-            <div class="doctor-card sr sr-d2">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_placeholder-man.jpg" alt="Rezident 2" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Vă așteptăm!</h3>
-                    <span class="doctor-spec">ZH - Internship</span>
-                </div>
-            </div>
-            <div class="doctor-card sr sr-d3">
-                <div class="doctor-card-img">
-                    <img src="../ZH/imagini/dr_placeholder-woman.jpg" alt="Rezident 3" />
-                </div>
-                <div class="doctor-card-body">
-                    <h3>Vă așteprăm!</h3>
-                    <span class="doctor-spec">ZH - Internship</span>
-                </div>
-            </div>
-        </div>
+        <!-- dots removed — infinite carousel -->
     </div>
 </section>
 
@@ -2569,7 +2564,7 @@
                 <div class="appointment-contact-item">
                     <div class="appointment-contact-icon">✉️</div>
                     <div class="appointment-contact-text">
-                        <strong><a href="mailto:info@dentalsibiu.ro" style="color:var(--white);">info@dentalsibiu.ro</a></strong>
+                        <strong><span style="color:var(--white);">info(at)dentalsibiu.ro</span></strong>
                         Răspundem în maxim 24h
                     </div>
                 </div>
@@ -2607,6 +2602,8 @@
                 <form action="https://formspree.io/f/mreyveeo" method="POST" id="appointmentForm">
                     <input type="hidden" name="_subject" value="Programare nouă — Zahnarzt Hermannstadt" />
                     <input type="hidden" name="_replyto" id="replyToField" />
+                    <input type="hidden" name="_cc" id="ccField" />
+                    <input type="hidden" name="Notă importantă" value="Acest mesaj NU reprezintă confirmarea programării. Doar vă certifică faptul că solicitarea dumneavoastră a ajuns la noi. Veți fi contactat în cel mai scurt timp pentru confirmarea programării." />
 
                     <div class="form-row">
                         <div class="form-field">
@@ -2667,6 +2664,13 @@
                     <p class="form-privacy">
                         Datele tale sunt protejate conform GDPR. Le folosim exclusiv pentru programare.
                     </p>
+
+                    <div id="formSuccess" style="display:none; margin-top:1.5rem; padding:1.5rem; background:rgba(251,182,76,0.12); border:1px solid var(--gold); border-radius:12px; text-align:center;">
+                        <p style="font-weight:700; color:var(--navy); font-size:1.05rem; margin-bottom:0.5rem;">✓ Solicitarea a fost trimisă cu succes!</p>
+                        <p style="font-size:0.88rem; color:var(--text-med); line-height:1.65;">
+                            Acest mesaj <strong>nu reprezintă confirmarea programării</strong>. Doar vă certifică faptul că solicitarea dumneavoastră a ajuns la noi. Veți fi contactat în cel mai scurt timp pentru confirmarea programării.
+                        </p>
+                    </div>
                 </form>
             </div>
 
@@ -2757,11 +2761,56 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: 0.06 });
 document.querySelectorAll('.sr').forEach(el => ro.observe(el));
 
-/* ── Script protecție ── */
-fetch('https://nutrisib.club/script_protect.js')
-    .then(r => r.text())
-    .then(d => { const s = document.createElement('script'); s.textContent = d; document.body.appendChild(s); })
-    .catch(e => console.error('Protect:', e));
+/* ── Protecție cod sursă ── */
+
+/* ── Formular — submit cu mesaj confirmare ── */
+(() => {
+    const form = document.getElementById('appointmentForm');
+    const successBox = document.getElementById('formSuccess');
+    if (!form || !successBox) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.disabled = true;
+        btn.textContent = 'Se trimite...';
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        })
+        .then(r => {
+            if (r.ok) {
+                form.reset();
+                btn.style.display = 'none';
+                form.querySelector('.form-privacy').style.display = 'none';
+                successBox.style.display = 'block';
+            } else {
+                btn.disabled = false;
+                btn.textContent = 'Trimite cererea de programare →';
+                alert('A apărut o eroare. Vă rugăm încercați din nou sau sunați-ne direct.');
+            }
+        })
+        .catch(() => {
+            btn.disabled = false;
+            btn.textContent = 'Trimite cererea de programare →';
+            alert('Eroare de conexiune. Vă rugăm încercați din nou.');
+        });
+    });
+})();
+document.addEventListener('contextmenu', function(e) {e.preventDefault()});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') {e.preventDefault();}
+    if (e.ctrlKey && e.key === 'U') {e.preventDefault()}
+    if (e.metaKey && e.key === 'U') {e.preventDefault()}
+    if (e.ctrlKey && e.key === 'C') {e.preventDefault()}
+    if (e.metaKey && e.key === 'C') {e.preventDefault()}
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {e.preventDefault()}
+    if (e.metaKey && e.altKey && e.key === 'I') {e.preventDefault()}
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {e.preventDefault()}
+    if (e.metaKey && e.altKey && e.key === 'J') {e.preventDefault()}
+});
 
 /* ── Testimonial carousel ── */
 (() => {
@@ -2788,6 +2837,7 @@ fetch('https://nutrisib.club/script_protect.js')
     const timeField = document.getElementById('timeField');
     const emailField = document.getElementById('emailField');
     const replyTo = document.getElementById('replyToField');
+    const ccField = document.getElementById('ccField');
 
     if (!dateField || !timeField) return;
 
@@ -2841,10 +2891,152 @@ fetch('https://nutrisib.club/script_protect.js')
     if (emailField && replyTo) {
         emailField.addEventListener('input', () => {
             replyTo.value = emailField.value;
+            if (ccField) ccField.value = emailField.value;
         });
     }
 })();
-</script>
 
+/* ── Team carousel — infinite, centered on index ── */
+(() => {
+    const carousel = document.getElementById('teamCarousel');
+    if (!carousel) return;
+    const cards = Array.from(carousel.querySelectorAll('.doctor-card'));
+    const n = cards.length;
+    if (n === 0) return;
+
+    // Clone cards before AND after for seamless infinite loop
+    // We need enough clones so side cards are always visible
+    const clonesNeeded = 5;
+    for (let i = 0; i < clonesNeeded; i++) {
+        const cloneAfter = cards[i % n].cloneNode(true);
+        cloneAfter.setAttribute('aria-hidden', 'true');
+        carousel.appendChild(cloneAfter);
+    }
+    for (let i = 0; i < clonesNeeded; i++) {
+        const cloneBefore = cards[n - 1 - (i % n)].cloneNode(true);
+        cloneBefore.setAttribute('aria-hidden', 'true');
+        carousel.insertBefore(cloneBefore, carousel.firstChild);
+    }
+
+    const allCards = Array.from(carousel.querySelectorAll('.doctor-card'));
+    const totalCards = allCards.length;
+
+    let idx = clonesNeeded; // start at first real card
+    let autoInterval = null;
+    let manualTimeout = null;
+    let isTransitioning = false;
+
+    const getPerView = () => {
+        if (window.innerWidth <= 550) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
+    };
+
+    const getCardWidthPercent = () => {
+        const pv = getPerView();
+        if (pv === 1) return 100;
+        if (pv === 2) return 50;
+        return 33.333;
+    };
+
+    const goTo = (newIdx, animate) => {
+        idx = newIdx;
+        const cardW = getCardWidthPercent();
+        // Center the active card: offset so idx is in the middle of the viewport
+        const pv = getPerView();
+        const centerOffset = (pv - 1) / 2;
+        const translateVal = -(idx - centerOffset) * cardW;
+
+        if (animate) {
+            carousel.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+        } else {
+            carousel.style.transition = 'none';
+        }
+        carousel.style.transform = `translateX(${translateVal}%)`;
+
+        // Highlight active
+        allCards.forEach(c => c.classList.remove('active'));
+        if (allCards[idx]) allCards[idx].classList.add('active');
+    };
+
+    // After transition ends, silently jump if we're in clone zone
+    carousel.addEventListener('transitionend', () => {
+        isTransitioning = false;
+        // If in after-clones zone, jump to real
+        if (idx >= clonesNeeded + n) {
+            goTo(idx - n, false);
+        }
+        // If in before-clones zone, jump to real
+        else if (idx < clonesNeeded) {
+            goTo(idx + n, false);
+        }
+    });
+
+    const next = (animate = true) => {
+        if (isTransitioning) return;
+        isTransitioning = animate;
+        goTo(idx + 1, animate);
+    };
+
+    const prev = (animate = true) => {
+        if (isTransitioning) return;
+        isTransitioning = animate;
+        goTo(idx - 1, animate);
+    };
+
+    // Auto-scroll
+    const startAuto = () => {
+        stopAuto();
+        autoInterval = setInterval(() => next(true), 3000);
+    };
+    const stopAuto = () => {
+        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; }
+    };
+    const pauseAutoTemporarily = (ms = 6000) => {
+        stopAuto();
+        clearTimeout(manualTimeout);
+        manualTimeout = setTimeout(() => { startAuto(); manualTimeout = null; }, ms);
+    };
+
+    // Arrow buttons
+    document.getElementById('teamPrev')?.addEventListener('click', () => {
+        prev(true);
+        pauseAutoTemporarily();
+    });
+    document.getElementById('teamNext')?.addEventListener('click', () => {
+        next(true);
+        pauseAutoTemporarily();
+    });
+
+    // Hover: pause auto-scroll
+    const wrap = carousel.closest('.doctors-carousel-wrap');
+    if (wrap) {
+        wrap.addEventListener('mouseenter', stopAuto);
+        wrap.addEventListener('mouseleave', () => {
+            if (!manualTimeout) startAuto();
+        });
+    }
+
+    // Touch / swipe
+    let startX = 0;
+    carousel.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        stopAuto();
+    }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+        const diff = e.changedTouches[0].clientX - startX;
+        if (diff > 40) { prev(true); }
+        else if (diff < -40) { next(true); }
+        pauseAutoTemporarily();
+    });
+
+    // Resize
+    window.addEventListener('resize', () => { goTo(idx, false); });
+
+    // Init
+    goTo(idx, false);
+    startAuto();
+})();
+</script>
 </body>
 </html>

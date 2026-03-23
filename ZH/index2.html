@@ -1750,6 +1750,52 @@
 		.btn-gold:hover { transform: none; }
 		.btn-navy:hover { transform: none; }
 	}
+	/* ════════════════════════════════════
+	   VIDEO PREZENTARE ECHIPĂ
+	════════════════════════════════════ */
+	.video-section {
+		padding: 4rem 0 2rem;
+		background: var(--pearl);
+	}
+	.video-card {
+		max-width: 900px;
+		margin: 0 auto;
+		border-radius: 20px;
+		overflow: hidden;
+		background: var(--navy-deep);
+		box-shadow: var(--shadow-xl);
+		position: relative;
+	}
+	.video-card video {
+		width: 100%;
+		display: block;
+		border-radius: 20px;
+	}
+	.video-card-caption {
+		position: absolute;
+		bottom: 0; left: 0; right: 0;
+		padding: 2rem 2rem 1.5rem;
+		background: linear-gradient(to top, rgba(42,46,94,0.85) 0%, transparent 100%);
+		pointer-events: none;
+	}
+	.video-card-caption h3 {
+		font-family: 'Playfair Display', serif;
+		font-size: 1.3rem; font-weight: 700;
+		color: var(--white);
+		margin: 0 0 0.25rem;
+	}
+	.video-card-caption p {
+		font-size: 0.85rem;
+		color: rgba(255,255,255,0.6);
+		margin: 0;
+	}
+	@media (max-width: 768px) {
+		.video-section { padding: 2.5rem 0 1.5rem; }
+		.video-card { border-radius: 14px; }
+		.video-card video { border-radius: 14px; }
+		.video-card-caption { padding: 1.5rem 1.25rem 1rem; }
+		.video-card-caption h3 { font-size: 1.1rem; }
+	}
     </style>
 </head>
 <body>
@@ -1810,6 +1856,25 @@
             <div>
                 <div class="hero-stat-num">zero compromisuri</div>
                 <div class="hero-stat-lbl">Pe calitate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     VIDEO PREZENTARE ECHIPĂ
+══════════════════════════════════════════════ -->
+<section class="video-section" aria-label="Prezentare echipă">
+    <div class="container">
+        <div class="video-card sr">
+            <video controls playsinline preload="metadata" poster="">
+                <source src="../ZH/imagini/intro.mp4" type="video/mp4" />
+                Browserul tău nu suportă redarea video.
+            </video>
+            <div class="video-card-caption">
+                <h3 class="font-display">Descoperă echipa Zahnarzt Hermannstadt</h3>
+                <p>Specialiștii care fac posibil fiecare zâmbet</p>
             </div>
         </div>
     </div>
