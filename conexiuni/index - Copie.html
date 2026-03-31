@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Asociația CONEXIUNI - Conectăm oameni, culturi și oportunități</title>
+    <meta name="description" content="Misiunea asociației CONEXIUNI este de a crea și consolida punți de legătură între oameni, comunități, instituții culturale și educaționale, prin proiecte, parteneriate și intervenții inovative.">
+    <meta property="og:title" content="Asociația CONEXIUNI">
+    <meta property="og:description" content="Conectăm oameni, culturi și oportunități prin proiecte educaționale, culturale și socio-umanitare.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.asociatiaconexiuni.ro">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --teal-inovat: #0d9488;
+            --orange-warm: #f97316;
+            --light-bg: #f8fafc;
+            --dark-text: #0f172a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Animații generale (Slide-up & Fade-in) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigare fixă */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: lowercase;
+        }
+        
+        .nav-links a::first-letter {
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal-inovat);
+        }
+
+        .btn-cta {
+            background-color: var(--orange-warm);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s, background-color 0.3s;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background-color: #ea580c;
+            transform: scale(1.05);
+            color: var(--white);
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1e40af 100%);
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Noduri SVG animate în fundal */
+        .hero-svg-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        .node {
+            fill: var(--teal-inovat);
+            animation: pulse 3s infinite alternate;
+        }
+
+        .line {
+            stroke: var(--orange-warm);
+            stroke-width: 2;
+            opacity: 0.6;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 1; }
+        }
+
+        /* Secțiuni generice */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+        }
+
+        /* Grid-uri */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .grid-3x3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Carduri Misiune și Valori */
+        .card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-bottom: 4px solid var(--teal-inovat);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .card p {
+            font-size: 0.95rem;
+        }
+
+        .letter-icon {
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--orange-warm);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Activități */
+        .activity-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .activity-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .activity-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(to top, rgba(30,58,138, 0.9), transparent);
+            color: var(--white);
+        }
+
+        /* Viziune */
+        .viziune-section {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .viziune-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Formular contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-3x3 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-svg-bg { display: none; }
+            .contact-container { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .grid-3x3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--orange-warm);">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            CONEXIUNI
+        </div>
+        <ul class="nav-links">
+            <li><a href="#acasa">Acasă</a></li>
+            <li><a href="#scop">Scopul</a></li>
+            <li><a href="#valori">Valorile</a></li>
+            <li><a href="#activitati">Activități</a></li>
+            <li><a href="galerie.html">Galerie foto</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn-cta">Implică-te</a>
+    </nav>
+
+    <section id="acasa" class="hero">
+        <svg class="hero-svg-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+            <line x1="100" y1="100" x2="400" y2="300" class="line" />
+            <line x1="400" y1="300" x2="700" y2="200" class="line" />
+            <line x1="400" y1="300" x2="500" y2="500" class="line" />
+            <line x1="100" y1="100" x2="200" y2="400" class="line" />
+            <line x1="200" y1="400" x2="500" y2="500" class="line" />
+            
+            <circle cx="100" cy="100" r="10" class="node" style="animation-delay: 0s;" />
+            <circle cx="400" cy="300" r="15" class="node" style="animation-delay: 0.5s;" />
+            <circle cx="700" cy="200" r="12" class="node" style="animation-delay: 1s;" />
+            <circle cx="500" cy="500" r="10" class="node" style="animation-delay: 1.5s;" />
+            <circle cx="200" cy="400" r="14" class="node" style="animation-delay: 2s;" />
+        </svg>
+
+        <div class="hero-content animate-on-scroll">
+            <h1>Conectăm oameni, culturi și oportunități.</h1>
+            <p>Misiunea asociației este de a crea și consolida punți de legătură între oameni, comunități, instituții culturale și educaționale, prin proiecte, parteneriate și intervenții inovative care promovează patrimoniul cultural, dezvoltarea personală și profesională, incluziunea socială și reducerea decalajelor educaționale și socio-economice din comunitate[cite: 26].</p>
+            <a href="#scop" class="btn-cta">Descoperă scopul nostru</a>
+        </div>
+    </section>
+
+    <section id="scop">
+        <h2 class="section-title animate-on-scroll">Scopul asociației</h2>
+        <div class="grid-3">
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <h3>1. Cultural-patrimonial</h3>
+                    <p>Asociația își propune să contribuie la conservarea, promovarea și valorificarea patrimoniului cultural material și imaterial al județului Sibiu și al României[cite: 56]. Prin proiecte culturale inovative, parteneriate cu instituții de cultură, muzee, biblioteci, centre culturale și organizații artistice, asociația urmărește să creeze punți de legătură între tradiție și modernitate, între cultura locală și cea europeană[cite: 57]. Promovăm diversitatea culturală, dialogul intercultural și accesul liber la cultură pentru toate categoriile sociale[cite: 58].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll" style="transition-delay: 0.1s;">
+                <div class="card-content">
+                    <h3>2. Educațional și de dezvoltare personală</h3>
+                    <p>Asociația își propune să faciliteze accesul la educație de calitate, relevantă și modernă, prin programe educaționale formale și non-formale, destinate tuturor categoriilor de vârstă[cite: 60]. Promovăm dezvoltarea personală și profesională continuă, învățarea pe tot parcursul vieții, dobândirea de competențe cheie și adaptarea la cerințele unui mediu socio-economic dinamic[cite: 61]. Susținem inițiative care încurajează autocunoașterea, reziliența, gândirea critică, creativitatea și participarea activă în comunitate[cite: 62].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll" style="transition-delay: 0.2s;">
+                <div class="card-content">
+                    <h3>3. Socio-umanitar</h3>
+                    <p>Asociația propune să-și utilizeze resursele și expertiza pentru a sprijini integrarea socială și profesională a persoanelor vulnerabile, contribuind astfel la reducerea inegalităților din societate[cite: 64]. Ne vom implica în proiecte care promovează incluziunea socială, echitatea și solidaritatea, prin acces la educație, formare continuă, cultură și oportunități de dezvoltare personală pentru grupurile dezavantajate[cite: 65]. Ne propunem să îmbunătățim calitatea vieții persoanelor aflate în dificultate și să le susținem în vederea realizării unui trai demn[cite: 66].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="valori" style="background-color: var(--light-bg);">
+        <h2 class="section-title animate-on-scroll">Valorile noastre</h2>
+        <p class="animate-on-scroll" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+            Ne ghidăm activitatea după principii fundamentale care reflectă angajamentul nostru față de conservarea patrimoniului cultural, promovarea educației ca instrument de transformare socială și construirea unei comunități incluzive și solidare. Prin fiecare proiect, acțiune și parteneriat, ne propunem să conectăm cultura cu educația, tradiția cu inovația, individul cu comunitatea[cite: 27, 28, 29].
+        </p>
+        
+        <div class="grid-3x3">
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">C</span>
+                    <h3>Comunitate și colaborare</h3>
+                    <p>Credem că schimbarea autentică se naște din colaborare. Construim rețele de parteneriat între instituții publice, organizații non-guvernamentale, mediul de afaceri și cetățeni, pentru a genera proiecte cu impact real în comunitate. Fiecare conexiune creată este un pas către o societate mai unită și mai solidară[cite: 32, 33].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">O</span>
+                    <h3>Originalitate și onestitate</h3>
+                    <p>Promovăm abordări originale și creative în toate proiectele noastre, fără a compromite integritatea și transparența. Ne exprimăm cu sinceritate și acționăm cu responsabilitate în toate demersurile noastre, valorizând autenticitatea în fiecare inițiativă[cite: 35, 36].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">N</span>
+                    <h3>Noutate</h3>
+                    <p>Îmbrățișăm inovația în educație, cultură și intervenție socială, propunând soluții noi și adaptate contextului local, național și european[cite: 39].</p>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">E</span>
+                    <h3>Educație și evoluție</h3>
+                    <p>Credem că educația este motorul transformării personale și sociale. Promovăm învățarea continuă, dezvoltarea competențelor și creșterea personală ca instrumente esențiale pentru adaptarea la un mediu în permanentă schimbare. Evoluția noastră colectivă depinde de investiția în educație[cite: 41, 42].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">X</span>
+                    <h3>Excelență și experiență</h3>
+                    <p>Urmărim excelența în tot ceea ce facem, de la calitatea proiectelor până la impactul generat. Valorificăm experiența acumulată și creăm contexte de învățare experiențială, în care participanții devin actori activi ai propriei dezvoltări[cite: 44, 45].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">I</span>
+                    <h3>Incluziune</h3>
+                    <p>Suntem dedicați creării unui mediu inclusiv, în care fiecare persoană – indiferent de vârstă, etnie, religie, gen sau condiție socio-economică – are acces egal la oportunități de dezvoltare[cite: 47].</p>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">U</span>
+                    <h3>Unitate și utilitate</h3>
+                    <p>Ne definim succesul prin utilitatea socială a acțiunilor noastre. Creăm spații de dialog și unitate între diverse grupuri sociale, culturale și profesionale, contribuind la coeziunea comunității sibiene și a societății românești în ansamblu[cite: 50].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">N</span>
+                    <h3>Nevoie</h3>
+                    <p>Fiecare proiect al asociației răspunde unor nevoi reale ale comunității, identificate prin cercetare și dialog[cite: 38].</p>
+                </div>
+            </div>
+            <div class="card animate-on-scroll">
+                <div class="card-content">
+                    <span class="letter-icon">I</span>
+                    <h3>Integritate</h3>
+                    <p>Acționăm cu integritate, respectând demnitatea fiecărui individ[cite: 48].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activitati">
+        <h2 class="section-title animate-on-scroll">Activitățile asociației</h2>
+        <div class="grid-3">
+            <div class="activity-card animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=800" alt="Activități educaționale">
+                <div class="activity-overlay">
+                    <h3 class="serif-font">Educație și formare</h3>
+                    <p>Dezvoltare personală și profesională, reziliență, autocunoaștere[cite: 98]. Organizarea de cursuri, mese rotunde, simpozioane, conferințe, seminarii, ateliere de lucru, cluburi și tabere tematice[cite: 85, 86]. Educație non-formală, informală, antreprenorială, financiară și pentru mediu[cite: 99, 101, 103].</p>
+                </div>
+            </div>
+            <div class="activity-card animate-on-scroll" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=800" alt="Turism și cultură">
+                <div class="activity-overlay">
+                    <h3 class="serif-font">Cultură și patrimoniu</h3>
+                    <p>Conservarea și promovarea patrimoniului cultural material și imaterial[cite: 96]. Turism cultural, ecoturism și turism montan[cite: 97]. Organizarea de expoziții, festivaluri, evenimente culturale, spectacole și proiecții cinematografice, schimburi culturale și științifice[cite: 88, 90, 92].</p>
+                </div>
+            </div>
+            <div class="activity-card animate-on-scroll" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=800" alt="Voluntariat și umanitar">
+                <div class="activity-overlay">
+                    <h3 class="serif-font">Social și umanitar</h3>
+                    <p>Incluziune socială și sprijin pentru grupuri vulnerabile[cite: 105]. Organizarea de campanii umanitare, acțiuni de voluntariat, campanii de promovare și conștientizare[cite: 93, 94]. Sănătate mentală, stil de viață sănătos și educație interculturală[cite: 100, 107].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="viziune" class="viziune-section animate-on-scroll">
+        <div class="viziune-content">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--orange-warm); margin-bottom: 1rem;">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <h2 class="serif-font" style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary-blue);">Viziunea asociației</h2>
+            <p>Construirea unei comunități în care cultura, educația și solidaritatea socială se îmbină armonios, oferind fiecărei persoane șansa de a se dezvolta integral și de a contribui activ la prosperitatea comunității. Aspirăm să devenim un actor de referință în conectarea oamenilor, instituțiilor și comunităților din județul Sibiu și din întreaga Românie, prin inițiative care facilitează colaborarea, inovația și echitatea în accesul la oportunități culturale, educaționale și sociale relevante. Credem într-o societate în care conexiunile autentice dintre oameni, culturi și instituții generează comunități sustenabile, incluzive și prospere[cite: 51, 52, 53].</p>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: #f1f5f9;">
+        <h2 class="section-title animate-on-scroll">Contactează-ne</h2>
+        <div class="contact-container animate-on-scroll">
+            <div class="contact-info">
+                <h3 class="serif-font" style="font-size: 1.8rem; margin-bottom: 1.5rem;">Suntem aici pentru comunitate</h3>
+                <p style="margin-bottom: 2rem;">Poate deveni membru activ al asociației orice persoană fizică majoră care înțelege ca prin propria activitate să contribuie și să sprijine realizarea scopurilor asociației[cite: 126, 128]. Așteptăm mesajul tău.</p>
+                
+                <div style="display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-inovat)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <div>
+                        <strong>Sediul asociației:</strong><br>
+                        Sibiu, str. Nicolae Bălcescu, nr. 25, cod poștal 550159, județul Sibiu[cite: 20].
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal-inovat)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <div>
+                        <strong>Email:</strong><br>
+                        contact@asociatiaconexiuni.ro
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Numele tău" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Adresa de email" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Mesajul tău..." required></textarea>
+                </div>
+                <button type="submit" class="btn-cta" style="border: none; cursor: pointer; width: 100%;">Trimite mesajul</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="color: var(--white); margin-bottom: 1rem;">
+                    CONEXIUNI
+                </div>
+                <p style="opacity: 0.8; font-size: 0.9rem;">
+                    Homines, culturas et opportunitates conectimus.<br>
+                    CIF/CUI: 21681657
+                </p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; color: var(--teal-inovat);">Meniul principal</h4>
+                <ul style="list-style: none; opacity: 0.8; line-height: 2;">
+                    <li><a href="#scop">Scopul asociației</a></li>
+                    <li><a href="#valori">Valorile</a></li>
+                    <li><a href="galerie.html">Galerie foto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; color: var(--teal-inovat);">Legal</h4>
+                <ul style="list-style: none; opacity: 0.8; line-height: 2;">
+                    <li><a href="#">Termeni și condiții</a></li>
+                    <li><a href="#">Politica de confidențialitate</a></li>
+                    <li><a href="#">Statutul asociației</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Asociația CONEXIUNI. Toate drepturile rezervate.<br>
+            <span style="font-size: 0.8rem; color: #94a3b8;">Copyrights: dr.ing. Radu Pascu - 2025</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
