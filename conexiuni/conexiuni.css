@@ -83,7 +83,7 @@ h2, h3, .section-desc { font-family: 'Lora', serif; }
    ========================================================================== */
 .nav-wrapper {
     position: sticky; top: 0; z-index: 1000;
-    padding: 0.75rem 1.5rem;
+    padding: 0.15rem 1.5rem;
     background: rgba(248,250,252,0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-border);
@@ -505,7 +505,8 @@ h2, h3, .section-desc { font-family: 'Lora', serif; }
    NAV BRAND IMG
    ========================================================================== */
 .nav-brand img {
-    width: 48px; height: 48px; object-fit: contain; border-radius: 8px;
+    width: 90px; height: 75px; object-fit: contain; border-radius: 8px;
+    max-width: none;
 }
 
 /* ==========================================================================
@@ -529,6 +530,7 @@ h2, h3, .section-desc { font-family: 'Lora', serif; }
     .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
 }
 @media (max-width: 768px) {
+    .nav-brand img { width: 56px; height: 56px; }
     .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(248,250,252,0.98); padding: 1rem 1.5rem; border-top: 1px solid var(--color-border); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
     .nav-links.open { display: flex; }
     .mobile-menu-btn { display: block; }
