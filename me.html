@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <title>Digital Business Card</title>
+
+  <!-- ══════════════════════════════════════════
+       ✦  DATE IMPLICITE — modificate din Admin  ✦
+  ══════════════════════════════════════════ -->
+  <script>
+    const DEFAULTS = {
+      firstName:  "Alexandru",
+      lastName:   "Ionescu",
+      title:      "Marketing & PR Director",
+      company:    "Brandwave Studio",
+      phone:      "+40 721 000 000",
+      email:      "alex@brandwave.ro",
+      website:    "brandwave.ro",
+      linkedin:   "linkedin.com/in/alexionescu",
+      instagram:  "@brandwave.ro",
+      address:    "București, România",
+      note:       "Specialist în strategie de brand și comunicare integrată.",
+      pageUrl:    "https://card.brandwave.ro",
+      avatarUrl:  "",
+      adminPin:   "1234",
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #0a0a0f;
+      --paper: #f5f0e8;
+      --gold:  #b8963e;
+      --gold2: #d4af6a;
+      --warm:  #e8dfc8;
+      --muted: #7a7060;
+      --line:  rgba(184,150,62,.25);
+      --red:   #c0392b;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--paper);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none; z-index: 0; opacity: .5;
+    }
+
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 420px; margin: 0 auto;
+      padding: 0 0 80px;
+      animation: rise .9s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes rise {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .header {
+      position: relative;
+      background: linear-gradient(160deg,#1a160e 0%,#0d0b07 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 48px 32px 36px; overflow: hidden;
+    }
+    .header::after {
+      content:''; position:absolute;
+      bottom:0; left:32px; right:32px; height:1px;
+      background: linear-gradient(90deg,transparent,var(--gold),transparent);
+    }
+    .corner { position:absolute; width:28px; height:28px; }
+    .corner.tl { top:16px; left:16px;  border-top:1px solid var(--gold); border-left:1px solid var(--gold); }
+    .corner.tr { top:16px; right:16px; border-top:1px solid var(--gold); border-right:1px solid var(--gold); }
+
+    .avatar-wrap {
+      width:72px; height:72px; border-radius:50%;
+      border:1.5px solid var(--gold); overflow:hidden;
+      margin-bottom:20px; background:#1e1a12;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px; color:var(--gold); letter-spacing:.02em;
+    }
+    .avatar-wrap img { width:100%; height:100%; object-fit:cover; }
+
+    .name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,8vw,38px); font-weight:300;
+      line-height:1.1; letter-spacing:.01em; color:var(--paper);
+    }
+    .name em { font-style:italic; color:var(--gold2); }
+    .title-line   { margin-top:8px; font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+    .company-line { margin-top:4px; font-size:13px; font-weight:300; color:var(--muted); letter-spacing:.04em; }
+
+    .contact-section { padding:0 32px; margin-top:32px; display:flex; flex-direction:column; }
+    .contact-item {
+      display:flex; align-items:center; gap:16px;
+      padding:14px 0; border-bottom:1px solid rgba(255,255,255,.06);
+      text-decoration:none; color:inherit; transition:color .2s;
+    }
+    .contact-item:last-child { border-bottom:none; }
+    .contact-item:hover .ci-value { color:var(--gold2); }
+    .ci-icon {
+      width:34px; height:34px; border-radius:8px;
+      background:rgba(184,150,62,.1); border:1px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; font-size:15px;
+    }
+    .ci-meta { display:flex; flex-direction:column; }
+    .ci-label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+    .ci-value  { font-size:14px; font-weight:300; color:var(--warm); transition:color .2s; }
+
+    .divider { margin:28px 32px 0; height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); }
+
+    .note-block { margin:24px 32px 0; padding:16px 20px; border-left:2px solid var(--gold); background:rgba(184,150,62,.04); border-radius:0 8px 8px 0; }
+    .note-block p { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:300; font-style:italic; color:var(--warm); line-height:1.6; }
+
+    .cta-wrap { padding:32px 32px 0; display:flex; flex-direction:column; gap:12px; }
+
+    .btn-save {
+      width:100%; padding:17px 24px;
+      background:linear-gradient(135deg,var(--gold) 0%,#9a7a2e 100%);
+      border:none; border-radius:12px;
+      font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500;
+      letter-spacing:.14em; text-transform:uppercase; color:#0a0a0f;
+      cursor:pointer; position:relative; overflow:hidden;
+      transition:transform .15s, box-shadow .15s;
+      box-shadow:0 4px 24px rgba(184,150,62,.25);
+    }
+    .btn-save::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 60%); }
+    .btn-save:active { transform:scale(.98); }
+    .btn-save:hover  { box-shadow:0 6px 32px rgba(184,150,62,.4); }
+
+    .btn-admin {
+      width:100%; padding:14px 24px;
+      background:transparent;
+      border:1px solid rgba(184,150,62,.22); border-radius:12px;
+      font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400;
+      letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
+      cursor:pointer; transition:border-color .2s, color .2s;
+    }
+    .btn-admin:hover { border-color:var(--gold); color:var(--gold); }
+
+    .qr-panel {
+      margin:28px 32px 0; padding:24px;
+      border:1px solid var(--line); border-radius:16px;
+      background:rgba(255,255,255,.02);
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+    }
+    .qr-label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+    #qr-code canvas, #qr-code img { border-radius:8px; display:block; }
+    .qr-url { font-size:11px; color:var(--muted); letter-spacing:.04em; text-align:center; word-break:break-all; }
+
+    .footer { margin-top:40px; text-align:center; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(122,112,96,.4); }
+
+    /* ── TOAST ── */
+    .toast {
+      position:fixed; bottom:32px; left:50%;
+      transform:translateX(-50%) translateY(20px);
+      background:var(--gold); color:#0a0a0f;
+      padding:12px 24px; border-radius:50px;
+      font-size:13px; font-weight:500; opacity:0;
+      pointer-events:none; transition:opacity .3s, transform .3s;
+      white-space:nowrap; z-index:9999;
+    }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+    /* ── OVERLAY ── */
+    .overlay {
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(0,0,0,.82); backdrop-filter:blur(6px);
+      display:flex; align-items:flex-end; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .overlay.open { opacity:1; pointer-events:all; }
+
+    /* ── PIN MODAL ── */
+    .pin-modal {
+      background:#121008; border:1px solid var(--line);
+      border-radius:24px 24px 0 0; padding:40px 32px 52px;
+      width:100%; max-width:420px; text-align:center;
+      transform:translateY(100%); transition:transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .overlay.open .pin-modal { transform:translateY(0); }
+
+    .pin-title { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--paper); margin-bottom:6px; }
+    .pin-sub   { font-size:12px; color:var(--muted); letter-spacing:.08em; margin-bottom:32px; }
+
+    .pin-dots { display:flex; gap:14px; justify-content:center; margin-bottom:32px; }
+    .pin-dot {
+      width:14px; height:14px; border-radius:50%;
+      border:1.5px solid var(--muted); background:transparent;
+      transition:background .15s, border-color .15s;
+    }
+    .pin-dot.filled { background:var(--gold); border-color:var(--gold); }
+    .pin-dot.error  { background:var(--red);  border-color:var(--red); animation:shake .3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+    .pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:280px; margin:0 auto; }
+    .pin-key {
+      padding:18px; border-radius:12px;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+      font-family:'DM Sans',sans-serif; font-size:22px; font-weight:300; color:var(--paper);
+      cursor:pointer; transition:background .12s, transform .1s; user-select:none;
+    }
+    .pin-key:active { background:rgba(184,150,62,.15); transform:scale(.93); }
+    .pin-key.del   { font-size:16px; color:var(--muted); }
+    .pin-key.empty { background:transparent; border:none; cursor:default; }
+    .pin-cancel    { margin-top:20px; background:none; border:none; font-size:12px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; cursor:pointer; display:block; width:100%; }
+    .pin-cancel:hover { color:var(--paper); }
+
+    /* ── ADMIN PANEL ── */
+    .admin-panel {
+      background:#0e0c08; border:1px solid var(--line);
+      border-radius:24px 24px 0 0;
+      width:100%; max-width:420px; max-height:92vh;
+      overflow-y:auto; overscroll-behavior:contain;
+      transform:translateY(100%); transition:transform .4s cubic-bezier(.16,1,.3,1);
+      display:none;
+    }
+    .overlay.open .admin-panel { transform:translateY(0); }
+    .admin-panel::-webkit-scrollbar { width:4px; }
+    .admin-panel::-webkit-scrollbar-thumb { background:var(--line); border-radius:2px; }
+
+    .admin-header {
+      position:sticky; top:0; z-index:10;
+      background:#0e0c08; border-bottom:1px solid rgba(255,255,255,.06);
+      padding:22px 24px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .admin-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--paper); }
+    .admin-title span { color:var(--gold); font-style:italic; }
+    .btn-close { background:none; border:none; color:var(--muted); font-size:22px; cursor:pointer; padding:4px; transition:color .2s; line-height:1; }
+    .btn-close:hover { color:var(--paper); }
+
+    .admin-body { padding:12px 24px 40px; }
+
+    .section-label { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin:20px 0 12px; }
+
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .field { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+    .field label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+    .field input, .field textarea {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+      border-radius:10px; padding:11px 14px;
+      font-family:'DM Sans',sans-serif; font-size:13px; font-weight:300;
+      color:var(--paper); outline:none; width:100%;
+      transition:border-color .2s, background .2s;
+    }
+    .field input:focus, .field textarea:focus { border-color:var(--gold); background:rgba(184,150,62,.06); }
+    .field textarea { resize:vertical; min-height:72px; line-height:1.5; }
+
+    .avatar-preview-row { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+    .avatar-mini {
+      width:48px; height:48px; border-radius:50%;
+      border:1.5px solid var(--gold); overflow:hidden;
+      background:#1e1a12; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold);
+    }
+    .avatar-mini img { width:100%; height:100%; object-fit:cover; }
+
+    .hint { font-size:11px; color:var(--muted); margin:-4px 0 8px; }
+
+    .admin-actions { display:flex; flex-direction:column; gap:10px; margin-top:24px; }
+
+    .btn-primary {
+      width:100%; padding:16px;
+      background:linear-gradient(135deg,var(--gold) 0%,#9a7a2e 100%);
+      border:none; border-radius:12px;
+      font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500;
+      letter-spacing:.16em; text-transform:uppercase; color:#0a0a0f;
+      cursor:pointer; position:relative; overflow:hidden;
+      box-shadow:0 4px 20px rgba(184,150,62,.2);
+      transition:transform .15s, box-shadow .15s;
+    }
+    .btn-primary::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 60%); }
+    .btn-primary:active { transform:scale(.98); }
+    .btn-primary:hover  { box-shadow:0 6px 28px rgba(184,150,62,.4); }
+
+    .btn-outline {
+      width:100%; padding:14px;
+      background:transparent; border:1px solid rgba(255,255,255,.12); border-radius:12px;
+      font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400;
+      letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+      cursor:pointer; transition:border-color .2s, color .2s;
+    }
+    .btn-outline:hover { border-color:var(--gold); color:var(--gold2); }
+
+    .btn-danger {
+      width:100%; padding:14px;
+      background:transparent; border:1px solid rgba(192,57,43,.3); border-radius:12px;
+      font-family:'DM Sans',sans-serif; font-size:11px; font-weight:400;
+      letter-spacing:.18em; text-transform:uppercase; color:rgba(192,57,43,.65);
+      cursor:pointer; transition:all .2s;
+    }
+    .btn-danger:hover { border-color:var(--red); color:var(--red); background:rgba(192,57,43,.06); }
+  </style>
+</head>
+<body>
+
+<!-- ══ CARD ══ -->
+<div class="wrapper">
+  <div class="header">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="avatar-wrap" id="avatar"></div>
+    <div class="name" id="display-name"></div>
+    <div class="title-line" id="display-title"></div>
+    <div class="company-line" id="display-company"></div>
+  </div>
+
+  <div class="contact-section" id="contact-section"></div>
+
+  <div class="note-block" id="note-block" style="display:none">
+    <p id="display-note"></p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-wrap">
+    <button class="btn-save" onclick="downloadVCard()">＋ Adaugă în Agendă</button>
+    <button class="btn-admin" onclick="openPinModal()">⚙ Administrare</button>
+  </div>
+
+  <div class="qr-panel">
+    <div class="qr-label">Distribuie cardul tău</div>
+    <div id="qr-code"></div>
+    <div class="qr-url" id="qr-url-text"></div>
+  </div>
+
+  <div class="footer">Digital Business Card</div>
+</div>
+
+<!-- ══ PIN OVERLAY ══ -->
+<div class="overlay" id="pin-overlay">
+  <div class="pin-modal">
+    <div class="pin-title">Acces Administrare</div>
+    <div class="pin-sub">Introdu PIN-ul de 4 cifre</div>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-keypad">
+      <div class="pin-key" onclick="pinKey('1')">1</div>
+      <div class="pin-key" onclick="pinKey('2')">2</div>
+      <div class="pin-key" onclick="pinKey('3')">3</div>
+      <div class="pin-key" onclick="pinKey('4')">4</div>
+      <div class="pin-key" onclick="pinKey('5')">5</div>
+      <div class="pin-key" onclick="pinKey('6')">6</div>
+      <div class="pin-key" onclick="pinKey('7')">7</div>
+      <div class="pin-key" onclick="pinKey('8')">8</div>
+      <div class="pin-key" onclick="pinKey('9')">9</div>
+      <div class="pin-key empty"></div>
+      <div class="pin-key" onclick="pinKey('0')">0</div>
+      <div class="pin-key del" onclick="pinDel()">⌫</div>
+    </div>
+    <button class="pin-cancel" onclick="closeOverlay('pin-overlay')">Anulează</button>
+  </div>
+</div>
+
+<!-- ══ ADMIN OVERLAY ══ -->
+<div class="overlay" id="admin-overlay">
+  <div class="admin-panel" id="admin-panel">
+
+    <div class="admin-header">
+      <div class="admin-title">Admin <span>Panel</span></div>
+      <button class="btn-close" onclick="closeOverlay('admin-overlay')">✕</button>
+    </div>
+
+    <div class="admin-body">
+
+      <div class="section-label">✦ Identitate</div>
+
+      <div class="avatar-preview-row">
+        <div class="avatar-mini" id="admin-avatar-preview">?</div>
+        <div class="field" style="flex:1;margin-bottom:0">
+          <label>URL Fotografie (opțional)</label>
+          <input type="url" id="f-avatarUrl" placeholder="https://…/poza.jpg" oninput="previewAvatar()">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label>Prenume</label><input type="text" id="f-firstName" oninput="previewAvatar()"></div>
+        <div class="field"><label>Nume</label><input type="text" id="f-lastName" oninput="previewAvatar()"></div>
+      </div>
+      <div class="field"><label>Titlu / Funcție</label><input type="text" id="f-title"></div>
+      <div class="field"><label>Companie / Brand</label><input type="text" id="f-company"></div>
+
+      <div class="section-label">✦ Contact</div>
+      <div class="field"><label>Telefon</label><input type="tel" id="f-phone" placeholder="+40 7xx xxx xxx"></div>
+      <div class="field"><label>Email</label><input type="email" id="f-email"></div>
+      <div class="field"><label>Website (fără https://)</label><input type="text" id="f-website" placeholder="site.ro"></div>
+      <div class="field"><label>LinkedIn (fără https://)</label><input type="text" id="f-linkedin" placeholder="linkedin.com/in/…"></div>
+      <div class="field"><label>Instagram</label><input type="text" id="f-instagram" placeholder="@username"></div>
+      <div class="field"><label>Adresă / Locație</label><input type="text" id="f-address"></div>
+      <div class="field"><label>Notă / Descriere</label><textarea id="f-note"></textarea></div>
+
+      <div class="section-label">✦ QR Code</div>
+      <div class="field"><label>URL pagina cardului (pentru QR)</label><input type="url" id="f-pageUrl" placeholder="https://card.site.ro"></div>
+      <div class="hint">Actualizează după ce hostuiești pagina pentru a obține QR-ul corect.</div>
+
+      <div class="section-label">✦ Securitate PIN</div>
+      <div class="field-row">
+        <div class="field"><label>PIN nou (4 cifre)</label><input type="password" id="f-pin" maxlength="4" placeholder="••••" inputmode="numeric" pattern="\d{4}"></div>
+        <div class="field"><label>Confirmă PIN</label><input type="password" id="f-pin2" maxlength="4" placeholder="••••" inputmode="numeric"></div>
+      </div>
+      <div class="hint">Lasă gol pentru a păstra PIN-ul actual.</div>
+
+      <div class="admin-actions">
+        <button class="btn-primary" onclick="saveAdmin()">✓ Salvează &amp; Actualizează Cardul</button>
+        <button class="btn-outline" onclick="downloadQR()">↓ Descarcă QR Code (PNG)</button>
+        <button class="btn-danger" onclick="resetToDefaults()">↺ Resetează la valorile implicite</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── State ───────────────────────────────────────────
+let CARD = {};
+let pinBuffer = '';
+const LS_KEY = 'dbc_v1';
+
+// ─── Init ─────────────────────────────────────────────
+(function init() {
+  try {
+    const saved = localStorage.getItem(LS_KEY);
+    CARD = saved ? JSON.parse(saved) : { ...DEFAULTS };
+  } catch(e) {
+    CARD = { ...DEFAULTS };
+  }
+  renderCard();
+})();
+
+// ─── Render complet ───────────────────────────────────
+function renderCard() {
+  const c = CARD;
+
+  // Avatar
+  const av = document.getElementById('avatar');
+  if (c.avatarUrl) {
+    av.innerHTML = `<img src="${c.avatarUrl}" alt="${esc(c.firstName)}" onerror="this.parentElement.textContent='${initials(c)}'">`;
+  } else {
+    av.textContent = initials(c);
+  }
+
+  document.getElementById('display-name').innerHTML =
+    `<em>${esc(c.firstName)}</em>\u00a0${esc(c.lastName)}`;
+  document.getElementById('display-title').textContent   = c.title   || '';
+  document.getElementById('display-company').textContent = c.company || '';
+
+  // Notă
+  const nb = document.getElementById('note-block');
+  nb.style.display = c.note ? 'block' : 'none';
+  document.getElementById('display-note').textContent = c.note || '';
+
+  // Contact rows
+  const section = document.getElementById('contact-section');
+  section.innerHTML = '';
+  const rows = [
+    { icon:'📞', label:'Telefon',   val:c.phone,     href:`tel:${(c.phone||'').replace(/\s/g,'')}` },
+    { icon:'✉️', label:'Email',     val:c.email,     href:`mailto:${c.email}` },
+    { icon:'🌐', label:'Website',   val:c.website,   href:`https://${c.website}` },
+    { icon:'💼', label:'LinkedIn',  val:c.linkedin,  href:`https://${c.linkedin}` },
+    { icon:'📸', label:'Instagram', val:c.instagram, href:`https://instagram.com/${(c.instagram||'').replace('@','')}` },
+    { icon:'📍', label:'Locație',   val:c.address,   href:null },
+  ];
+  rows.forEach(r => {
+    if (!r.val) return;
+    const el = r.href ? document.createElement('a') : document.createElement('div');
+    el.className = 'contact-item';
+    if (r.href) { el.href = r.href; el.rel = 'noopener'; }
+    el.innerHTML = `
+      <div class="ci-icon">${r.icon}</div>
+      <div class="ci-meta">
+        <span class="ci-label">${r.label}</span>
+        <span class="ci-value">${esc(r.val)}</span>
+      </div>`;
+    section.appendChild(el);
+  });
+
+  // QR — regenerare
+  const qrEl = document.getElementById('qr-code');
+  qrEl.innerHTML = '';
+  const urlText = document.getElementById('qr-url-text');
+  urlText.textContent = c.pageUrl || '';
+  if (c.pageUrl) {
+    new QRCode(qrEl, {
+      text: c.pageUrl,
+      width: 140, height: 140,
+      colorDark: '#f5f0e8', colorLight: '#0a0a0f',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  }
+
+  document.title = `${c.firstName} ${c.lastName} — Business Card`;
+}
+
+// ─── vCard ────────────────────────────────────────────
+function downloadVCard() {
+  const c = CARD;
+  const lines = [
+    'BEGIN:VCARD', 'VERSION:3.0',
+    `N:${c.lastName};${c.firstName};;;`,
+    `FN:${c.firstName} ${c.lastName}`,
+    c.title   ? `TITLE:${c.title}`   : '',
+    c.company ? `ORG:${c.company}`   : '',
+    c.phone   ? `TEL;TYPE=CELL:${c.phone}` : '',
+    c.email   ? `EMAIL:${c.email}`   : '',
+    c.website ? `URL:https://${c.website}` : '',
+    c.address ? `ADR;TYPE=WORK:;;${c.address};;;;` : '',
+    c.note    ? `NOTE:${c.note}`     : '',
+    c.linkedin  ? `X-SOCIALPROFILE;type=linkedin:${c.linkedin}` : '',
+    c.instagram ? `X-SOCIALPROFILE;type=instagram:${c.instagram}` : '',
+    'END:VCARD'
+  ].filter(Boolean).join('\r\n');
+
+  triggerDownload(
+    new Blob([lines], { type:'text/vcard;charset=utf-8' }),
+    `${c.firstName}_${c.lastName}.vcf`
+  );
+  showToast('✓ Contact descărcat (.vcf)');
+}
+
+// ─── QR PNG ───────────────────────────────────────────
+function downloadQR() {
+  const canvas = document.querySelector('#qr-code canvas');
+  if (!canvas) { showToast('⚠ Adaugă mai întâi un URL pentru QR'); return; }
+
+  // Creăm un canvas mai mare cu padding alb pentru imprimat
+  const SIZE = 300, PAD = 24;
+  const out = document.createElement('canvas');
+  out.width = SIZE + PAD*2; out.height = SIZE + PAD*2;
+  const ctx = out.getContext('2d');
+  ctx.fillStyle = '#f5f0e8';
+  ctx.fillRect(0, 0, out.width, out.height);
+  ctx.drawImage(canvas, PAD, PAD, SIZE, SIZE);
+
+  out.toBlob(blob => {
+    triggerDownload(blob, 'qr-business-card.png');
+    showToast('✓ QR Code descărcat (PNG)');
+  });
+}
+
+// ─── PIN ──────────────────────────────────────────────
+function openPinModal() {
+  pinBuffer = '';
+  updateDots();
+  document.getElementById('pin-overlay').classList.add('open');
+}
+function pinKey(k) {
+  if (pinBuffer.length >= 4) return;
+  pinBuffer += k;
+  updateDots();
+  if (pinBuffer.length === 4) setTimeout(checkPin, 140);
+}
+function pinDel() {
+  pinBuffer = pinBuffer.slice(0, -1);
+  updateDots();
+}
+function updateDots() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById('d' + i);
+    d.classList.toggle('filled', i < pinBuffer.length);
+    d.classList.remove('error');
+  }
+}
+function checkPin() {
+  const correct = CARD.adminPin || DEFAULTS.adminPin;
+  if (pinBuffer === correct) {
+    closeOverlay('pin-overlay');
+    openAdmin();
+  } else {
+    for (let i = 0; i < 4; i++) {
+      const d = document.getElementById('d' + i);
+      d.classList.remove('filled');
+      d.classList.add('error');
+    }
+    showToast('✗ PIN incorect');
+    pinBuffer = '';
+    setTimeout(updateDots, 700);
+  }
+}
+
+// ─── Admin ────────────────────────────────────────────
+function openAdmin() {
+  const c = CARD;
+  ['firstName','lastName','title','company','phone','email',
+   'website','linkedin','instagram','address','note','pageUrl','avatarUrl']
+  .forEach(k => {
+    const el = document.getElementById('f-' + k);
+    if (el) el.value = c[k] || '';
+  });
+  document.getElementById('f-pin').value  = '';
+  document.getElementById('f-pin2').value = '';
+  previewAvatar();
+
+  const panel = document.getElementById('admin-panel');
+  panel.style.display = 'block';
+  setTimeout(() => document.getElementById('admin-overlay').classList.add('open'), 10);
+}
+
+function previewAvatar() {
+  const url = (document.getElementById('f-avatarUrl').value || '').trim();
+  const fn  = (document.getElementById('f-firstName').value || '')[0] || '';
+  const ln  = (document.getElementById('f-lastName').value  || '')[0] || '';
+  const ini = (fn + ln).toUpperCase() || '?';
+  const prev = document.getElementById('admin-avatar-preview');
+  prev.innerHTML = url
+    ? `<img src="${url}" alt="preview" onerror="this.parentElement.textContent='${ini}'">`
+    : ini;
+}
+
+function saveAdmin() {
+  // Validare PIN
+  const pin1 = document.getElementById('f-pin').value.trim();
+  const pin2 = document.getElementById('f-pin2').value.trim();
+  if (pin1 || pin2) {
+    if (!/^\d{4}$/.test(pin1)) { showToast('⚠ PIN-ul trebuie să fie exact 4 cifre'); return; }
+    if (pin1 !== pin2)          { showToast('⚠ PIN-urile nu coincid'); return; }
+    CARD.adminPin = pin1;
+  }
+
+  // Colectare câmpuri
+  ['firstName','lastName','title','company','phone','email',
+   'website','linkedin','instagram','address','note','pageUrl','avatarUrl']
+  .forEach(k => {
+    const el = document.getElementById('f-' + k);
+    if (el) CARD[k] = el.value.trim();
+  });
+
+  localStorage.setItem(LS_KEY, JSON.stringify(CARD));
+  renderCard();
+  closeOverlay('admin-overlay');
+  showToast('✓ Card actualizat cu succes!', 3500);
+}
+
+function resetToDefaults() {
+  if (!confirm('Ești sigur? Toate modificările salvate vor fi șterse și se vor restaura datele implicite.')) return;
+  localStorage.removeItem(LS_KEY);
+  CARD = { ...DEFAULTS };
+  renderCard();
+  closeOverlay('admin-overlay');
+  showToast('✓ Resetat la valorile implicite');
+}
+
+// ─── Utilities ────────────────────────────────────────
+function closeOverlay(id) {
+  document.getElementById(id).classList.remove('open');
+}
+function initials(c) {
+  return (((c.firstName||'')[0]||'') + ((c.lastName||'')[0]||'')).toUpperCase();
+}
+function esc(s) {
+  return (s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function triggerDownload(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function showToast(msg, dur = 3200) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// Închide la tap pe backdrop
+['pin-overlay','admin-overlay'].forEach(id => {
+  document.getElementById(id).addEventListener('click', e => {
+    if (e.target.id === id) closeOverlay(id);
+  });
+});
+</script>
+</body>
+</html>
