@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI NAVIGATOR — Campanie Social Media</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #060d1f;
+    --navy2:   #0c1a3a;
+    --navy3:   #112244;
+    --blue:    #1a4a8a;
+    --accent:  #4a90d9;
+    --gold:    #c9a84c;
+    --text:    #c8daee;
+    --muted:   #6a8aaa;
+    --border:  rgba(99,130,186,0.2);
+    --ig:      #E1306C;
+    --fb:      #1877F2;
+    --th:      #6e6e6e;
+    --li:      #0A66C2;
+  }
+
+  body {
+    background: radial-gradient(ellipse at 20% 10%, #0f2040 0%, #060d1f 60%);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #070e22 0%, #0d1e42 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 22px 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-left .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #e8f0ff;
+    line-height: 1.15;
+  }
+  .header-left .subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 3px;
+  }
+  .header-right { text-align: right; }
+  .header-right .authors { font-size: 11px; color: #5a7a9a; margin-bottom: 3px; }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(99,130,186,0.12);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 6px;
+  }
+
+  /* ── LAYOUT ── */
+  main { max-width: 900px; margin: 0 auto; padding: 28px 24px 60px; }
+
+  /* ── LABELS ── */
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── DAY TABS ── */
+  .day-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+  .day-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(10,20,40,0.4);
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .day-btn:hover { border-color: rgba(99,130,186,0.5); color: var(--text); }
+  .day-btn.active {
+    background: linear-gradient(135deg, rgba(30,70,140,.7), rgba(20,50,100,.7));
+    border-color: rgba(160,190,255,.5);
+    color: #c8daff;
+    font-weight: 600;
+  }
+  .day-btn .theme { font-size: 10px; color: var(--muted); }
+  .day-btn.active .theme { color: #8aa8d8; }
+
+  /* ── PLATFORM TABS ── */
+  .platform-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .plat-btn {
+    padding: 9px 22px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(10,20,40,0.4);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  .plat-btn:hover { color: var(--text); }
+  .plat-btn[data-p="instagram"].active  { border-color: #E1306C88; background: #E1306C18; color: #e8ecff; }
+  .plat-btn[data-p="facebook"].active   { border-color: #1877F288; background: #1877F218; color: #e8ecff; }
+  .plat-btn[data-p="threads"].active    { border-color: #88888888; background: #66666618; color: #e8ecff; }
+  .plat-btn[data-p="linkedin"].active   { border-color: #0A66C288; background: #0A66C218; color: #e8ecff; }
+
+  /* ── POST CARD ── */
+  .post-header {
+    padding: 14px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .post-header-info { display: flex; align-items: center; gap: 10px; }
+  .post-header-info .icon { font-size: 22px; }
+  .post-header-info .day-name { font-weight: 700; color: #d8e8ff; font-size: 14px; }
+  .post-header-info .platform-label { font-size: 11px; color: #8aafcf; }
+
+  .post-body {
+    background: rgba(8,18,38,.7);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    padding: 24px;
+  }
+  .post-text {
+    white-space: pre-wrap;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #c8daee;
+  }
+
+  .img-prompt-block {
+    border: 1px solid var(--border);
+    border-top: 1px solid rgba(99,130,186,.1);
+    border-radius: 0 0 10px 10px;
+    background: rgba(5,12,28,.6);
+    overflow: hidden;
+  }
+  .img-prompt-header {
+    padding: 11px 20px;
+    border-bottom: 1px solid rgba(99,130,186,.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .img-prompt-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .img-prompt-text {
+    padding: 14px 20px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: #7a9dbf;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── COPY BUTTON ── */
+  .copy-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.08);
+    color: rgba(255,255,255,.85);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,.15); }
+  .copy-btn.copied { background: rgba(74,222,128,.18); border-color: #4ade80; color: #4ade80; }
+  .copy-btn-dark {
+    padding: 5px 13px;
+    border-radius: 6px;
+    border: 1px solid rgba(99,130,186,.35);
+    background: rgba(15,25,50,.5);
+    color: #93b4d8;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .copy-btn-dark:hover { background: rgba(30,60,100,.5); }
+  .copy-btn-dark.copied { background: rgba(74,222,128,.1); border-color: #4ade80; color: #4ade80; }
+
+  /* ── NAV ARROWS ── */
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .nav-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(10,20,40,.5);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .nav-btn:hover:not(:disabled) { color: var(--text); border-color: rgba(99,130,186,.4); }
+  .nav-btn:disabled { opacity: .35; cursor: default; }
+  .nav-counter { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a6a8a; }
+
+  /* ── OVERVIEW ── */
+  .overview {
+    margin-top: 36px;
+    padding: 20px 24px;
+    border-radius: 10px;
+    background: rgba(5,12,28,.5);
+    border: 1px solid var(--border);
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .ov-btn {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(60,90,130,.2);
+    background: rgba(8,16,34,.3);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    transition: all .15s;
+  }
+  .ov-btn:hover { border-color: rgba(99,130,186,.4); background: rgba(20,40,80,.3); }
+  .ov-btn.active { border-color: rgba(120,160,220,.4); background: rgba(20,45,90,.5); }
+  .ov-btn .ov-day { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+  .ov-btn.active .ov-day { color: var(--accent); }
+  .ov-btn .ov-theme { font-size: 13px; color: #6a8aaa; }
+  .ov-btn.active .ov-theme { color: #c0d8f8; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="eyebrow">Campanie Social Media</div>
+    <h1>AI NAVIGATOR</h1>
+    <div class="subtitle">Etică și productivitate în cercetarea academică</div>
+  </div>
+  <div class="header-right">
+    <div class="authors">Radu V. Pascu &amp; Liliana G. Popescu · MATRIX ROM, 2026 · 148 pagini</div>
+    <div class="badge">7 zile · 4 platforme · 28 posturi</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-label">Selectează ziua</div>
+  <div class="day-tabs" id="dayTabs"></div>
+
+  <div class="section-label">Platformă</div>
+  <div class="platform-tabs" id="platTabs"></div>
+
+  <div id="postCard"></div>
+
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" onclick="changeDay(-1)">← Ziua anterioară</button>
+    <span class="nav-counter" id="navCounter"></span>
+    <button class="nav-btn" id="nextBtn" onclick="changeDay(1)">Ziua următoare →</button>
+  </div>
+
+  <div class="overview">
+    <div class="section-label">Structura campaniei pe 7 zile</div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </div>
+
+</main>
+
+<script>
+const days = [
+  { icon:"🚀", label:"Ziua 1", theme:"Lansare" },
+  { icon:"⚠️", label:"Ziua 2", theme:"Problema" },
+  { icon:"💡", label:"Ziua 3", theme:"Cadrul RCSFC" },
+  { icon:"🌡️", label:"Ziua 4", theme:"Termometrul Etic" },
+  { icon:"🔍", label:"Ziua 5", theme:"Halucinații AI" },
+  { icon:"📚", label:"Ziua 6", theme:"Ce conține" },
+  { icon:"🎯", label:"Ziua 7", theme:"Call to Action" },
+];
+
+const platforms = [
+  { id:"instagram", label:"Instagram", color:"#E1306C" },
+  { id:"facebook",  label:"Facebook",  color:"#1877F2" },
+  { id:"threads",   label:"Threads",   color:"#888888" },
+  { id:"linkedin",  label:"LinkedIn",  color:"#0A66C2" },
+];
+
+const campaign = {
+  instagram: {
+    posts: [
+      `📖 AI NAVIGATOR a apărut.\n\nPrimul ghid românesc care răspunde simultan la trei întrebări esențiale pentru orice cercetător:\n→ Ce este, de fapt, AI?\n→ Ce îți este permis să folosești?\n→ Cum utilizezi responsabil?\n\n148 de pagini. Etică. Productivitate. Cercetare academică.\n\nScris pentru studenți în ani terminali, doctoranzi și cercetători.\n\n💬 Trimite-mi un mesaj direct pentru achiziție.\n\n#AINavigator #CercetareAcademica #InteligentaArtificiala #EticaAI #Doctorat #Licenta #Disertatie #GhidAcademic #AI2026 #RomaniaAcademica #StudentiRomania #MatrixROM`,
+      `⚠️ Realitatea din academia românească în 2026:\n\nChatGPT, Claude, Gemini — folosite pe scară largă.\nÎn tăcere.\nFără niciun cadru.\n\nConsecința? Iluzia competenței: studentul care a generat o introducere academic-sonoră cu AI, dar care nu poate apăra nicio afirmație din ea în fața comisiei.\n\nAI NAVIGATOR trasează linia. Cu precizie.\n\n💬 DM pentru achiziție.\n\n#AINavigator #EticaAI #CercetareAcademica #IntegritateAcademica #AI2026 #StudentiRomania`,
+      `💡 Promptul tău naiv produce text plauzibil și raționament împrumutat.\n\nAi nevoie de Cadrul RCSFC:\n→ R — Rol (ce expertiză simulează AI?)\n→ C — Context (ce informații îi oferi?)\n→ S — Sarcină (ce output vrei exact?)\n→ F — Format (cum vrei structurat rezultatul?)\n→ C — Constrângeri (inclusiv etice — integrate, nu opționale)\n\n5 componente. Prompting performant. Etică inclusă de la bun început.\n\nCapitolul 2 — AI NAVIGATOR.\n\n💬 DM pentru achiziție.\n\n#RCSFC #Prompting #AINavigator #CercetareAcademica #AIProductivitate #Doctorat`,
+      `🌡️ 17 categorii de utilizare AI.\n3 zone: PERMIS — CONDIȚIONAT — INTERZIS.\n\nTermometrul Etic din AI NAVIGATOR transformă etica — abstractă și adesea paralizantă — într-un instrument de decizie aplicabil în timp real.\n\nNu mai ghici dacă ce faci e corect.\nVerifici.\n\nCapitolul 1 — AI NAVIGATOR.\n\n💬 DM pentru achiziție.\n\n#EticaAI #TermometrulEtic #AINavigator #CercetareAcademica #IntegritateAcademica #AIAct2024`,
+      `🔍 AI-ul a inventat 3 articole din bibliografia ta.\n\nNu știi care.\n\nHalucinațiile bibliografice sunt cea mai periculoasă formă de eroare AI în cercetare: surse inexistente, autori falși, DOI-uri care nu duc nicăieri — toate cu aspect perfect.\n\nToolbox-ul din AI NAVIGATOR:\n→ 8 instrumente de verificare\n→ Protocol în 4 pași\n→ Exercițiul „Detectivul Surselor"\n\nVerificarea nu e opțională. E competență de ordin superior.\n\nCapitolul 4 — AI NAVIGATOR.\n\n💬 DM pentru achiziție.\n\n#FactChecking #HalucinatiiAI #AINavigator #CercetareAcademica #Bibliografie #IntegritateAcademica`,
+      `📚 148 de pagini. Iată ce primești:\n\n6 CAPITOLE\n→ Etica AI + AI Act 2024\n→ Cadrul RCSFC de prompting\n→ Matricea celor 7 faze\n→ Toolbox fact-checking (8 instrumente)\n→ Ateliere practice integrate\n→ Ghid pentru doctoranzi + politici editoriale\n\n🛠️ INSTRUMENTE\n→ Termometrul Etic (17 categorii)\n→ Biblioteca de 12 prompturi academice\n→ Tabel comparativ: 7 platforme AI 2026\n→ 5 fișe de lucru printabile\n\n„O carte despre gândire." — Prof. Anca Drăghici, Politehnica Timișoara\n\n💬 DM pentru achiziție.\n\n#AINavigator #CercetareAcademica #Doctorat #AI2026 #GhidAcademic`,
+      `📖 AI NAVIGATOR.\nEtică și productivitate în cercetarea academică.\n\ndr.ing. Radu V. Pascu & ș.l.dr.ing. Liliana G. Popescu\nMATRIX ROM, București, 2026\n\n„AI Navigator este o carte despre gândire."\n— Prof. Anca Drăghici, Politehnica Timișoara\n\nDacă ești student în an terminal, doctorand sau cercetător și vrei să știi cum să folosești AI corect, complet și cu integritate academică — această carte este pentru tine.\n\n💬 Trimite-mi un mesaj direct pentru achiziție.\n\n#AINavigator #CercetareAcademica #EticaAI #Doctorat #Licenta #Disertatie #GhidAcademic #InteligentaArtificiala #AI2026 #StudentiRomania #RomaniaAcademica #MatrixROM #IntegritateAcademica #PromptingAI #FactChecking`,
+    ],
+    prompts: [
+      "Minimalist book cover mockup 'AI NAVIGATOR' on dark navy background, glowing compass rose from circuit board lines, clean academic typography, dramatic lighting, premium editorial feel.",
+      "Moody split composition: confused student facing AI chat interface vs confident student with compass symbol. Deep blue academic atmosphere, dramatic contrast lighting.",
+      "Clean infographic: 5 hexagonal elements in cycle showing R-C-S-F-C labels with Romanian descriptions, deep navy and electric blue, geometric scientific aesthetic, glowing connections.",
+      "Stylized thermometer with three color zones: green (PERMIS), amber (CONDIȚIONAT), red (INTERZIS). Academic research icons around it, dark background, luminous scientific aesthetic.",
+      "Magnifying glass examining a bibliography — some references glow red (fake/hallucinated), some green (verified). Detective noir aesthetic with academic elements, cinematic moody lighting.",
+      "Elegant flat-lay: AI NAVIGATOR book open to internal diagrams and infographics, surrounded by printed worksheet, compass, and pen. Warm golden editorial lighting, premium book photography.",
+      "Dramatic book announcement: AI NAVIGATOR cover centered on dark background with spotlight effect, elegant serif quote text overlay, call-to-action 'Disponibil acum — Mesaj direct', premium editorial.",
+    ]
+  },
+  facebook: {
+    posts: [
+      `🎓 AI NAVIGATOR — Etică și productivitate în cercetarea academică a apărut!\n\nDacă ești student în an terminal, doctorand sau cercetător și folosești — sau vrei să folosești — instrumente de inteligență artificială în activitatea ta, această carte a fost scrisă pentru tine.\n\nMediul academic românesc traversează o criză de identitate metodologică: AI-ul este folosit pe scară largă, în tăcere, fără niciun cadru coerent. Nici interdicțiile categorice, nici permisivitatea necondiționată nu funcționează.\n\nAI NAVIGATOR oferă exact ce lipsea: un cadru de înțelegere și acțiune — riguros și aplicabil imediat, la masa de lucru.\n\nScrisă de dr.ing. Radu V. Pascu & ș.l.dr.ing. Liliana G. Popescu. Publicată la MATRIX ROM, București, 2026.\n\n📩 Mesaj direct pentru achiziție.`,
+      `Știi care este cel mai frecvent scenariu în universitățile românești în 2026?\n\nStudentul folosește ChatGPT pentru lucrarea de licență. Profesorul nu știe cum să evalueze asta. Instituția nu are un regulament clar. Editorul științific are politici stricte pe care nimeni nu le-a citit. Și toată lumea tace.\n\nAutorii AI NAVIGATOR au numit această situație „iluzia competenței": studentul care a generat o introducere academic-sonoră, dar care nu poate apăra nicio afirmație din ea în fața comisiei de examinare.\n\nNici interdicția categorică, nici permisivitatea necondiționată nu funcționează. Ce lipsea era un cadru.\n\n📩 Mesaj direct pentru AI NAVIGATOR.`,
+      `Cel mai frecvent viciu al interacțiunii cu AI în cercetare? Promptul naiv.\n\n„Scrie-mi o introducere pentru lucrarea despre X."\nRezultat: text generic, plauzibil, fără substanță. Raționament împrumutat, nu construit.\n\nCadrul RCSFC din AI NAVIGATOR schimbă asta:\n✔ R — Rolul: calibrarea expertizei simulate\n✔ C — Contextul: furnizarea informațiilor de fundal\n✔ S — Sarcina: specificarea precisă a output-ului dorit\n✔ F — Formatul: structura rezultatului\n✔ C — Constrângerile: limitele etice și calitative — integrate ca element obligatoriu\n\nCartea include și o bibliotecă de 12 prompturi academice calibrate, gata de utilizat pentru fiecare fază a cercetării.\n\n📩 Mesaj direct pentru achiziție.`,
+      `Câte dintre aceste utilizări AI sunt permise în lucrarea ta de licență sau doctorat?\n\n→ Reformularea stilistică a unui paragraf propriu\n→ Generarea unui cuprins de la zero\n→ Rezumarea unui articol pe care nu l-ai citit\n→ Traducerea unui text\n→ Inventarea de referințe bibliografice\n\nRăspunsul nu e simplu: depinde de context, de instituție, de editură și de gradul de transparență al declarației tale AI.\n\nTermometrul Etic din AI NAVIGATOR clasifică 17 tipuri de utilizări AI în trei zone — PERMIS, CONDIȚIONAT, INTERZIS — cu criterii explicite pentru fiecare.\n\nNu e un cod de etică pentru raft. E un instrument de decizie în timp real.\n\n📩 Mesaj direct pentru achiziție.`,
+      `Ai primit vreodată o referință bibliografică de la AI care arăta perfect — autor, titlu, an, jurnal, volum, pagini — dar care nu exista în realitate?\n\nDacă da, ai întâlnit halucinația bibliografică. Dacă nu, probabil nu ai verificat îndeajuns.\n\nAI-ul nu minte intenționat. Generează text plauzibil — și uneori acea plauzibilitate ia forma unui articol inventat cu toate elementele formale corecte, dar inexistent ca substanță.\n\nCapitolul 4 din AI NAVIGATOR detaliază:\n✔ Anatomia unei halucinații bibliografice (studiu de caz)\n✔ Toolbox academic: 8 instrumente de verificare (Google Scholar, Semantic Scholar, CrossRef, Retraction Watch, PubMed, Unpaywall, DOAJ, ANELISPLUS)\n✔ Protocolul de verificare în 4 pași\n✔ Exercițiul „Detectivul Surselor"\n\n📩 Mesaj direct pentru achiziție.`,
+      `Ce găsești în cele 148 de pagini ale AI NAVIGATOR:\n\n📖 CAPITOLELE\n1. Fundamentele etice ale AI + Termometrul Etic (17 categorii)\n2. Cadrul RCSFC + Biblioteca celor 12 prompturi\n3. Matricea celor 7 faze ale lucrării de cercetare\n4. Toolbox de fact-checking: 8 instrumente + Protocol în 4 pași\n5. Ateliere practice integrate\n6. AI în cercetarea doctorală + Politicile editoriale (Elsevier, Springer, IEEE, APA 7) + AI Act UE\n\n🛠️ INSTRUMENTE\n→ Termometrul Etic — 17 categorii de utilizare clasificate\n→ 12 prompturi academice gata de utilizat\n→ Protocol de fact-checking în 4 pași\n→ Tabel comparativ al 7 platforme AI 2026\n→ 5 fișe de lucru printabile\n→ Ghid pentru îndrumătorii de licență/master/doctorat\n→ Model de declarație privind utilizarea AI\n→ Model de regulament instituțional\n\n„O carte despre gândire." — Prof.dr.ing. Anca Drăghici, Politehnica Timișoara\n\n📩 Mesaj direct pentru achiziție.`,
+      `Săptămâna aceasta am prezentat AI NAVIGATOR pe larg.\n\nAstăzi, un singur mesaj:\n\nDacă lucrezi în mediul academic — ca student, doctorand, cercetător sau îndrumător — și te confrunți cu întrebarea „cum și cât am voie să folosesc AI?", cartea asta a fost scrisă pentru tine.\n\n148 de pagini. Răspunsuri concrete. Instrumente testate. Etică integrată.\n\n„O carte despre inteligență artificială care îți păstrează valabilitatea dincolo de versiunea curentă a modelelor AI este, prin definiție, o carte despre gândire. AI Navigator este această carte."\n— Prof.dr.ing. Anca Drăghici, Universitatea Politehnica Timișoara\n\n📩 Trimite-mi un mesaj direct pentru a achiziționa cartea.`,
+    ],
+    prompts: [
+      "Warm editorial flat-lay of the AI NAVIGATOR book on a wooden academic desk with a compass, coffee cup, and open notebook, dramatic window light, professional book photography.",
+      "Infographic: three figures (student, professor, institution) connected by dotted lines. Dark navy palette with amber warning accents. Labels: '?', 'fără regulament', 'fără politici'.",
+      "Before/after comparison: 'PROMPT NAIV' with generic output on left vs 'PROMPT RCSFC' with structured output on right. Clean infographic design, navy background.",
+      "Quiz infographic: 5 question items with green/amber/red indicators, styled as an academic evaluation form, clean and professional editorial design.",
+      "Educational infographic: anatomy of a bibliographic hallucination — a reference card with elements labeled and annotated in red (author: 'invented?', title: 'plausible?', DOI: 'leads nowhere?').",
+      "Detailed contents spread: chapters and instruments listed in magazine-style layout, warm paper texture background, editorial book design feel.",
+      "Testimonial visual: pull quote from Anca Drăghici in elegant serif typography, professor's affiliation below, AI NAVIGATOR book cover thumbnail in corner, prestigious academic aesthetic.",
+    ]
+  },
+  threads: {
+    posts: [
+      `Am scris o carte despre cum să folosești AI în cercetarea academică fără să-ți sabotezi munca și fără să înșeli pe nimeni.\n\nSe cheamă AI NAVIGATOR. A apărut azi.\n\nDM dacă vrei s-o achiziționezi.`,
+      `Situația reală din academia în 2026:\n→ AI-ul e folosit pe scară largă\n→ nimeni nu știe exact ce e permis\n→ regulile editoriale există, dar n-a citit nimeni\n→ AI Act e în vigoare, dar ignorat\n\nAceastă carte rezolvă exact asta: AI NAVIGATOR.\nDM pentru achiziție.`,
+      `Promptul tău: „Ajută-mă cu lucrarea de licență"\n\nCe primești: text de umplutură cu aer academic\n\nPromptul corect are 5 componente. Le detaliez în AI NAVIGATOR, cap. 2. Se cheamă Cadrul RCSFC și schimbă complet calitatea interacțiunii cu orice tool AI.\n\nDM pentru achiziție.`,
+      `Test:\n\nReformulezi un paragraf propriu cu AI → permis?\nGenerezi ipoteze de cercetare cu AI → permis?\nRezumi un articol necitit cu AI → permis?\n\nRăspunsurile depind de context. Sunt clasificate în 17 categorii în AI NAVIGATOR. Se cheamă Termometrul Etic.\n\nDM pentru achiziție.`,
+      `AI-ul ți-a dat vreodată o referință bibliografică perfectă care nu exista?\n\nAutor corect, titlu plauzibil, jurnal real, an verosimil. Totul perfect. Nimic adevărat.\n\nSe cheamă halucinație bibliografică. Se verifică. Există 8 instrumente pentru asta. Le găsești în AI NAVIGATOR, cap. 4.\n\nDM pentru achiziție.`,
+      `Ce am pus în AI NAVIGATOR:\n\n12 prompturi academice calibrate\n8 instrumente de fact-checking\n7 faze ale lucrării de cercetare\n17 categorii etice clasificate\n5 fișe de lucru printabile\n1 ghid pentru îndrumători\n1 model de regulament instituțional\n\n148 pagini. Tot ce lipsea.\n\nDM pentru achiziție.`,
+      `O săptămână de postări despre AI NAVIGATOR.\n\nAzi e simplu: dacă ești în academia și te întrebi cum să folosești AI corect, cartea asta e pentru tine.\n\nDM pentru achiziție.\n\n„AI Navigator este o carte despre gândire." — Prof. Anca Drăghici, Politehnica Timișoara`,
+    ],
+    prompts: [
+      "Clean square visual: book title 'AI NAVIGATOR' in bold serif on navy background, minimalist compass icon, white subtitle text. Minimal and striking.",
+      "Bold text-based graphic: bullet points on dark background with red/amber warning colors, typographic design, urgent feel.",
+      "Two chat bubbles side by side: 'NAIV' (vague text) vs 'RCSFC' (structured, precise text). Clean dark background, typographic contrast.",
+      "Bold quiz-style graphic: three questions with colored indicators (green, amber, red), conversational Threads aesthetic, clean typography.",
+      "A reference citation with 'FAKE' stamped in red over it. Clean bold typographic design, stark high-contrast visual.",
+      "Bold numerical visual: large numbers 12, 8, 7, 17, 5 stacked with brief labels, dark background, clean minimalist typographic design.",
+      "Clean closing visual: book title and authors on minimal background, single italic quote in elegant typography, navy and white.",
+    ]
+  },
+  linkedin: {
+    posts: [
+      `Astăzi lansez AI NAVIGATOR: Etică și productivitate în cercetarea academică — ghid scris împreună cu dr.ing. Liliana G. Popescu și publicat la MATRIX ROM, București, 2026.\n\nCartea răspunde simultan la trei întrebări pe care mediul academic le evită sau le tratează incomplet: ce este AI (tehnic), ce este permis (etic) și cum se utilizează responsabil (practic). Niciun compromis între cele trei perspective.\n\nPublicul-țintă: studenți în ani terminali, doctoranzi și cercetători care lucrează în contextul politicilor editoriale internaționale și al AI Act (UE) 2024.\n\nConținut: cadrul RCSFC de prompting cu constrângeri etice integrate, Termometrul Etic (17 categorii de utilizare), Toolbox academic de fact-checking (8 instrumente), Matricea celor 7 faze ale lucrării de cercetare, ghid de politici editoriale (Elsevier, Springer Nature, IEEE, APA 7).\n\nDisponibilă la comandă directă. Detalii în comentarii sau mesaj privat.\n\n#AINavigator #CercetareAcademica #InteligentaArtificiala #EticaAI #AcademicAI #Doctorat #MatrixROM`,
+      `O observație despre mediul academic românesc în 2026: instrumentele de inteligență artificială sunt utilizate pe scară largă în lucrări de licență, disertații și referate de doctorat — în absența oricărui cadru instituțional coerent.\n\nReacțiile instituționale oscilează între interdicție categorică și permisivitate necondiționată. Niciuna nu produce rezultatele așteptate, pentru că niciuna nu răspunde la întrebările reale: ce am voie să fac, cum dovedesc că am folosit AI responsabil, ce cer editurile internaționale?\n\nAI NAVIGATOR a fost scrisă pentru a umple acest gol. Nu e o carte despre AI în general — e un ghid operațional pentru cercetarea academică, cu cadre practice, instrumente verificabile și ancorare în reglementările în vigoare.\n\nDisponibilă la comandă. Detalii în mesaj privat.\n\n#AINavigator #IntegritateAcademica #EticaAI #AIAct #CercetareStiintifica`,
+      `Există o diferență fundamentală între a folosi AI și a folosi AI eficient în cercetarea academică. Diferența o face calitatea promptului.\n\nCel mai frecvent viciu: promptul naiv — care furnizează AI-ului context minim și primește în schimb text plauzibil, lipsit de substanță și de raționament propriu.\n\nCadrul RCSFC, dezvoltat în AI NAVIGATOR, structurează interacțiunea cu AI în cinci componente: Rol, Context, Sarcină, Format, Constrângeri. Elementul diferențiator: constrângerile etice sunt integrate ca element obligatoriu al promptului — nu adăugate post-factum.\n\nCartea include și o bibliotecă de 12 prompturi academice calibrate, cu exemple detaliate pentru fiecare fază a cercetării.\n\n#Prompting #AIProductivitate #CercetareAcademica #AINavigator #RCSFC`,
+      `Etica utilizării AI în cercetarea academică suferă adesea de un defect de design: este formulată ca principii abstracte, imposibil de aplicat în situații concrete.\n\n„Folosește AI responsabil" nu spune nimănui dacă are voie să reformuleze un paragraf propriu, să genereze o structură de capitol sau să rezume surse bibliografice.\n\nTermometrul Etic din AI NAVIGATOR rezolvă acest deficit. 17 categorii de utilizare, clasificate operațional în trei zone: PERMIS, CONDIȚIONAT, INTERZIS — cu criterii explicite pentru fiecare situație.\n\nClasificarea este ancorată în Regulamentul european AI Act (UE 2024/1689), în recomandările UNESCO privind etica AI și în politicile editoriale ale principalilor publisheri academici internaționali.\n\n#EticaAI #AIAct #IntegritateAcademica #AINavigator #CercetareStiintifica #Doctorat`,
+      `Halucinația bibliografică reprezintă, în opinia mea, cel mai serios risc al utilizării nemediate a AI în cercetarea academică.\n\nSpre deosebire de o eroare factuală care poate fi detectată prin raționament, halucinația bibliografică este structural invizibilă: o referință inventată respectă toate convențiile formale — autor, titlu, jurnal, an, volum, pagini — și poate trece nedetectată printr-o lectură superficială.\n\nCapitolul 4 din AI NAVIGATOR tratează mecanismele generative ale halucinațiilor, prezintă un toolbox de verificare cu 8 instrumente verificate și propune un protocol în 4 pași aplicabil sistematic.\n\n#FactChecking #IntegritateAcademica #CercetareStiintifica #AINavigator #Bibliografie`,
+      `Pentru cei care m-au întrebat despre structura detaliată a AI NAVIGATOR, iată o privire de ansamblu.\n\nCartea este organizată în șase capitole cu densitate progresivă: de la fundamentele tehnice și etice (cap. 1), la tehnicile de prompting (cap. 2), la utilizarea AI în fiecare fază a elaborării lucrării (cap. 3), la fact-checking și detectarea halucinațiilor (cap. 4), la ateliere practice integrate (cap. 5) și la specificul cercetării doctorale și al publicării științifice internaționale (cap. 6).\n\nAnnexele includ un ghid pentru îndrumători, un model de declarație privind utilizarea AI și un model de regulament instituțional.\n\nDisponibilă la comandă.\n\n#AINavigator #CercetareAcademica #Doctorat #AIAct #MatrixROM #EticaAI`,
+      `Închei seria AI NAVIGATOR cu un citat din prefața cărții, semnat de Prof.dr.ing. Anca Drăghici, Universitatea Politehnica din Timișoara:\n\n„O carte despre inteligență artificială care îți păstrează valabilitatea dincolo de versiunea curentă a modelelor AI este, prin definiție, o carte despre gândire. AI Navigator este această carte. O recomand călduros oricărui student care învață să cerceteze, oricărui cadru didactic care însoțește acest parcurs și oricărei instituții care încă caută răspunsuri la întrebări pe care mulți preferă să le amâne."\n\nAI NAVIGATOR: Etică și productivitate în cercetarea academică, MATRIX ROM, București, 2026, 148 p.\n\nDisponibilă la comandă directă — mesaj privat sau comentariu.\n\n#AINavigator #CercetareAcademica #EticaAI #Doctorat #AI2026 #MatrixROM #InteligentaArtificiala`,
+    ],
+    prompts: [
+      "Professional book announcement: AI NAVIGATOR cover on clean white/navy background, publisher badge, author names, LinkedIn-appropriate editorial style, navy and gold color scheme.",
+      "Thought leadership visual: split bar graph showing AI adoption vs institutional framework readiness in Romanian academia, professional infographic style, navy and amber.",
+      "Clean LinkedIn visual: RCSFC acronym expanded in clean typography, each letter with a brief descriptor, navy and white, executive presentation style.",
+      "Professional three-zone diagram with green/amber/red columns populated with academic use-case examples, clean corporate infographic style, suitable for LinkedIn.",
+      "Professional risk assessment visual: 2x2 matrix showing 'detectability' vs 'severity' of AI errors, with bibliographic hallucination as high severity / low detectability. Executive infographic.",
+      "Clean chapter overview: numbered sections with brief descriptors, elegant sidebar design, navy and gold, suitable for LinkedIn professional audience.",
+      "Executive LinkedIn announcement: full quote by Anca Drăghici in editorial serif typography, professor attribution, book cover thumbnail, publisher logo, professional prestige aesthetic.",
+    ]
+  }
+};
+
+let activeDay = 0;
+let activePlatform = 'instagram';
+
+function render() {
+  // Day tabs
+  const dayTabs = document.getElementById('dayTabs');
+  dayTabs.innerHTML = days.map((d, i) => `
+    <button class="day-btn ${i === activeDay ? 'active' : ''}" onclick="setDay(${i})">
+      <span>${d.icon}</span>
+      <span>${d.label}</span>
+      <span class="theme">${d.theme}</span>
+    </button>
+  `).join('');
+
+  // Platform tabs
+  const platTabs = document.getElementById('platTabs');
+  platTabs.innerHTML = platforms.map(p => `
+    <button class="plat-btn ${p.id === activePlatform ? 'active' : ''}" data-p="${p.id}" onclick="setPlatform('${p.id}')">
+      ${p.label}
+    </button>
+  `).join('');
+
+  const d = days[activeDay];
+  const p = platforms.find(x => x.id === activePlatform);
+  const post = campaign[activePlatform].posts[activeDay];
+  const prompt = campaign[activePlatform].prompts[activeDay];
+
+  // Post card
+  document.getElementById('postCard').innerHTML = `
+    <div class="post-header" style="background: linear-gradient(135deg, ${p.color}35, ${p.color}18); border: 1px solid ${p.color}45; border-bottom: none;">
+      <div class="post-header-info">
+        <span class="icon">${d.icon}</span>
+        <div>
+          <div class="day-name">${d.label} — ${d.theme}</div>
+          <div class="platform-label">Post pentru ${p.label}</div>
+        </div>
+      </div>
+      <button class="copy-btn" id="copyPostBtn" onclick="copyText('copyPostBtn', ${JSON.stringify(post)})">⎘ Copiază text</button>
+    </div>
+    <div class="post-body" style="border-left: 1px solid ${p.color}25; border-right: 1px solid ${p.color}25;">
+      <pre class="post-text">${escHtml(post)}</pre>
+    </div>
+    <div class="img-prompt-block">
+      <div class="img-prompt-header">
+        <span class="img-prompt-label">🎨 Prompt imagine (Midjourney / DALL-E / Canva AI)</span>
+        <button class="copy-btn-dark" id="copyPromptBtn" onclick="copyText('copyPromptBtn', ${JSON.stringify(prompt)})">⎘ Copiază prompt</button>
+      </div>
+      <div class="img-prompt-text">${escHtml(prompt)}</div>
+    </div>
+  `;
+
+  // Nav
+  document.getElementById('prevBtn').disabled = activeDay === 0;
+  document.getElementById('nextBtn').disabled = activeDay === days.length - 1;
+  document.getElementById('navCounter').textContent = `${activeDay + 1} / ${days.length}`;
+
+  // Overview
+  document.getElementById('overviewGrid').innerHTML = days.map((d, i) => `
+    <button class="ov-btn ${i === activeDay ? 'active' : ''}" onclick="setDay(${i})">
+      <div class="ov-day">${d.label}</div>
+      <div class="ov-theme">${d.icon} ${d.theme}</div>
+    </button>
+  `).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setDay(i) { activeDay = i; render(); }
+function setPlatform(p) { activePlatform = p; render(); }
+function changeDay(d) { activeDay = Math.max(0, Math.min(days.length - 1, activeDay + d)); render(); }
+
+function copyText(btnId, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copiat';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
