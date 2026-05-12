@@ -77,9 +77,10 @@
     <nav class="nav-bar">
         <a href="#acasa" class="nav-brand" aria-label="Pagina principală CONEXIUNI">
             <img src="imagini/siglaconexiuni.png"
-                 alt="Sigla Asociației CONEXIUNI mărită"
-                 width="120" height="120"
+                 alt="Sigla Asociației CONEXIUNI"
+                 width="40" height="40"
                  onerror="this.style.display='none'" />
+            <span class="nav-brand-name">Conexiuni</span>
         </a>
 
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Deschide meniu" aria-expanded="false" aria-controls="navLinks">
@@ -104,6 +105,7 @@
 <!-- ═══════════ HERO ═══════════ -->
 <main id="acasa">
 <section class="hero-section" aria-labelledby="heroTitle">
+    <div class="hero-bg-grid" aria-hidden="true"></div>
     <div class="hero-inner container-main">
 
         <div class="hero-content">
@@ -150,14 +152,19 @@
         </div>
 
         <div class="hero-logo-wrap">
-            <img src="imagini/siglaconexiuni.png"
-                 alt="Sigla Asociației CONEXIUNI — Homines, culturas et opportunitates conectimus"
-                 width="260" height="260" />
-            <p style="font-family:'Lora',serif; font-style:italic; color:rgba(255,255,255,0.55); font-size:0.78rem; text-align:center; margin-top:0.75rem; line-height:1.5;">
-                Homines, culturas et opportunitates conectimus
-            </p>
+            <div class="hero-logo-ring">
+                <img src="imagini/siglaconexiuni.png"
+                     alt="Sigla Asociației CONEXIUNI — Homines, culturas et opportunitates conectimus"
+                     width="210" height="210" />
+            </div>
+            <p class="hero-latin">Homines, culturas et<br>opportunitates conectimus</p>
         </div>
 
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+        <span class="hero-scroll-line"></span>
+        Scroll
     </div>
 </section>
 
@@ -205,26 +212,28 @@
             </div>
         </div>
 
-        <div class="content-card reveal" style="margin-top:1.5rem; display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; align-items:center;">
-            <div style="text-align:center; padding:1rem;">
-                <div style="font-size:2rem; margin-bottom:0.5rem;">📋</div>
-                <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1.1rem;">CIF: 21681657</div>
-                <div style="font-size:0.82rem; color:var(--color-text-light); margin-top:0.25rem;">Cod de Identificare Fiscală</div>
-            </div>
-            <div style="text-align:center; padding:1rem;">
-                <div style="font-size:2rem; margin-bottom:0.5rem;">🏢</div>
-                <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1.1rem;">Judecătoria Sibiu</div>
-                <div style="font-size:0.82rem; color:var(--color-text-light); margin-top:0.25rem;">Registrul Asociațiilor</div>
-            </div>
-            <div style="text-align:center; padding:1rem;">
-                <div style="font-size:2rem; margin-bottom:0.5rem;">📍</div>
-                <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1.1rem;">Sibiu, România</div>
-                <div style="font-size:0.82rem; color:var(--color-text-light); margin-top:0.25rem;">Str. Nicolae Bălcescu 25</div>
-            </div>
-            <div style="text-align:center; padding:1rem;">
-                <div style="font-size:2rem; margin-bottom:0.5rem;">📚</div>
-                <div style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1.1rem;">CAEN 9499 & 8559</div>
-                <div style="font-size:0.82rem; color:var(--color-text-light); margin-top:0.25rem;">ONG & Învățământ</div>
+        <div class="content-card reveal" style="margin-top:1.5rem;">
+            <div class="info-strip">
+                <div class="info-item">
+                    <div class="info-item-icon">📋</div>
+                    <div class="info-item-val">CIF: 21681657</div>
+                    <div class="info-item-lbl">Cod de Identificare Fiscală</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">🏢</div>
+                    <div class="info-item-val">Judecătoria Sibiu</div>
+                    <div class="info-item-lbl">Registrul Asociațiilor</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">📍</div>
+                    <div class="info-item-val">Sibiu, România</div>
+                    <div class="info-item-lbl">Str. Nicolae Bălcescu 25</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">📚</div>
+                    <div class="info-item-val">CAEN 9499 & 8559</div>
+                    <div class="info-item-lbl">ONG & Învățământ</div>
+                </div>
             </div>
         </div>
     </div>
@@ -554,9 +563,9 @@
 <section class="section section-dark" aria-label="Impactul asociației">
     <div class="container-main">
         <header class="section-header-center reveal">
-            <div class="section-label" style="background:rgba(13,148,136,0.2); color:var(--color-teal-border); border-color:rgba(13,148,136,0.3);">📊 Impactul nostru</div>
+            <div class="section-label" style="background:rgba(45,212,191,0.12); color:var(--color-teal-border); border-color:rgba(45,212,191,0.2);">📊 Impactul nostru</div>
             <h2 class="section-title center white">Creăm impact real</h2>
-            <div class="title-underline" style="margin:0.75rem auto 0;"></div>
+            <div class="title-underline"></div>
             <p class="section-desc center white">
                 Măsurăm succesul prin schimbările pozitive generate în viața beneficiarilor și a comunităților în care activăm.
             </p>
@@ -759,7 +768,7 @@
         </div>
 
         <div style="text-align:center; margin-top:2.5rem;" class="reveal">
-            <a href="#contact" class="btn" style="font-size:1rem; padding:0.85rem 2.5rem;">
+            <a href="#contact" class="btn">
                 🤝 Propune un parteneriat
             </a>
         </div>
@@ -793,7 +802,7 @@
                     <li>Rețea de contacte și conexiuni</li>
                     <li>Fără cotizație obligatorie</li>
                 </ul>
-                <a href="#contact" class="btn-green-light" style="background: var(--color-teal-bg); color: var(--color-teal-dark) !important; border-color: var(--color-teal-border);">Înscrie-te →</a>
+                <a href="#contact" class="btn-green-light">Înscrie-te →</a>
             </div>
 
             <div class="member-card featured reveal reveal-delay-2">
@@ -831,27 +840,24 @@
 
         <!-- Cum devii membru -->
         <div class="content-card reveal" style="margin-top:2rem;">
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:2rem; align-items:start;">
-                <div>
-                    <div style="font-size:2rem; margin-bottom:0.75rem;">📝</div>
-                    <h4 style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1rem; margin:0 0 0.4rem;">1. Depune o adeziune</h4>
-                    <p style="font-size:0.88rem; color:var(--color-text-light); margin:0;">
-                        Completează o cerere scrisă sau electronică adresată Consiliului Director cu informații despre tine și motivul aderării.
-                    </p>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-icon">📝</div>
+                    <div class="step-num">1</div>
+                    <h4>Depune o adeziune</h4>
+                    <p>Completează o cerere scrisă sau electronică adresată Consiliului Director cu informații despre tine și motivul aderării.</p>
                 </div>
-                <div>
-                    <div style="font-size:2rem; margin-bottom:0.75rem;">✅</div>
-                    <h4 style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1rem; margin:0 0 0.4rem;">2. Aprobare CD</h4>
-                    <p style="font-size:0.88rem; color:var(--color-text-light); margin:0;">
-                        Consiliul Director analizează cererea. Calitatea de membru se dobândește prin aprobarea adeziunii de către CD.
-                    </p>
+                <div class="step-item">
+                    <div class="step-icon">✅</div>
+                    <div class="step-num">2</div>
+                    <h4>Aprobare CD</h4>
+                    <p>Consiliul Director analizează cererea. Calitatea de membru se dobândește prin aprobarea adeziunii de către CD.</p>
                 </div>
-                <div>
-                    <div style="font-size:2rem; margin-bottom:0.75rem;">🎉</div>
-                    <h4 style="font-family:'Montserrat',sans-serif; font-weight:800; color:var(--color-navy); font-size:1rem; margin:0 0 0.4rem;">3. Bun venit în CONEXIUNI!</h4>
-                    <p style="font-size:0.88rem; color:var(--color-text-light); margin:0;">
-                        Ești acum parte din comunitatea noastră și poți contribui activ la misiunea asociației.
-                    </p>
+                <div class="step-item">
+                    <div class="step-icon">🎉</div>
+                    <div class="step-num">3</div>
+                    <h4>Bun venit în CONEXIUNI!</h4>
+                    <p>Ești acum parte din comunitatea noastră și poți contribui activ la misiunea asociației.</p>
                 </div>
             </div>
         </div>
@@ -863,9 +869,9 @@
 <section class="contact-section" id="contact" aria-labelledby="contactTitle">
     <div class="container-main">
         <header class="section-header-center" style="position:relative;z-index:1;">
-            <div class="section-label" style="background:rgba(255,255,255,0.2); color:#fff; border-color:rgba(255,255,255,0.3);">📬 Contactează-ne</div>
+            <div class="section-label" style="background:rgba(45,212,191,0.15); color:var(--color-teal-border); border-color:rgba(45,212,191,0.25);">📬 Contactează-ne</div>
             <h2 class="section-title center white" id="contactTitle">Hai să vorbim!</h2>
-            <div class="title-underline" style="margin:0.75rem auto 0; background: var(--color-teal-border);"></div>
+            <div class="title-underline"></div>
             <p class="section-desc center white" style="max-width:600px;">
                 Suntem deschiși oricărei idei, propuneri de proiect, parteneriat sau pur și simplu dacă vrei să afli mai multe despre ce facem. Scrie-ne!
             </p>
@@ -893,12 +899,11 @@
 
         </div>
 
-        <div style="text-align:center; margin-top:2.5rem; position:relative;z-index:1;">
-            <a href="mailto:contact@asociatiaconexiuni.ro" class="btn" style="font-size:1.05rem; padding:0.95rem 2.8rem;">
+        <div style="text-align:center; margin-top:2.5rem; position:relative; z-index:1; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+            <a href="mailto:contact@asociatiaconexiuni.ro" class="btn">
                 ✉️ Trimite un mesaj
             </a>
-            &nbsp;&nbsp;
-            <a href="tel:+40722123456" class="btn-outline" style="font-size:1.05rem; padding:0.93rem 2.8rem;">
+            <a href="tel:+40722123456" class="btn-outline">
                 📞 Sună-ne
             </a>
         </div>
