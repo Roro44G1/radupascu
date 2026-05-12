@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evoluția Utilizatorilor pe Platformele AI Generativ — Analiză 2022–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0b0f1a;
+    --bg2:       #111827;
+    --bg3:       #1a2236;
+    --border:    #1e2d45;
+    --accent:    #00d4aa;
+    --accent2:   #3b82f6;
+    --accent3:   #f59e0b;
+    --accent4:   #ec4899;
+    --text:      #e2e8f0;
+    --text-muted:#7c92b0;
+    --text-dim:  #4a6080;
+    --white:     #ffffff;
+    --mono:      'JetBrains Mono', monospace;
+    --serif:     'DM Serif Display', serif;
+    --sans:      'Sora', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #060c1a 0%, #0b1829 60%, #0d1f30 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 70px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(0,212,170,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(59,130,246,.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; position: relative; }
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 620px;
+    margin-bottom: 36px;
+  }
+  .meta-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--text-dim);
+  }
+  .meta-value {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent2);
+  }
+
+  /* ── LAYOUT ── */
+  main { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── SECTION HEADINGS ── */
+  .section {
+    margin-top: 70px;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 28px 0 12px;
+  }
+  p { color: var(--text); margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── PLATFORM CARD ── */
+  .platform-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-top: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+  }
+  .card-openai::before  { background: #10a37f; }
+  .card-gemini::before  { background: #4285f4; }
+  .card-copilot::before { background: #0078d4; }
+  .card-claude::before  { background: #d97706; }
+  .card-perplexity::before { background: #20b2aa; }
+  .card-grok::before    { background: #e5e5e5; }
+  .card-deepseek::before { background: #ef4444; }
+
+  .platform-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .platform-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--white);
+  }
+  .platform-org {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .kpi-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .kpi {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 18px;
+    min-width: 140px;
+  }
+  .kpi-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .kpi-value {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .kpi-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--bg3);
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #141e2e;
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.015); }
+  td.num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  td.growth {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #34d399;
+    white-space: nowrap;
+  }
+  td.source-col {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  /* ── MARKET SHARE TABLE ── */
+  .market-table { margin-top: 20px; }
+  .bar-cell { width: 180px; }
+  .bar-wrap {
+    background: var(--bg3);
+    border-radius: 2px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent2);
+    transition: width .3s;
+  }
+
+  /* ── INFO BOXES ── */
+  .info-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .info-box strong { color: var(--text); }
+
+  /* ── HIGHLIGHT STAT ── */
+  .stat-pull {
+    font-family: var(--serif);
+    font-size: 42px;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-context {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── SOURCES ── */
+  .sources-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .sources-list li {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .sources-list li strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-section {
+    margin-top: 50px;
+  }
+  .sticky-th th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 40px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: .08em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    header, main { padding-left: 20px; padding-right: 20px; }
+    footer { padding: 24px 20px; }
+    .kpi { min-width: 120px; }
+    .meta-grid { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">Raport Statistică & Business Intelligence</div>
+    <h1>Evoluția Numărului de Utilizatori<br>pe <em>Platformele AI Generativ</em></h1>
+    <p class="subtitle">Analiză documentată pe baza datelor publice verificate din surse primare și secundare de referință globală. Acoperă perioada 2022–T1 2026.</p>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">Data compilării</span>
+        <span class="meta-value">Mai 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Platforme analizate</span>
+        <span class="meta-value">7 principale</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Surse documentate</span>
+        <span class="meta-value">18+ surse verificate</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Tip metrici</span>
+        <span class="meta-value">WAU · MAU · DAU · Market Share</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SUMAR EXECUTIV -->
+  <div class="section">
+    <div class="section-label">§ 01 — Sumar Executiv</div>
+    <h2>Tabloul de Ansamblu</h2>
+
+    <div class="kpi-row" style="margin-top: 24px;">
+      <div class="kpi">
+        <div class="kpi-label">Utilizatori săptămânali ChatGPT</div>
+        <div class="kpi-value">800M+</div>
+        <div class="kpi-sub">Octombrie 2025 · OpenAI</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Vizite lunare Top-40 AI tools</div>
+        <div class="kpi-value">3 Mrd.</div>
+        <div class="kpi-sub">Martie 2024 · ScienceDirect</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Prompts/zi — toate platformele</div>
+        <div class="kpi-value">4 Mrd.</div>
+        <div class="kpi-sub">2025 · Founders Forum</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Creștere piață GenAI CAGR</div>
+        <div class="kpi-value">46.5%</div>
+        <div class="kpi-sub">2024–2030 · Statista/Bloomberg</div>
+      </div>
+    </div>
+
+    <p>Inteligența artificială generativă a înregistrat cea mai rapidă difuzare globală a oricărei tehnologii de consum din istorie. ChatGPT a atins 100 de milioane de utilizatori activi lunar în doar 2 luni de la lansare (noiembrie 2022 → ianuarie 2023), depășind cu mult ritmul de adopție al smartphone-urilor sau rețelelor sociale. Până în 2025, ecosistemul s-a structurat în trei straturi: (1) un lider dominant — ChatGPT cu cotă de piață de 60–81% în funcție de metrică; (2) doi concurenți majori — Google Gemini și Microsoft Copilot, susținuți de distribuție ecosistemică masivă; (3) jucători de nișă cu creștere accelerată — Claude (enterprise), Perplexity (AI search), Grok (social-integrated) și DeepSeek (China/Asia).</p>
+
+    <div class="info-box">
+      <strong>Notă metodologică:</strong> Metricile raportate variază semnificativ între surse, deoarece companiile folosesc metrici diferite (WAU vs. MAU vs. DAU vs. vizite web). Acolo unde există discrepanțe, sunt prezentate mai multe valori cu atribuire specifică. Sunt preferate datele din comunicatele oficiale ale companiilor, completate cu date independente de la Similarweb, Semrush, Business of Apps și firme de analiză de piață (Andreessen Horowitz, First Page Sage, Stanford HAI).
+    </div>
+  </div>
+
+  <!-- PLATFORM 1: ChatGPT -->
+  <div class="section">
+    <div class="section-label">§ 02 — Platformă #1</div>
+    <h2>ChatGPT — OpenAI</h2>
+
+    <div class="platform-card card-openai">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">ChatGPT</div>
+          <div class="platform-org">OpenAI · Lansat: Noiembrie 2022</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">WAU (oct. 2025)</div>
+          <div class="kpi-value">800M</div>
+          <div class="kpi-sub">Weekly Active Users</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">DAU (mai 2025)</div>
+          <div class="kpi-value">122.6M</div>
+          <div class="kpi-sub">Daily Active Users</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Abonați plătitori</div>
+          <div class="kpi-value">35M</div>
+          <div class="kpi-sub">Total subscribers 2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Market Share chat AI</div>
+          <div class="kpi-value">~60–81%</div>
+          <div class="kpi-sub">Depinde de metrică</div>
+        </div>
+      </div>
+
+      <h3>Evoluție cronologică documentată</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Perioadă</th>
+              <th>Metrică</th>
+              <th>Valoare</th>
+              <th>Variație</th>
+              <th>Sursa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Noiembrie 2022</td><td>Lansare</td><td class="num">—</td><td class="growth">—</td><td class="source-col">OpenAI</td></tr>
+            <tr><td>Ianuarie 2023</td><td>MAU</td><td class="num">100M</td><td class="growth">Record mondial (2 luni)</td><td class="source-col">OpenAI / Reuters</td></tr>
+            <tr><td>Noiembrie 2023</td><td>WAU</td><td class="num">100M</td><td class="growth">—</td><td class="source-col">OpenAI</td></tr>
+            <tr><td>August 2024</td><td>WAU</td><td class="num">200M</td><td class="growth">+100% YoY</td><td class="source-col">OpenAI (Sam Altman)</td></tr>
+            <tr><td>Octombrie 2024</td><td>WAU</td><td class="num">250M</td><td class="growth">+25% în 2 luni</td><td class="source-col">OpenAI</td></tr>
+            <tr><td>Decembrie 2024</td><td>WAU / MAU</td><td class="num">300M</td><td class="growth">+50M / lună</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>Februarie 2025</td><td>WAU</td><td class="num">400M</td><td class="growth">+33% față de dec. 2024</td><td class="source-col">OpenAI (TED 2025)</td></tr>
+            <tr><td>Martie 2025</td><td>MAU</td><td class="num">~500M</td><td class="growth">Post-GPT-4o Image</td><td class="source-col">Diverse estimări</td></tr>
+            <tr><td>Mai 2025</td><td>DAU</td><td class="num">122.6M</td><td class="growth">—</td><td class="source-col">OpenAI / Semrush</td></tr>
+            <tr><td>Septembrie 2025</td><td>WAU</td><td class="num">700M</td><td class="growth">—</td><td class="source-col">OpenAI</td></tr>
+            <tr><td>Octombrie 2025</td><td>WAU</td><td class="num">800M</td><td class="growth">+100% față de feb. 2025</td><td class="source-col">OpenAI</td></tr>
+            <tr><td>Noiembrie 2025</td><td>WAU</td><td class="num">810M</td><td class="growth">+10M în 1 lună</td><td class="source-col">OpenAI</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Date financiare și de monetizare</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Indicator</th><th>Valoare</th><th>Perioadă / Sursă</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ARR (Annualized Recurring Revenue)</td><td class="num">$10B</td><td class="source-col">Iunie 2025 · OpenAI</td></tr>
+            <tr><td>Venituri in-app (mobil, 12 luni)</td><td class="num">$677.6M</td><td class="source-col">Mar 2024 – Mar 2025 · App store analytics</td></tr>
+            <tr><td>Cea mai mare lună venituri mobil</td><td class="num">$108M</td><td class="source-col">Martie 2025</td></tr>
+            <tr><td>Abonați ChatGPT Plus</td><td class="num">12M</td><td class="source-col">2025 · diverse surse</td></tr>
+            <tr><td>Clienți enterprise plătitori</td><td class="num">3M</td><td class="source-col">2025 · OpenAI</td></tr>
+            <tr><td>Cota de piață subscripții B2C</td><td class="num">62.5%</td><td class="source-col">Noiembrie 2024</td></tr>
+            <tr><td>Valoare companie (ultimă rundă)</td><td class="num">$300B</td><td class="source-col">Estimare 2025 · Investopedia</td></tr>
+            <tr><td>Companii Fortune 500 utilizatoare</td><td class="num">92%</td><td class="source-col">Financial Times · via API OpenAI</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box" style="margin-top: 20px;">
+        <strong>Context strategic:</strong> ChatGPT rămâne liderul incontestabil în volumul absolut de utilizatori. Creșterea de la 400M WAU (feb. 2025) la 800M WAU (oct. 2025) în doar 6 luni a fost declanșată de lansări majore de produse (GPT-4o Image, Sora standalone, integrare agenți). Totuși, costurile operaționale rămân un semn de întrebare: pierderi estimate de $5 miliarde anual, cu un cost mediu de $0.36 per query.
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 2: Google Gemini -->
+  <div class="section">
+    <div class="section-label">§ 03 — Platformă #2</div>
+    <h2>Google Gemini (ex-Bard)</h2>
+
+    <div class="platform-card card-gemini">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">Google Gemini</div>
+          <div class="platform-org">Google DeepMind · Lansat ca Bard: Martie 2023 · Rebrandat Gemini: Februarie 2024</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">MAU (T4 2025)</div>
+          <div class="kpi-value">750M</div>
+          <div class="kpi-sub">Sundar Pichai · Google</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">DAU (2025)</div>
+          <div class="kpi-value">35–45M</div>
+          <div class="kpi-sub">estimare</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">AI Overviews (Search)</div>
+          <div class="kpi-value">2 Mrd.</div>
+          <div class="kpi-sub">utilizatori lunari 2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Market Share US</div>
+          <div class="kpi-value">13.4%</div>
+          <div class="kpi-sub">GenAI chatbot market</div>
+        </div>
+      </div>
+
+      <h3>Evoluție cronologică documentată</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Perioadă</th>
+              <th>Metrică</th>
+              <th>Valoare</th>
+              <th>Variație</th>
+              <th>Sursa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Octombrie 2024</td><td>MAU estimat</td><td class="num">~42M</td><td class="growth">—</td><td class="source-col">BusinessofApps</td></tr>
+            <tr><td>Ianuarie 2025</td><td>DAU</td><td class="num">~35M</td><td class="growth">+4× față de oct. 2024</td><td class="source-col">Diverse estimări</td></tr>
+            <tr><td>Mai 2025</td><td>MAU</td><td class="num">400M</td><td class="growth">+4× față de oct. 2024</td><td class="source-col">Views4You / Google</td></tr>
+            <tr><td>Mijloc 2025</td><td>MAU</td><td class="num">450–650M</td><td class="growth">+114% în 8 luni</td><td class="source-col">SQMagazine / aifundingtracker</td></tr>
+            <tr><td>T4 2025</td><td>MAU</td><td class="num">750M</td><td class="growth">+100M în 3 luni</td><td class="source-col">Sundar Pichai · Google earnings</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <strong>Avantajul ecosistemic:</strong> Gemini nu poate fi evaluat exclusiv prin aplicația dedicată. Integrarea cu Google Search (AI Overviews — 2 miliarde utilizatori lunari), Android, Chrome, YouTube și Workspace reprezintă un multiplicator de distribuție fără precedent. Creșterea de 114% în 8 luni este cea mai rapidă dintre toate platformele majore în 2025.
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 3: Microsoft Copilot -->
+  <div class="section">
+    <div class="section-label">§ 04 — Platformă #3</div>
+    <h2>Microsoft Copilot</h2>
+
+    <div class="platform-card card-copilot">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">Microsoft Copilot</div>
+          <div class="platform-org">Microsoft (powered by OpenAI) · GitHub Copilot: 2021 · M365 Copilot: 2023 · Windows Copilot: 2024</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Market Share US (chatbot)</div>
+          <div class="kpi-value">~14%</div>
+          <div class="kpi-sub">standalone chat portal</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Seat-uri M365 plătite</div>
+          <div class="kpi-value">345M</div>
+          <div class="kpi-sub">potențial de distribuție</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">GitHub Copilot</div>
+          <div class="kpi-value">1.3M</div>
+          <div class="kpi-sub">utilizatori plătitori</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Fortune 500 cu GenAI</div>
+          <div class="kpi-value">85%</div>
+          <div class="kpi-sub">prin platformele Microsoft</div>
+        </div>
+      </div>
+
+      <h3>Caracteristici cheie și date disponibile</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Indicator</th><th>Valoare</th><th>Perioadă / Sursă</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Vizitatori zilnici Bing (cu Copilot integrat)</td><td class="num">140M DAU</td><td class="source-col">Aprilie 2024 · Microsoft</td></tr>
+            <tr><td>Utilizatori lunari Bing total</td><td class="num">~500M</td><td class="source-col">2025 · Microsoft</td></tr>
+            <tr><td>Creștere clienți enterprise Copilot</td><td class="num">+60% QoQ</td><td class="source-col">T4 2024 · Microsoft earnings</td></tr>
+            <tr><td>Clienți cu peste 10.000 de seat-uri</td><td class="num">2× QoQ</td><td class="source-col">T4 2024 · Microsoft earnings</td></tr>
+            <tr><td>ROI raportat pentru enterprise</td><td class="num">$3.70 / $1 investit</td><td class="source-col">IDC Study commissioned by Microsoft</td></tr>
+            <tr><td>StatCounter — cota de trafic chatbot</td><td class="num">~5%</td><td class="source-col">Iulie 2024 – Aug 2025 · StatCounter</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <strong>Notă de evaluare:</strong> Copilot este cazul cel mai dificil de cuantificat — nu există o singură metrică de utilizatori publicată, deoarece produsul este distribuit pe multiple suprafețe (Bing Chat, M365, Windows, GitHub, Azure). Datele de trafic standalone (5% StatCounter) subestimează masiv utilizarea reală prin integrările Office 365.
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 4: Claude -->
+  <div class="section">
+    <div class="section-label">§ 05 — Platformă #4</div>
+    <h2>Claude — Anthropic</h2>
+
+    <div class="platform-card card-claude">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">Claude</div>
+          <div class="platform-org">Anthropic (PBC) · Claude 1: Martie 2023 · Claude 3: Martie 2024 · Claude 4.x: 2025–2026</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">MAU (T3 2025)</div>
+          <div class="kpi-value">19–30M</div>
+          <div class="kpi-sub">estimări variate</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">API calls / lună</div>
+          <div class="kpi-value">25 Mrd.</div>
+          <div class="kpi-sub">T2 2025 · Anthropic</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Market Share (chatbot web)</div>
+          <div class="kpi-value">3.2–3.5%</div>
+          <div class="kpi-sub">SimilarWeb aug. 2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Valorizare</div>
+          <div class="kpi-value">$350–380B</div>
+          <div class="kpi-sub">Nov. 2025 / Feb. 2026</div>
+        </div>
+      </div>
+
+      <h3>Evoluție cronologică documentată</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Perioadă</th>
+              <th>Metrică</th>
+              <th>Valoare</th>
+              <th>Variație</th>
+              <th>Sursa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Decembrie 2023</td><td>MAU web</td><td class="num">4M</td><td class="growth">—</td><td class="source-col">Electroiq / SimilarWeb</td></tr>
+            <tr><td>T1 2024</td><td>MAU total</td><td class="num">2M</td><td class="growth">—</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>T2 2024</td><td>App downloads</td><td class="num">0.6M</td><td class="growth">Prima perioadă raportată</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>T3 2024</td><td>App downloads</td><td class="num">2.1M</td><td class="growth">+250% față de T2</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>T2 2024</td><td>MAU total</td><td class="num">6.5M</td><td class="growth">—</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>Noiembrie 2024</td><td>MAU web</td><td class="num">18.8M</td><td class="growth">+370% față de dec. 2023</td><td class="source-col">SimilarWeb / Electroiq</td></tr>
+            <tr><td>Noiembrie 2024</td><td>App downloads (luna)</td><td class="num">800.6K</td><td class="growth">Peak lunar</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>T4 2024</td><td>App downloads</td><td class="num">2.6M</td><td class="growth">—</td><td class="source-col">Business of Apps</td></tr>
+            <tr><td>Ianuarie 2025</td><td>MAU</td><td class="num">18.9M</td><td class="growth">—</td><td class="source-col">Views4You</td></tr>
+            <tr><td>T2 2025</td><td>MAU</td><td class="num">~30M</td><td class="growth">+59% față de ian. 2025</td><td class="source-col">Views4You</td></tr>
+            <tr><td>T3 2025</td><td>MAU</td><td class="num">19M</td><td class="growth">—</td><td class="source-col">Business of Apps (altă metr.)</td></tr>
+            <tr><td>2025</td><td>App downloads totale</td><td class="num">3.9M</td><td class="growth">—</td><td class="source-col">Business of Apps</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Profilul enterprise și demografic</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Indicator</th><th>Valoare</th><th>Sursa</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Pondere venituri din enterprise</td><td class="num">~80%</td><td class="source-col">Dario Amodei, CEO Anthropic</td></tr>
+            <tr><td>Pondere trafic API de la clienți corporativi</td><td class="num">45%</td><td class="source-col">Views4You 2025</td></tr>
+            <tr><td>Cota din traficul global LLM</td><td class="num">21%</td><td class="source-col">Views4You 2025</td></tr>
+            <tr><td>Utilizatori primari (18–24 ani)</td><td class="num">8.3M</td><td class="source-col">Views4You 2025</td></tr>
+            <tr><td>Creștere utilizare în healthcare (T1 2025)</td><td class="num">+61%</td><td class="source-col">Views4You 2025</td></tr>
+            <tr><td>Pondere chatboți e-commerce bazați pe Claude</td><td class="num">38%</td><td class="source-col">Views4You 2025</td></tr>
+            <tr><td>SDK downloads lunare (Python + TypeScript)</td><td class="num">97M</td><td class="source-col">Anthropic 2025</td></tr>
+            <tr><td>Servere MCP publice active</td><td class="num">10.000+</td><td class="source-col">Anthropic 2025</td></tr>
+            <tr><td>Distribuție gen: masculin / feminin</td><td class="num">61.6% / 38.4%</td><td class="source-col">Electroiq / SimilarWeb</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <strong>Poziționare strategică:</strong> Claude este unicul jucător major care a ales deliberat modelul enterprise over consumer. Dimensiunea mai mică a bazei de utilizatori față de ChatGPT sau Gemini nu reflectă un deficit de produs, ci o strategie de go-to-market diferențiată — clienți mai puțini, dar cu valoare mult mai ridicată. Anthropic a atras $4B de la Amazon și $2B+ de la Google.
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 5: Perplexity -->
+  <div class="section">
+    <div class="section-label">§ 06 — Platformă #5</div>
+    <h2>Perplexity AI</h2>
+
+    <div class="platform-card card-perplexity">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">Perplexity AI</div>
+          <div class="platform-org">Perplexity AI Inc. · Lansat: August 2022 (beta) · Disponibil public: 2023</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">MAU (mid-2025)</div>
+          <div class="kpi-value">22–45M</div>
+          <div class="kpi-sub">estimări variate surse</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Query-uri lunare (mai 2025)</div>
+          <div class="kpi-value">780M</div>
+          <div class="kpi-sub">sursa: Index.dev</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Creștere YoY</div>
+          <div class="kpi-value">800%+</div>
+          <div class="kpi-sub">2024–2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">ARR 2025</div>
+          <div class="kpi-value">$100–148M</div>
+          <div class="kpi-sub">estimări surse multiple</div>
+        </div>
+      </div>
+
+      <h3>Evoluție trafic și utilizatori</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Perioadă</th>
+              <th>Indicator</th>
+              <th>Valoare</th>
+              <th>Sursă</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Septembrie 2023</td><td>Vizite lunare</td><td class="num">35.28M</td><td class="source-col">SimilarWeb</td></tr>
+            <tr><td>Octombrie 2023</td><td>Vizite lunare</td><td class="num">40.35M</td><td class="source-col">SimilarWeb</td></tr>
+            <tr><td>Ianuarie 2024</td><td>MAU</td><td class="num">10M</td><td class="source-col">Backlinko</td></tr>
+            <tr><td>Februarie 2024</td><td>Vizite lunare</td><td class="num">52.4M</td><td class="source-col">SimilarWeb</td></tr>
+            <tr><td>Octombrie 2024</td><td>Query-uri lunare</td><td class="num">400M</td><td class="source-col">CEO Perplexity</td></tr>
+            <tr><td>Aprilie 2025</td><td>MAU</td><td class="num">22–30M</td><td class="source-col">Backlinko / DemandSage</td></tr>
+            <tr><td>Mai 2025</td><td>Vizite lunare</td><td class="num">153M</td><td class="source-col">SimilarWeb / Index.dev</td></tr>
+            <tr><td>Mai 2025</td><td>Query-uri lunare</td><td class="num">780M</td><td class="source-col">Index.dev</td></tr>
+            <tr><td>Mid-2025</td><td>MAU</td><td class="num">120M total users</td><td class="source-col">SQMagazine</td></tr>
+            <tr><td>2025</td><td>DAU</td><td class="num">16M</td><td class="source-col">SQMagazine</td></tr>
+            <tr><td>Noiembrie 2025</td><td>Vizite lunare</td><td class="num">239.7M</td><td class="source-col">Backlinko / SimilarWeb</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        <strong>Diferențiator de piață:</strong> Perplexity nu concurează cu ChatGPT pe conversație generală, ci redefinește motoarele de căutare prin răspunsuri citate și verificabile în timp real. Rata de retenție de 62–85% și sesiunile medii de 23 de minute indică un angajament profund. Creșterea utilizatorilor din India cu +640% YoY (T2 2025), parțial datorită parteneriatului cu Airtel, arată potențialul piețelor emergente.
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 6: Grok -->
+  <div class="section">
+    <div class="section-label">§ 07 — Platformă #6</div>
+    <h2>Grok — xAI</h2>
+
+    <div class="platform-card card-grok">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">Grok</div>
+          <div class="platform-org">xAI (Elon Musk) · Integrat în platforma X (Twitter) · Grok-1: Nov. 2023 · Grok-3: Mar. 2025</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">MAU</div>
+          <div class="kpi-value">35.1M</div>
+          <div class="kpi-sub">Views4You 2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Vizite lunare (după Grok-3)</div>
+          <div class="kpi-value">202.7M</div>
+          <div class="kpi-sub">Martie 2025</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">DAU</div>
+          <div class="kpi-value">6.7M</div>
+          <div class="kpi-sub">după lansare Grok-3</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">App downloads</div>
+          <div class="kpi-value">10M</div>
+          <div class="kpi-sub">Views4You 2025</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Model de distribuție:</strong> Grok valorifică baza de utilizatori X (Twitter), obținând adoptare rapidă fără costuri de achiziție. Demografic atipic: 60% feminin / 40% masculin (invers față de concurenți); ~33% utilizatori din India, ~14% din SUA. Lansarea Grok-3 (Martie 2025) a produs un spike masiv de trafic (+202.7M vizite lunare).
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM 7: DeepSeek -->
+  <div class="section">
+    <div class="section-label">§ 08 — Platformă #7</div>
+    <h2>DeepSeek</h2>
+
+    <div class="platform-card card-deepseek">
+      <div class="platform-header">
+        <div>
+          <div class="platform-name">DeepSeek</div>
+          <div class="platform-org">High-Flyer Capital (China) · DeepSeek-R1 open-source: Ianuarie 2025</div>
+        </div>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">MAU (Ianuarie 2025)</div>
+          <div class="kpi-value">33.7M</div>
+          <div class="kpi-sub">RAPID după lansare</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">DAU (Ianuarie 2025)</div>
+          <div class="kpi-value">22.15M</div>
+          <div class="kpi-sub">imediat post-lansare</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Downloads (până feb. 2025)</div>
+          <div class="kpi-value">21.66M</div>
+          <div class="kpi-sub">Google Play + App Store</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Creștere web (săpt. 20-26 ian.)</div>
+          <div class="kpi-value">+2.800%</div>
+          <div class="kpi-sub">vizitatori unici</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Evenimentul DeepSeek:</strong> Lansarea DeepSeek-R1 în ianuarie 2025 a declanșat un val de adopție global fără precedent în rândul platformelor AI non-americane. Performanțele competitive cu GPT-4 la un cost de antrenament declarat de ~$6M (vs. sute de milioane pentru modele similare) au șocat industria. Top 3 piețe: China (30.71%), India (13.59%), Indonezia (6.94%). Open-source-ul modelului a generat o adoptare masivă din parte developerilor globali.
+      </div>
+    </div>
+  </div>
+
+  <!-- TABEL COMPARATIV GLOBAL -->
+  <div class="section summary-section">
+    <div class="section-label">§ 09 — Sinteză Comparativă</div>
+    <h2>Tablou Comparativ Global — Mid 2025 / T4 2025</h2>
+
+    <div class="table-wrap sticky-th">
+      <table class="market-table">
+        <thead>
+          <tr>
+            <th>Platformă</th>
+            <th>MAU / WAU</th>
+            <th>DAU est.</th>
+            <th>Market Share (chatbot)</th>
+            <th style="width:160px">Distribuție relativă</th>
+            <th>Model business</th>
+            <th>Avantaj-cheie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ChatGPT</strong><br><span style="font-size:11px;color:var(--text-dim)">OpenAI</span></td>
+            <td class="num">800M WAU<br><span style="font-size:11px">(oct. 2025)</span></td>
+            <td class="num">122.6M</td>
+            <td class="num">60–81%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:81%;background:#10a37f;"></div></div>
+            </td>
+            <td>Consumer + Enterprise</td>
+            <td>Brand, ecosistem, viteza inovării</td>
+          </tr>
+          <tr>
+            <td><strong>Google Gemini</strong><br><span style="font-size:11px;color:var(--text-dim)">Google DeepMind</span></td>
+            <td class="num">750M MAU<br><span style="font-size:11px">(T4 2025)</span></td>
+            <td class="num">35–45M</td>
+            <td class="num">13.4–21.5%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:21%;background:#4285f4;"></div></div>
+            </td>
+            <td>Ecosistem Google</td>
+            <td>Search, Android, Workspace</td>
+          </tr>
+          <tr>
+            <td><strong>Microsoft Copilot</strong><br><span style="font-size:11px;color:var(--text-dim)">Microsoft + OpenAI</span></td>
+            <td class="num">~140M DAU Bing<br><span style="font-size:11px">(apr. 2024)</span></td>
+            <td class="num">est. 8–14M</td>
+            <td class="num">~14% (US)</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:14%;background:#0078d4;"></div></div>
+            </td>
+            <td>Enterprise / M365</td>
+            <td>Office 365, 345M seat-uri potențiale</td>
+          </tr>
+          <tr>
+            <td><strong>Perplexity AI</strong><br><span style="font-size:11px;color:var(--text-dim)">Perplexity AI Inc.</span></td>
+            <td class="num">22–45M MAU<br><span style="font-size:11px">(mid-2025)</span></td>
+            <td class="num">16M</td>
+            <td class="num">6.5%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:6.5%;background:#20b2aa;"></div></div>
+            </td>
+            <td>Freemium + Pro</td>
+            <td>AI Search cu citări, timp real</td>
+          </tr>
+          <tr>
+            <td><strong>Claude</strong><br><span style="font-size:11px;color:var(--text-dim)">Anthropic</span></td>
+            <td class="num">19–30M MAU<br><span style="font-size:11px">(T2–T3 2025)</span></td>
+            <td class="num">est. 3–5M</td>
+            <td class="num">3.2–3.5%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:3.5%;background:#d97706;"></div></div>
+            </td>
+            <td>Enterprise-first</td>
+            <td>Siguranță, context lung, reglementat</td>
+          </tr>
+          <tr>
+            <td><strong>Grok</strong><br><span style="font-size:11px;color:var(--text-dim)">xAI</span></td>
+            <td class="num">35.1M MAU<br><span style="font-size:11px">(2025)</span></td>
+            <td class="num">6.7M</td>
+            <td class="num">~0.6%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:2%;background:#aaa;"></div></div>
+            </td>
+            <td>Social-integrated</td>
+            <td>Integrare X/Twitter, real-time</td>
+          </tr>
+          <tr>
+            <td><strong>DeepSeek</strong><br><span style="font-size:11px;color:var(--text-dim)">High-Flyer · China</span></td>
+            <td class="num">33.7M MAU<br><span style="font-size:11px">(ian. 2025)</span></td>
+            <td class="num">22.15M</td>
+            <td class="num">~0.4%</td>
+            <td class="bar-cell">
+              <div class="bar-wrap"><div class="bar-fill" style="width:2%;background:#ef4444;"></div></div>
+            </td>
+            <td>Open-source + API</td>
+            <td>Cost-eficiență, open-source</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TENDINTE SI PROGNOZE -->
+  <div class="section">
+    <div class="section-label">§ 10 — Tendințe și Prognoze</div>
+    <h2>Dinamici Structurale ale Pieței</h2>
+
+    <h3>1. Concentrarea pieței și riscul de fragmentare</h3>
+    <p>Piața AI generativ este dominată de ChatGPT cu o cotă de 60–81%, în funcție de metrică. Totuși, datele Andreessen Horowitz (a16z) arată că mai puțin de 10% dintre utilizatorii săptămânali ChatGPT vizitează o altă platformă AI — indicator de <em>lock-in</em> comportamental puternic. Concomitent, doar 9% dintre consumatori plătesc pentru mai mult de un abonament AI simultan.</p>
+
+    <h3>2. Creșterea superioară a Gemini</h3>
+    <p>Creșterea Gemini de la ~42M MAU (oct. 2024) la 750M MAU (T4 2025) reprezintă o multiplicare de ~18× în 12 luni, cea mai mare rată de creștere procentuală dintre toți jucătorii majori. Impulsul vine din integrarea în Google Search (AI Overviews — 2 miliarde utilizatori lunari), Android și Workspace — nu din adoptarea aplicației dedicate.</p>
+
+    <h3>3. Bifurcarea consumer vs. enterprise</h3>
+    <p>Piața se structurează în două track-uri distincte: (a) <strong>consumer mass-market</strong> — dominat de ChatGPT și Gemini prin volume; (b) <strong>enterprise premium</strong> — dominat de Claude și Microsoft Copilot prin valoarea per utilizator. Anthropic generează ~80% din venituri din enterprise, deși reprezintă 3.5% din traficul chatbot.</p>
+
+    <h3>4. AI Search vs. AI Assistant</h3>
+    <p>Perplexity AI definește un sub-segment distinct față de chatboții conversaționali — <em>AI search cu verificare în timp real</em>. Creșterea YoY de 800% și rata de retenție de 62–85% sugerează că există o nevoie structurală nesatisfăcută de motoarele tradiționale de căutare.</p>
+
+    <h3>5. Valoarea pieței și prognoze</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>An</th><th>Valoare piață GenAI (globală)</th><th>CAGR proiectat</th><th>Sursa</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2023</td><td class="num">$44–67B</td><td class="growth">+68% YoY</td><td class="source-col">Statista / AIPRM</td></tr>
+          <tr><td>2024</td><td class="num">$66–100B</td><td class="growth">+50–100%</td><td class="source-col">Statista / Gartner</td></tr>
+          <tr><td>2025</td><td class="num">$217–356B</td><td class="growth">+46%</td><td class="source-col">Bloomberg / Statista</td></tr>
+          <tr><td>2030</td><td class="num">$897B–1T</td><td class="growth">—</td><td class="source-col">AIPRM / Bloomberg</td></tr>
+          <tr><td>2032</td><td class="num">$1.3T</td><td class="growth">CAGR 42%</td><td class="source-col">Bloomberg Intelligence</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box" style="margin-top: 24px;">
+      <strong>Contextualizare critică:</strong> Datele demografice globale arată că utilizatorii AI generativ sunt predominant tineri (25–34 ani — 29–34% din trafic), educați, bărbați (60% în medie) și proveniți din economii cu infrastructură digitală avansată. Statele Unite, India, Brazilia, Coreea de Sud și Marea Britanie sunt constant în top 5 piețe pentru toate platformele majore. Economiile cu venituri mici contribuie sub 1% din traficul global (ScienceDirect, 2025).
+    </div>
+  </div>
+
+  <!-- CONCLUZII -->
+  <div class="section">
+    <div class="section-label">§ 11 — Concluzii</div>
+    <h2>Sinteza Analistului</h2>
+
+    <p>Ecosistemul AI generativ a trecut, în perioada 2022–2026, prin trei faze distincte: (1) <strong>Descoperirea</strong> (2022–2023) — dominată de efectul „wow" al ChatGPT, cu adopție virală; (2) <strong>Experimentarea structurată</strong> (2023–2024) — proliferarea modelelor, prime implementări enterprise, PoC-uri la scară; (3) <strong>Integrarea sistemică</strong> (2025–2026) — AI-ul devine infrastructură de bază în business, nu mai este un experiment.</p>
+
+    <p>Cei trei mari câștigători structurali sunt: <strong>OpenAI</strong> (brand, viteză, ecosistem developer), <strong>Google</strong> (distribuție ecosistemică fără competitor), și <strong>Anthropic</strong> (enterprise premium, siguranță, sectoare reglementate). Competiția reală nu este între platformele de chat — este între paradigme de integrare: agenți autonomi, AI în fluxurile de lucru native, și AI search în detrimentul căutării tradiționale.</p>
+
+    <p>Cel mai semnificativ semnal pentru 2026 și ulterior: trecerea de la <em>utilizatori care accesează o platformă AI</em> la <em>aplicații și fluxuri de lucru care consumă AI în fundal</em> — o tranziție care va face metricile de MAU/WAU din ce în ce mai puțin relevante față de volumul de API calls, token-uri procesate și valoarea economică generată.</p>
+  </div>
+
+  <!-- SURSE -->
+  <div class="section">
+    <div class="section-label">§ 12 — Documentare</div>
+    <h2>Surse Documentare Utilizate</h2>
+    <p style="color:var(--text-muted); font-size:13px;">Toate statisticile prezentate sunt atribuite surselor primare sau secundare verificabile. Datele reprezintă cele mai recente estimări disponibile la data compilării (Mai 2026).</p>
+    <ul class="sources-list">
+      <li><strong>OpenAI (comunicat oficial)</strong>Metrici WAU ChatGPT, venituri, abonați — Sam Altman / TED 2025</li>
+      <li><strong>Google / Sundar Pichai</strong>Gemini MAU T4 2025 — earnings call</li>
+      <li><strong>Microsoft earnings reports</strong>Copilot enterprise adoption, Bing DAU</li>
+      <li><strong>Andreessen Horowitz (a16z)</strong>State of Consumer AI 2025; Top 100 Gen AI Apps — 6th Edition</li>
+      <li><strong>ScienceDirect (World Development)</strong>„Who on earth is using Generative AI?" — Nov. 2025</li>
+      <li><strong>Stanford HAI</strong>AI Index Report 2025</li>
+      <li><strong>SimilarWeb / Semrush</strong>Trafic web platforme, metrici de engagement</li>
+      <li><strong>Business of Apps</strong>Downloads, MAU, venituri mobile ChatGPT, Claude</li>
+      <li><strong>Backlinko / DemandSage</strong>Perplexity AI Statistics 2025–2026</li>
+      <li><strong>First Page Sage</strong>Top Generative AI Chatbots by Market Share — Apr. 2026</li>
+      <li><strong>StatCounter</strong>AI chatbot usage share — iulie 2024 – august 2025</li>
+      <li><strong>Views4You Research</strong>AI Tools Usage Statistics Report 2025</li>
+      <li><strong>Electroiq.com</strong>Claude vs. ChatGPT Statistics 2026; Claude Statistics 2025</li>
+      <li><strong>MasterOfCode</strong>350+ Generative AI Statistics — 2026</li>
+      <li><strong>aifundingtracker.com</strong>ChatGPT vs Claude vs Gemini — Revenue, Users & Funding</li>
+      <li><strong>AllOutSEO</strong>DeepSeek AI Statistics — March 2025</li>
+      <li><strong>TechnoLlama.co.uk</strong>How many people use generative AI daily? — Apr. 2025</li>
+      <li><strong>Fullview.io</strong>200+ AI Statistics & Trends for 2025</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  Raport compilat în scopuri de analiză și documentare · Statistici publice verificate · Mai 2026
+  &nbsp;·&nbsp; Valorile pot diferi între surse din cauza metodologiilor de măsurare diferite
+</footer>
+
+</body>
+</html>
