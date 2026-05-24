@@ -543,7 +543,7 @@ function renderCard() {
     ? '<img src="' + c.avatarUrl + '" onerror="this.parentElement.textContent=\'' + ini(c) + '\'">'
     : ini(c);
 
-  document.getElementById('display-name').innerHTML = '<em>' + esc(c.firstName) + '</em>\u00a0' + esc(c.lastName);
+  document.getElementById('display-name').innerHTML = '<em>' + esc(c.firstName) + '\u00a0' + esc(c.lastName) + '</em>';
   document.getElementById('display-title').textContent   = c.title   || '';
   document.getElementById('display-company').textContent = c.company || '';
 
