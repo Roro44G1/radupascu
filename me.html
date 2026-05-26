@@ -1,322 +1,369 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="theme-color" content="#0b1a35" />
-  <title>Digital Business Card</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+  <meta name="theme-color" content="#0b1a35"/>
+  <title>Radu Vasile Pascu</title>
 
-  <!-- ══════════════════════════════════════════════════════
-       ✦  CONFIGURARE — completează o singură dată          ✦
-  ════════════════════════════════════════════════════════
-
-  PAȘI DE SETUP (5 minute):
-  1. Creează cont gratuit pe https://jsonbin.io
-  2. Dashboard → API Keys → copiază "Secret Key"         → JSONBIN_API_KEY
-  3. Bins → Create Bin → lipește {} → salvează            → copiază BIN ID → JSONBIN_BIN_ID
-  4. Completează DEFAULTS cu datele tale reale
-  5. Hostuiește fișierul (Netlify drop, GitHub Pages etc.)
-  6. Actualizează pageUrl cu URL-ul real → salvează din Admin
-
-  ══════════════════════════════════════════════════════ -->
-  <script>
-    // ── Cloud config ──────────────────────────────────
-    const JSONBIN_API_KEY = "$2a$10$fAYeMBVDAeL/wTbNTxsAD.kIK0rtDMBLGYtVEnQJMJSMSZEPhRM6a";
-    const JSONBIN_BIN_ID  = "6a00675eadc21f119a7c4842";
-    // Dacă ambele sunt completate, cardul folosește JSONBin.
-    // Altfel, fallback la localStorage (mod demo/local).
-    const CLOUD_ENABLED = JSONBIN_API_KEY !== "PUNE_API_KEY_AICI" &&
-                          JSONBIN_BIN_ID  !== "PUNE_BIN_ID_AICI";
-
-    // ── Date implicite (folosite la prima rulare) ──────
-    const DEFAULTS = {
-      firstName:  "Alexandru",
-      lastName:   "Ionescu",
-      title:      "Marketing & PR Director",
-      company:    "Brandwave Studio",
-      phone:      "+40 721 000 000",
-      email:      "alex@brandwave.ro",
-      website:    "brandwave.ro",
-      linkedin:   "linkedin.com/in/alexionescu",
-      instagram:  "@brandwave.ro",
-      address:    "București, România",
-      note:       "Specialist în strategie de brand și comunicare integrată.",
-      pageUrl:    "https://card.brandwave.ro",
-      avatarUrl:  "",
-      adminPin:   "1234",
+  <script id="card-data">
+    const CARD_DATA = {
+      firstName  : "Radu Vasile",
+      lastName   : "Pascu",
+      title      : "Președinte",
+      company    : "Asociația AVANS PROIECT",
+      phone      : "0723 274 206",
+      phone2     : "0770 276 406",
+      email      : "rvpascu@gmail.ro",
+      website    : "radupascu.online",
+      website2   : "avansproiect.online",
+      website3   : "nutrisibclub.online",
+      linkedin   : "https://www.linkedin.com/in/rvpascu-nutrisib/",
+      instagram  : "https://www.instagram.com/",
+      facebook   : "https://www.facebook.com/rvpascu",
+      threads    : "https://www.threads.net/@rvpascu",
+      whatsapp   : "https://wa.me/40723274206",
+      telegram   : "https://t.me/rvpascu",
+      address    : "Sibiu, România",
+      note       : "Arhitectura performanței.",
+      pageUrl    : "https://radupascu.online/me",
+      avatarUrl  : "",
+      adminPin   : "1007",
     };
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
     :root {
-      --navy-deep:  #07112a;
-      --navy:       #0b1a35;
-      --navy-mid:   #0f2348;
-      --navy-light: #162d5c;
-      --navy-mist:  #1e3a70;
-      --white:      #ffffff;
-      --white-90:   rgba(255,255,255,.90);
-      --white-60:   rgba(255,255,255,.60);
-      --white-30:   rgba(255,255,255,.30);
-      --white-10:   rgba(255,255,255,.10);
-      --white-06:   rgba(255,255,255,.06);
-      --gold:       #c9a84c;
-      --gold-light: #e2c473;
-      --gold-dim:   rgba(201,168,76,.25);
-      --gold-glow:  rgba(201,168,76,.15);
-      --red:        #c0392b;
-      --green:      #27ae60;
+      --navy-deep : #07112a;
+      --navy      : #0b1a35;
+      --navy-mid  : #0f2348;
+      --navy-l    : #162d5c;
+      --navy-mist : #1e3a70;
+      --white     : #ffffff;
+      --w90       : rgba(255,255,255,.90);
+      --w70       : rgba(255,255,255,.70);
+      --w60       : rgba(255,255,255,.60);
+      --w30       : rgba(255,255,255,.30);
+      --w12       : rgba(255,255,255,.12);
+      --w07       : rgba(255,255,255,.07);
+      --w04       : rgba(255,255,255,.04);
+      --gold      : #c9a84c;
+      --gold-l    : #e2c473;
+      --gold-dim  : rgba(201,168,76,.22);
+      --gold-glow : rgba(201,168,76,.14);
+      --red       : #c0392b;
     }
 
     html, body {
-      min-height: 100%; background: var(--navy);
-      font-family: 'DM Sans', sans-serif; color: var(--white); overflow-x: hidden;
+      min-height:100%; background:var(--navy);
+      font-family:'DM Sans',sans-serif; color:var(--white); overflow-x:hidden;
     }
+
+    /* grain + top glow */
     body::before {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30,58,112,.7) 0%, transparent 70%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-      background-size: cover, 250px;
+      content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 100% 50% at 50% 0%, rgba(22,45,92,.9) 0%, transparent 65%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      background-size:cover, 220px;
     }
 
-    /* ── Loading screen ── */
-    #loading-screen {
-      position: fixed; inset: 0; z-index: 500;
-      background: var(--navy);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 20px;
-      transition: opacity .5s;
-    }
-    #loading-screen.hidden { opacity: 0; pointer-events: none; }
-    .loader-ring {
-      width: 44px; height: 44px; border-radius: 50%;
-      border: 2px solid var(--gold-dim);
-      border-top-color: var(--gold);
-      animation: spin .8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loader-text { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--white-60); }
-
-    /* ── Cloud status badge ── */
-    .cloud-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin: 16px 32px 0;
-      padding: 7px 14px; border-radius: 50px;
-      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
-      border: 1px solid; width: fit-content;
-    }
-    .cloud-badge.online  { color: #2ecc71; border-color: rgba(46,204,113,.3); background: rgba(46,204,113,.07); }
-    .cloud-badge.offline { color: var(--white-60); border-color: var(--white-10); background: var(--white-06); }
-    .cloud-badge.error   { color: #e74c3c; border-color: rgba(231,76,60,.3); background: rgba(231,76,60,.07); }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-
-    /* ── Wrapper ── */
+    /* ═══ WRAPPER ═══ */
     .wrapper {
-      position: relative; z-index: 1;
-      max-width: 420px; margin: 0 auto; padding: 0 0 80px;
-      animation: rise .85s cubic-bezier(.16,1,.3,1) both;
+      position:relative; z-index:1;
+      max-width:420px; margin:0 auto; padding:0 0 80px;
+      animation:rise .9s cubic-bezier(.16,1,.3,1) both;
     }
-    @keyframes rise { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes rise { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── Header ── */
+    /* ═══ HEADER ═══ */
     .header {
-      position: relative;
-      background: linear-gradient(160deg, var(--navy-mist) 0%, var(--navy-mid) 60%, var(--navy-deep) 100%);
-      border-bottom: 1px solid var(--gold-dim);
-      padding: 52px 32px 40px; overflow: hidden;
+      position:relative;
+      background:linear-gradient(155deg, var(--navy-mist) 0%, var(--navy-mid) 55%, var(--navy-deep) 100%);
+      border-bottom:1px solid var(--gold-dim);
+      padding:56px 32px 44px; overflow:hidden;
     }
+    /* ambient gold halo */
     .header::before {
-      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-      width: 260px; height: 160px;
-      background: radial-gradient(ellipse, rgba(201,168,76,.18) 0%, transparent 70%);
-      pointer-events: none;
+      content:''; position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+      width:320px; height:200px;
+      background:radial-gradient(ellipse, rgba(201,168,76,.15) 0%, transparent 68%);
+      pointer-events:none;
     }
     .header::after {
-      content: ''; position: absolute; bottom: 0; left: 32px; right: 32px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      content:''; position:absolute; bottom:0; left:24px; right:24px; height:1px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-    .corner { position: absolute; width: 22px; height: 22px; }
-    .corner.tl { top:14px;left:14px;   border-top:1.5px solid var(--gold);    border-left:1.5px solid var(--gold); }
-    .corner.tr { top:14px;right:14px;  border-top:1.5px solid var(--gold);    border-right:1.5px solid var(--gold); }
-    .corner.bl { bottom:14px;left:14px;  border-bottom:1.5px solid var(--gold-dim); border-left:1.5px solid var(--gold-dim); }
-    .corner.br { bottom:14px;right:14px; border-bottom:1.5px solid var(--gold-dim); border-right:1.5px solid var(--gold-dim); }
+    /* corner brackets */
+    .corner { position:absolute; width:20px; height:20px; }
+    .corner.tl { top:14px;    left:14px;    border-top:1.5px solid var(--gold);    border-left:1.5px solid var(--gold); }
+    .corner.tr { top:14px;    right:14px;   border-top:1.5px solid var(--gold);    border-right:1.5px solid var(--gold); }
+    .corner.bl { bottom:14px; left:14px;    border-bottom:1.5px solid var(--gold-dim); border-left:1.5px solid var(--gold-dim); }
+    .corner.br { bottom:14px; right:14px;   border-bottom:1.5px solid var(--gold-dim); border-right:1.5px solid var(--gold-dim); }
 
+    /* avatar */
     .avatar-wrap {
-      width:76px;height:76px;border-radius:50%;
+      width:80px; height:80px; border-radius:50%;
       border:2px solid var(--gold);
-      box-shadow:0 0 0 4px var(--gold-glow),0 0 24px rgba(201,168,76,.2);
-      overflow:hidden;margin-bottom:22px;background:var(--navy-light);
-      display:flex;align-items:center;justify-content:center;
-      font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);
+      box-shadow:0 0 0 5px var(--gold-glow), 0 8px 32px rgba(0,0,0,.4);
+      overflow:hidden; margin-bottom:20px; background:var(--navy-l);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:30px; color:var(--gold);
     }
-    .avatar-wrap img { width:100%;height:100%;object-fit:cover; }
-    .name { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,8.5vw,42px); font-weight:300; line-height:1.08; color:var(--white); }
-    .name em { font-style:italic; color:var(--gold-light); }
-    .title-line   { margin-top:10px;font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold); }
-    .company-line { margin-top:5px;font-size:13px;font-weight:300;color:var(--white-60);letter-spacing:.05em; }
+    .avatar-wrap img { width:100%; height:100%; object-fit:cover; }
 
-    /* ── Contact ── */
-    .contact-section { padding:0 32px;margin-top:30px;display:flex;flex-direction:column; }
-    .contact-item {
-      display:flex;align-items:center;gap:16px;padding:13px 0;
-      border-bottom:1px solid var(--white-06);
-      text-decoration:none;color:inherit;
+    .name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,8vw,40px); font-weight:300; line-height:1.08;
     }
-    .contact-item:last-child { border-bottom:none; }
-    .contact-item:hover .ci-value { color:var(--gold-light); }
-    .ci-icon { width:36px;height:36px;border-radius:9px;flex-shrink:0;background:var(--white-06);border:1px solid var(--white-10);display:flex;align-items:center;justify-content:center;font-size:15px; }
-    .ci-meta { display:flex;flex-direction:column; }
-    .ci-label { font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2px; }
-    .ci-value { font-size:14px;font-weight:300;color:var(--white-90);transition:color .2s; }
+    .name em { font-style:italic; color:var(--gold-l); }
 
-    .divider { margin:26px 32px 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent); }
+    .title-line {
+      margin-top:10px; font-size:10px; font-weight:500;
+      letter-spacing:.24em; text-transform:uppercase; color:var(--gold);
+    }
+    .company-line {
+      margin-top:6px; font-size:13px; font-weight:300;
+      color:var(--w60); letter-spacing:.04em;
+    }
 
-    .note-block { margin:22px 32px 0;padding:16px 20px;border-left:2px solid var(--gold);background:rgba(201,168,76,.06);border-radius:0 10px 10px 0; }
-    .note-block p { font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;font-style:italic;color:var(--white-90);line-height:1.65; }
+    /* ═══ SECTIONS ═══ */
+    .section { padding:0 28px; margin-top:28px; }
+    .section-title {
+      font-size:9px; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:4px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .section-title::after {
+      content:''; flex:1; height:1px; background:var(--gold-dim);
+    }
 
-    /* ── CTA ── */
-    .cta-wrap { padding:28px 32px 0;display:flex;flex-direction:column;gap:11px; }
+    /* ═══ CONTACT ROWS ═══ */
+    .contact-list { display:flex; flex-direction:column; margin-top:4px; }
+    .ci {
+      display:flex; align-items:center; gap:14px;
+      padding:11px 0; border-bottom:1px solid var(--w04);
+      text-decoration:none; color:inherit; transition:background .15s;
+      border-radius:4px;
+    }
+    .ci:last-child { border-bottom:none; }
+    .ci:hover .ci-value { color:var(--gold-l); }
+    .ci:hover .ci-icon-wrap { border-color:var(--gold-dim); background:var(--gold-glow); }
+
+    .ci-icon-wrap {
+      width:38px; height:38px; border-radius:10px; flex-shrink:0;
+      background:var(--w07); border:1px solid var(--w12);
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s, border-color .2s;
+    }
+    .ci-icon-wrap svg { width:17px; height:17px; }
+
+    .ci-meta { display:flex; flex-direction:column; min-width:0; }
+    .ci-label { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+    .ci-value { font-size:13.5px; font-weight:300; color:var(--w90); transition:color .2s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    /* ═══ SOCIAL GRID ═══ */
+    .social-grid {
+      display:grid; grid-template-columns:1fr 1fr 1fr;
+      gap:9px; margin-top:10px;
+    }
+    .social-btn {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:6px; padding:12px 6px;
+      background:var(--w07); border:1px solid var(--w12); border-radius:14px;
+      text-decoration:none; color:inherit;
+      transition:background .2s, border-color .2s, transform .15s;
+    }
+    .social-btn:hover { background:var(--w12); border-color:var(--gold-dim); transform:translateY(-2px); }
+    .social-btn:active { transform:scale(.96); }
+    .social-btn svg   { width:22px; height:22px; flex-shrink:0; }
+    .social-name  { font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
+    .social-handle{ display:none; }
+
+    /* ═══ DIVIDER ═══ */
+    .divider { margin:24px 28px 0; height:1px; background:linear-gradient(90deg,transparent,var(--gold-dim),transparent); }
+
+    /* ═══ NOTE ═══ */
+    .note-block {
+      margin:20px 28px 0; padding:16px 20px;
+      border-left:2px solid var(--gold); background:rgba(201,168,76,.05);
+      border-radius:0 12px 12px 0;
+    }
+    .note-block p {
+      font-family:'Cormorant Garamond',serif; font-size:18px;
+      font-weight:300; font-style:italic; color:var(--w90); line-height:1.6;
+    }
+
+    /* ═══ CTA ═══ */
+    .cta-wrap { padding:24px 28px 0; display:flex; flex-direction:column; gap:10px; }
+
     .btn-save {
-      width:100%;padding:17px 24px;border:none;border-radius:12px;
-      background:linear-gradient(135deg,var(--gold) 0%,#a87d2a 100%);
-      font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
-      letter-spacing:.16em;text-transform:uppercase;color:var(--navy-deep);
-      cursor:pointer;position:relative;overflow:hidden;
-      box-shadow:0 4px 28px rgba(201,168,76,.3);
-      transition:transform .15s,box-shadow .15s;
+      width:100%; padding:16px; border:none; border-radius:14px;
+      background:linear-gradient(135deg, var(--gold) 0%, #a07828 100%);
+      font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500;
+      letter-spacing:.18em; text-transform:uppercase; color:var(--navy-deep);
+      cursor:pointer; position:relative; overflow:hidden;
+      box-shadow:0 4px 24px rgba(201,168,76,.3);
+      transition:transform .15s, box-shadow .15s;
     }
-    .btn-save::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 55%);}
-    .btn-save:active{transform:scale(.98);}
-    .btn-save:hover{box-shadow:0 6px 36px rgba(201,168,76,.45);}
+    .btn-save::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 50%); }
+    .btn-save:active  { transform:scale(.98); }
+    .btn-save:hover   { box-shadow:0 6px 32px rgba(201,168,76,.45); }
 
-    .btn-admin {
-      width:100%;padding:13px 24px;background:transparent;
-      border:1px solid var(--white-10);border-radius:12px;
-      font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;
-      letter-spacing:.2em;text-transform:uppercase;color:var(--white-60);
-      cursor:pointer;transition:border-color .2s,color .2s;
+    .btn-admin { display:none; }
+
+    /* ═══ QR ═══ */
+    .qr-panel {
+      margin:24px 28px 0; padding:22px 20px;
+      border:1px solid var(--gold-dim); border-radius:18px; background:var(--w04);
+      display:flex; flex-direction:column; align-items:center; gap:14px;
     }
-    .btn-admin:hover{border-color:var(--gold-dim);color:var(--gold-light);}
+    .qr-label { font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); }
+    #qr-code  { border-radius:10px; overflow:hidden; }
+    #qr-code canvas, #qr-code img { display:block; border-radius:8px; }
+    .qr-url   { display:none; }
 
-    /* ── QR ── */
-    .qr-panel { margin:28px 32px 0;padding:24px 20px;border:1px solid var(--gold-dim);border-radius:16px;background:var(--white-06);display:flex;flex-direction:column;align-items:center;gap:14px; }
-    .qr-label { font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold); }
-    #qr-code{border-radius:10px;overflow:hidden;}
-    #qr-code canvas,#qr-code img{display:block;border-radius:8px;}
-    .qr-url{font-size:11px;color:var(--white-60);letter-spacing:.05em;text-align:center;word-break:break-all;}
+    .footer { margin-top:40px; text-align:center; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.15); }
 
-    .footer{margin-top:40px;text-align:center;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.18);}
+    /* ═══ TOAST ═══ */
+    .toast {
+      position:fixed; bottom:32px; left:50%;
+      transform:translateX(-50%) translateY(16px);
+      background:var(--gold); color:var(--navy-deep);
+      padding:11px 24px; border-radius:50px;
+      font-size:12px; font-weight:500; opacity:0;
+      pointer-events:none; transition:opacity .3s,transform .3s;
+      white-space:nowrap; z-index:9999;
+    }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-    /* ── Toast ── */
-    .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:var(--navy-deep);padding:12px 26px;border-radius:50px;font-size:13px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;z-index:9999;}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    /* ═══ OVERLAY ═══ */
+    .overlay {
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(5,13,30,.9); backdrop-filter:blur(10px);
+      display:flex; align-items:flex-end; justify-content:center;
+      opacity:0; pointer-events:none; transition:opacity .3s;
+    }
+    .overlay.open { opacity:1; pointer-events:all; }
 
-    /* ── Overlay ── */
-    .overlay{position:fixed;inset:0;z-index:1000;background:rgba(7,17,42,.88);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
-    .overlay.open{opacity:1;pointer-events:all;}
+    /* ═══ PIN ═══ */
+    .pin-modal {
+      background:var(--navy-mid); border:1px solid var(--gold-dim);
+      border-radius:26px 26px 0 0; padding:40px 32px 52px;
+      width:100%; max-width:420px; text-align:center;
+      transform:translateY(100%); transition:transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .overlay.open .pin-modal { transform:translateY(0); }
+    .pin-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--white); margin-bottom:5px; }
+    .pin-sub   { font-size:12px; color:var(--w60); letter-spacing:.08em; margin-bottom:30px; }
+    .pin-dots  { display:flex; gap:14px; justify-content:center; margin-bottom:32px; }
+    .pin-dot   { width:12px; height:12px; border-radius:50%; border:1.5px solid var(--w30); background:transparent; transition:background .15s,border-color .15s; }
+    .pin-dot.filled { background:var(--gold); border-color:var(--gold); }
+    .pin-dot.error  { background:var(--red);  border-color:var(--red);  animation:shake .3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+    .pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:270px; margin:0 auto; }
+    .pin-key { padding:17px; border-radius:12px; background:var(--w07); border:1px solid var(--w12); font-family:'DM Sans',sans-serif; font-size:22px; font-weight:300; color:var(--white); cursor:pointer; transition:background .12s,transform .1s; user-select:none; }
+    .pin-key:active { background:var(--gold-glow); transform:scale(.92); }
+    .pin-key:hover  { background:var(--w12); }
+    .pin-key.del    { font-size:16px; color:var(--w60); }
+    .pin-key.empty  { background:transparent; border:none; cursor:default; }
+    .pin-cancel { margin-top:20px; background:none; border:none; font-size:12px; color:var(--w60); letter-spacing:.15em; text-transform:uppercase; cursor:pointer; display:block; width:100%; transition:color .2s; }
+    .pin-cancel:hover { color:var(--white); }
 
-    /* ── PIN ── */
-    .pin-modal{background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:24px 24px 0 0;padding:40px 32px 54px;width:100%;max-width:420px;text-align:center;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);}
-    .overlay.open .pin-modal{transform:translateY(0);}
-    .pin-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);margin-bottom:6px;}
-    .pin-sub{font-size:12px;color:var(--white-60);letter-spacing:.08em;margin-bottom:32px;}
-    .pin-dots{display:flex;gap:14px;justify-content:center;margin-bottom:34px;}
-    .pin-dot{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--white-30);background:transparent;transition:background .15s,border-color .15s;}
-    .pin-dot.filled{background:var(--gold);border-color:var(--gold);}
-    .pin-dot.error{background:var(--red);border-color:var(--red);animation:shake .3s;}
-    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
-    .pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;max-width:280px;margin:0 auto;}
-    .pin-key{padding:18px;border-radius:12px;background:var(--white-06);border:1px solid var(--white-10);font-family:'DM Sans',sans-serif;font-size:22px;font-weight:300;color:var(--white);cursor:pointer;transition:background .12s,transform .1s;user-select:none;}
-    .pin-key:active{background:var(--gold-glow);transform:scale(.92);}
-    .pin-key:hover{background:var(--white-10);}
-    .pin-key.del{font-size:17px;color:var(--white-60);}
-    .pin-key.empty{background:transparent;border:none;cursor:default;}
-    .pin-cancel{margin-top:22px;background:none;border:none;font-size:12px;color:var(--white-60);letter-spacing:.15em;text-transform:uppercase;cursor:pointer;display:block;width:100%;transition:color .2s;}
-    .pin-cancel:hover{color:var(--white);}
+    /* ═══ ADMIN ═══ */
+    .admin-panel {
+      background:var(--navy-mid); border:1px solid var(--gold-dim);
+      border-radius:26px 26px 0 0; width:100%; max-width:420px;
+      max-height:93vh; overflow-y:auto; overscroll-behavior:contain;
+      transform:translateY(100%); transition:transform .4s cubic-bezier(.16,1,.3,1);
+      display:none;
+    }
+    .overlay.open .admin-panel { transform:translateY(0); }
+    .admin-panel::-webkit-scrollbar { width:3px; }
+    .admin-panel::-webkit-scrollbar-thumb { background:var(--gold-dim); border-radius:2px; }
 
-    /* ── Admin Panel ── */
-    .admin-panel{background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:24px 24px 0 0;width:100%;max-width:420px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:none;}
-    .overlay.open .admin-panel{transform:translateY(0);}
-    .admin-panel::-webkit-scrollbar{width:4px;}
-    .admin-panel::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
-    .admin-header{position:sticky;top:0;z-index:10;background:var(--navy-mid);border-bottom:1px solid var(--white-06);padding:22px 24px 18px;display:flex;align-items:center;justify-content:space-between;}
-    .admin-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:300;color:var(--white);}
-    .admin-title span{color:var(--gold-light);font-style:italic;}
+    .admin-header {
+      position:sticky; top:0; z-index:10;
+      background:var(--navy-mid); border-bottom:1px solid var(--w07);
+      padding:20px 22px 16px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .admin-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--white); }
+    .admin-title span { color:var(--gold-l); font-style:italic; }
+    .btn-close { background:none; border:none; color:var(--w60); font-size:20px; cursor:pointer; padding:6px; line-height:1; transition:color .2s; border-radius:8px; }
+    .btn-close:hover { color:var(--white); background:var(--w07); }
 
-    /* Cloud indicator in admin header */
-    .admin-cloud-status{font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:50px;border:1px solid;}
-    .admin-cloud-status.cloud{color:#2ecc71;border-color:rgba(46,204,113,.35);background:rgba(46,204,113,.08);}
-    .admin-cloud-status.local{color:var(--white-60);border-color:var(--white-10);background:var(--white-06);}
+    .admin-body { padding:8px 22px 40px; }
+    .a-sec { font-size:9px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); margin:20px 0 11px; display:flex; align-items:center; gap:8px; }
+    .a-sec::after { content:''; flex:1; height:1px; background:var(--gold-dim); }
+    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .field { display:flex; flex-direction:column; gap:5px; margin-bottom:9px; }
+    .field label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--w60); }
+    .field input, .field textarea {
+      background:var(--w07); border:1px solid var(--w12); border-radius:10px;
+      padding:10px 13px; font-family:'DM Sans',sans-serif; font-size:13px;
+      font-weight:300; color:var(--white); outline:none; width:100%;
+      transition:border-color .2s,background .2s;
+    }
+    .field input::placeholder, .field textarea::placeholder { color:var(--w30); }
+    .field input:focus, .field textarea:focus { border-color:var(--gold); background:var(--gold-glow); }
+    .field textarea { resize:vertical; min-height:68px; line-height:1.55; }
+    .hint { font-size:11px; color:var(--w60); margin:-3px 0 7px; line-height:1.5; }
 
-    .btn-close{background:none;border:none;color:var(--white-60);font-size:22px;cursor:pointer;padding:4px;line-height:1;transition:color .2s;}
-    .btn-close:hover{color:var(--white);}
-    .admin-body{padding:10px 24px 40px;}
-    .section-label{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:22px 0 13px;}
+    .av-row  { display:flex; align-items:center; gap:12px; margin-bottom:9px; }
+    .av-mini { width:48px; height:48px; border-radius:50%; border:1.5px solid var(--gold); box-shadow:0 0 0 3px var(--gold-glow); overflow:hidden; background:var(--navy-l); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); }
+    .av-mini img { width:100%; height:100%; object-fit:cover; }
 
-    /* Setup box */
-    .setup-box{background:rgba(201,168,76,.07);border:1px solid var(--gold-dim);border-radius:12px;padding:16px 18px;margin-bottom:6px;}
-    .setup-box p{font-size:12px;color:var(--white-60);line-height:1.7;}
-    .setup-box a{color:var(--gold-light);text-decoration:none;}
-    .setup-box strong{color:var(--white-90);}
-
-    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
-    .field label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--white-60);}
-    .field input,.field textarea{background:var(--white-06);border:1px solid var(--white-10);border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;color:var(--white);outline:none;width:100%;transition:border-color .2s,background .2s;}
-    .field input::placeholder,.field textarea::placeholder{color:var(--white-30);}
-    .field input:focus,.field textarea:focus{border-color:var(--gold);background:var(--gold-glow);}
-    .field textarea{resize:vertical;min-height:72px;line-height:1.55;}
-
-    .avatar-preview-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
-    .avatar-mini{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--gold);box-shadow:0 0 0 3px var(--gold-glow);overflow:hidden;background:var(--navy-light);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--gold);}
-    .avatar-mini img{width:100%;height:100%;object-fit:cover;}
-    .hint{font-size:11px;color:var(--white-60);margin:-4px 0 8px;line-height:1.5;}
-
-    .admin-actions{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
-    .btn-primary{width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--gold) 0%,#a87d2a 100%);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--navy-deep);cursor:pointer;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(201,168,76,.25);transition:transform .15s,box-shadow .15s;}
-    .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%);}
-    .btn-primary:active{transform:scale(.98);}
-    .btn-primary:hover{box-shadow:0 6px 28px rgba(201,168,76,.45);}
-    .btn-primary:disabled{opacity:.5;cursor:not-allowed;}
-    .btn-outline{width:100%;padding:14px;background:transparent;border:1px solid var(--white-10);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--white-60);cursor:pointer;transition:border-color .2s,color .2s;}
-    .btn-outline:hover{border-color:var(--gold-dim);color:var(--gold-light);}
-    .btn-danger{width:100%;padding:14px;background:transparent;border:1px solid rgba(192,57,43,.3);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(192,57,43,.65);cursor:pointer;transition:all .2s;}
-    .btn-danger:hover{border-color:var(--red);color:var(--red);background:rgba(192,57,43,.07);}
-
-    /* Saving spinner on button */
-    .btn-primary.saving::after{content:'';display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid rgba(0,0,0,.3);border-top-color:#000;animation:spin .7s linear infinite;margin-left:8px;vertical-align:middle;}
+    .actions { display:flex; flex-direction:column; gap:9px; margin-top:22px; }
+    .btn-primary { width:100%; padding:15px; border:none; border-radius:12px; background:linear-gradient(135deg,var(--gold) 0%,#a07828 100%); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-deep); cursor:pointer; position:relative; overflow:hidden; box-shadow:0 4px 18px rgba(201,168,76,.22); transition:transform .15s,box-shadow .15s; }
+    .btn-primary::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%); }
+    .btn-primary:active { transform:scale(.98); }
+    .btn-primary:hover  { box-shadow:0 6px 26px rgba(201,168,76,.4); }
+    .btn-export  { width:100%; padding:15px; border:none; border-radius:12px; background:linear-gradient(135deg,#27ae60 0%,#1a7a42 100%); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:#fff; cursor:pointer; position:relative; overflow:hidden; box-shadow:0 4px 18px rgba(39,174,96,.18); transition:transform .15s,box-shadow .15s; }
+    .btn-export::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.12) 0%,transparent 55%); }
+    .btn-export:active  { transform:scale(.98); }
+    .btn-export:hover   { box-shadow:0 6px 26px rgba(39,174,96,.32); }
+    .export-info { background:rgba(39,174,96,.06); border:1px solid rgba(39,174,96,.18); border-radius:10px; padding:13px 15px; }
+    .export-info p { font-size:11px; color:var(--w60); line-height:1.75; }
+    .export-info strong { color:rgba(100,220,140,.85); }
+    .btn-outline { width:100%; padding:13px; background:transparent; border:1px solid var(--w12); border-radius:12px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--w60); cursor:pointer; transition:border-color .2s,color .2s; }
+    .btn-outline:hover  { border-color:var(--gold-dim); color:var(--gold-l); }
+    .btn-danger  { width:100%; padding:13px; background:transparent; border:1px solid rgba(192,57,43,.28); border-radius:12px; font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(192,57,43,.6); cursor:pointer; transition:all .2s; }
+    .btn-danger:hover   { border-color:var(--red); color:var(--red); background:rgba(192,57,43,.07); }
   </style>
 </head>
 <body>
 
-<!-- Loading -->
-<div id="loading-screen">
-  <div class="loader-ring"></div>
-  <div class="loader-text">Se încarcă cardul…</div>
-</div>
-
-<!-- CARD -->
+<!-- ═══ CARD ═══ -->
 <div class="wrapper">
+
   <div class="header">
     <div class="corner tl"></div><div class="corner tr"></div>
     <div class="corner bl"></div><div class="corner br"></div>
     <div class="avatar-wrap" id="avatar"></div>
     <div class="name" id="display-name"></div>
-    <div class="title-line" id="display-title"></div>
+    <div class="title-line"   id="display-title"></div>
     <div class="company-line" id="display-company"></div>
   </div>
 
-  <div id="cloud-status-badge"></div>
+  <!-- Contact -->
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <div class="contact-list" id="contact-list"></div>
+  </div>
 
-  <div class="contact-section" id="contact-section"></div>
+  <!-- Social -->
+  <div class="section" id="social-section">
+    <div class="section-title">Online</div>
+    <div class="social-grid" id="social-grid"></div>
+  </div>
 
+  <!-- Note -->
   <div class="note-block" id="note-block" style="display:none">
     <p id="display-note"></p>
   </div>
@@ -324,20 +371,19 @@
   <div class="divider"></div>
 
   <div class="cta-wrap">
-    <button class="btn-save" onclick="downloadVCard()">＋ Adaugă în Agendă</button>
-    <button class="btn-admin" onclick="openPinModal()">⚙ Administrare</button>
+    <button class="btn-save" onclick="downloadVCard()">＋ &nbsp;Adaugă în Agendă</button>
+    <button class="btn-admin" onclick="openPinModal()">⚙ &nbsp;Administrare</button>
   </div>
 
   <div class="qr-panel">
-    <div class="qr-label">Distribuie cardul tău</div>
     <div id="qr-code"></div>
-    <div class="qr-url" id="qr-url-text"></div>
+    <div class="qr-url" id="qr-url-text" style="display:none"></div>
   </div>
 
-  <div class="footer">Digital Business Card</div>
+  <div class="footer" id="secret-footer">Digital Business Card &nbsp;|&nbsp; &copy; 2026 Dr.Ing. Radu Pascu</div>
 </div>
 
-<!-- PIN -->
+<!-- ═══ PIN ═══ -->
 <div class="overlay" id="pin-overlay">
   <div class="pin-modal">
     <div class="pin-title">Acces Administrare</div>
@@ -364,63 +410,81 @@
   </div>
 </div>
 
-<!-- ADMIN -->
+<!-- ═══ ADMIN ═══ -->
 <div class="overlay" id="admin-overlay">
   <div class="admin-panel" id="admin-panel">
     <div class="admin-header">
       <div class="admin-title">Admin <span>Panel</span></div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span class="admin-cloud-status" id="admin-cloud-indicator"></span>
-        <button class="btn-close" onclick="closeOverlay('admin-overlay')">✕</button>
-      </div>
+      <button class="btn-close" onclick="closeOverlay('admin-overlay')">✕</button>
     </div>
-
     <div class="admin-body">
 
-      <div id="setup-notice"></div>
-
-      <div class="section-label">✦ Identitate</div>
-      <div class="avatar-preview-row">
-        <div class="avatar-mini" id="admin-avatar-preview">?</div>
+      <div class="a-sec">Identitate</div>
+      <div class="av-row">
+        <div class="av-mini" id="av-preview">?</div>
         <div class="field" style="flex:1;margin-bottom:0">
           <label>URL Fotografie (opțional)</label>
-          <input type="url" id="f-avatarUrl" placeholder="https://…/poza.jpg" oninput="previewAvatar()">
+          <input type="url" id="f-avatarUrl" placeholder="https://radupascu.online/imagini/card09.png" oninput="prevAvatar()">
         </div>
       </div>
-      <div class="field-row">
-        <div class="field"><label>Prenume</label><input type="text" id="f-firstName" oninput="previewAvatar()"></div>
-        <div class="field"><label>Nume</label><input type="text" id="f-lastName" oninput="previewAvatar()"></div>
+      <div class="row2">
+        <div class="field"><label>Prenume</label><input type="text" id="f-firstName" oninput="prevAvatar()"></div>
+        <div class="field"><label>Nume</label>  <input type="text" id="f-lastName"  oninput="prevAvatar()"></div>
       </div>
       <div class="field"><label>Titlu / Funcție</label><input type="text" id="f-title"></div>
-      <div class="field"><label>Companie / Brand</label><input type="text" id="f-company"></div>
+      <div class="field"><label>Companie / Organizație</label><input type="text" id="f-company"></div>
 
-      <div class="section-label">✦ Contact</div>
-      <div class="field"><label>Telefon</label><input type="tel" id="f-phone" placeholder="+40 7xx xxx xxx"></div>
+      <div class="a-sec">Telefoane</div>
+      <div class="row2">
+        <div class="field"><label>Telefon 1</label><input type="tel" id="f-phone"  placeholder="07xx xxx xxx"></div>
+        <div class="field"><label>Telefon 2</label><input type="tel" id="f-phone2" placeholder="07xx xxx xxx"></div>
+      </div>
+
+      <div class="a-sec">Web &amp; Email</div>
       <div class="field"><label>Email</label><input type="email" id="f-email"></div>
-      <div class="field"><label>Website (fără https://)</label><input type="text" id="f-website" placeholder="site.ro"></div>
-      <div class="field"><label>LinkedIn (fără https://)</label><input type="text" id="f-linkedin" placeholder="linkedin.com/in/…"></div>
-      <div class="field"><label>Instagram</label><input type="text" id="f-instagram" placeholder="@username"></div>
-      <div class="field"><label>Adresă / Locație</label><input type="text" id="f-address"></div>
-      <div class="field"><label>Notă / Descriere</label><textarea id="f-note"></textarea></div>
+      <div class="field"><label>Website 1 (fără https://)</label><input type="text" id="f-website"  placeholder="radupascu.online"></div>
+      <div class="field"><label>Website 2 (fără https://)</label><input type="text" id="f-website2" placeholder="avansproiect.online"></div>
+      <div class="field"><label>Website 3 (fără https://)</label><input type="text" id="f-website3" placeholder="nutrisibclub.online"></div>
 
-      <div class="section-label">✦ QR Code</div>
+      <div class="a-sec">Social Media</div>
+      <div class="field"><label>Facebook (URL complet)</label><input type="url" id="f-facebook"  placeholder="https://facebook.com/…"></div>
+      <div class="field"><label>Instagram (URL complet)</label><input type="url" id="f-instagram" placeholder="https://instagram.com/…"></div>
+      <div class="field"><label>LinkedIn (URL complet)</label> <input type="url" id="f-linkedin"  placeholder="https://linkedin.com/in/…"></div>
+      <div class="field"><label>Threads (URL complet)</label>  <input type="url" id="f-threads"   placeholder="https://www.threads.net/@…"></div>
+      <div class="field"><label>WhatsApp (URL wa.me)</label>   <input type="url" id="f-whatsapp"  placeholder="https://wa.me/40…"></div>
+      <div class="field"><label>Telegram (URL t.me)</label>    <input type="url" id="f-telegram"  placeholder="https://t.me/…"></div>
+
+      <div class="a-sec">Altele</div>
+      <div class="field"><label>Adresă / Locație</label><input type="text" id="f-address"></div>
+      <div class="field"><label>Notă / Motto</label><textarea id="f-note"></textarea></div>
+
+      <div class="a-sec">QR Code</div>
       <div class="field">
         <label>URL pagina cardului</label>
-        <input type="url" id="f-pageUrl" placeholder="https://card.site.ro">
+        <input type="url" id="f-pageUrl" placeholder="https://radupascu.online/me">
       </div>
-      <div class="hint">Actualizează cu URL-ul real după hostare.</div>
 
-      <div class="section-label">✦ Securitate PIN</div>
-      <div class="field-row">
-        <div class="field"><label>PIN nou (4 cifre)</label><input type="password" id="f-pin" maxlength="4" placeholder="••••" inputmode="numeric"></div>
-        <div class="field"><label>Confirmă PIN</label><input type="password" id="f-pin2" maxlength="4" placeholder="••••" inputmode="numeric"></div>
+      <div class="a-sec">Securitate PIN</div>
+      <div class="row2">
+        <div class="field"><label>PIN nou (4 cifre)</label><input type="password" id="f-pin"  maxlength="4" placeholder="••••" inputmode="numeric"></div>
+        <div class="field"><label>Confirmă PIN</label>    <input type="password" id="f-pin2" maxlength="4" placeholder="••••" inputmode="numeric"></div>
       </div>
       <div class="hint">Lasă gol pentru a păstra PIN-ul actual.</div>
 
-      <div class="admin-actions">
-        <button class="btn-primary" id="btn-save-admin" onclick="saveAdmin()">✓ Salvează &amp; Actualizează Cardul</button>
-        <button class="btn-outline" onclick="downloadQR()">↓ Descarcă QR Code (PNG)</button>
-        <button class="btn-danger" onclick="resetToDefaults()">↺ Resetează la valorile implicite</button>
+      <div class="actions">
+        <button class="btn-primary" onclick="saveAdmin()">✓ &nbsp;Previzualizează modificările</button>
+        <button class="btn-export"  onclick="exportHTML()">↓ &nbsp;Descarcă HTML actualizat</button>
+        <div class="export-info">
+          <p>
+            <strong>Cum publici:</strong><br>
+            1. <strong>Previzualizează</strong> — verifici pe ecran<br>
+            2. <strong>Descarcă HTML</strong> — primești fișierul cu datele noi<br>
+            3. Încarci pe hosting la <strong>radupascu.online/me</strong><br>
+            4. Oricine scanează QR-ul vede imediat datele noi ✓
+          </p>
+        </div>
+        <button class="btn-outline" onclick="downloadQR()">↓ &nbsp;Descarcă QR Code (PNG)</button>
+        <button class="btn-danger"  onclick="resetDefaults()">↺ &nbsp;Resetează la valorile din fișier</button>
       </div>
     </div>
   </div>
@@ -429,258 +493,381 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
+//  SVG ICONS
+// ════════════════════════════════════════════
+var ICONS = {
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 9.65 19.79 19.79 0 01.88 1.1 2 2 0 012.87 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>',
+  email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',
+  pin:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  fb:    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>',
+  ig:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>',
+  li:    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>',
+  wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+    tg: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>',
+  threads: '<svg viewBox="0 0 192 192" fill="currentColor"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.195 47.292 9.65 32.788 28.08 19.882 44.485 13.224 67.315 13.01 96v.36c.214 28.685 6.872 51.515 19.778 67.92 14.504 18.43 36.094 27.884 64.168 28.08h.113c24.925-.169 42.426-6.72 57.101-21.286 18.935-18.912 18.404-42.607 12.152-57.223-4.489-10.461-13.044-18.895-24.785-24.863zm-43.246 40.626c-10.427.571-21.268-4.092-21.82-14.19-.412-7.703 5.477-16.293 23.166-17.313 2.026-.117 4.013-.173 5.962-.173 6.459 0 12.499.617 17.97 1.803-2.043 25.55-15.215 29.183-25.278 29.873z"/></svg>',
+};
+
+// ════════════════════════════════════════════
 //  STATE
-// ════════════════════════════════════════════════
-let CARD = {};
-let pinBuffer = '';
-const LS_KEY = 'dbc_v1';
+// ════════════════════════════════════════════
+var CARD = {};
+var pinBuffer = '';
+var LS_KEY = 'dbc_v4';
+var FIELDS = ['firstName','lastName','title','company',
+              'phone','phone2','email',
+              'website','website2','website3',
+              'facebook','instagram','linkedin','threads','whatsapp','telegram',
+              'address','note','pageUrl','avatarUrl','adminPin'];
 
-// ════════════════════════════════════════════════
-//  JSONBIN API
-// ════════════════════════════════════════════════
-async function cloudLoad() {
-  if (!CLOUD_ENABLED) return null;
-  const r = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-    headers: { 'X-Master-Key': JSONBIN_API_KEY }
-  });
-  if (!r.ok) throw new Error('load failed');
-  const j = await r.json();
-  return j.record;
-}
-
-async function cloudSave(data) {
-  if (!CLOUD_ENABLED) return false;
-  const r = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Master-Key': JSONBIN_API_KEY
-    },
-    body: JSON.stringify(data)
-  });
-  if (!r.ok) throw new Error('save failed');
-  return true;
-}
-
-// ════════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════════
-(async function init() {
-  const badge = document.getElementById('cloud-status-badge');
-
-  if (CLOUD_ENABLED) {
-    try {
-      const remote = await cloudLoad();
-      // dacă bin-ul e gol ({}) la prima rulare, populăm cu DEFAULTS
-      CARD = (remote && Object.keys(remote).length > 0) ? remote : { ...DEFAULTS };
-      if (Object.keys(remote || {}).length === 0) await cloudSave(CARD);
-      badge.innerHTML = `<div class="cloud-badge online"><div class="badge-dot"></div>Date live din cloud</div>`;
-    } catch(e) {
-      // fallback la localStorage
-      const saved = localStorage.getItem(LS_KEY);
-      CARD = saved ? JSON.parse(saved) : { ...DEFAULTS };
-      badge.innerHTML = `<div class="cloud-badge error"><div class="badge-dot"></div>Eroare cloud — date locale</div>`;
-    }
-  } else {
-    const saved = localStorage.getItem(LS_KEY);
-    CARD = saved ? JSON.parse(saved) : { ...DEFAULTS };
-    badge.innerHTML = `<div class="cloud-badge offline"><div class="badge-dot"></div>Mod local — configurează JSONBin pentru cloud</div>`;
-  }
-
+// ── Init ───────────────────────────────────
+(function init() {
+  try {
+    var s = localStorage.getItem(LS_KEY);
+    CARD = s ? JSON.parse(s) : clone(CARD_DATA);
+  } catch(e) { CARD = clone(CARD_DATA); }
   renderCard();
-  document.getElementById('loading-screen').classList.add('hidden');
 })();
 
-// ════════════════════════════════════════════════
-//  RENDER
-// ════════════════════════════════════════════════
-function renderCard() {
-  const c = CARD;
-  const av = document.getElementById('avatar');
-  av.innerHTML = c.avatarUrl
-    ? `<img src="${c.avatarUrl}" onerror="this.parentElement.textContent='${initials(c)}'">` 
-    : initials(c);
+// ════════════════════════════════════════════
+//  HELPERS — extrage handle din URL
+// ════════════════════════════════════════════
+function extractHandle(url) {
+  if (!url) return '';
+  // scoate protocol, www, domeniu → rămâne path-ul
+  var s = url.replace(/^https?:\/\/(www\.)?/, '');
+  // scoate domeniu (facebook.com/, instagram.com/, linkedin.com/in/)
+  s = s.replace(/^[^/]+\/+(in\/)?/, '');
+  // scoate slash final
+  s = s.replace(/\/$/, '');
+  return s || url;
+}
 
-  document.getElementById('display-name').innerHTML = `<em>${esc(c.firstName)}</em>\u00a0${esc(c.lastName)}`;
+function shortDomain(url) {
+  if (!url) return '';
+  return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+}
+
+// ════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════
+function renderCard() {
+  var c = CARD;
+
+  // Avatar
+  var av = document.getElementById('avatar');
+  av.innerHTML = c.avatarUrl
+    ? '<img src="' + c.avatarUrl + '" onerror="this.parentElement.textContent=\'' + ini(c) + '\'">'
+    : ini(c);
+
+  // Name / title / company
+  document.getElementById('display-name').innerHTML =
+    '<em>' + esc(c.firstName) + '\u00a0' + esc(c.lastName) + '</em>';
   document.getElementById('display-title').textContent   = c.title   || '';
   document.getElementById('display-company').textContent = c.company || '';
 
-  const nb = document.getElementById('note-block');
+  // Note
+  var nb = document.getElementById('note-block');
   nb.style.display = c.note ? 'block' : 'none';
   document.getElementById('display-note').textContent = c.note || '';
 
-  const section = document.getElementById('contact-section');
-  section.innerHTML = '';
-  [
-    { icon:'📞', label:'Telefon',   val:c.phone,     href:`tel:${(c.phone||'').replace(/\s/g,'')}` },
-    { icon:'✉️', label:'Email',     val:c.email,     href:`mailto:${c.email}` },
-    { icon:'🌐', label:'Website',   val:c.website,   href:`https://${c.website}` },
-    { icon:'💼', label:'LinkedIn',  val:c.linkedin,  href:`https://${c.linkedin}` },
-    { icon:'📸', label:'Instagram', val:c.instagram, href:`https://instagram.com/${(c.instagram||'').replace('@','')}` },
-    { icon:'📍', label:'Locație',   val:c.address,   href:null },
-  ].forEach(r => {
-    if (!r.val) return;
-    const el = r.href ? document.createElement('a') : document.createElement('div');
-    el.className = 'contact-item';
+  // ── Contact rows (phone, email, websites, address) ──
+  var contactRows = [];
+  if (c.phone)    contactRows.push({ icon:ICONS.phone, label:'Telefon 1', val:fmtDisplay(c.phone),  href:'tel:' + c.phone.replace(/\s/g,'') });
+  if (c.phone2)   contactRows.push({ icon:ICONS.phone, label:'Telefon 2', val:fmtDisplay(c.phone2), href:'tel:' + c.phone2.replace(/\s/g,'') });
+  if (c.email)    contactRows.push({ icon:ICONS.email, label:'Email',     val:c.email,   href:'mailto:' + c.email });
+  if (c.website)  contactRows.push({ icon:ICONS.globe, label:'Website',   val:c.website, href:'https://' + c.website });
+  if (c.website2) contactRows.push({ icon:ICONS.globe, label:'Website 2', val:c.website2,href:'https://' + c.website2 });
+  if (c.website3) contactRows.push({ icon:ICONS.globe, label:'Website 3', val:c.website3,href:'https://' + c.website3 });
+  if (c.address)  contactRows.push({ icon:ICONS.pin,   label:'Locație',   val:c.address, href:null });
+
+  var list = document.getElementById('contact-list');
+  list.innerHTML = '';
+  contactRows.forEach(function(r) {
+    var el = r.href ? document.createElement('a') : document.createElement('div');
+    el.className = 'ci';
     if (r.href) { el.href = r.href; el.rel = 'noopener'; }
-    el.innerHTML = `<div class="ci-icon">${r.icon}</div><div class="ci-meta"><span class="ci-label">${r.label}</span><span class="ci-value">${esc(r.val)}</span></div>`;
-    section.appendChild(el);
+    el.innerHTML =
+      '<div class="ci-icon-wrap">' + r.icon + '</div>' +
+      '<div class="ci-meta">' +
+        '<span class="ci-label">' + r.label + '</span>' +
+        '<span class="ci-value">' + esc(r.val) + '</span>' +
+      '</div>';
+    list.appendChild(el);
   });
 
-  const qrEl = document.getElementById('qr-code');
+  // ── Social grid (Facebook, Instagram, LinkedIn) ──
+  var socials = [];
+  if (c.facebook)  socials.push({ icon:ICONS.fb, name:'Facebook',  handle:extractHandle(c.facebook),  href:c.facebook });
+  if (c.instagram) socials.push({ icon:ICONS.ig, name:'Instagram', handle:extractHandle(c.instagram), href:c.instagram });
+  if (c.linkedin)  socials.push({ icon:ICONS.li,      name:'LinkedIn',  handle:extractHandle(c.linkedin),  href:c.linkedin });
+  if (c.threads)   socials.push({ icon:ICONS.threads, name:'Threads',   handle:extractHandle(c.threads),   href:c.threads });
+  if (c.whatsapp)  socials.push({ icon:ICONS.wa,      name:'WhatsApp',  handle:extractHandle(c.whatsapp),  href:c.whatsapp });
+  if (c.telegram)  socials.push({ icon:ICONS.tg,      name:'Telegram',  handle:extractHandle(c.telegram),  href:c.telegram });
+
+  var grid = document.getElementById('social-grid');
+  var section = document.getElementById('social-section');
+  grid.innerHTML = '';
+  section.style.display = socials.length ? 'block' : 'none';
+  socials.forEach(function(s) {
+    var a = document.createElement('a');
+    a.className = 'social-btn';
+    a.href = s.href; a.rel = 'noopener'; a.target = '_blank';
+    a.innerHTML =
+      s.icon +
+      '<span class="social-name">'  + s.name + '</span>' +
+      '<span class="social-handle">' + esc(s.handle) + '</span>';
+    grid.appendChild(a);
+  });
+
+  // ── QR ──
+  var qrEl = document.getElementById('qr-code');
   qrEl.innerHTML = '';
-  document.getElementById('qr-url-text').textContent = c.pageUrl || '';
+  var qrUrlEl = document.getElementById('qr-url-text');
+  if (qrUrlEl) qrUrlEl.textContent = c.pageUrl || '';
   if (c.pageUrl) {
-    new QRCode(qrEl, { text:c.pageUrl, width:148, height:148, colorDark:'#0b1a35', colorLight:'#f5f0e0', correctLevel:QRCode.CorrectLevel.H });
+    new QRCode(qrEl, {
+      text: c.pageUrl, width:148, height:148,
+      colorDark:'#0b1a35', colorLight:'#f5f0e0',
+      correctLevel: QRCode.CorrectLevel.H
+    });
   }
-  document.title = `${c.firstName} ${c.lastName} — Business Card`;
+  document.title = (c.firstName||'') + ' ' + (c.lastName||'') + ' — Business Card';
 }
 
-// ════════════════════════════════════════════════
-//  vCARD DOWNLOAD
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
+//  vCARD — maxim compatibil Android + iPhone
+//  Standard: vCard 3.0 (suportat nativ pe ambele)
+// ════════════════════════════════════════════
 function downloadVCard() {
-  const c = CARD;
-  const lines = ['BEGIN:VCARD','VERSION:3.0',
-    `N:${c.lastName};${c.firstName};;;`,`FN:${c.firstName} ${c.lastName}`,
-    c.title?`TITLE:${c.title}`:'', c.company?`ORG:${c.company}`:'',
-    c.phone?`TEL;TYPE=CELL:${c.phone}`:'', c.email?`EMAIL:${c.email}`:'',
-    c.website?`URL:https://${c.website}`:'', c.address?`ADR;TYPE=WORK:;;${c.address};;;;`:'',
-    c.note?`NOTE:${c.note}`:'',
-    c.linkedin?`X-SOCIALPROFILE;type=linkedin:${c.linkedin}`:'',
-    c.instagram?`X-SOCIALPROFILE;type=instagram:${c.instagram}`:'',
-    'END:VCARD'].filter(Boolean).join('\r\n');
-  triggerDownload(new Blob([lines],{type:'text/vcard;charset=utf-8'}),`${c.firstName}_${c.lastName}.vcf`);
-  showToast('✓ Contact descărcat (.vcf)');
+  var c = CARD;
+  var fn = (c.firstName||'').trim();
+  var ln = (c.lastName||'').trim();
+
+  // Telefoane — eliminăm spații și adăugăm +40 dacă lipsește prefixul
+  function formatTel(t) {
+    if (!t) return '';
+    t = t.replace(/\s/g,'');
+    if (t.charAt(0) === '0') t = '+4' + t; // 0723... → +40723...
+    return t;
+  }
+
+  var lines = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    // Structured name: Family;Given;Middle;Prefix;Suffix
+    'N:' + ln + ';' + fn + ';;;',
+    // Full name
+    'FN:' + fn + ' ' + ln,
+    // Org + title
+    c.company ? 'ORG:' + c.company   : '',
+    c.title   ? 'TITLE:' + c.title   : '',
+    // Phones — TYPE=CELL,VOICE acceptat pe ambele platforme
+    c.phone  ? 'TEL;TYPE=CELL,VOICE,PREF:' + formatTel(c.phone)  : '',
+    c.phone2 ? 'TEL;TYPE=CELL,VOICE:'      + formatTel(c.phone2) : '',
+    // Email
+    c.email  ? 'EMAIL;TYPE=INTERNET,PREF:' + c.email : '',
+    // Websites — URL multiplu acceptat pe ambele
+    c.website  ? 'URL;TYPE=pref:'    + 'https://' + c.website  : '',
+    c.website2 ? 'URL;TYPE=work:'    + 'https://' + c.website2 : '',
+    c.website3 ? 'URL;TYPE=work:'    + 'https://' + c.website3 : '',
+    // Address — ADR: P.O.Box;Ext;Street;City;State;ZIP;Country
+    c.address  ? 'ADR;TYPE=WORK:;;;' + c.address + ';;;' : '',
+    // Note
+    c.note     ? 'NOTE:' + c.note : '',
+    // Social profiles — X-SOCIALPROFILE (iOS Contacts nativ)
+    c.facebook  ? 'X-SOCIALPROFILE;type=facebook:'  + c.facebook  : '',
+    c.instagram ? 'X-SOCIALPROFILE;type=instagram:' + c.instagram : '',
+    c.linkedin  ? 'X-SOCIALPROFILE;type=linkedin:'  + c.linkedin  : '',
+    c.threads   ? 'X-SOCIALPROFILE;type=threads:'   + c.threads   : '',
+    c.whatsapp  ? 'X-SOCIALPROFILE;type=whatsapp:'  + c.whatsapp  : '',
+    c.telegram  ? 'X-SOCIALPROFILE;type=telegram:'  + c.telegram  : '',
+    // URL fallback social — Android le afișează ca website
+    c.facebook  ? 'URL;TYPE=facebook:'  + c.facebook  : '',
+    c.instagram ? 'URL;TYPE=instagram:' + c.instagram : '',
+    c.linkedin  ? 'URL;TYPE=linkedin:'  + c.linkedin  : '',
+    c.threads   ? 'URL;TYPE=threads:'   + c.threads   : '',
+    c.whatsapp  ? 'URL;TYPE=whatsapp:'  + c.whatsapp  : '',
+    c.telegram  ? 'URL;TYPE=telegram:'  + c.telegram  : '',
+    'END:VCARD'
+  ].filter(Boolean).join('\r\n');
+
+  triggerDL(
+    new Blob([lines], { type:'text/vcard;charset=utf-8' }),
+    fn + '_' + ln + '.vcf'
+  );
+  showToast('✓ Contact descărcat — deschide .vcf pe telefon');
 }
 
-// ════════════════════════════════════════════════
-//  QR DOWNLOAD
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
+//  EXPORT HTML actualizat
+// ════════════════════════════════════════════
+function exportHTML() {
+  var c = CARD;
+  var newBlock =
+    '    const CARD_DATA = {\n' +
+    '      firstName  : ' + JSON.stringify(c.firstName  ||'') + ',\n' +
+    '      lastName   : ' + JSON.stringify(c.lastName   ||'') + ',\n' +
+    '      title      : ' + JSON.stringify(c.title      ||'') + ',\n' +
+    '      company    : ' + JSON.stringify(c.company    ||'') + ',\n' +
+    '      phone      : ' + JSON.stringify(c.phone      ||'') + ',\n' +
+    '      phone2     : ' + JSON.stringify(c.phone2     ||'') + ',\n' +
+    '      email      : ' + JSON.stringify(c.email      ||'') + ',\n' +
+    '      website    : ' + JSON.stringify(c.website    ||'') + ',\n' +
+    '      website2   : ' + JSON.stringify(c.website2   ||'') + ',\n' +
+    '      website3   : ' + JSON.stringify(c.website3   ||'') + ',\n' +
+    '      linkedin   : ' + JSON.stringify(c.linkedin   ||'') + ',\n' +
+    '      instagram  : ' + JSON.stringify(c.instagram  ||'') + ',\n' +
+    '      facebook   : ' + JSON.stringify(c.facebook   ||'') + ',\n' +
+    '      threads    : ' + JSON.stringify(c.threads    ||'') + ',\n' +
+    '      whatsapp   : ' + JSON.stringify(c.whatsapp   ||'') + ',\n' +
+    '      telegram   : ' + JSON.stringify(c.telegram   ||'') + ',\n' +
+    '      address    : ' + JSON.stringify(c.address    ||'') + ',\n' +
+    '      note       : ' + JSON.stringify(c.note       ||'') + ',\n' +
+    '      pageUrl    : ' + JSON.stringify(c.pageUrl    ||'') + ',\n' +
+    '      avatarUrl  : ' + JSON.stringify(c.avatarUrl  ||'') + ',\n' +
+    '      adminPin   : ' + JSON.stringify(c.adminPin   ||'1234') + ',\n' +
+    '    };';
+
+  var html = document.documentElement.outerHTML;
+  var updated = html.replace(/const CARD_DATA = \{[\s\S]*?\};/, newBlock);
+
+  triggerDL(
+    new Blob([updated], { type:'text/html;charset=utf-8' }),
+    'business-card.html'
+  );
+  showToast('✓ HTML descărcat — încarcă-l pe hosting!', 4000);
+}
+
+// ════════════════════════════════════════════
+//  QR PNG
+// ════════════════════════════════════════════
 function downloadQR() {
-  const canvas = document.querySelector('#qr-code canvas');
+  var canvas = document.querySelector('#qr-code canvas');
   if (!canvas) { showToast('⚠ Adaugă mai întâi URL-ul paginii'); return; }
-  const S=320,P=28, out=document.createElement('canvas');
-  out.width=S+P*2; out.height=S+P*2;
-  const ctx=out.getContext('2d');
-  ctx.fillStyle='#f5f0e0'; ctx.fillRect(0,0,out.width,out.height);
+  var S=320, P=28;
+  var out = document.createElement('canvas');
+  out.width = S+P*2; out.height = S+P*2;
+  var ctx = out.getContext('2d');
+  ctx.fillStyle = '#f5f0e0'; ctx.fillRect(0,0,out.width,out.height);
   ctx.drawImage(canvas,P,P,S,S);
-  out.toBlob(blob=>{triggerDownload(blob,'qr-business-card.png');showToast('✓ QR descărcat (PNG)');});
+  out.toBlob(function(blob){ triggerDL(blob,'qr-business-card.png'); showToast('✓ QR descărcat (PNG)'); });
 }
 
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
 //  PIN
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
 function openPinModal() { pinBuffer=''; updateDots(); document.getElementById('pin-overlay').classList.add('open'); }
 function pinKey(k) { if(pinBuffer.length>=4)return; pinBuffer+=k; updateDots(); if(pinBuffer.length===4)setTimeout(checkPin,140); }
 function pinDel()  { pinBuffer=pinBuffer.slice(0,-1); updateDots(); }
 function updateDots() {
-  for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.toggle('filled',i<pinBuffer.length);d.classList.remove('error');}
+  for(var i=0;i<4;i++){ var d=document.getElementById('d'+i); d.classList.toggle('filled',i<pinBuffer.length); d.classList.remove('error'); }
 }
 function checkPin() {
-  if(pinBuffer===(CARD.adminPin||DEFAULTS.adminPin)){closeOverlay('pin-overlay');openAdmin();}
-  else{for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.remove('filled');d.classList.add('error');}showToast('✗ PIN incorect');pinBuffer='';setTimeout(updateDots,700);}
+  if(pinBuffer===(CARD.adminPin||CARD_DATA.adminPin)){ closeOverlay('pin-overlay'); openAdmin(); }
+  else {
+    for(var i=0;i<4;i++){ var d=document.getElementById('d'+i); d.classList.remove('filled'); d.classList.add('error'); }
+    showToast('✗ PIN incorect'); pinBuffer=''; setTimeout(updateDots,700);
+  }
 }
 
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
 //  ADMIN
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
 function openAdmin() {
-  const c = CARD;
-  ['firstName','lastName','title','company','phone','email','website','linkedin','instagram','address','note','pageUrl','avatarUrl']
-    .forEach(k=>{const el=document.getElementById('f-'+k);if(el)el.value=c[k]||'';});
-  document.getElementById('f-pin').value='';
-  document.getElementById('f-pin2').value='';
-
-  // Cloud indicator
-  const ind = document.getElementById('admin-cloud-indicator');
-  ind.textContent = CLOUD_ENABLED ? '☁ Cloud' : '💾 Local';
-  ind.className = 'admin-cloud-status ' + (CLOUD_ENABLED ? 'cloud' : 'local');
-
-  // Setup notice
-  const notice = document.getElementById('setup-notice');
-  if (!CLOUD_ENABLED) {
-    notice.innerHTML = `
-      <div class="setup-box" style="margin-top:16px">
-        <p>
-          <strong>Mod local activ.</strong> Modificările se salvează doar pe acest dispozitiv.<br><br>
-          Pentru a sincroniza pe orice dispozitiv:<br>
-          1. Creează cont gratuit pe <a href="https://jsonbin.io" target="_blank">jsonbin.io</a><br>
-          2. Copiază <strong>API Key</strong> + <strong>Bin ID</strong><br>
-          3. Lipește în variabilele <code>JSONBIN_API_KEY</code> și <code>JSONBIN_BIN_ID</code> din fișier
-        </p>
-      </div>`;
-  } else { notice.innerHTML = ''; }
-
-  previewAvatar();
-  const panel=document.getElementById('admin-panel');
-  panel.style.display='block';
-  setTimeout(()=>document.getElementById('admin-overlay').classList.add('open'),10);
+  var c = CARD;
+  FIELDS.forEach(function(k){ var el=document.getElementById('f-'+k); if(el) el.value=c[k]||''; });
+  document.getElementById('f-pin').value=''; document.getElementById('f-pin2').value='';
+  prevAvatar();
+  document.getElementById('admin-panel').style.display='block';
+  setTimeout(function(){ document.getElementById('admin-overlay').classList.add('open'); },10);
 }
 
-async function saveAdmin() {
-  const pin1=document.getElementById('f-pin').value.trim();
-  const pin2=document.getElementById('f-pin2').value.trim();
-  if(pin1||pin2){
-    if(!/^\d{4}$/.test(pin1)){showToast('⚠ PIN-ul trebuie să fie exact 4 cifre');return;}
-    if(pin1!==pin2){showToast('⚠ PIN-urile nu coincid');return;}
-    CARD.adminPin=pin1;
+function saveAdmin() {
+  var p1=document.getElementById('f-pin').value.trim();
+  var p2=document.getElementById('f-pin2').value.trim();
+  if(p1||p2){
+    if(!/^\d{4}$/.test(p1)){ showToast('⚠ PIN-ul trebuie să fie exact 4 cifre'); return; }
+    if(p1!==p2)             { showToast('⚠ PIN-urile nu coincid'); return; }
+    CARD.adminPin=p1;
   }
-  ['firstName','lastName','title','company','phone','email','website','linkedin','instagram','address','note','pageUrl','avatarUrl']
-    .forEach(k=>{const el=document.getElementById('f-'+k);if(el)CARD[k]=el.value.trim();});
-
-  const btn = document.getElementById('btn-save-admin');
-  btn.classList.add('saving'); btn.disabled=true;
-
-  if (CLOUD_ENABLED) {
-    try {
-      await cloudSave(CARD);
-      // actualizăm și badge-ul principal
-      document.getElementById('cloud-status-badge').innerHTML =
-        `<div class="cloud-badge online"><div class="badge-dot"></div>Date live din cloud</div>`;
-    } catch(e) {
-      showToast('⚠ Eroare la salvarea în cloud — salvat local');
-      localStorage.setItem(LS_KEY, JSON.stringify(CARD));
-      btn.classList.remove('saving'); btn.disabled=false; return;
-    }
-  } else {
-    localStorage.setItem(LS_KEY, JSON.stringify(CARD));
-  }
-
-  btn.classList.remove('saving'); btn.disabled=false;
+  FIELDS.forEach(function(k){ if(k==='adminPin')return; var el=document.getElementById('f-'+k); if(el) CARD[k]=el.value.trim(); });
+  localStorage.setItem(LS_KEY,JSON.stringify(CARD));
   renderCard();
   closeOverlay('admin-overlay');
-  showToast(CLOUD_ENABLED ? '✓ Salvat în cloud — vizibil pentru toți!' : '✓ Salvat local pe acest dispozitiv', 3500);
+  showToast('✓ Previzualizare actualizată! Descarcă HTML pentru a publica.',4000);
 }
 
-async function resetToDefaults() {
-  if(!confirm('Ești sigur? Toate modificările vor fi șterse.'))return;
-  CARD={...DEFAULTS};
-  if(CLOUD_ENABLED){ try{await cloudSave(CARD);}catch(e){} }
-  localStorage.removeItem(LS_KEY);
-  renderCard(); closeOverlay('admin-overlay');
-  showToast('✓ Resetat la valorile implicite');
+function resetDefaults() {
+  if(!confirm('Ești sigur? Se vor restaura datele din fișierul curent.'))return;
+  localStorage.removeItem(LS_KEY); CARD=clone(CARD_DATA); renderCard();
+  closeOverlay('admin-overlay'); showToast('✓ Resetat la valorile din fișier');
 }
 
-function previewAvatar() {
-  const url=(document.getElementById('f-avatarUrl').value||'').trim();
-  const fn=(document.getElementById('f-firstName').value||'')[0]||'';
-  const ln=(document.getElementById('f-lastName').value||'')[0]||'';
-  const ini=(fn+ln).toUpperCase()||'?';
-  const prev=document.getElementById('admin-avatar-preview');
-  prev.innerHTML=url?`<img src="${url}" onerror="this.parentElement.textContent='${ini}'">`:`${ini}`;
+function prevAvatar() {
+  var url=(document.getElementById('f-avatarUrl').value||'').trim();
+  var fn=(document.getElementById('f-firstName').value||'')[0]||'';
+  var ln=(document.getElementById('f-lastName').value||'')[0]||'';
+  var i=(fn+ln).toUpperCase()||'?';
+  var imgHtml=url?'<img src="'+url+'" onerror="this.parentElement.textContent=\''+i+'\'">':i;
+  // preview mic din admin panel
+  var p=document.getElementById('av-preview');
+  p.innerHTML=imgHtml;
+  // avatarul principal din card — live preview
+  var av=document.getElementById('avatar');
+  if(av) av.innerHTML=imgHtml;
 }
 
-// ════════════════════════════════════════════════
+// ════════════════════════════════════════════
 //  UTILS
-// ════════════════════════════════════════════════
-function closeOverlay(id){document.getElementById(id).classList.remove('open');}
-function initials(c){return(((c.firstName||'')[0]||'')+((c.lastName||'')[0]||'')).toUpperCase();}
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function triggerDownload(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function showToast(msg,dur=3200){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),dur);}
-['pin-overlay','admin-overlay'].forEach(id=>{document.getElementById(id).addEventListener('click',e=>{if(e.target.id===id)closeOverlay(id);});});
+// ════════════════════════════════════════════
+function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+function fmtDisplay(t) {
+  if (!t) return '';
+  t = t.replace(/\s/g,'');
+  if (t.charAt(0)==='0') t = '+40' + t.slice(1);
+  return t.replace(/(\+\d{2})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4');
+}
+function ini(c){ return ((c.firstName||' ')[0]+(c.lastName||' ')[0]).toUpperCase(); }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function triggerDL(blob,name){
+  var url=URL.createObjectURL(blob); var a=document.createElement('a');
+  a.href=url; a.download=name; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+function showToast(msg,dur){
+  dur=dur||3000; var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},dur);
+}
+
+// ════════════════════════════════════════════
+//  SECRET ADMIN ACCESS — 5 tap-uri pe footer
+// ════════════════════════════════════════════
+(function() {
+  var taps = 0, timer = null;
+  var footer = document.getElementById('secret-footer');
+  if (!footer) return;
+  footer.addEventListener('click', function() {
+    taps++;
+    clearTimeout(timer);
+    if (taps >= 5) {
+      taps = 0;
+      openPinModal();
+    } else {
+      timer = setTimeout(function() { taps = 0; }, 1800);
+    }
+  });
+  // cursor normal pe footer - nu dăm hint vizual
+  footer.style.cursor = 'default';
+  footer.style.userSelect = 'none';
+})();
+
+['pin-overlay','admin-overlay'].forEach(function(id){
+  document.getElementById(id).addEventListener('click',function(e){ if(e.target.id===id) closeOverlay(id); });
+});
 </script>
 </body>
 </html>
