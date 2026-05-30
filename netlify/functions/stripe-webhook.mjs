@@ -55,7 +55,11 @@ export default async function handler(req) {
     // Aplică watermark în epub
     const zip = await JSZip.loadAsync(epubBuffer);
 
-    const watermarkHtml = `<div style="display:none;visibility:hidden;">Licențiat pentru: ${customerName} &lt;${customerEmail}&gt;</div>`;
+    //invizibil 
+	// const watermarkHtml = `<div style="display:none;visibility:hidden;">Licențiat pentru: ${customerName} &lt;${customerEmail}&gt;</div>`;
+	
+	//vizibil
+	const watermarkHtml = `<div style="font-size:0.75em;color:#888;text-align:center;padding:4px 0;border-top:1px solid #eee;margin-top:2em;">Copie licențiată pentru: ${customerName} (${customerEmail})</div>`;
 
     const htmlFiles = Object.keys(zip.files).filter(
       (name) => name.endsWith(".html") || name.endsWith(".xhtml")
