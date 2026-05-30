@@ -1,875 +1,915 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI NAVIGATOR — Comandă cartea</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Gagalin&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI NAVIGATOR — Comandă cartea</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Gagalin&display=swap" rel="stylesheet">
+	</script>
+	<style>
+	*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+	:root {
+  		--ink:     #0e0e12;
+  		--paper:   #f5f2ec;
+  		--cream:   #faf8f3;
+		--gold:    #b8943a;
+		--gold2:   #d4aa55;
+		--red:     #c0392b;
+		--navy:    #1a2744;
+		--muted:   #7a7468;
+		--border:  #ddd8ce;
+		--shadow:  rgba(14,14,18,0.10);
+	}
 
-:root {
-  --ink:     #0e0e12;
-  --paper:   #f5f2ec;
-  --cream:   #faf8f3;
-  --gold:    #b8943a;
-  --gold2:   #d4aa55;
-  --red:     #c0392b;
-  --navy:    #1a2744;
-  --muted:   #7a7468;
-  --border:  #ddd8ce;
-  --shadow:  rgba(14,14,18,0.10);
-}
+	html { scroll-behavior: smooth; }
+	
+	body {
+	  background: var(--cream);
+	  color: var(--ink);
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 16px;
+	  line-height: 1.35;
+	}
+	
+	/* ─── PROMO BANNER ─── */
+	.promo-bar {
+	  background: var(--navy);
+	  color: #fff;
+	  text-align: center;
+	  padding: 10px 20px;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 12px;
+	  letter-spacing: 0.08em;
+	}
+	.promo-bar strong { color: var(--gold2); }
+	
+	/* ─── HERO ─── */
+	.hero {
+	  background: var(--ink);
+	  color: var(--paper);
+	  padding: 56px 24px 48px;
+	  text-align: center;
+	  position: relative;
+	  overflow: hidden;
+	}
+	.hero::before {
+	  content: '';
+	  position: absolute;
+	  inset: 0;
+	  background:
+	    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,148,58,.18) 0%, transparent 70%),
+	    radial-gradient(ellipse 80% 40% at 30% 100%, rgba(26,39,68,.6) 0%, transparent 60%);
+	  pointer-events: none;
+	}
+	.hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
+	
+	.hero-eyebrow {
+	  display: inline-block;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 11px;
+	  letter-spacing: 0.2em;
+	  text-transform: uppercase;
+	  color: var(--gold2);
+	  border: 1px solid rgba(212,170,85,.35);
+	  padding: 5px 16px;
+	  border-radius: 2px;
+	  margin-bottom: 18px;
+	}
+	
+	.hero h1 {
+	  font-family: 'Gagalin', sans-serif;
+	  font-size: clamp(44px, 10vw, 96px);
+	  font-weight: 400;
+	  line-height: 1;
+	  letter-spacing: 0.04em;
+	  text-transform: uppercase;
+	  white-space: nowrap;
+	  margin-bottom: 10px;
+	  color: #f5f0e6;
+	}
+	.hero h1 em {
+	  font-style: normal;
+	  color: var(--gold2);
+	}
+	
+	.hero-subtitle {
+	  font-size: 15px;
+	  color: rgba(245,242,236,.65);
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 32px;
+	  margin-bottom: 22px;
+	}
+	
+	.hero-meta {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 10px;
+	  flex-wrap: wrap;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 12px;
+	  letter-spacing: 0.1em;
+	  color: rgba(245,242,236,.45);
+	  text-transform: uppercase;
+	}
+	.hero-meta span::before { content: '— '; }
+	.hero-meta span::after { content: ' — '; }
+	
+	/* ─── URGENCY BLOCK ─── */
+	.urgency {
+	  background: var(--paper);
+	  border-bottom: 1px solid var(--border);
+	  padding: 28px 24px;
+	  text-align: center;
+	}
+	.urgency-inner {
+	  max-width: 640px;
+	  margin: 0 auto;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 32px;
+	  flex-wrap: wrap;
+	}
+	.urgency-item { text-align: center; }
+	.urgency-number {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 48px;
+	  font-weight: 700;
+	  line-height: 1;
+	  color: var(--gold);
+	}
+	.urgency-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.12em;
+	  text-transform: uppercase;
+	  color: var(--muted);
+	  margin-top: 4px;
+	}
+	.urgency-divider {
+	  width: 1px;
+	  height: 48px;
+	  background: var(--border);
+	}
+	
+	/* progress bar */
+	.spots-bar {
+	  max-width: 360px;
+	  margin: 16px auto 0;
+	}
+	.spots-bar-track {
+	  height: 4px;
+	  background: #e8e4dc;
+	  border-radius: 2px;
+	  overflow: hidden;
+	}
+	.spots-bar-fill {
+	  height: 100%;
+	  width: 40%;
+	  background: linear-gradient(90deg, var(--gold), var(--gold2));
+	  border-radius: 2px;
+	  transition: width .6s ease;
+	}
+	.spots-bar-text {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  color: var(--red);
+	  letter-spacing: 0.08em;
+	  text-align: center;
+	  margin-top: 6px;
+	  font-weight: 500;
+	}
+	
+	/* ─── LAYOUT ─── */
+	.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+	
+	/* ─── BENEFITS ─── */
+	.benefits {
+	  padding: 48px 24px;
+	  background: var(--cream);
+	}
+	.section-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 12px;
+	  letter-spacing: 0.18em;
+	  text-transform: uppercase;
+	  color: var(--gold);
+	  margin-bottom: 12px;
+	}
+	.benefits h2 {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: clamp(30px, 4vw, 44px);
+	  font-weight: 600;
+	  line-height: 1.15;
+	  max-width: 520px;
+	  margin-bottom: 18px;
+	  color: var(--ink);
+	}
+	
+	.benefits-grid {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  gap: 2px;
+	  background: var(--border);
+	  border: 1px solid var(--border);
+	}
+	@media(max-width: 560px){ .benefits-grid { grid-template-columns: 1fr; } }
+	.benefit-card {
+	  background: var(--cream);
+	  padding: 32px 28px;
+	}
+	.benefit-icon {
+	  font-size: 26px;
+	  margin-bottom: 14px;
+	}
+	.benefit-title {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 24px;
+	  font-weight: 600;
+	  color: var(--ink);
+	  margin-bottom: 10px;
+	}
+	.benefit-desc {
+	  font-size: 16px;
+	  color: var(--muted);
+	  line-height: 1.35;
+	}
+	.benefit-tag {
+	  display: inline-block;
+	  margin-top: 12px;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 11px;
+	  letter-spacing: 0.1em;
+	  color: var(--gold);
+	  text-transform: uppercase;
+	}
+	
+	/* ─── QUOTES ─── */
+	.quote-section {
+	  background: var(--navy);
+	  color: var(--paper);
+	  padding: 56px 24px;
+	}
+	.quotes-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 12px;
+	  letter-spacing: 0.18em;
+	  text-transform: uppercase;
+	  color: var(--gold2);
+	  text-align: center;
+	  margin-bottom: 18px;
+	}
+	.quotes-grid {
+	  max-width: 900px;
+	  margin: 0 auto;
+	  display: grid;
+	  grid-template-columns: 1fr 1px 1fr;
+	  gap: 0 28px;
+	  align-items: start;
+	}
+	@media(max-width: 680px) {
+	  .quotes-grid { grid-template-columns: 1fr; gap: 28px 0; }
+	  .quote-separator { display: none; }
+	}
+	.quote-separator {
+	  background: rgba(212,170,85,.25);
+	  align-self: stretch;
+	}
+	.quote-block { padding: 0 8px; }
+	.quote-mark {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 80px;
+	  line-height: 0.6;
+	  color: var(--gold2);
+	  opacity: 0.5;
+	  margin-bottom: 16px;
+	}
+	.quote-text {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: clamp(18px, 2.2vw, 24px);
+	  font-style: italic;
+	  font-weight: 400;
+	  line-height: 1.3;
+	  color: #f0ece2;
+	  margin-bottom: 12px;
+	}
+	.quote-divider {
+	  width: 40px;
+	  height: 1px;
+	  background: var(--gold);
+	  margin-bottom: 20px;
+	}
+	.quote-source {
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 14px;
+	  line-height: 1.35;
+	  color: rgba(240,236,226,.55);
+	}
+	.quote-source strong {
+	  color: rgba(240,236,226,.9);
+	  display: block;
+	  font-size: 15px;
+	  margin-bottom: 2px;
+	}
+	
+	/* ─── WHAT'S INSIDE ─── */
+	.inside {
+	  padding: 48px 24px;
+	  background: var(--paper);
+	}
+	.inside-grid {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  gap: 28px;
+	  margin-top: 40px;
+	}
+	@media(max-width: 600px){ .inside-grid { grid-template-columns: 1fr; gap: 32px; } }
+	
+	.inside-col h3 {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.16em;
+	  text-transform: uppercase;
+	  color: var(--gold);
+	  margin-bottom: 16px;
+	  padding-bottom: 8px;
+	  border-bottom: 1px solid var(--border);
+	}
+	.inside-list { list-style: none; }
+	.inside-list li {
+	  padding: 9px 0;
+	  border-bottom: 1px solid var(--border);
+	  font-size: 16px;
+	  color: var(--ink);
+	  display: flex;
+	  gap: 10px;
+	  align-items: flex-start;
+	  line-height: 1.3;
+	}
+	.inside-list li::before {
+	  content: '→';
+	  color: var(--gold);
+	  font-family: 'DM Mono', monospace;
+	  font-size: 12px;
+	  flex-shrink: 0;
+	  margin-top: 1px;
+	}
+	
+	/* ─── ORDER SECTION ─── */
+	.order-section {
+	  padding: 56px 24px;
+	  background: var(--cream);
+	  text-align: center;
+	}
+	.order-card {
+	  max-width: 520px;
+	  margin: 0 auto;
+	  background: #fff;
+	  border: 1px solid var(--border);
+	  border-radius: 4px;
+	  overflow: hidden;
+	  box-shadow: 0 8px 40px var(--shadow);
+	}
+	.order-card-header {
+	  background: var(--ink);
+	  color: var(--paper);
+	  padding: 28px 32px;
+	}
+	.order-card-header .price-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.15em;
+	  text-transform: uppercase;
+	  color: rgba(245,242,236,.5);
+	  margin-bottom: 8px;
+	}
+	.order-card-header .price-row {
+	  display: flex;
+	  align-items: baseline;
+	  justify-content: center;
+	  gap: 14px;
+	}
+	.order-card-header .price-current {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 56px;
+	  font-weight: 700;
+	  line-height: 1;
+	  color: var(--gold2);
+	}
+	.order-card-header .price-currency {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 16px;
+	  color: rgba(245,242,236,.6);
+	  align-self: flex-end;
+	  padding-bottom: 4px;
+	}
+	.order-card-header .price-old {
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 13px;
+	  color: rgba(245,242,236,.35);
+	  text-decoration: line-through;
+	  align-self: flex-end;
+	  padding-bottom: 6px;
+	}
+	.order-card-header .price-note {
+	  font-size: 12px;
+	  color: rgba(245,242,236,.45);
+	  margin-top: 4px;
+	  font-style: italic;
+	}
+	
+	.order-card-body { padding: 32px; }
+	
+	.includes-list {
+	  list-style: none;
+	  text-align: left;
+	  margin-bottom: 18px;
+	}
+	.includes-list li {
+	  padding: 7px 0;
+	  font-size: 15px;
+	  color: #444;
+	  display: flex;
+	  gap: 10px;
+	  border-bottom: 1px solid #f0ede6;
+	}
+	.includes-list li .check {
+	  color: var(--gold);
+	  font-weight: 600;
+	  flex-shrink: 0;
+	}
+	
+	#stripe-zone {
+	  margin-bottom: 20px;
+	}
+	
+	.secure-note {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.08em;
+	  color: var(--muted);
+	  text-align: center;
+	}
+	.secure-note span { margin: 0 6px; }
+	
+	/* ─── AUTHORS ─── */
+	.authors-section {
+	  padding: 48px 24px;
+	  background: var(--paper);
+	  border-top: 1px solid var(--border);
+	}
+	.authors-inner {
+	  max-width: 640px;
+	  margin: 0 auto;
+	}
+	.author-block { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
+	.author-block:last-child { margin-bottom: 0; }
+	.author-avatar {
+	  width: 52px;
+	  height: 52px;
+	  border-radius: 50%;
+	  background: var(--ink);
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 22px;
+	  font-weight: 700;
+	  color: var(--gold2);
+	  flex-shrink: 0;
+	}
+	.author-name {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 20px;
+	  font-weight: 600;
+	  margin-bottom: 4px;
+	}
+	.author-title {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.1em;
+	  text-transform: uppercase;
+	  color: var(--gold);
+	  margin-bottom: 8px;
+	}
+	.author-bio { font-size: 15px; color: var(--muted); line-height: 1.35; }
+	
+	/* ─── FOOTER ─── */
+	footer {
+	  background: var(--ink);
+	  color: rgba(245,242,236,.4);
+	  text-align: center;
+	  padding: 28px 24px;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 11px;
+	  letter-spacing: 0.06em;
+	}
+	footer strong { color: rgba(245,242,236,.7); }
+	
+	/* ─── BOOK COVERS ─── */
+	.covers-section {
+	  background: var(--ink);
+	  padding: 44px 24px 36px;
+	  text-align: center;
+	}
+	.covers-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 11px;
+	  letter-spacing: 0.18em;
+	  text-transform: uppercase;
+	  color: var(--gold2);
+	  opacity: 0.7;
+	  margin-bottom: 22px;
+	}
+	.covers-grid {
+	  display: flex;
+	  justify-content: center;
+	  align-items: flex-end;
+	  gap: 40px;
+	  flex-wrap: wrap;
+	}
+	.cover-item {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  gap: 16px;
+	}
+	.cover-img-wrap {
+	  position: relative;
+	  display: inline-block;
+	}
+	.cover-img-wrap img {
+	  display: block;
+	  width: 200px;
+	  height: auto;
+	  border-radius: 3px;
+	  box-shadow:
+	    -6px 6px 0 rgba(0,0,0,0.5),
+	    0 20px 60px rgba(0,0,0,0.6);
+	  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	.cover-img-wrap img:hover {
+	  transform: translateY(-6px) rotate(-1deg);
+	  box-shadow: -8px 12px 0 rgba(0,0,0,0.5), 0 30px 70px rgba(0,0,0,0.7);
+	}
+	.cover-placeholder {
+	  width: 200px;
+	  height: 280px;
+	  background: linear-gradient(135deg, #1e2a40 0%, #111520 100%);
+	  border: 1px solid rgba(184,148,58,.3);
+	  border-radius: 3px;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 10px;
+	  box-shadow: -6px 6px 0 rgba(0,0,0,0.5), 0 20px 60px rgba(0,0,0,0.6);
+	}
+	.cover-placeholder-title {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 22px;
+	  font-weight: 700;
+	  color: var(--gold2);
+	  text-align: center;
+	  line-height: 1.1;
+	}
+	.cover-placeholder-sub {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 9px;
+	  letter-spacing: 0.12em;
+	  color: rgba(212,170,85,.45);
+	  text-transform: uppercase;
+	  text-align: center;
+	}
+	.cover-badge {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.12em;
+	  text-transform: uppercase;
+	  padding: 5px 14px;
+	  border-radius: 2px;
+	  display: inline-block;
+	}
+	.cover-badge.print {
+	  background: rgba(184,148,58,.15);
+	  border: 1px solid rgba(184,148,58,.4);
+	  color: var(--gold2);
+	}
+	.cover-badge.epub {
+	  background: rgba(26,39,68,.8);
+	  border: 1px solid rgba(26,39,68,1);
+	  color: rgba(245,242,236,.6);
+	}
+	
+	/* ─── DUAL FORMAT ORDER SECTION ─── */
+	.format-selector {
+	  display: flex;
+	  justify-content: center;
+	  gap: 24px;
+	  margin-bottom: 22px;
+	  flex-wrap: wrap;
+	}
+	.format-cards-grid {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  gap: 24px;
+	  max-width: 900px;
+	  margin: 0 auto;
+	}
+	@media(max-width: 700px) {
+	  .format-cards-grid { grid-template-columns: 1fr; max-width: 520px; }
+	}
+	.format-card {
+	  background: #fff;
+	  border: 1px solid var(--border);
+	  border-radius: 4px;
+	  overflow: hidden;
+	  box-shadow: 0 8px 40px var(--shadow);
+	  display: flex;
+	  flex-direction: column;
+	}
+	.format-card.featured {
+	  border-color: var(--gold);
+	  box-shadow: 0 8px 40px rgba(184,148,58,.2);
+	}
+	.format-card-ribbon {
+	  background: var(--gold);
+	  color: var(--ink);
+	  font-family: 'DM Mono', monospace;
+	  font-size: 9px;
+	  letter-spacing: 0.15em;
+	  text-transform: uppercase;
+	  text-align: center;
+	  padding: 5px;
+	  font-weight: 500;
+	}
+	.format-card-header {
+	  background: var(--ink);
+	  color: var(--paper);
+	  padding: 24px 28px;
+	  text-align: center;
+	}
+	.format-type-badge {
+	  display: inline-block;
+	  font-family: 'DM Mono', monospace;
+	  font-size: 9px;
+	  letter-spacing: 0.18em;
+	  text-transform: uppercase;
+	  border: 1px solid rgba(212,170,85,.35);
+	  color: var(--gold2);
+	  padding: 3px 12px;
+	  border-radius: 2px;
+	  margin-bottom: 12px;
+	}
+	.format-card-header .price-row {
+	  display: flex;
+	  align-items: baseline;
+	  justify-content: center;
+	  gap: 10px;
+	  margin-bottom: 4px;
+	}
+	.format-card-header .price-current {
+	  font-family: 'Cormorant Garamond', serif;
+	  font-size: 52px;
+	  font-weight: 700;
+	  line-height: 1;
+	  color: var(--gold2);
+	}
+	.format-card-header .price-currency {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 16px;
+	  color: rgba(245,242,236,.6);
+	  align-self: flex-end;
+	  padding-bottom: 4px;
+	}
+	.format-card-header .price-old {
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 12px;
+	  color: rgba(245,242,236,.3);
+	  text-decoration: line-through;
+	  align-self: flex-end;
+	  padding-bottom: 5px;
+	}
+	.format-card-header .price-note {
+	  font-size: 11px;
+	  color: rgba(245,242,236,.4);
+	  font-style: italic;
+	  margin-top: 4px;
+	}
+	.format-card-body {
+	  padding: 24px 28px;
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	}
+	.format-includes {
+	  list-style: none;
+	  margin-bottom: 12px;
+	  flex: 1;
+	}
+	.format-includes li {
+	  padding: 7px 0;
+	  font-size: 14px;
+	  color: #444;
+	  display: flex;
+	  gap: 8px;
+	  border-bottom: 1px solid #f0ede6;
+	  line-height: 1.3;
+	}
+	.format-includes li .check { color: var(--gold); font-weight: 600; flex-shrink: 0; }
+	.format-stripe-zone { margin-bottom: 16px; }
+	.format-secure-note {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 9px;
+	  letter-spacing: 0.07em;
+	  color: var(--muted);
+	  text-align: center;
+	}
+	.format-secure-note span { margin: 0 5px; }
 
-html { scroll-behavior: smooth; }
+	/* ─── PAYPAL SEPARATOR ─── */
+	.paypal-separator {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+	  margin: 14px 0 10px;
+	}
+	.paypal-separator::before,
+	.paypal-separator::after {
+	  content: '';
+	  flex: 1;
+	  height: 1px;
+	  background: var(--border);
+	}
+	.paypal-separator span {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.1em;
+	  text-transform: uppercase;
+	  color: var(--muted);
+	  white-space: nowrap;
+	}
 
-body {
-  background: var(--cream);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.35;
-}
-
-/* ─── PROMO BANNER ─── */
-.promo-bar {
-  background: var(--navy);
-  color: #fff;
-  text-align: center;
-  padding: 10px 20px;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-}
-.promo-bar strong { color: var(--gold2); }
-
-/* ─── HERO ─── */
-.hero {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 56px 24px 48px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,148,58,.18) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 40% at 30% 100%, rgba(26,39,68,.6) 0%, transparent 60%);
-  pointer-events: none;
-}
-.hero-inner { position: relative; max-width: 720px; margin: 0 auto; }
-
-.hero-eyebrow {
-  display: inline-block;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  border: 1px solid rgba(212,170,85,.35);
-  padding: 5px 16px;
-  border-radius: 2px;
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-family: 'Gagalin', sans-serif;
-  font-size: clamp(44px, 10vw, 96px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  margin-bottom: 10px;
-  color: #f5f0e6;
-}
-.hero h1 em {
-  font-style: normal;
-  color: var(--gold2);
-}
-
-.hero-subtitle {
-  font-size: 15px;
-  color: rgba(245,242,236,.65);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
-  margin-bottom: 22px;
-}
-
-.hero-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: rgba(245,242,236,.45);
-  text-transform: uppercase;
-}
-.hero-meta span::before { content: '— '; }
-.hero-meta span::after { content: ' — '; }
-
-/* ─── URGENCY BLOCK ─── */
-.urgency {
-  background: var(--paper);
-  border-bottom: 1px solid var(--border);
-  padding: 28px 24px;
-  text-align: center;
-}
-.urgency-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-.urgency-item { text-align: center; }
-.urgency-number {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--gold);
-}
-.urgency-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 4px;
-}
-.urgency-divider {
-  width: 1px;
-  height: 48px;
-  background: var(--border);
-}
-
-/* progress bar */
-.spots-bar {
-  max-width: 360px;
-  margin: 16px auto 0;
-}
-.spots-bar-track {
-  height: 4px;
-  background: #e8e4dc;
-  border-radius: 2px;
-  overflow: hidden;
-}
-.spots-bar-fill {
-  height: 100%;
-  width: 40%; /* 8 din 20 ocupate — ajustezi manual */
-  background: linear-gradient(90deg, var(--gold), var(--gold2));
-  border-radius: 2px;
-  transition: width .6s ease;
-}
-.spots-bar-text {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--red);
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-top: 6px;
-  font-weight: 500;
-}
-
-/* ─── LAYOUT ─── */
-.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-
-/* ─── BENEFITS ─── */
-.benefits {
-  padding: 48px 24px;
-  background: var(--cream);
-}
-.section-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-.benefits h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(30px, 4vw, 44px);
-  font-weight: 600;
-  line-height: 1.15;
-  max-width: 520px;
-  margin-bottom: 18px;
-  color: var(--ink);
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-@media(max-width: 560px){ .benefits-grid { grid-template-columns: 1fr; } }
-.benefit-card {
-  background: var(--cream);
-  padding: 32px 28px;
-}
-.benefit-icon {
-  font-size: 26px;
-  margin-bottom: 14px;
-}
-.benefit-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 10px;
-}
-.benefit-desc {
-  font-size: 16px;
-  color: var(--muted);
-  line-height: 1.35;
-}
-.benefit-tag {
-  display: inline-block;
-  margin-top: 12px;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-
-/* ─── QUOTES ─── */
-.quote-section {
-  background: var(--navy);
-  color: var(--paper);
-  padding: 56px 24px;
-}
-.quotes-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  text-align: center;
-  margin-bottom: 18px;
-}
-.quotes-grid {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  gap: 0 28px;
-  align-items: start;
-}
-@media(max-width: 680px) {
-  .quotes-grid { grid-template-columns: 1fr; gap: 28px 0; }
-  .quote-separator { display: none; }
-}
-.quote-separator {
-  background: rgba(212,170,85,.25);
-  align-self: stretch;
-}
-.quote-block { padding: 0 8px; }
-.quote-mark {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 80px;
-  line-height: 0.6;
-  color: var(--gold2);
-  opacity: 0.5;
-  margin-bottom: 16px;
-}
-.quote-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(18px, 2.2vw, 24px);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.3;
-  color: #f0ece2;
-  margin-bottom: 12px;
-}
-.quote-divider {
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
-  margin-bottom: 20px;
-}
-.quote-source {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.35;
-  color: rgba(240,236,226,.55);
-}
-.quote-source strong {
-  color: rgba(240,236,226,.9);
-  display: block;
-  font-size: 15px;
-  margin-bottom: 2px;
-}
-
-/* ─── WHAT'S INSIDE ─── */
-.inside {
-  padding: 48px 24px;
-  background: var(--paper);
-}
-.inside-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  margin-top: 40px;
-}
-@media(max-width: 600px){ .inside-grid { grid-template-columns: 1fr; gap: 32px; } }
-
-.inside-col h3 {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.inside-list { list-style: none; }
-.inside-list li {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 16px;
-  color: var(--ink);
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  line-height: 1.3;
-}
-.inside-list li::before {
-  content: '→';
-  color: var(--gold);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-/* ─── ORDER SECTION ─── */
-.order-section {
-  padding: 56px 24px;
-  background: var(--cream);
-  text-align: center;
-}
-.order-card {
-  max-width: 520px;
-  margin: 0 auto;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px var(--shadow);
-}
-.order-card-header {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 28px 32px;
-}
-.order-card-header .price-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(245,242,236,.5);
-  margin-bottom: 8px;
-}
-.order-card-header .price-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 14px;
-}
-.order-card-header .price-current {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--gold2);
-}
-.order-card-header .price-currency {
-  font-family: 'DM Mono', monospace;
-  font-size: 16px;
-  color: rgba(245,242,236,.6);
-  align-self: flex-end;
-  padding-bottom: 4px;
-}
-.order-card-header .price-old {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  color: rgba(245,242,236,.35);
-  text-decoration: line-through;
-  align-self: flex-end;
-  padding-bottom: 6px;
-}
-.order-card-header .price-note {
-  font-size: 12px;
-  color: rgba(245,242,236,.45);
-  margin-top: 4px;
-  font-style: italic;
-}
-
-.order-card-body { padding: 32px; }
-
-.includes-list {
-  list-style: none;
-  text-align: left;
-  margin-bottom: 18px;
-}
-.includes-list li {
-  padding: 7px 0;
-  font-size: 15px;
-  color: #444;
-  display: flex;
-  gap: 10px;
-  border-bottom: 1px solid #f0ede6;
-}
-.includes-list li .check {
-  color: var(--gold);
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   STRIPE BUY BUTTON ZONE
-   Înlocuiește conținutul div-ului #stripe-zone cu cele 2 linii
-   de cod de la Stripe Dashboard → Payment Links → Create buy button
-   ───────────────────────────────────────────────────────────────── */
-#stripe-zone {
-  margin-bottom: 20px;
-}
-
-/* Buton placeholder — șterge secțiunea .stripe-placeholder după
-   ce adaugi codul Stripe real */
-.stripe-placeholder {
-  background: #fff8ec;
-  border: 2px dashed var(--gold);
-  border-radius: 4px;
-  padding: 20px;
-  text-align: center;
-}
-.stripe-placeholder p {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--gold);
-  letter-spacing: 0.08em;
-  line-height: 1.4;
-}
-.stripe-placeholder code {
-  display: block;
-  background: #f5f0e4;
-  border-radius: 3px;
-  padding: 10px 14px;
-  margin-top: 10px;
-  font-size: 11px;
-  color: var(--ink);
-  text-align: left;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-/* ─── FIN STRIPE ZONE ─── */
-
-.secure-note {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  text-align: center;
-}
-.secure-note span { margin: 0 6px; }
-
-/* ─── AUTHORS ─── */
-.authors-section {
-  padding: 48px 24px;
-  background: var(--paper);
-  border-top: 1px solid var(--border);
-}
-.authors-inner {
-  max-width: 640px;
-  margin: 0 auto;
-}
-.author-block { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
-.author-block:last-child { margin-bottom: 0; }
-.author-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--gold2);
-  flex-shrink: 0;
-}
-.author-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.author-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.author-bio { font-size: 15px; color: var(--muted); line-height: 1.35; }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--ink);
-  color: rgba(245,242,236,.4);
-  text-align: center;
-  padding: 28px 24px;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-}
-footer strong { color: rgba(245,242,236,.7); }
-
-/* ─── BOOK COVERS ─── */
-.covers-section {
-  background: var(--ink);
-  padding: 44px 24px 36px;
-  text-align: center;
-}
-.covers-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  opacity: 0.7;
-  margin-bottom: 22px;
-}
-.covers-grid {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.cover-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-.cover-img-wrap {
-  position: relative;
-  display: inline-block;
-}
-.cover-img-wrap img {
-  display: block;
-  width: 200px;
-  height: auto;
-  border-radius: 3px;
-  box-shadow:
-    -6px 6px 0 rgba(0,0,0,0.5),
-    0 20px 60px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.cover-img-wrap img:hover {
-  transform: translateY(-6px) rotate(-1deg);
-  box-shadow: -8px 12px 0 rgba(0,0,0,0.5), 0 30px 70px rgba(0,0,0,0.7);
-}
-/* placeholder când nu ai imaginea încă */
-.cover-placeholder {
-  width: 200px;
-  height: 280px;
-  background: linear-gradient(135deg, #1e2a40 0%, #111520 100%);
-  border: 1px solid rgba(184,148,58,.3);
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  box-shadow: -6px 6px 0 rgba(0,0,0,0.5), 0 20px 60px rgba(0,0,0,0.6);
-}
-.cover-placeholder-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--gold2);
-  text-align: center;
-  line-height: 1.1;
-}
-.cover-placeholder-sub {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: rgba(212,170,85,.45);
-  text-transform: uppercase;
-  text-align: center;
-}
-.cover-badge {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 2px;
-  display: inline-block;
-}
-.cover-badge.print {
-  background: rgba(184,148,58,.15);
-  border: 1px solid rgba(184,148,58,.4);
-  color: var(--gold2);
-}
-.cover-badge.epub {
-  background: rgba(26,39,68,.8);
-  border: 1px solid rgba(26,39,68,1);
-  color: rgba(245,242,236,.6);
-}
-
-/* ─── DUAL FORMAT ORDER SECTION ─── */
-.format-selector {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-.format-cards-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-@media(max-width: 700px) {
-  .format-cards-grid { grid-template-columns: 1fr; max-width: 520px; }
-}
-.format-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px var(--shadow);
-  display: flex;
-  flex-direction: column;
-}
-.format-card.featured {
-  border-color: var(--gold);
-  box-shadow: 0 8px 40px rgba(184,148,58,.2);
-}
-.format-card-ribbon {
-  background: var(--gold);
-  color: var(--ink);
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 5px;
-  font-weight: 500;
-}
-.format-card-header {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 24px 28px;
-  text-align: center;
-}
-.format-type-badge {
-  display: inline-block;
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  border: 1px solid rgba(212,170,85,.35);
-  color: var(--gold2);
-  padding: 3px 12px;
-  border-radius: 2px;
-  margin-bottom: 12px;
-}
-.format-card-header .price-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 4px;
-}
-.format-card-header .price-current {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 52px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--gold2);
-}
-.format-card-header .price-currency {
-  font-family: 'DM Mono', monospace;
-  font-size: 16px;
-  color: rgba(245,242,236,.6);
-  align-self: flex-end;
-  padding-bottom: 4px;
-}
-.format-card-header .price-old {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  color: rgba(245,242,236,.3);
-  text-decoration: line-through;
-  align-self: flex-end;
-  padding-bottom: 5px;
-}
-.format-card-header .price-note {
-  font-size: 11px;
-  color: rgba(245,242,236,.4);
-  font-style: italic;
-  margin-top: 4px;
-}
-.format-card-body {
-  padding: 24px 28px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.format-includes {
-  list-style: none;
-  margin-bottom: 12px;
-  flex: 1;
-}
-.format-includes li {
-  padding: 7px 0;
-  font-size: 14px;
-  color: #444;
-  display: flex;
-  gap: 8px;
-  border-bottom: 1px solid #f0ede6;
-  line-height: 1.3;
-}
-.format-includes li .check { color: var(--gold); font-weight: 600; flex-shrink: 0; }
-.format-stripe-zone { margin-bottom: 16px; }
-.format-secure-note {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.07em;
-  color: var(--muted);
-  text-align: center;
-}
-.format-secure-note span { margin: 0 5px; }
-
-/* ─── RESPONSIVE ─── */
-@media(max-width: 640px) {
-  .urgency-inner { gap: 20px; }
-  .urgency-divider { display: none; }
-  .format-card-body { padding: 20px 18px; }
-  .format-card-header { padding: 20px 18px; }
-}
-
-/* ─── MODAL COPERTE ─── */
-.cover-img-wrap {
-  cursor: zoom-in;
-}
-.cover-hint {
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.75);
-  text-transform: uppercase;
-  margin-top: -4px;
-}
-
-#cover-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(8,8,12,0.92);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-#cover-modal.open {
-  display: flex;
-  animation: modalFadeIn .25s ease;
-}
-@keyframes modalFadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
-}
-.modal-inner {
-  position: relative;
-  display: flex;
-  gap: 24px;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  justify-content: center;
-  max-width: 860px;
-  width: 100%;
-  animation: modalSlideUp .3s cubic-bezier(.22,1,.36,1);
-}
-@keyframes modalSlideUp {
-  from { transform: translateY(24px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
-}
-.modal-cover {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  flex: 1;
-  min-width: 0;
-}
-.modal-cover img {
-  max-height: 78vh;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  border-radius: 3px;
-  box-shadow: -8px 10px 0 rgba(0,0,0,0.6), 0 32px 80px rgba(0,0,0,0.8);
-}
-@media(max-width: 640px) {
-  .modal-inner { gap: 12px; padding: 0 4px; }
-  .modal-cover img { max-height: 55vh; }
-}
-.modal-cover-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(212,170,85,.6);
-}
-.modal-close {
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  background: none;
-  border: 1px solid rgba(245,242,236,.2);
-  color: rgba(245,242,236,.6);
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  padding: 7px 16px;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: all .2s;
-}
-.modal-close:hover {
-  background: rgba(245,242,236,.08);
-  color: #fff;
-  border-color: rgba(245,242,236,.4);
-}
-</style>
+	/* ─── RESPONSIVE ─── */
+	@media(max-width: 640px) {
+	  .urgency-inner { gap: 20px; }
+	  .urgency-divider { display: none; }
+	  .format-card-body { padding: 20px 18px; }
+	  .format-card-header { padding: 20px 18px; }
+	}
+	
+	/* ─── MODAL COPERTE ─── */
+	.cover-img-wrap {
+	  cursor: zoom-in;
+	}
+	.cover-hint {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 13px;
+	  letter-spacing: 0.1em;
+	  color: rgba(255,255,255,0.75);
+	  text-transform: uppercase;
+	  margin-top: -4px;
+	}
+	
+	#cover-modal {
+	  display: none;
+	  position: fixed;
+	  inset: 0;
+	  z-index: 9999;
+	  background: rgba(8,8,12,0.92);
+	  backdrop-filter: blur(6px);
+	  -webkit-backdrop-filter: blur(6px);
+	  align-items: center;
+	  justify-content: center;
+	  padding: 24px;
+	}
+	#cover-modal.open {
+	  display: flex;
+	  animation: modalFadeIn .25s ease;
+	}
+	@keyframes modalFadeIn {
+	  from { opacity: 0; transform: scale(0.96); }
+	  to   { opacity: 1; transform: scale(1); }
+	}
+	.modal-inner {
+	  position: relative;
+	  display: flex;
+	  gap: 24px;
+	  align-items: flex-end;
+	  flex-wrap: nowrap;
+	  justify-content: center;
+	  max-width: 860px;
+	  width: 100%;
+	  animation: modalSlideUp .3s cubic-bezier(.22,1,.36,1);
+	}
+	@keyframes modalSlideUp {
+	  from { transform: translateY(24px); opacity: 0; }
+	  to   { transform: translateY(0);    opacity: 1; }
+	}
+	.modal-cover {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  gap: 14px;
+	  flex: 1;
+	  min-width: 0;
+	}
+	.modal-cover img {
+	  max-height: 78vh;
+	  max-width: 100%;
+	  width: auto;
+	  height: auto;
+	  border-radius: 3px;
+	  box-shadow: -8px 10px 0 rgba(0,0,0,0.6), 0 32px 80px rgba(0,0,0,0.8);
+	}
+	@media(max-width: 640px) {
+	  .modal-inner { gap: 12px; padding: 0 4px; }
+	  .modal-cover img { max-height: 55vh; }
+	}
+	.modal-cover-label {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.14em;
+	  text-transform: uppercase;
+	  color: rgba(212,170,85,.6);
+	}
+	.modal-close {
+	  position: fixed;
+	  top: 20px;
+	  right: 24px;
+	  background: none;
+	  border: 1px solid rgba(245,242,236,.2);
+	  color: rgba(245,242,236,.6);
+	  font-family: 'DM Mono', monospace;
+	  font-size: 11px;
+	  letter-spacing: 0.1em;
+	  padding: 7px 16px;
+	  cursor: pointer;
+	  border-radius: 2px;
+	  transition: all .2s;
+	}
+	.modal-close:hover {
+	  background: rgba(245,242,236,.08);
+	  color: #fff;
+	  border-color: rgba(245,242,236,.4);
+	}
+	
+	/* ─── STRIPE BUTTON ─── */
+	.stripe-btn {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 8px;
+	  width: 100%;
+	  padding: 13px 20px;
+	  background: var(--navy);
+	  border: none;
+	  border-radius: 4px;
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 15px;
+	  font-weight: 600;
+	  color: #fff;
+	  text-decoration: none;
+	  cursor: pointer;
+	  transition: background .2s, transform .15s;
+	  margin-bottom: 4px;
+	}
+	.stripe-btn:hover {
+	  background: #253660;
+	  transform: translateY(-1px);
+	}
+	/* ─── PAYPAL BUTTON ─── */
+	.paypal-btn {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 10px;
+	  width: 100%;
+	  padding: 13px 20px;
+	  background: #FFC439;
+	  border: none;
+	  border-radius: 4px;
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 15px;
+	  font-weight: 600;
+	  color: #003087;
+	  text-decoration: none;
+	  cursor: pointer;
+	  transition: background .2s, transform .15s;
+	  margin-bottom: 4px;
+	}
+	.paypal-btn:hover {
+	  background: #f0b429;
+	  transform: translateY(-1px);
+	}
+	.paypal-btn img {
+	  display: inline-block;
+	  vertical-align: middle;
+	}
+	</style>
 </head>
 <body>
 
@@ -887,23 +927,11 @@ footer strong { color: rgba(245,242,236,.7); }
     <div class="hero-meta">
 	  <span>Autori: <strong>dr.ing. Radu Pascu &amp; dr.ing. Liliana Popescu</strong></span>
       <span>Editura MATRIX ROM, București, 2026. 160 pagini</span>
-
     </div>
   </div>
 </section>
 
-<!-- BOOK COVERS
-     ════════════════════════════════════════════════════════════════
-     Înlocuiește .cover-placeholder cu un tag <img> atunci când ai
-     imaginile coperților. Exemplu:
-
-     <div class="cover-img-wrap">
-       <img src="coperta-print.jpg" alt="AI Navigator — ediție tipărită">
-     </div>
-
-     Poți folosi și URL de pe Google Drive sau Dropbox (link public).
-     Dimensiune recomandată: min 400×560 px, format JPG sau WebP.
-     ════════════════════════════════════════════════════════════════ -->
+<!-- BOOK COVERS -->
 <div class="covers-section">
   <div class="covers-label">Disponibil în două formate</div>
   <div class="covers-grid">
@@ -921,7 +949,7 @@ footer strong { color: rgba(245,242,236,.7); }
         <img src="c1.png" alt="AI Navigator — eBook">
       </div>
       <span class="cover-hint">🔍 click pentru zoom</span>
-      <span class="cover-badge epub">📱 DOAR ePub · Digital</span>
+      <span class="cover-badge epub">📱 ePub · Digital</span>
     </div>
 
   </div>
@@ -1072,54 +1100,45 @@ footer strong { color: rgba(245,242,236,.7); }
 
       <!-- ══════════════════════════════════════════════════
            CARD 1 — EDIȚIE TIPĂRITĂ (Print)
-           Stripe: Products → "AI NAVIGATOR Print" → Payment Link
-           Activează: ✓ Collect shipping address
            ══════════════════════════════════════════════════ -->
       <div class="format-card">
         <div class="format-card-header">
           <div class="format-type-badge">📖 Ediție tipărită</div>
           <div class="price-row">
-            <div class="price-current">199</div>
+            <div class="price-current">149</div>
             <div class="price-currency">RON</div>
-            <div class="price-old">249 RON</div>
+            <div class="price-old">199 RON</div>
           </div>
           <div class="price-note">Preț promoțional · Primii 20 solicitanți</div>
         </div>
         <div class="format-card-body">
           <ul class="format-includes">
-            <li><span class="check">✓</span> Carte fizică, 160 pagini, MATRIX ROM 2026</li>
+            <li><span class="check">✓</span> Carte format fizic, 160 pagini, MATRIX ROM 2026</li>
             <li><span class="check">✓</span> Fișele de lucru PDF/WORD (trimise pe email)</li>
-            <li><span class="check">✓</span> Livrare prin curier în toată România</li>
+            <li><span class="check">✓</span> Livrare gratuită prin EasyBox în toată România</li>
             <li><span class="check">✓</span> Factură fiscală la cerere</li>
           </ul>
-          <!-- ═══════════════════════════════════════════
-               STRIPE BUY BUTTON — PRINT
-               Înlocuiește conținutul div-ului de mai jos
-               cu cele 2 linii de cod din Stripe Dashboard
-               (asigură-te că ai activat "Collect shipping address")
-               ═══════════════════════════════════════════ -->
-          <div class="format-stripe-zone" id="stripe-zone-print">
-            <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-            <stripe-buy-button
-              buy-button-id="buy_btn_1TYQCPRwvEzkBobCWIptvm4l"
-              publishable-key="pk_live_51SQqj8RwvEzkBobCjd0EcFZtRF0BPg4Uz4rL32bsYUzjwfT4B7NWI0LS4qXki4xfOLlgY4amExFcxWEG5IEhbYOl00Yebmy8e8"
-            ></stripe-buy-button>
-          </div>
-          <div class="format-secure-note">🔒 Plată securizată Stripe <span>·</span> SSL 256-bit</div>
+
+          <!-- Stripe — Print -->
+          <a href="https://buy.stripe.com/cNi3cxal1c4ZaRUgbI6Vq02" target="_blank" rel="noopener" class="stripe-btn">
+            🛒 Comandă acum · Card bancar
+          </a>
+
+          <!-- PayPal — Print -->
+          <div class="paypal-separator"><span>sau plătește cu</span></div>
+          <a href="https://www.paypal.com/ncp/payment/MTVVK3NXKKUH8" target="_blank" rel="noopener" class="paypal-btn"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" height="18"> Plătește cu PayPal</a>
+
+          <div class="format-secure-note" style="margin-top:14px;">🔒 Plată securizată Stripe &amp; PayPal <span>·</span> SSL 256-bit</div>
         </div>
       </div>
 
       <!-- ══════════════════════════════════════════════════
            CARD 2 — e-BOOK (ePub + PDF)
-           Stripe: Products → "AI NAVIGATOR eBook" → Payment Link
-           NU activa "Collect shipping address" (e livrare digitală)
-           Adaugă un "Thank you page" sau trimite fișierul manual pe email
            ══════════════════════════════════════════════════ -->
       <div class="format-card">
         <div class="format-card-header">
           <div class="format-type-badge">📱 e-Book digital</div>
           <div class="price-row">
-            <!-- ↓ Modifică prețul după cum stabilești tu -->
             <div class="price-current">99</div>
             <div class="price-currency">RON</div>
             <div class="price-old">129 RON</div>
@@ -1133,26 +1152,17 @@ footer strong { color: rgba(245,242,236,.7); }
             <li><span class="check">✓</span> Livrare instant pe email după plată</li>
             <li><span class="check">✓</span> Compatibil cu toate dispozitivele</li>
           </ul>
-          <!-- ═══════════════════════════════════════════
-               STRIPE BUY BUTTON — eBOOK
-               Pași:
-               1. Stripe Dashboard → Products → + Add product
-                  Nume: "AI NAVIGATOR — eBook"
-                  Preț: [suma ta] RON · One-time
-               2. Create Payment Link → fără "Collect shipping"
-               3. Create buy button → copiază codul de mai jos
-               ═══════════════════════════════════════════ -->
-          <div class="format-stripe-zone" id="stripe-zone-epub">
-            <script async
-			  src="https://js.stripe.com/v3/buy-button.js">
-			</script>
-			<stripe-buy-button
-			  buy-button-id="buy_btn_1TZ5s4RwvEzkBobChkbodzkC"
-			  publishable-key="pk_live_51SQqj8RwvEzkBobCjd0EcFZtRF0BPg4Uz4rL32bsYUzjwfT4B7NWI0LS4qXki4xfOLlgY4amExFcxWEG5IEhbYOl00Yebmy8e8"
-			>
-			</stripe-buy-button>
-          </div>
-          <div class="format-secure-note">🔒 Plată securizată Stripe <span>·</span> SSL 256-bit</div>
+
+          <!-- Stripe — eBook -->
+          <a href="https://buy.stripe.com/dRm6oJ2Szfhb1hk2kS6Vq01" target="_blank" rel="noopener" class="stripe-btn">
+            🛒 Comandă acum · Card bancar
+          </a>
+
+          <!-- PayPal — eBook -->
+          <div class="paypal-separator"><span>sau plătește cu</span></div>
+          <a href="https://www.paypal.com/ncp/payment/Y54JDF7MQX2DS" target="_blank" rel="noopener" class="paypal-btn"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" height="18"> Plătește cu PayPal</a>
+
+          <div class="format-secure-note" style="margin-top:14px;">🔒 Plată securizată Stripe &amp; PayPal <span>·</span> SSL 256-bit</div>
         </div>
       </div>
 
@@ -1193,9 +1203,8 @@ footer strong { color: rgba(245,242,236,.7); }
 
 <script>
 // ── Contor locuri rămase ────────────────────────────────────────────────────
-// Modifică această valoare manual pe măsură ce primești comenzi
 const TOTAL = 20;
-const VANDUTE = 8; // ← actualizezi tu după fiecare comandă
+const VANDUTE = 8;
 const RAMASE = TOTAL - VANDUTE;
 
 document.getElementById('spotsLeft').textContent = RAMASE;
@@ -1226,16 +1235,16 @@ function openModal() {
   document.body.style.overflow = 'hidden';
 }
 function closeModal(e) {
-  // închide dacă s-a dat click pe fundal sau pe butonul de închidere
   if (!e || e.target === document.getElementById('cover-modal') || e.currentTarget.classList.contains('modal-close')) {
     document.getElementById('cover-modal').classList.remove('open');
     document.body.style.overflow = '';
   }
 }
-// închide și cu Escape
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
+
+// PayPal — simple payment links, no SDK needed
 </script>
 
 </body>
