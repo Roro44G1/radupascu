@@ -3,10 +3,9 @@ import { getStore } from "@netlify/blobs";
 import { Resend } from "resend";
 import JSZip from "jszip";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export default async function handler(req) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY);
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
