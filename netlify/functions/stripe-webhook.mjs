@@ -4,19 +4,20 @@ import { Resend } from "resend";
 import JSZip from "jszip";
 
 export default async function handler(req) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-  const resend = new Resend(process.env.RESEND_API_KEY);
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
 
-  // Verifică semnătura Stripe
-  const sig = req.headers.get("stripe-signature");
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  // Citește body-ul raw pentru verificarea semnăturii Stripe
   const body = await req.text();
+  const sig = req.headers.get("stripe-signature");
 
   let event;
   try {
-    event = stripe.webhooks.constructEvent(
+    event = await stripe.webhooks.constructEventAsync(
       body,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
@@ -54,7 +55,6 @@ export default async function handler(req) {
     // Aplică watermark în epub
     const zip = await JSZip.loadAsync(epubBuffer);
 
-    // Injectează watermark în toate fișierele HTML/XHTML din epub
     const watermarkHtml = `<div style="display:none;visibility:hidden;">Licențiat pentru: ${customerName} &lt;${customerEmail}&gt;</div>`;
 
     const htmlFiles = Object.keys(zip.files).filter(
@@ -106,4 +106,5 @@ export default async function handler(req) {
 
 export const config = {
   path: "/.netlify/functions/stripe-webhook",
+  bodyParser: false,
 };
