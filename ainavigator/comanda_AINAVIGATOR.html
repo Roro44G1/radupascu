@@ -6,8 +6,6 @@
 	<title>AI NAVIGATOR — Comandă cartea</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Gagalin&display=swap" rel="stylesheet">
-	<script 
-	  src="https://www.paypal.com/sdk/js?client-id=BAA3xIOjNnOqKGQRSTUs68lY18TlKF9XhmNXl9dw0kwYKggQjovGxYOQ8cTQad0YFCZPlACad_kfXk9OPk&components=hosted-buttons&disable-funding=venmo&currency=EUR">
 	</script>
 	<style>
 	*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -170,7 +168,7 @@
 	}
 	.spots-bar-fill {
 	  height: 100%;
-	  width: 40%; /* 8 din 20 ocupate — ajustezi manual */
+	  width: 40%;
 	  background: linear-gradient(90deg, var(--gold), var(--gold2));
 	  border-radius: 2px;
 	  transition: width .6s ease;
@@ -444,44 +442,9 @@
 	  flex-shrink: 0;
 	}
 	
-	/* ─────────────────────────────────────────────────────────────────
-	   STRIPE BUY BUTTON ZONE
-	   Înlocuiește conținutul div-ului #stripe-zone cu cele 2 linii
-	   de cod de la Stripe Dashboard → Payment Links → Create buy button
-	   ───────────────────────────────────────────────────────────────── */
 	#stripe-zone {
 	  margin-bottom: 20px;
 	}
-	
-	/* Buton placeholder — șterge secțiunea .stripe-placeholder după
-	   ce adaugi codul Stripe real */
-	.stripe-placeholder {
-	  background: #fff8ec;
-	  border: 2px dashed var(--gold);
-	  border-radius: 4px;
-	  padding: 20px;
-	  text-align: center;
-	}
-	.stripe-placeholder p {
-	  font-family: 'DM Mono', monospace;
-	  font-size: 11px;
-	  color: var(--gold);
-	  letter-spacing: 0.08em;
-	  line-height: 1.4;
-	}
-	.stripe-placeholder code {
-	  display: block;
-	  background: #f5f0e4;
-	  border-radius: 3px;
-	  padding: 10px 14px;
-	  margin-top: 10px;
-	  font-size: 11px;
-	  color: var(--ink);
-	  text-align: left;
-	  white-space: pre-wrap;
-	  word-break: break-all;
-	}
-	/* ─── FIN STRIPE ZONE ─── */
 	
 	.secure-note {
 	  font-family: 'DM Mono', monospace;
@@ -592,7 +555,6 @@
 	  transform: translateY(-6px) rotate(-1deg);
 	  box-shadow: -8px 12px 0 rgba(0,0,0,0.5), 0 30px 70px rgba(0,0,0,0.7);
 	}
-	/* placeholder când nu ai imaginea încă */
 	.cover-placeholder {
 	  width: 200px;
 	  height: 280px;
@@ -767,7 +729,30 @@
 	  text-align: center;
 	}
 	.format-secure-note span { margin: 0 5px; }
-	
+
+	/* ─── PAYPAL SEPARATOR ─── */
+	.paypal-separator {
+	  display: flex;
+	  align-items: center;
+	  gap: 10px;
+	  margin: 14px 0 10px;
+	}
+	.paypal-separator::before,
+	.paypal-separator::after {
+	  content: '';
+	  flex: 1;
+	  height: 1px;
+	  background: var(--border);
+	}
+	.paypal-separator span {
+	  font-family: 'DM Mono', monospace;
+	  font-size: 10px;
+	  letter-spacing: 0.1em;
+	  text-transform: uppercase;
+	  color: var(--muted);
+	  white-space: nowrap;
+	}
+
 	/* ─── RESPONSIVE ─── */
 	@media(max-width: 640px) {
 	  .urgency-inner { gap: 20px; }
@@ -871,28 +856,58 @@
 	  color: #fff;
 	  border-color: rgba(245,242,236,.4);
 	}
-
-	/* ─── PAYPAL SEPARATOR ─── */
-	.paypal-separator {
+	
+	/* ─── STRIPE BUTTON ─── */
+	.stripe-btn {
 	  display: flex;
 	  align-items: center;
+	  justify-content: center;
+	  gap: 8px;
+	  width: 100%;
+	  padding: 13px 20px;
+	  background: var(--navy);
+	  border: none;
+	  border-radius: 4px;
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 15px;
+	  font-weight: 600;
+	  color: #fff;
+	  text-decoration: none;
+	  cursor: pointer;
+	  transition: background .2s, transform .15s;
+	  margin-bottom: 4px;
+	}
+	.stripe-btn:hover {
+	  background: #253660;
+	  transform: translateY(-1px);
+	}
+	/* ─── PAYPAL BUTTON ─── */
+	.paypal-btn {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
 	  gap: 10px;
-	  margin: 12px 0;
-	  color: var(--muted);
+	  width: 100%;
+	  padding: 13px 20px;
+	  background: #FFC439;
+	  border: none;
+	  border-radius: 4px;
+	  font-family: 'DM Sans', sans-serif;
+	  font-size: 15px;
+	  font-weight: 600;
+	  color: #003087;
+	  text-decoration: none;
+	  cursor: pointer;
+	  transition: background .2s, transform .15s;
+	  margin-bottom: 4px;
 	}
-	.paypal-separator::before,
-	.paypal-separator::after {
-	  content: '';
-	  flex: 1;
-	  height: 1px;
-	  background: var(--border);
+	.paypal-btn:hover {
+	  background: #f0b429;
+	  transform: translateY(-1px);
 	}
-	.paypal-separator span {
-	  font-family: 'DM Mono', monospace;
-	  font-size: 10px;
-	  letter-spacing: 0.1em;
-	  text-transform: uppercase;
-	  white-space: nowrap;
+	.paypal-btn img {
+	  display: inline-block;
+	  vertical-align: middle;
 	}
 	</style>
 </head>
@@ -912,23 +927,11 @@
     <div class="hero-meta">
 	  <span>Autori: <strong>dr.ing. Radu Pascu &amp; dr.ing. Liliana Popescu</strong></span>
       <span>Editura MATRIX ROM, București, 2026. 160 pagini</span>
-
     </div>
   </div>
 </section>
 
-<!-- BOOK COVERS
-     ════════════════════════════════════════════════════════════════
-     Înlocuiește .cover-placeholder cu un tag <img> atunci când ai
-     imaginile coperților. Exemplu:
-
-     <div class="cover-img-wrap">
-       <img src="coperta-print.jpg" alt="AI Navigator — ediție tipărită">
-     </div>
-
-     Poți folosi și URL de pe Google Drive sau Dropbox (link public).
-     Dimensiune recomandată: min 400×560 px, format JPG sau WebP.
-     ════════════════════════════════════════════════════════════════ -->
+<!-- BOOK COVERS -->
 <div class="covers-section">
   <div class="covers-label">Disponibil în două formate</div>
   <div class="covers-grid">
@@ -946,7 +949,7 @@
         <img src="c1.png" alt="AI Navigator — eBook">
       </div>
       <span class="cover-hint">🔍 click pentru zoom</span>
-      <span class="cover-badge epub">📱 DOAR ePub · Digital</span>
+      <span class="cover-badge epub">📱 ePub · Digital</span>
     </div>
 
   </div>
@@ -1097,8 +1100,6 @@
 
       <!-- ══════════════════════════════════════════════════
            CARD 1 — EDIȚIE TIPĂRITĂ (Print)
-           Stripe: Products → "AI NAVIGATOR Print" → Payment Link
-           Activează: ✓ Collect shipping address
            ══════════════════════════════════════════════════ -->
       <div class="format-card">
         <div class="format-card-header">
@@ -1117,34 +1118,27 @@
             <li><span class="check">✓</span> Livrare gratuită prin EasyBox în toată România</li>
             <li><span class="check">✓</span> Factură fiscală la cerere</li>
           </ul>
-          <!-- ═══════════════════════════════════════════
-               STRIPE BUY BUTTON — PRINT
-               Înlocuiește conținutul div-ului de mai jos
-               cu cele 2 linii de cod din Stripe Dashboard
-               (asigură-te că ai activat "Collect shipping address")
-               ═══════════════════════════════════════════ -->
-          <div class="format-stripe-zone" id="stripe-zone-print">
-            <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-            <stripe-buy-button
-              buy-button-id="buy_btn_1TYQCPRwvEzkBobCWIptvm4l"
-              publishable-key="pk_live_51SQqj8RwvEzkBobCjd0EcFZtRF0BPg4Uz4rL32bsYUzjwfT4B7NWI0LS4qXki4xfOLlgY4amExFcxWEG5IEhbYOl00Yebmy8e8"
-            ></stripe-buy-button>
-          </div>
-          <div class="format-secure-note">🔒 Plată securizată Stripe <span>·</span> SSL 256-bit</div>
+
+          <!-- Stripe — Print -->
+          <a href="https://buy.stripe.com/cNi3cxal1c4ZaRUgbI6Vq02" target="_blank" rel="noopener" class="stripe-btn">
+            🛒 Comandă acum · Card bancar
+          </a>
+
+          <!-- PayPal — Print -->
+          <div class="paypal-separator"><span>sau plătește cu</span></div>
+          <a href="https://www.paypal.com/ncp/payment/MTVVK3NXKKUH8" target="_blank" rel="noopener" class="paypal-btn"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" height="18"> Plătește cu PayPal</a>
+
+          <div class="format-secure-note" style="margin-top:14px;">🔒 Plată securizată Stripe &amp; PayPal <span>·</span> SSL 256-bit</div>
         </div>
       </div>
 
       <!-- ══════════════════════════════════════════════════
            CARD 2 — e-BOOK (ePub + PDF)
-           Stripe: Products → "AI NAVIGATOR eBook" → Payment Link
-           NU activa "Collect shipping address" (e livrare digitală)
-           Adaugă un "Thank you page" sau trimite fișierul manual pe email
            ══════════════════════════════════════════════════ -->
       <div class="format-card">
         <div class="format-card-header">
           <div class="format-type-badge">📱 e-Book digital</div>
           <div class="price-row">
-            <!-- ↓ Modifică prețul după cum stabilești tu -->
             <div class="price-current">99</div>
             <div class="price-currency">RON</div>
             <div class="price-old">129 RON</div>
@@ -1158,35 +1152,17 @@
             <li><span class="check">✓</span> Livrare instant pe email după plată</li>
             <li><span class="check">✓</span> Compatibil cu toate dispozitivele</li>
           </ul>
-          <!-- ═══════════════════════════════════════════
-               STRIPE BUY BUTTON — eBOOK
-               Pași:
-               1. Stripe Dashboard → Products → + Add product
-                  Nume: "AI NAVIGATOR — eBook"
-                  Preț: [suma ta] RON · One-time
-               2. Create Payment Link → fără "Collect shipping"
-               3. Create buy button → copiază codul de mai jos
-               ═══════════════════════════════════════════ -->
-			<div class="format-stripe-zone" id="stripe-zone-epub">
-			  <script async
-			    src="https://js.stripe.com/v3/buy-button.js">
-			  </script>
-			  <stripe-buy-button
-			    buy-button-id="buy_btn_1TZ5s4RwvEzkBobChkbodzkC"
-			    publishable-key="pk_live_51SQqj8RwvEzkBobCjd0EcFZtRF0BPg4Uz4rL32bsYUzjwfT4B7NWI0LS4qXki4xfOLlgY4amExFcxWEG5IEhbYOl00Yebmy8e8"
-			  >
-			  </stripe-buy-button>
-			  
-			  <!-- PayPal separator -->
-			  <div class="paypal-separator">
-			    <span>sau plătește cu</span>
-			  </div>
-			  
-			  <!-- PayPal Hosted Button — eBook 99 RON -->
-			  <div id="paypal-container-8U4WP5GS7SBUY"></div>
-			</div>
-          </div>
-          <div class="format-secure-note">🔒 Plată securizată Stripe <span>·</span> SSL 256-bit</div>
+
+          <!-- Stripe — eBook -->
+          <a href="https://buy.stripe.com/dRm6oJ2Szfhb1hk2kS6Vq01" target="_blank" rel="noopener" class="stripe-btn">
+            🛒 Comandă acum · Card bancar
+          </a>
+
+          <!-- PayPal — eBook -->
+          <div class="paypal-separator"><span>sau plătește cu</span></div>
+          <a href="https://www.paypal.com/ncp/payment/Y54JDF7MQX2DS" target="_blank" rel="noopener" class="paypal-btn"><img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" height="18"> Plătește cu PayPal</a>
+
+          <div class="format-secure-note" style="margin-top:14px;">🔒 Plată securizată Stripe &amp; PayPal <span>·</span> SSL 256-bit</div>
         </div>
       </div>
 
@@ -1227,9 +1203,8 @@
 
 <script>
 // ── Contor locuri rămase ────────────────────────────────────────────────────
-// Modifică această valoare manual pe măsură ce primești comenzi
 const TOTAL = 20;
-const VANDUTE = 8; // ← actualizezi tu după fiecare comandă
+const VANDUTE = 8;
 const RAMASE = TOTAL - VANDUTE;
 
 document.getElementById('spotsLeft').textContent = RAMASE;
@@ -1260,16 +1235,16 @@ function openModal() {
   document.body.style.overflow = 'hidden';
 }
 function closeModal(e) {
-  // închide dacă s-a dat click pe fundal sau pe butonul de închidere
   if (!e || e.target === document.getElementById('cover-modal') || e.currentTarget.classList.contains('modal-close')) {
     document.getElementById('cover-modal').classList.remove('open');
     document.body.style.overflow = '';
   }
 }
-// închide și cu Escape
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
+
+// PayPal — simple payment links, no SDK needed
 </script>
 
 </body>
