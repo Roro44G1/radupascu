@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afiș A2 - Lansare AI NAVIGATOR (Economic)</title>
+    
+    <!-- SEO Tags -->
+    <meta name="description" content="Lansare de carte: AI NAVIGATOR - Etică și productivitate în cercetarea academică de dr. ing. Radu Pascu și Liliana G. Popescu la Târgul de carte Alba Transilvana.">
+    <meta name="keywords" content="lansare carte, AI NAVIGATOR, Radu Pascu, Alba Iulia, Târgul de carte, etică cercetare">
+    <meta name="author" content="dr. ing. Radu Pascu">
+    
+    <!-- Open Graph Tags Actualizat -->
+    <meta property="og:title" content="Lansare de carte - AI NAVIGATOR">
+    <meta property="og:description" content="Te așteptăm pe 19 iunie 2026, ora 17:00, la Muzeul Național al Unirii din Alba Iulia pentru lansarea volumului AI NAVIGATOR.">
+    <meta property="og:type" content="event">
+    <meta property="og:url" content="https://radupascu.online/ainavigator/lansareainavigator">
+    
+    <style>
+        /* Declararea fonturilor speciale solicitate */
+				
+		@font-face {
+			font-family: 'Baka';
+			src: url('Baka.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+        @font-face {
+            font-family: 'Gagalin';
+            src: url('Gagalin.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Futura';
+            src: url('Futura.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Telegraf';
+            src: url('Telegraf.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Font implicit de rezervă */
+            font-family: Arial, sans-serif; 
+        }
+
+        /* Format A2 optimizat pentru Plotter (Fundal Alb) */
+        .poster-a2 {
+            width: 1200px;
+            height: 1697px;
+            background-color: #ffffff;
+            color: #0d1b2a;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 60px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+
+        /* Cadru discret pentru a delimita spațiul */
+        .poster-a2::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            right: 40px;
+            bottom: 40px;
+            border: 5px solid #00b4d8;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        /* HEADER: Tip eveniment și branding */
+        .text-group {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Lansare de carte: GAGALIN */
+        .event-type {
+            font-family: 'Gagalin', Impact, sans-serif;
+            font-size: 65px;
+            letter-spacing: 4px;
+            color: #0d1b2a;
+            text-transform: uppercase;
+            border-bottom: 8px solid #f07178;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .fair-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .fair-logo {
+            height: 130px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .fair-name {
+            text-align: left;
+        }
+
+		   /* Târgul de cArte : Futura */
+		.fair-name h2 {
+			font-family: 'Futura', 'Futura Medium', 'Futura Bold', Arial, sans-serif;
+			font-size: 42px;
+			color: #000000;
+			font-weight: bold;
+			text-transform: none;
+		}
+		
+		/* Stilul specific pentru Alba Transilvana */
+		.fair-name .alba-transilvana {
+			font-family: 'Baka', 'Brush Script MT', cursive;
+			font-size: 40px; /* Poți ajusta dimensiunea în funcție de cum se așază fontul */
+			color: #f07178;
+			font-weight: normal;
+}
+
+		.fair-name p {
+			font-family: 'Futura', 'Futura Medium', Arial, sans-serif;
+			font-size: 26px;
+			font-weight: normal;
+			color: #0d1b2a;
+}
+        /* SECȚIUNEA CENTRALĂ: IMAGINE MASIVĂ */
+        .book-hero {
+            width: 85%;
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+		.book-image {
+			max-width: 85%;
+			height: auto;
+			/* Face albul din jurul cărților transparent */
+			mix-blend-mode: multiply; 
+			/* Optimizează culorile cărții ca să rămână intense */
+			filter: contrast(1.15) brightness(0.95);
+		}
+
+        /* Numele autorilor: Telegraf culoare Gold */
+        .authors-container {
+            font-family: 'Telegraf', Arial, sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: #d4af37; /* Culoare Gold academică */
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 20px;
+            text-transform: none;
+        }
+
+        /* Titlul cărții: GAGALIN */
+        .main-title {
+            font-family: 'Gagalin', Impact, sans-serif;
+            font-size: 145px;
+            color: #0d1b2a;
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* Subtitlu: Telegraf */
+        .subtitle {
+            font-family: 'Telegraf', Arial, sans-serif;
+            font-size: 39px;
+            font-weight: bold;
+            color: #d4af37; /* Culoare Gold academică */
+            max-width: 95%;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        /* LOGISTICĂ EVENIMENT (Păstrat lizibil pe font curat) */
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .date-time {
+            font-family: Arial, sans-serif;
+            font-size: 44px;
+            font-weight: bold;
+            color: #0d1b2a;
+        }
+
+        .location-main {
+            font-family: Arial, sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f07178;
+        }
+
+        .location-sub {
+            font-family: Arial, sans-serif;
+            font-size: 28px;
+            color: #415a77;
+            font-weight: bold;
+        }
+
+        .weather-contingency {
+            margin-top: 15px;
+            padding: 15px 40px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            font-size: 20px;
+            color: #415a77;
+            max-width: 90%;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            line-height: 1.4;
+            font-family: Arial, sans-serif;
+        }
+
+        .weather-contingency strong {
+            color: #0d1b2a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster-a2">
+        
+        <!-- Antet și Branding Târg -->
+        <div class="text-group">
+            <h1 class="event-type">LANSARE DE CARTE</h1>
+            <div class="fair-branding">
+                <img src="targuldecarte.jpeg" alt="Logo Târg" class="fair-logo">
+                <div class="fair-name">
+                    <h2>Târgul de cArte</h2>
+                    <p align="center"><span class="alba-transilvana">Alba Transilvana</span</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coperta Cărții -->
+        <div class="book-hero">
+            <img src="ainavigator.png" alt="Copertă AI Navigator" class="book-image">
+        </div>
+
+        <!-- Zonă Titluri și Autori -->
+        <div class="text-group">
+            <div class="authors-container">
+                <span>dr.ing. Radu Pascu</span>
+                <span>dr.ing. Liliana Popescu</span>
+            </div>
+            <h2 class="main-title">AI NAVIGATOR</h2>
+            <p class="subtitle">Etică și productivitate în cercetarea academică</p>
+        </div>
+
+        <!-- Detalii Logistice Centrate -->
+        <div class="event-details">
+            <p class="date-time">19.06.2026 | ORA 17:00</p>
+            <p class="location-main">Scenă / Esplanadă</p>
+            <p class="location-sub">Muzeul Național al Unirii Alba Iulia</p>
+
+            <div class="weather-contingency">
+                * În caz de vreme nefavorabilă, evenimentul are loc la:<br>
+                <strong>ATRIUM CENTURIONUM</strong> – sediul administrativ al județului Alba
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
