@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examen Final – Mașini și Instalații pentru Manipularea Mărfurilor</title>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --navy:       #1F3864;
+  --blue:       #2F5496;
+  --sky:        #D6E4F0;
+  --green-ok:   #1a7a1a;
+  --green-bg:   #d4edda;
+  --red-err:    #b00020;
+  --red-bg:     #f8d7da;
+  --warn:       #e67e00;
+  --danger:     #cc0000;
+  --surface:    #ffffff;
+  --page:       #eef2f7;
+  --border:     #c8d8e8;
+  --text:       #1a1a2e;
+  --muted:      #555;
+  --chip-bg:    #f0f5fb;
+
+  --d1: #D5E8F0; /* Tipuri mărfuri */
+  --d2: #D9EAD3; /* Mașini */
+  --d3: #FFF2CC; /* Marcaje */
+  --d4: #F4CCCC; /* Organizare */
+  --d5: #EAD1DC; /* Documente */
+  --d6: #E6D0F0; /* Periculoase */
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--page);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ============================================================
+   STICKY HEADER
+   ============================================================ */
+#site-header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+  padding: 12px 28px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.35);
+}
+#hdr-left { display: flex; flex-direction: column; gap: 2px; }
+#hdr-title { color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: .3px; }
+#hdr-sub   { color: #a8c4e0; font-size: .75rem; font-style: italic; }
+#timer-wrap {
+  background: #fff;
+  border-radius: 10px;
+  padding: 7px 20px;
+  text-align: center;
+  min-width: 120px;
+}
+#timer-lbl { font-size: .65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); }
+#timer     { font-size: 1.9rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--navy); letter-spacing: 3px; }
+#timer.warn   { color: var(--warn); }
+#timer.danger { color: var(--danger); animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+#prog-rail { height: 4px; background: #c0d4e8; }
+#prog-fill { height: 4px; background: #4CAF50; width: 0; transition: width .4s; }
+
+/* ============================================================
+   WRAP
+   ============================================================ */
+#wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px 60px; }
+
+/* ============================================================
+   GATE — email + name form shown before exam
+   ============================================================ */
+#gate {
+  background: var(--surface);
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  padding: 36px 40px;
+  max-width: 520px;
+  margin: 48px auto;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(31,56,100,.12);
+}
+#gate h1 {
+  color: var(--navy);
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: .3px;
+}
+#gate p.gate-sub {
+  color: var(--muted);
+  font-size: .85rem;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.gate-field {
+  text-align: left;
+  margin-bottom: 18px;
+}
+.gate-field label {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 5px;
+}
+.gate-field input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: .95rem;
+  font-family: inherit;
+  transition: border-color .2s, box-shadow .2s;
+}
+.gate-field input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(47,84,150,.15);
+}
+.gate-field input.err { border-color: var(--red-err); }
+.gate-err {
+  font-size: .78rem;
+  color: var(--red-err);
+  margin-top: 5px;
+  display: none;
+}
+.gate-err.show { display: block; }
+#btn-gate {
+  width: 100%;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: 6px;
+}
+#btn-gate:hover { background: var(--blue); }
+.gate-note {
+  margin-top: 16px;
+  font-size: .73rem;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   ALREADY-TAKEN SCREEN
+   ============================================================ */
+#already-taken {
+  display: none;
+  background: var(--surface);
+  border: 2px solid var(--red-err);
+  border-radius: 14px;
+  padding: 40px;
+  max-width: 520px;
+  margin: 48px auto;
+  text-align: center;
+}
+#already-taken h2 { color: var(--red-err); margin-bottom: 12px; font-size: 1.2rem; }
+#already-taken p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+/* ============================================================
+   EXAM BODY (hidden until gate passes)
+   ============================================================ */
+#exam-body { display: none; }
+
+/* INFO BAR */
+#info-bar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.chip {
+  background: var(--chip-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: .79rem;
+  color: var(--navy);
+  font-weight: 700;
+}
+.chip span { font-weight: 400; color: var(--muted); }
+
+/* LEGEND */
+#legend {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  font-size: .76rem;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+#legend strong { color: var(--navy); margin-right: 4px; }
+.leg { display: inline-flex; align-items: center; gap: 5px; }
+.leg-dot { width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
+
+/* QUESTION CARD */
+.qcard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  transition: border-color .3s;
+}
+.qcard.answered     { border-color: #8ab8d8; }
+.qcard.correct-card { border-color: #4CAF50; }
+.qcard.wrong-card   { border-color: #e53935; }
+
+.qcard-hdr {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 10px 16px 8px;
+}
+.qnum {
+  background: var(--navy); color: #fff;
+  border-radius: 50%; width: 27px; height: 27px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .82rem; font-weight: 700; flex-shrink: 0;
+}
+.qdomain { font-size: .7rem; color: #666; font-style: italic; flex: 1; }
+.qstatus { font-size: .73rem; font-weight: 700; opacity: 0; transition: opacity .3s; }
+.qcard.answered .qstatus,
+.qcard.correct-card .qstatus,
+.qcard.wrong-card .qstatus { opacity: 1; }
+.qcard.correct-card .qstatus { color: var(--green-ok); }
+.qcard.wrong-card   .qstatus { color: var(--red-err); }
+
+.qtext {
+  padding: 0 16px 12px 51px;
+  font-weight: 700;
+  font-size: .97rem;
+  color: var(--text);
+}
+.options {
+  padding: 0 16px 14px 51px;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #dde4f0;
+  cursor: pointer;
+  background: #fafbfd;
+  user-select: none;
+  transition: background .18s, border-color .18s;
+}
+.opt:hover:not(.disabled) { background: var(--sky); border-color: var(--blue); }
+.opt input[type=radio] { margin-top: 3px; flex-shrink: 0; accent-color: var(--navy); width: 15px; height: 15px; }
+.opt-label { font-size: .9rem; line-height: 1.4; }
+.opt.selected { background: var(--sky); border-color: var(--blue); }
+.opt.correct  { background: var(--green-bg); border-color: #4CAF50; }
+.opt.wrong    { background: var(--red-bg);   border-color: #e53935; }
+.opt.disabled { cursor: default; }
+
+.explain {
+  display: none;
+  padding: 9px 16px 13px 51px;
+  font-size: .8rem; color: #444;
+  background: #f7f9ff;
+  border-top: 1px dashed var(--border);
+  line-height: 1.5;
+}
+.explain.show { display: block; }
+.explain strong { color: var(--navy); }
+
+/* DOMAIN COLORS */
+.dc1 { background: var(--d1); }
+.dc2 { background: var(--d2); }
+.dc3 { background: var(--d3); }
+.dc4 { background: var(--d4); }
+.dc5 { background: var(--d5); }
+.dc6 { background: var(--d6); }
+
+/* SUBMIT */
+#submit-area { text-align: center; margin: 30px 0 18px; }
+#btn-submit {
+  background: var(--navy); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 13px 46px;
+  font-size: 1.05rem; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: background .2s;
+  letter-spacing: .3px;
+}
+#btn-submit:hover:not(:disabled) { background: var(--blue); }
+#btn-submit:disabled { background: #999; cursor: default; }
+#warn-unanswered { color: var(--red-err); font-size: .85rem; margin-top: 9px; display: none; }
+
+/* SENDING OVERLAY */
+#sending-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(31,56,100,.7);
+  z-index: 999;
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 18px;
+}
+#sending-overlay.show { display: flex; }
+.spinner {
+  width: 52px; height: 52px;
+  border: 5px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#sending-overlay p { color: #fff; font-size: 1rem; font-weight: 600; }
+
+/* RESULTS */
+#results {
+  display: none;
+  background: var(--surface);
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  padding: 30px;
+  margin-top: 30px;
+}
+#results h2 { color: var(--navy); font-size: 1.35rem; text-align: center; margin-bottom: 22px; }
+.rg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px; margin-bottom: 22px;
+}
+.rstat { background: var(--sky); border-radius: 10px; padding: 15px; text-align: center; }
+.rstat .rv  { font-size: 1.9rem; font-weight: 800; color: var(--navy); }
+.rstat .rl  { font-size: .72rem; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: .5px; }
+.rstat.nota { background: var(--navy); }
+.rstat.nota .rv { color: #fff; font-size: 2.3rem; }
+.rstat.nota .rl { color: #a8c4e0; }
+
+#barem-note {
+  background: #f5f8fc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 15px;
+  font-size: .79rem; color: #444;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+#barem-note strong { color: var(--navy); }
+
+/* domain bars */
+#db-wrap h3 { color: var(--navy); font-size: .9rem; margin-bottom: 10px; }
+.db-row { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; font-size: .78rem; }
+.db-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.db-rail { width: 110px; background: #dde8f0; border-radius: 4px; height: 9px; flex-shrink: 0; }
+.db-bar  { height: 9px; border-radius: 4px; background: var(--blue); }
+.db-sc   { font-weight: 700; color: var(--navy); min-width: 32px; text-align: right; }
+
+/* detail table */
+#rtbl { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: .8rem; }
+#rtbl th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: left; }
+#rtbl td { padding: 7px 10px; border-bottom: 1px solid #e0e8f0; }
+#rtbl tr:nth-child(even) td { background: #f4f8fc; }
+#rtbl .ok { color: var(--green-ok); font-weight: 700; }
+#rtbl .no { color: var(--red-err);  font-weight: 700; }
+
+/* email status */
+#email-status {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: .85rem;
+  text-align: center;
+  display: none;
+}
+#email-status.ok  { background: var(--green-bg); color: var(--green-ok); border: 1px solid #4CAF50; }
+#email-status.err { background: var(--red-bg);   color: var(--red-err);  border: 1px solid #e53935; }
+
+/* actions */
+#actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+.btn-act {
+  padding: 10px 22px; border-radius: 7px;
+  font-size: .88rem; font-family: inherit; font-weight: 700;
+  cursor: pointer; border: 2px solid var(--navy);
+  transition: all .2s;
+}
+.btn-act.pri { background: var(--navy); color: #fff; }
+.btn-act.pri:hover { background: var(--blue); }
+.btn-act.sec { background: var(--surface); color: var(--navy); }
+.btn-act.sec:hover { background: var(--sky); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:600px){
+  #site-header { padding: 10px 14px; }
+  #timer { font-size: 1.45rem; }
+  #wrap { padding: 14px 10px 40px; }
+  #gate { padding: 26px 20px; }
+  .qtext, .options, .explain { padding-left: 36px; }
+}
+@media print {
+  #site-header, #prog-rail, #submit-area, #actions, #sending-overlay { display: none !important; }
+  body { background: #fff; }
+  .qcard { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY HEADER -->
+<header id="site-header">
+  <div id="hdr-left">
+    <div id="hdr-title">Mașini și Instalații pentru Manipularea Mărfurilor</div>
+    <div id="hdr-sub">Examen Final de Semestru — Universitatea „Lucian Blaga" din Sibiu</div>
+  </div>
+  <div id="timer-wrap">
+    <div id="timer-lbl">Timp rămas</div>
+    <div id="timer">40:00</div>
+  </div>
+</header>
+<div id="prog-rail"><div id="prog-fill"></div></div>
+
+<div id="wrap">
+
+  <!-- ═══════════════════════════════════════════
+       GATE — arătat ÎNAINTE de examen
+  ═══════════════════════════════════════════ -->
+  <div id="gate">
+    <h1>📋 Examen Final de Semestru</h1>
+    <p class="gate-sub">
+      Mașini și Instalații pentru Manipularea Mărfurilor<br>
+      Completează datele de mai jos pentru a începe testul.<br>
+      <strong>Este permisă o singură participare per adresă de email.</strong>
+    </p>
+
+    <div class="gate-field">
+      <label for="g-name">Nume și prenume *</label>
+      <input type="text" id="g-name" placeholder="ex. Ionescu Maria" autocomplete="name">
+      <div class="gate-err" id="err-name">Câmp obligatoriu.</div>
+    </div>
+
+    <div class="gate-field">
+      <label for="g-email">Adresă email instituțională *</label>
+      <input type="email" id="g-email" placeholder="prenume.nume@ulbsibiu.ro" autocomplete="email">
+      <div class="gate-err" id="err-email">Folosește adresa instituțională @ulbsibiu.ro</div>
+    </div>
+
+    <div class="gate-field">
+      <label for="g-grupa">Grupă *</label>
+      <input type="text" id="g-grupa" placeholder="ex. 4321A">
+      <div class="gate-err" id="err-grupa">Câmp obligatoriu.</div>
+    </div>
+
+    <button id="btn-gate" onclick="startExam()">Începe examenul →</button>
+
+    <p class="gate-note">
+      🔒 Adresa ta de email va fi folosită exclusiv pentru a-ți transmite rezultatul testului<br>
+      și pentru a preveni participări multiple. Nu va fi partajată terților.
+    </p>
+  </div>
+
+  <!-- ALREADY TAKEN -->
+  <div id="already-taken">
+    <h2>⛔ Acces restricționat</h2>
+    <p>
+      Adresa <strong id="at-email"></strong> a fost folosită deja pentru a susține acest examen.<br><br>
+      Dacă crezi că este o eroare, contactează titularul de curs.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       EXAM BODY
+  ═══════════════════════════════════════════ -->
+  <div id="exam-body">
+
+    <div id="info-bar">
+      <div class="chip">📋 <span>Întrebări:</span> 20</div>
+      <div class="chip">⏱ <span>Timp:</span> 40 min</div>
+      <div class="chip">🏆 <span>Barem:</span> 1p + 20×0,45p = 10p max</div>
+      <div class="chip">✅ <span>Răspuns unic</span></div>
+      <div class="chip" id="chip-answered">0 / 20 completate</div>
+    </div>
+
+    <div id="legend">
+      <strong>Domenii:</strong>
+      <span class="leg"><span class="leg-dot" style="background:var(--d1)"></span> Tipuri mărfuri &amp; grupaj</span>
+      <span class="leg"><span class="leg-dot" style="background:var(--d2)"></span> Mașini &amp; instalații</span>
+      <span class="leg"><span class="leg-dot" style="background:var(--d3)"></span> Marcaje &amp; simboluri</span>
+      <span class="leg"><span class="leg-dot" style="background:var(--d4)"></span> Organizare încărcare-descărcare</span>
+      <span class="leg"><span class="leg-dot" style="background:var(--d5)"></span> Documente &amp; norme timp</span>
+      <span class="leg"><span class="leg-dot" style="background:var(--d6)"></span> Mărfuri periculoase &amp; containere</span>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <div id="submit-area">
+      <button id="btn-submit" onclick="submitExam()">✓ Finalizează și corectează</button>
+      <div id="warn-unanswered">⚠ Ai <span id="cnt-unanswered">0</span> întrebări fără răspuns. Poți totuși finaliza.</div>
+    </div>
+
+    <div id="results">
+      <h2>📊 Rezultatele tale</h2>
+      <div class="rg">
+        <div class="rstat"><div class="rv" id="r-correct">0</div><div class="rl">Corecte</div></div>
+        <div class="rstat"><div class="rv" id="r-wrong">0</div><div class="rl">Greșite</div></div>
+        <div class="rstat"><div class="rv" id="r-skip">0</div><div class="rl">Fără răspuns</div></div>
+        <div class="rstat"><div class="rv" id="r-score">0</div><div class="rl">Punctaj (din 10)</div></div>
+        <div class="rstat nota"><div class="rv" id="r-nota">—</div><div class="rl">Notă finală (1 + corecte×0,45)</div></div>
+      </div>
+
+      <div id="barem-note">
+        <strong>Barem:</strong> 1 punct din oficiu + număr răspunsuri corecte × 0,45 puncte = notă finală (maxim 10,00)<br>
+        <span style="color:#666">Prag promovare (nota 5,00): minim <strong>9 răspunsuri corecte</strong> din 20 &nbsp;|&nbsp;
+        0 corecte = 1,00 &nbsp;|&nbsp; 5 = 3,25 &nbsp;|&nbsp; 9 = 5,05 &nbsp;|&nbsp; 13 = 6,85 &nbsp;|&nbsp; 20 = 10,00</span>
+      </div>
+
+      <div id="db-wrap">
+        <h3>Performanță pe domenii</h3>
+        <div id="db-bars"></div>
+      </div>
+
+      <h3 style="color:var(--navy);font-size:.9rem;margin:20px 0 10px">Detaliu răspunsuri</h3>
+      <table id="rtbl">
+        <thead><tr><th>#</th><th>Domeniu</th><th>Răspuns tău</th><th>Corect</th><th>Rezultat</th></tr></thead>
+        <tbody id="rtbl-body"></tbody>
+      </table>
+
+      <div id="email-status"></div>
+
+      <div id="actions">
+        <button class="btn-act pri" onclick="downloadJSON()">💾 Descarcă rezultat (JSON)</button>
+        <button class="btn-act sec" onclick="window.print()">🖨 Tipărește</button>
+      </div>
+    </div><!-- /results -->
+
+  </div><!-- /exam-body -->
+
+</div><!-- /wrap -->
+
+<!-- SENDING OVERLAY -->
+<div id="sending-overlay">
+  <div class="spinner"></div>
+  <p id="sending-msg">Se trimite rezultatul pe email…</p>
+</div>
+
+<!-- Netlify hidden form (pentru honeypot + detectare) -->
+<form name="exam-submission" netlify netlify-honeypot="bot-field" hidden>
+  <input name="bot-field">
+  <input name="student_name">
+  <input name="student_email">
+  <input name="student_grupa">
+  <input name="nota">
+  <input name="corecte">
+  <input name="timestamp">
+  <input name="details">
+</form>
+
+<script>
+/* ============================================================
+   CONFIGURARE EmailJS
+   ▸ Înlocuiește valorile de mai jos după ce îți creezi contul
+   ============================================================ */
+const EMAILJS_PUBLIC_KEY   = "SBw3NiEakE4gCuM82";   // din EmailJS → Account → Public Key
+const EMAILJS_SERVICE_ID   = "service_nutrisib";            // din EmailJS → Email Services
+const EMAILJS_TEMPLATE_ID  = "service_nutrisib";            // UN SINGUR template (plan free)
+
+const PROFESOR_EMAIL = "liliana.popescu@ulbsibiu.ro";
+const DOMAIN_ALLOWED = "@ulbsibiu.ro";
+
+/* ============================================================
+   ÎNTREBĂRI
+   ============================================================ */
+const questions = [
+  { id:1, dc:"dc1", domain:"Cunoașterea tipurilor de mărfuri și a tehnologiilor de grupaj",
+    text:"Care dintre următoarele categorii NU reprezintă o clasificare a mărfurilor după starea fizică?",
+    opts:["A. Mărfuri solide cu bucata","B. Mărfuri lichide vărsate","C. Mărfuri de masă (transportate în cantități mari)","D. Mărfuri gazoase în tuburi sau butelii"],
+    ok:"C", expl:"Mărfurile de masă reprezintă o clasificare după cantitate/volum, nu după starea fizică. Stările fizice includ: solidă, lichidă, gazoasă." },
+  { id:2, dc:"dc1", domain:"Cunoașterea tipurilor de mărfuri și a tehnologiilor de grupaj",
+    text:"Paletizarea se definește ca:",
+    opts:["A. Gruparea mărfurilor într-o construcție permanentă cu volum interior minim 1 m³","B. Gruparea mai multor unități de marfă, ambalate sau nu, pe un singur suport standardizat","C. Gruparea mărfurilor de același fel într-un tot unitar care constituie și unitate de transport","D. Transportul mărfurilor în flux neîntrerupt pe o traiectorie determinată"],
+    ok:"B", expl:"Paletizarea = gruparea pe un palet/paletă (suport standardizat). Varianta C descrie containerizarea." },
+  { id:3, dc:"dc1", domain:"Cunoașterea tipurilor de mărfuri și a tehnologiilor de grupaj",
+    text:"Transcontainerizarea se deosebește de containerizarea obișnuită în principal prin:",
+    opts:["A. Utilizarea unor containere cu volum interior mai mic de 1 m³","B. Posibilitatea descărcării manuale fără echipamente speciale","C. Masa brută maximă cuprinsă între 10 și 30 t și necesitatea unor instalații specializate de transbordare","D. Folosirea exclusivă a transportului aerian"],
+    ok:"C", expl:"Transcontainerul are masa brută 10–30 t și necesită echipamente speciale (portainere, transtainere) pentru transbordare." },
+  { id:4, dc:"dc3", domain:"Interpretarea marcajelor și simbolurilor de manipulare",
+    text:"Conform standardelor internaționale, marcajele de transport și de informare se plasează pe unitatea de încărcătură:",
+    opts:["A. În colțul din stânga sus al suprafeței laterale","B. Pe suprafața superioară (capac) a ambalajului","C. În colțul din dreapta jos al suprafeței laterale, pe aceeași etichetă","D. Pe două suprafețe laterale opuse, la mijlocul înălțimii"],
+    ok:"C", expl:"Marcajele de transport și informare: colțul dreapta jos. Simbolurile de manipulare (fragil, sus etc.): colțul stânga sus." },
+  { id:5, dc:"dc3", domain:"Interpretarea marcajelor și simbolurilor de manipulare",
+    text:"Simbolul internațional \"stacking limitation\" (…kg. max) indică faptul că:",
+    opts:["A. Unitatea de încărcătură nu poate fi ridicată cu furca stivuitorului","B. Unitatea de încărcătură nu poate suporta mase mai mari decât cea indicată deasupra sa","C. Unitatea trebuie transportată cu săgețile întotdeauna în jos","D. Marfa necesită condiții de temperatură controlată"],
+    ok:"B", expl:"\"Stacking limitation\" = limită de stivuire: masa maximă admisă deasupra unității de încărcătură nu trebuie depășită." },
+  { id:6, dc:"dc6", domain:"Particularități în manipularea mărfurilor periculoase și a containerelor",
+    text:"Mărfurile din Clasa 4.3 (ADR) sunt periculoase deoarece:",
+    opts:["A. Se aprind spontan în contact cu aerul la temperatura obișnuită","B. Emit gaze inflamabile la contactul cu apa","C. Sunt oxidante și fac să ardă mai ușor materialele combustibile","D. Sunt substanțe radioactive cu condiții stricte de ambalare"],
+    ok:"B", expl:"Clasa 4.3 ADR = substanțe care, în contact cu apa, emană gaze inflamabile (ex. carbid de calciu, sodiu metalic). Clasa 4.2 = autoaprinzabile; Clasa 5.1 = oxidante; Clasa 7 = radioactive." },
+  { id:7, dc:"dc3", domain:"Interpretarea marcajelor și simbolurilor de manipulare",
+    text:"Codul alfanumeric ISO 6346 aplicat pe transcontainere conține, ca prime elemente:",
+    opts:["A. Codul de țară, numărul de serie și cifra de control","B. Codul de proprietar (3 litere), identificatorul categoriei de echipament (1 literă), numărul de serie (6 cifre) și cifra de control","C. Tipul containerului, dimensiunile și masa brută maximă","D. Codul IATA, volumul interior și materialul de construcție"],
+    ok:"B", expl:"ISO 6346: 3 litere cod proprietar + 1 literă identificator categorie (U, J, Z) = prefix alfa, urmat de 6 cifre serie + 1 cifră de control." },
+  { id:8, dc:"dc1", domain:"Cunoașterea tipurilor de mărfuri și a tehnologiilor de grupaj",
+    text:"Care dintre avantajele de mai jos este specific transcontainerizării față de transportul clasic?",
+    opts:["A. Necesită spații acoperite mari de depozitare în terminale","B. Permite depozitarea pe verticală sub cerul liber și asigură transportul din poartă în poartă","C. Elimină complet necesitatea mijloacelor mecanizate de manipulare","D. Este utilizabilă exclusiv pe căi rutiere"],
+    ok:"B", expl:"Transcontainerizarea permite stivuirea pe verticală în aer liber (economie de teren), reduce manipulările și asigură transport door-to-door." },
+  { id:9, dc:"dc6", domain:"Particularități în manipularea mărfurilor periculoase și a containerelor",
+    text:"Piesele de colț ale transcontainerelor sunt standardizate după ISO și îndeplinesc simultan funcțiile de:",
+    opts:["A. Prindere pentru manipulare, fixare pe mijlocul de transport și cuplare pentru stivuire","B. Izolare termică, rezistență la coroziune și ghidare pe căile de rulare","C. Ventilare, drenare și semnalizare a pericolului","D. Reducere a masei containerului și mărire a volumului interior util"],
+    ok:"A", expl:"Cele 8 piese de colț ISO: prindere la manipulare (spreader), fixare pe vehicul (twist-lock) și cuplare la stivuire." },
+  { id:10, dc:"dc2", domain:"Identificarea mașinilor și instalațiilor de manipulare",
+    text:"Transpaletele sunt echipamente destinate:",
+    opts:["A. Manipulării mărfurilor în vrac pe suprafețe înclinate","B. Manipulării mărfurilor paletizabile pe suprafețe fără denivelări","C. Ridicării sarcinilor pe ghidaje verticale (ascensoare)","D. Transbordării containerelor în terminale portuare"],
+    ok:"B", expl:"Transpaletele (manuale sau electrice) sunt special concepute pentru deplasarea orizontală a mărfurilor paletizate pe teren plan." },
+  { id:11, dc:"dc2", domain:"Identificarea mașinilor și instalațiilor de manipulare",
+    text:"Diferența esențială dintre utilajele cu acționare intermitentă și cele cu acționare continuă constă în:",
+    opts:["A. Capacitatea de sarcină maximă admisă","B. Materialul din care este fabricat organul de tracțiune","C. Faptul că cele intermitente necesită cicluri cu porniri și opriri, pe când cele continue deplasează sarcina fără întrerupere","D. Posibilitatea de a funcționa în medii cu risc de explozie"],
+    ok:"C", expl:"Intermitente (stivuitoare, macarale) = cicluri cu opriri. Continue (transportoare cu bandă, șnecuri) = flux neîntrerupt." },
+  { id:12, dc:"dc2", domain:"Identificarea mașinilor și instalațiilor de manipulare",
+    text:"Palanele sunt mecanisme de ridicat care combină:",
+    opts:["A. Un motor electric cu un reductor planetar montat pe un autovehicul","B. Un sistem de fulii legate prin cabluri sau lanțuri cu un dispozitiv demultiplicator","C. Două benzi transportoare suprapuse cu viteze diferite","D. Un șnec elicoidal cu un elevator cu cupe"],
+    ok:"B", expl:"Palanele = sistem de fulii + cabluri sau lanțuri + dispozitiv demultiplicator (roți dințate, șurub fără sfârșit etc.)." },
+  { id:13, dc:"dc2", domain:"Identificarea mașinilor și instalațiilor de manipulare",
+    text:"Care dintre mijloacele tehnice de mai jos reprezintă utilajele PRINCIPALE ale unui terminal intermodal de transcontainere?",
+    opts:["A. Electrostivuitoarele și cărucioarele manuale","B. Transtainerele și portainerele","C. Liza și cabestanele","D. Transportoarele cu bandă și ascensoarele pentru marfă"],
+    ok:"B", expl:"Transtainerele (stivuire în terminal) și portainerele (încărcare/descărcare nave) sunt utilajele principale ale terminalelor intermodale." },
+  { id:14, dc:"dc2", domain:"Identificarea mașinilor și instalațiilor de manipulare",
+    text:"Transportoarele elicoidale (șnecuri) sunt indicate pentru vehicularea:",
+    opts:["A. Containere ISO de 20 și 40 de picioare","B. Materiale granulate umede sau uscate, în plan orizontal sau înclinat","C. Mărfuri periculoase din Clasa 1 (explozivi)","D. Automobile și utilaje de mari dimensiuni"],
+    ok:"B", expl:"Transportorul elicoidal (șnec) = destinat materialelor granulate sau pulverulente (cereale, ciment, nisip) în transport orizontal sau ușor înclinat." },
+  { id:15, dc:"dc4", domain:"Organizarea proceselor de încărcare-descărcare",
+    text:"Capacitatea de manipulare Cm a unui punct de încărcare-descărcare se calculează cu formula:",
+    opts:["A. Cm = Ct × t  [t/h]","B. Cm = Ct / t  [t/h], unde Ct este capacitatea maximă a autovehiculelor simultane și t este timpul pe tonă","C. Cm = Pa × trul  [t/h]","D. Cm = Nid × Kn  [t/h]"],
+    ok:"B", expl:"Formula: Cm = Ct / t [t/h], unde Ct = capacitatea totală a vehiculelor deservite simultan (t) și t = timp specific de manipulare (ore/tonă)." },
+  { id:16, dc:"dc4", domain:"Organizarea proceselor de încărcare-descărcare",
+    text:"Amplasarea perpendiculară a autovehiculelor față de frontul de încărcare prezintă ca avantaj principal:",
+    opts:["A. Manevrarea mai ușoară a autovehiculelor la intrarea în rampă","B. Reducerea semnificativă a lungimii necesare a frontului de încărcare","C. Posibilitatea utilizării exclusive a manipulării manuale","D. Eliminarea necesității egalizatoarelor de rampă"],
+    ok:"B", expl:"Amplasarea perpendiculară (spate la rampă) reduce lungimea frontului față de amplasarea paralelă, fiecare post ocupând doar lățimea vehiculului." },
+  { id:17, dc:"dc5", domain:"Utilizarea documentelor și normelor de timp în transport",
+    text:"Timpii liberi (timpii scutiți de plata taxelor tarifare) reprezintă:",
+    opts:["A. Durata maximă de condus a șoferului conform legislației europene (9 ore/zi)","B. Intervalele de timp în care beneficiarul poate imobiliza autovehiculul pentru încărcare-descărcare fără penalități","C. Pauzele obligatorii ale șoferului prevăzute de normele de securitate în muncă","D. Durata normată de repaos zilnic a vehiculului între două curse"],
+    ok:"B", expl:"Timpii liberi = intervalul de timp inclus în tarif, fără penalități, în care vehiculul poate fi imobilizat la beneficiar. Depășirea generează taxe suplimentare (stagnare)." },
+  { id:18, dc:"dc5", domain:"Utilizarea documentelor și normelor de timp în transport",
+    text:"Documentul de transport obligatoriu pentru marfă în transportul rutier internațional este:",
+    opts:["A. Certificatul de înmatriculare al autovehiculului","B. Polița de asigurare medicală a conducătorului","C. Scrisoarea de trăsură (CMR)","D. Foaia de parcurs a autovehiculului"],
+    ok:"C", expl:"Scrisoarea de trăsură CMR (Convenția privind Contractul de Transport Internațional Rutier de Mărfuri) este documentul obligatoriu de transport marfă în trafic internațional." },
+  { id:19, dc:"dc6", domain:"Particularități în manipularea mărfurilor periculoase și a containerelor",
+    text:"Criteriul de vecinătate în transportul mărfurilor periculoase impune că:",
+    opts:["A. Toate mărfurile periculoase pot fi depozitate împreună, indiferent de clasă, dacă sunt în ambalaje etanșe","B. Produsele din Clasa 8 (corozive) – acizi și baze – pot fi amestecate fără restricții","C. Există incompatibilități chiar între produse din aceeași clasă, iar vecinătatea cu produse alimentare este interzisă","D. Mărfurile periculoase pot sta alături de materiale combustibile dacă temperatura ambiantă este sub 20°C"],
+    ok:"C", expl:"Criteriul de vecinătate: acizii și bazele (Clasa 8) sunt INCOMPATIBILI; inflamabilele + oxidanții sunt incompatibili; mărfurile periculoase nu pot fi alăturate alimentelor." },
+  { id:20, dc:"dc4", domain:"Organizarea proceselor de încărcare-descărcare",
+    text:"Parcul activ de vehicule Pa necesar unui trafic continuu de marfă se determină cu relația:",
+    opts:["A. Pa = trul / Nid, unde trul este timpul de rulaj și Nid numărul posturilor","B. Pa = trul × Nid / tid, unde tid este timpul total de încărcare-descărcare","C. Pa = Cm × T, unde T este timpul de lucru zilnic","D. Pa = Lf / (L + a), unde Lf este lungimea frontului"],
+    ok:"B", expl:"Formula: Pa = (trul × Nid) / tid, unde trul = tm + ti + td (mers dus + încărcare + descărcare fără revenire), Nid = nr. posturi, tid = timp total i/d." }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const STORAGE_KEY = "exam_masini_instalatii_v1";
+let timerInterval  = null;
+let secondsLeft    = 40 * 60;
+let examSubmitted  = false;
+let studentData    = {};
+const userAnswers  = {};
+
+/* ============================================================
+   INIT EmailJS
+   ============================================================ */
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+/* ============================================================
+   GATE LOGIC
+   ============================================================ */
+function startExam() {
+  const name  = document.getElementById('g-name').value.trim();
+  const email = document.getElementById('g-email').value.trim().toLowerCase();
+  const grupa = document.getElementById('g-grupa').value.trim();
+  let valid = true;
+
+  // Validate name
+  const errName = document.getElementById('err-name');
+  if (!name) {
+    document.getElementById('g-name').classList.add('err');
+    errName.classList.add('show'); valid = false;
+  } else {
+    document.getElementById('g-name').classList.remove('err');
+    errName.classList.remove('show');
+  }
+
+  // Validate email domain
+  const errEmail = document.getElementById('err-email');
+  if (!email.endsWith(DOMAIN_ALLOWED)) {
+    document.getElementById('g-email').classList.add('err');
+    errEmail.textContent = 'Folosește adresa instituțională ' + DOMAIN_ALLOWED;
+    errEmail.classList.add('show'); valid = false;
+  } else {
+    document.getElementById('g-email').classList.remove('err');
+    errEmail.classList.remove('show');
+  }
+
+  // Validate grupa
+  const errGrupa = document.getElementById('err-grupa');
+  if (!grupa) {
+    document.getElementById('g-grupa').classList.add('err');
+    errGrupa.classList.add('show'); valid = false;
+  } else {
+    document.getElementById('g-grupa').classList.remove('err');
+    errGrupa.classList.remove('show');
+  }
+
+  if (!valid) return;
+
+  // Check localStorage — has this email already taken the exam?
+  const taken = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (taken.includes(email)) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('already-taken').style.display = 'block';
+    document.getElementById('at-email').textContent = email;
+    return;
+  }
+
+  studentData = { name, email, grupa, date: new Date().toLocaleDateString('ro-RO') };
+
+  // Show exam
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('exam-body').style.display = 'block';
+
+  buildQuestions();
+  startTimer();
+}
+
+/* ============================================================
+   BUILD QUESTIONS
+   ============================================================ */
+function buildQuestions() {
+  const cont = document.getElementById('questions-container');
+  questions.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'qcard';
+    card.id = 'qcard-' + q.id;
+    card.innerHTML = `
+      <div class="qcard-hdr ${q.dc}">
+        <div class="qnum">${q.id}</div>
+        <div class="qdomain">${q.domain}</div>
+        <div class="qstatus" id="qstatus-${q.id}">—</div>
+      </div>
+      <div class="qtext">${q.text}</div>
+      <div class="options" id="opts-${q.id}">
+        ${q.opts.map(opt => {
+          const l = opt.charAt(0);
+          return `<label class="opt" id="opt-${q.id}-${l}" for="r-${q.id}-${l}">
+            <input type="radio" name="q${q.id}" id="r-${q.id}-${l}" value="${l}" onchange="handleAnswer(${q.id},'${l}')">
+            <span class="opt-label">${opt}</span>
+          </label>`;
+        }).join('')}
+      </div>
+      <div class="explain" id="expl-${q.id}"><strong>Explicație:</strong> ${q.expl}</div>
+    `;
+    cont.appendChild(card);
+  });
+}
+
+function handleAnswer(qId, letter) {
+  if (examSubmitted) return;
+  userAnswers[qId] = letter;
+  const card = document.getElementById('qcard-' + qId);
+  card.classList.add('answered');
+  questions.find(q => q.id === qId).opts.forEach(opt => {
+    document.getElementById('opt-' + qId + '-' + opt.charAt(0)).classList.remove('selected');
+  });
+  document.getElementById('opt-' + qId + '-' + letter).classList.add('selected');
+  document.getElementById('qstatus-' + qId).textContent = 'Selectat: ' + letter;
+  updateProgress();
+}
+
+function updateProgress() {
+  const ans = Object.keys(userAnswers).length;
+  document.getElementById('chip-answered').textContent = ans + ' / 20 completate';
+  document.getElementById('prog-fill').style.width = (ans / 20 * 100) + '%';
+  const un = 20 - ans;
+  document.getElementById('cnt-unanswered').textContent = un;
+  document.getElementById('warn-unanswered').style.display = un > 0 ? 'block' : 'none';
+}
+
+/* ============================================================
+   TIMER
+   ============================================================ */
+function startTimer() {
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    const m = Math.floor(secondsLeft / 60);
+    const s = secondsLeft % 60;
+    const t = document.getElementById('timer');
+    t.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (secondsLeft <= 300 && secondsLeft > 60) t.className = 'warn';
+    else if (secondsLeft <= 60) t.className = 'danger';
+    if (secondsLeft <= 0) { clearInterval(timerInterval); alert('⏰ Timpul a expirat! Examenul se corectează automat.'); submitExam(); }
+  }, 1000);
+}
+
+/* ============================================================
+   SUBMIT & CORRECT
+   ============================================================ */
+function submitExam() {
+  if (examSubmitted) return;
+  examSubmitted = true;
+  clearInterval(timerInterval);
+  document.getElementById('btn-submit').disabled = true;
+  document.getElementById('warn-unanswered').style.display = 'none';
+
+  let correct = 0, wrong = 0, skip = 0;
+  const domainStats = {};
+  const detailRows  = [];
+
+  questions.forEach(q => {
+    if (!domainStats[q.domain]) domainStats[q.domain] = { correct:0, total:0 };
+    domainStats[q.domain].total++;
+
+    const ua   = userAnswers[q.id];
+    const card = document.getElementById('qcard-' + q.id);
+    const stat = document.getElementById('qstatus-' + q.id);
+    const expl = document.getElementById('expl-' + q.id);
+
+    document.querySelectorAll('input[name="q'+q.id+'"]').forEach(r => r.disabled = true);
+    q.opts.forEach(opt => {
+      const l = opt.charAt(0);
+      const el = document.getElementById('opt-' + q.id + '-' + l);
+      el.classList.add('disabled');
+      if (l === q.ok) el.classList.add('correct');
+    });
+    expl.classList.add('show');
+
+    if (!ua) {
+      skip++;
+      card.classList.add('wrong-card');
+      stat.textContent = '✗ Fără răspuns';
+      detailRows.push({ id: q.id, domain: q.domain, ua: '—', ok: q.ok, result: 'fara_raspuns' });
+    } else if (ua === q.ok) {
+      correct++;
+      domainStats[q.domain].correct++;
+      card.classList.add('correct-card');
+      card.classList.remove('answered');
+      stat.textContent = '✓ Corect';
+      detailRows.push({ id: q.id, domain: q.domain, ua, ok: q.ok, result: 'corect' });
+    } else {
+      wrong++;
+      card.classList.add('wrong-card');
+      card.classList.remove('answered');
+      stat.textContent = '✗ Greșit (ales ' + ua + ')';
+      document.getElementById('opt-' + q.id + '-' + ua).classList.add('wrong');
+      detailRows.push({ id: q.id, domain: q.domain, ua, ok: q.ok, result: 'gresit' });
+    }
+  });
+
+  const nota = Math.min(10, parseFloat((1 + correct * 0.45).toFixed(2)));
+
+  document.getElementById('r-correct').textContent = correct;
+  document.getElementById('r-wrong').textContent   = wrong;
+  document.getElementById('r-skip').textContent    = skip;
+  document.getElementById('r-score').textContent   = nota.toFixed(2);
+  document.getElementById('r-nota').textContent    = nota.toFixed(2);
+
+  // Domain bars
+  const dbBars = document.getElementById('db-bars');
+  Object.entries(domainStats).forEach(([d, s]) => {
+    const pct = s.total ? s.correct / s.total * 100 : 0;
+    dbBars.innerHTML += `<div class="db-row">
+      <div class="db-name" title="${d}">${d}</div>
+      <div class="db-rail"><div class="db-bar" style="width:${pct}%"></div></div>
+      <div class="db-sc">${s.correct}/${s.total}</div>
+    </div>`;
+  });
+
+  // Detail table
+  const tbody = document.getElementById('rtbl-body');
+  detailRows.forEach(r => {
+    const ok = r.result === 'corect';
+    tbody.innerHTML += `<tr>
+      <td>${r.id}</td>
+      <td style="font-size:.75rem">${r.domain}</td>
+      <td>${r.ua}</td>
+      <td>${r.ok}</td>
+      <td class="${ok?'ok':'no'}">${ok ? '✓ Corect' : (r.ua==='—' ? '— Absent' : '✗ Greșit')}</td>
+    </tr>`;
+  });
+
+  // Show results
+  const resultsEl = document.getElementById('results');
+  resultsEl.style.display = 'block';
+  document.getElementById('prog-fill').style.width = '100%';
+  document.getElementById('prog-fill').style.background = nota >= 5 ? '#4CAF50' : '#e53935';
+  resultsEl.scrollIntoView({ behavior: 'smooth' });
+
+  // Mark email as taken in localStorage
+  const taken = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  taken.push(studentData.email);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(taken));
+
+  // Build result payload for emails
+  window._examPayload = { studentData, correct, wrong, skip, nota, detailRows, domainStats };
+
+  // Submit to Netlify Forms (archiving)
+  submitToNetlify(correct, nota, detailRows);
+
+  // Send emails via EmailJS
+  sendEmails(correct, wrong, skip, nota, detailRows);
+}
+
+/* ============================================================
+   NETLIFY FORM SUBMIT (arhivare)
+   ============================================================ */
+function submitToNetlify(correct, nota, detailRows) {
+  const formData = new FormData();
+  formData.append('form-name', 'exam-submission');
+  formData.append('student_name',  studentData.name);
+  formData.append('student_email', studentData.email);
+  formData.append('student_grupa', studentData.grupa);
+  formData.append('nota',    nota.toFixed(2));
+  formData.append('corecte', String(correct));
+  formData.append('timestamp', new Date().toISOString());
+  formData.append('details', JSON.stringify(detailRows));
+
+  fetch('/', { method: 'POST', body: formData })
+    .catch(e => console.warn('Netlify form submit error:', e));
+}
+
+/* ============================================================
+   EMAILJS — trimite email student + profesor
+   ============================================================ */
+async function sendEmails(correct, wrong, skip, nota, detailRows) {
+  const overlay = document.getElementById('sending-overlay');
+  const msgEl   = document.getElementById('sending-msg');
+  overlay.classList.add('show');
+
+  // Build details string for email body
+  const detailsText = detailRows.map(r =>
+    `Î${r.id}: răspuns ${r.ua} | corect ${r.ok} | ${r.result}`
+  ).join('\n');
+
+  const passText = nota >= 5 ? '✅ PROMOVAT' : '❌ NEPROMOVAT';
+
+  const commonParams = {
+    student_name:  studentData.name,
+    student_email: studentData.email,
+    student_grupa: studentData.grupa,
+    student_date:  studentData.date,
+    nota:          nota.toFixed(2),
+    corecte:       String(correct),
+    gresite:       String(wrong),
+    fara_raspuns:  String(skip),
+    rezultat:      passText,
+    barem:         '1p oficiu + corecte × 0,45p',
+    details:       detailsText,
+    profesor_email: PROFESOR_EMAIL,
+  };
+
+  let ok = true;
+
+  try {
+    msgEl.textContent = 'Se trimite rezultatul pe email…';
+    // Un singur apel — templateul trimite la student (To) și profesoară (CC)
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      ...commonParams,
+      to_email:  studentData.email,   // câmpul "To" din template
+      to_name:   studentData.name,
+      cc_email:  PROFESOR_EMAIL,      // câmpul "CC" din template → profesoară
+    });
+  } catch(e) {
+    console.error('EmailJS error:', e);
+    ok = false;
+  }
+
+  overlay.classList.remove('show');
+
+  const statusEl = document.getElementById('email-status');
+  statusEl.style.display = 'block';
+  if (ok) {
+    statusEl.className = 'ok';
+    statusEl.textContent = '✅ Rezultatele au fost trimise pe ' + studentData.email + ' și notificate profesorului.';
+  } else {
+    statusEl.className = 'err';
+    statusEl.textContent = '⚠ Trimiterea email-ului a întâmpinat o problemă. Descarcă rezultatul JSON și trimite-l manual profesorului.';
+  }
+}
+
+/* ============================================================
+   DOWNLOAD JSON
+   ============================================================ */
+function downloadJSON() {
+  const p = window._examPayload;
+  if (!p) return;
+  const blob = new Blob([JSON.stringify({
+    materie: 'Masini si Instalatii pentru Manipularea Marfurilor',
+    student: p.studentData,
+    rezultat: { corecte: p.correct, gresite: p.wrong, fara_raspuns: p.skip, nota: p.nota },
+    barem: '1p_oficiu + corecte * 0.45p',
+    raspunsuri: p.detailRows,
+    timestamp: new Date().toISOString()
+  }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Examen_' + (p.studentData.name||'student').replace(/\s+/g,'_') + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ============================================================
+   AUTO-FILL DATE in gate
+   ============================================================ */
+window.addEventListener('DOMContentLoaded', () => {
+  // nothing extra needed
+});
+</script>
+</body>
+</html>
