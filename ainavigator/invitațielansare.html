@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitație A5 - Lansare AI NAVIGATOR</title>
+    
+    <meta name="description" content="Invitație lansare carte: AI NAVIGATOR - Etică și productivitate în cercetarea academică de dr. ing. Radu Pascu și Liliana G. Popescu.">
+    <meta name="author" content="dr. ing. Radu Pascu">
+    <meta property="og:title" content="Invitație Lansare de carte AI NAVIGATOR">
+    <meta property="og:image" content="ainavigator.png">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://radupascu.online/ainavigator/lansareainavigator">
+
+    <style>
+        /* Declararea fonturilor speciale */
+        @font-face {
+            font-family: 'Gagalin';
+            src: url('Gagalin.woff2') format('woff2'),
+                 url('Gagalin.woff') format('woff'),
+                 url('Gagalin.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Telegraf';
+            src: url('Telegraf.woff2') format('woff2'),
+                 url('Telegraf.woff') format('woff'),
+                 url('Telegraf.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Baka';
+            src: url('Baka.woff2') format('woff2'),
+                 url('Baka.woff') format('woff'),
+                 url('Baka.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Containerul A5 Landscape (Raport de aspect 1:1.414 salvat la 842x595 px) */
+        .invitation-a5 {
+            width: 842px;
+            height: 595px;
+            background-color: #ffffff;
+            color: #0d1b2a;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            padding: 25px;
+            gap: 30px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+        }
+
+        /* Cadru discret scalat proporțional */
+        .invitation-a5::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #00b4d8;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        /* Coloana stângă: Imagine și motto scalate */
+        .left-column {
+            flex: 0.9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .book-preview {
+            width: 100%;
+            max-height: 280px; /* Redus de la 380px pentru a lăsa spațiu mottoului */
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            filter: contrast(1.15) brightness(0.95);
+        }
+
+        .book-motto {
+            font-family: 'Telegraf', Arial, sans-serif;
+            font-size: 13px; /* Scalat de la 18px */
+            font-weight: normal;
+            color: #415a77;
+            line-height: 1.45;
+            font-style: italic;
+            margin-top: 20px; /* Redus de la 32px */
+            padding-left: 10px;
+            padding-right: 5px;
+            border-left: 3px solid #f07178;
+        }
+
+        /* Coloana dreaptă: Toate textele au fost reduse proporțional */
+        .right-column {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .fair-partnership {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .fair-thumb {
+            width: 45px; /* Redus de la 70px */
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Târgul de cArte: Futura/Arial scalat */
+        .fair-info-text h5 {
+            font-family: 'Futura', 'Futura Medium', Arial, sans-serif;
+            font-size: 15px; /* Scalat de la 22px */
+            color: #f07178;
+            font-weight: bold;
+        }
+
+        /* Alba Transilvana: Baka scalat */
+        .fair-info-text .alba-transilvana {
+            font-family: 'Baka', 'Brush Script MT', cursive;
+            font-size: 15px; /* Scalat de la 20px */
+            color: #0d1b2a;
+            font-weight: normal;
+        }
+
+        /* Lansare de carte: GAGALIN */
+        .tag-launch {
+            font-family: 'Gagalin', Impact, sans-serif;
+            background-color: #f07178;
+            color: #ffffff;
+            font-size: 11px; /* Scalat de la 16px */
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-left: auto;
+            letter-spacing: 1px;
+        }
+
+        /* Autori: Telegraf Gold scalat */
+        .authors-container {
+            font-family: 'Telegraf', Arial, sans-serif;
+            font-size: 14px; /* Scalat de la 20px */
+            font-weight: bold;
+            color: #d4af37;
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Redus de la 160px */
+            margin-top: 25px; /* Redus de la 48px */
+            margin-bottom: 4px;
+        }
+
+        /* Titlul cărții: GAGALIN masiv dar adaptat */
+        .main-title {
+            font-family: 'Gagalin', Impact, sans-serif;
+            font-size: 54px; /* Scalat de la 96px */
+            line-height: 1;
+            color: #0d1b2a;
+            text-align: center;
+        }
+
+        /* Subtitlu: Telegraf scalat */
+        .sub-title {
+            font-family: 'Telegraf', Arial, sans-serif;
+            font-size: 16px; /* Scalat de la 25px */
+            color: #d4af37;
+            font-weight: bold;
+            margin-top: 6px;
+            margin-bottom: 25px; /* Redus de la 48px */
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        /* Caseta cu detalii logistice micșorată */
+        .details-grid {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px; /* Redus de la 20px */
+            border-left: 4px solid #00b4d8;
+            border-top: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .detail-item {
+            font-family: Arial, sans-serif;
+            font-size: 14px; /* Scalat de la 18px */
+            margin-bottom: 8px;
+            color: #415a77;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-item strong {
+            color: #0d1b2a;
+        }
+
+        .weather-note {
+            font-family: Arial, sans-serif;
+            font-size: 11px; /* Scalat de la 14px */
+            color: #778da9;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        /* Optimizare specială pentru comanda de print din browser */
+        @media print {
+            body {
+                background-color: #ffffff;
+            }
+            .invitation-a5 {
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+            }
+            @page {
+                size: A5 landscape;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-a5">
+        
+        <div class="left-column">
+            <img src="ainavigator.png" alt="Copertă carte" class="book-preview">
+            <div class="book-motto">
+                ”O carte despre inteligența artificială care își păstrează valabilitatea dincolo de versiunea curentă a modelelor AI este, prin definiție, o carte despre gândire.”
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div>
+                <div class="fair-partnership">
+                    <img src="targuldecarte.jpeg" alt="Târg Alba Transilvana" class="fair-thumb">
+                    <div class="fair-info-text">
+                        <h5>Târgul de cArte</h5>
+                        <p><span class="alba-transilvana">Alba Transilvana</span></p>
+                    </div>
+                    <span class="tag-launch">LANSARE DE CARTE</span>
+                </div>
+
+                <div class="authors-container">
+                    <span>dr.ing. Radu Pascu</span>
+                    <span>dr.ing. Liliana Popescu</span>
+                </div>
+
+                <h1 class="main-title">AI NAVIGATOR</h1>
+                <p class="sub-title">Etică și productivitate în cercetarea academică</p>
+                
+                <div class="details-grid">
+                    <div class="detail-item">📅 Dată: <strong>Vineri, 19 iunie 2026</strong></div>
+                    <div class="detail-item">🕔 Ora: <strong>17:00</strong></div>
+                    <div class="detail-item">📍 Locație: <strong>Scenă / Esplanadă</strong></div>
+                    <div class="detail-item">🏛️ Instituție: <strong>Muzeul Național al Unirii Alba Iulia</strong></div>
+                </div>
+                
+                <p class="weather-note">* În caz de vreme nefavorabilă: Atrium Centurionum</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
