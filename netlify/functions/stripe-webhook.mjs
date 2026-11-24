@@ -31,7 +31,19 @@ export default async function handler(req) {
   }
 
   const session = event.data.object;
-  
+
+  // Contul Stripe e comun cu nutrisib.club (magazin Herbalife, produse digitale NutriSib).
+  // ePub-ul se trimite DOAR pentru plățile făcute prin Payment Link-ul e-Book-ului.
+  // EBOOK_PAYMENT_LINK (Netlify) = id-ul linkului, ex. plink_1Abc… (mai multe: separate prin virgulă).
+  const ebookLinks = (process.env.EBOOK_PAYMENT_LINK || "").split(",").map((s) => s.trim()).filter(Boolean);
+  const eBook = ebookLinks.length
+    ? ebookLinks.includes(session.payment_link)
+    : Boolean(session.payment_link) && !session.metadata?.magazin; // până se setează variabila: măcar nu comenzile din magazinul nutrisib.club
+  if (!eBook) {
+    console.log(`Sesiunea ${session.id} ignorată: nu este o plată pentru e-Book.`);
+    return new Response("OK", { status: 200 });
+  }
+
   // Verifică dacă am mai procesat acest eveniment (deduplicare)
   const eventId = event.id;
   const store = getStore("books");
